@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="styles/registration.css">
+    <script type="text/javascript" src="scripts/registration.js"></script>
+    <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="registration">
+    <form id="registration_form" method="get">
+        <div class="reg_box">
+            <label class="reg_lbl"> E-mail: </label>
+            <input type="text" id="email_input" class="reg_input" name="email" pattern="([^@\s]+@[^@\s]+\.[^@\s]+)">
+        </div>
+        <div class="reg_box">
+            <label id="pass1_lbl"> Password: </label>
+            <input type="password" class="reg_input" id="pass_input1" name="password">
+        </div>
+        <div class="reg_box">
+            <label id="pass2_lbl"> Password again: </label>
+            <input type="password" class="reg_input" id="pass_input2" name="password_rep">
+        </div>
+        <div class="reg_box">
+            <label> Name: </label>
+            <input type="text" id="name_input" class="reg_input" name="name">
+        </div>
+        <div class="reg_box">
+            <label> Phone number: </label>
+            <input type="text" id="phone_input" class="reg_input" name="phone" pattern="([\+]\d{12})">
+        </div>
+        <div class="reg_box">
+            <label> Select your gender: </label>
+            <select id="gender_input" class="reg_input" name="gender">
+                <option> Female </option>
+                <option> Male </option>
+            </select>
+        </div>
+        <div class="reg_box">
+            <label> Country: </label>
+            <input type="text" id="country_input" class="reg_input" name="country" pattern="([\+]\d{12})">
+        </div>
+        <div class="reg_box">
+            <input type="submit" class="reg_input" value="Sign In">
+        </div>
+    </form>
+</div>
+</body>
+</html>

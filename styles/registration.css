@@ -1,0 +1,37 @@
+#registration {
+    width: 400px;
+    margin: auto;
+    padding: 60px;
+    background-color: silver;
+}
+
+.reg {
+
+}
+
+.reg_box {
+    background-color: aquamarine;
+    width: 300px;
+    margin: auto;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Century Gothic";
+}
+
+.reg_lbl {
+    width: 100%;
+    margin: 0 0 8px 0;
+}
+
+.reg_input {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    box-sizing: border-box;
+    line-height: 16px;
+    font-size: 16px;
+    padding: 8px 4px;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    width: 100%;
+    margin: 0;
+    height: 34px;
+}
