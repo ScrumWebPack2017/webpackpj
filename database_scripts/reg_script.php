@@ -22,11 +22,12 @@
         exit();
     } else {
         $password = get_crypted_password($_GET["password"]);
-        $phone = $_GET["phone"];
-        $country = $_GET["country"];
-        $gender = $_GET["gender"];
-        $name = $_GET["name"];
-        $insert_query = "INSERT INTO `User` (`email`, `password`, `name`, `gender`, `country`, `phone`) VALUES ('" . $email . "', '" . $password . "', '" . $name . "', '" . $gender . "', '" . $country . "', '" . $phone . "')";
+        $phone = (empty($_GET["phone"])) ? "NULL" : "'" . $_GET["phone"] . "'";
+        $country = (empty($_GET["country"])) ? "NULL" : "'" . $_GET["country"] . "'";
+        $gender = (empty($_GET["gender"])) ? "NULL" : "'" . $_GET["gender"] . "'";
+        $name = (empty($_GET["name"])) ? "NULL" : "'" . $_GET["name"] . "'";
+        $insert_query = "INSERT INTO `User` (`email`, `password`, `name`, `gender`, `country`, `phone`) 
+            VALUES ('" . $email . "', '" . $password . "', " . $name . ", " . $gender . ", " . $country . ", " . $phone . ")";
         $result_insert = mysql_query($insert_query);
         if(!$result_insert) { //вдруг не удалось сделать запрос
             echo "Send error: " . mysql_error();
