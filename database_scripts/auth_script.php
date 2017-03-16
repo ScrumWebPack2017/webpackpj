@@ -1,26 +1,26 @@
 <?php
     require ("crypt.php"); //подключаем функции шифрования
     include "database_connect.php";
-    if(!$_GET["password"] && !$_GET["email"]) {
+    if(!$_POST["password"] && !$_POST["email"]) {
         echo "post fail";
         exit();
     }
-    if(empty($_GET["email"]) || empty($_GET["password"])) {
+    if(empty($_POST["email"]) || empty($_POST["password"])) {
         echo "empty";
         exit();
     } else {
-        if(!checkEmailPhone($_GET["email"])) {
+        if(!checkEmailPhone($_POST["email"])) {
             echo "wrong email";
             exit();
         } else {
-            if(!checkPassword($_GET["password"])) {
+            if(!checkPassword($_POST["password"])) {
                 echo "wrong pass";
                 exit();
             }
         }
     }
-    $tmp_pass = get_crypted_password($_GET["password"]);
-    $search_query = "SELECT name, phone, gender, country FROM `User` WHERE (`email` = '" . $_GET["email"] . "' OR `phone` = '" . $_GET["email"] . "') AND `password` = '". $tmp_pass ."'";
+    $tmp_pass = get_crypted_password($_POST["password"]);
+    $search_query = "SELECT name, phone, gender, country FROM `User` WHERE (`email` = '" . $_POST["email"] . "' OR `phone` = '" . $_POST["email"] . "') AND `password` = '". $tmp_pass ."'";
     $result = mysql_query($search_query);
     if(!$result) {
         echo "retrieve error";
@@ -30,7 +30,7 @@
     $send_to;
     while($row = mysql_fetch_array($result)) {
         ++$count;
-        $send_to = array('name'=>$row["name"], 'email'=>$_GET["email"], 'phone'=>$row["phone"], 'gender'=>$row["gender"], 'country'=>$row["country"],);
+        $send_to = array('name'=>$row["name"], 'email'=>$_POST["email"], 'phone'=>$row["phone"], 'gender'=>$row["gender"], 'country'=>$row["country"],);
     }
     if ($count > 1) {
         unset($send_to);
@@ -43,7 +43,7 @@
         }
     }
     session_start();
-    $_SESSION["user"] = $_GET["email"];
+    $_SESSION["user"] = $_POST["email"];
     echo json_encode($send_to);
 
     function checkEmailPhone($email) {
