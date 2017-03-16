@@ -1,9 +1,8 @@
 window.onload = function() {
     $('#registration_form').submit(function(e) {
         e.preventDefault();
-        if (validateRegistration()) {
+        if (validateRegistration())
             sendRegistration();
-        }
         else
             errorRegistration();
     });
@@ -44,22 +43,8 @@ function instaRegCheck() {
         normalizeBorders();
     });
 
-    $('#email_input').blur(function() {
-        if(checkEmail()) {
-            
-            $.ajax({
-                url: 'database_scripts/reg_script.php',
-                type: 'POST',
-                data: data,
-                dataType: 'text',
-                success: function (data) {
-                    if (data.indexOf("exists")) {
-
-                    }
-                }
-            });
-        }
-
+    $('#email_input').blur(function(e) {
+        checkEmail();
     });
 
     $('#phone_input').blur(function() {
@@ -133,7 +118,20 @@ function checkEmail() {
             return false;
         }
     }
-    return true;
+    var data = "email=" + $('#email_input').val();
+    $.ajax({
+        url: 'database_scripts/emailChecker.php',
+        type: 'POST',
+        data: data,
+        dataType: 'text',
+        success: function (data) {
+            if (data.indexOf('yes') == -1) {
+                borderRed('email_input');
+                $('#email_msg').html('Email is exists');
+            }
+        }
+    });
+    return $('#email_msg').val().length == 0;
 }
 
 function normalizeBorders() {
@@ -192,7 +190,6 @@ function sendRegistration() {
         data: data,
         dataType: 'text',
         success: function (data) {
-            alert("kek");
             alert(data);
         }
     });
