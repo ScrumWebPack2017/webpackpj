@@ -1,4 +1,5 @@
 <?php
+    require ("database_framework.php");
     require ("crypt.php"); //подключаем функции шифрования
     include "database_connect.php";
     if(!$_POST["password"] && !$_POST["email"]) { //проверяем был ли отправлен пароль и имейл (другое может быть и пустым)
@@ -20,10 +21,7 @@
             }
         }
     }
-    $search_query = "SELECT id FROM `User` WHERE `email` = '" . $email . "'";
-    $result = mysql_query($search_query);
-    $row = mysql_fetch_array($result);
-    if($row[0] != 0) { //проверяем, если уже такой в базе
+    if(checkForEmail($email)) {
         echo "exists";
         exit();
     } else {
