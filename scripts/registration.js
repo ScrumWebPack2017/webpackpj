@@ -119,7 +119,7 @@ function sendRegistration() {
     //alert(data);
     $.ajax({
         url: 'database_scripts/reg_script.php',
-        type: 'GET',
+        type: 'POST',
         data: data,
         dataType: 'text',
         success: function (data) {

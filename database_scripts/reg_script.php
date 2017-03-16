@@ -1,18 +1,24 @@
 <?php
-    //Проверить с GET потом сменить на POST
-    //Пока что без ограничений на размер данных, пока просто на их наличие
-    //Пока нет форм и JS скриптов, можно пользоваться URL в виде:
-    //.../database_scripts/reg_script.php?password=123&name=Alex&phone=332228&email=alex&gender=male&country=UK
     require ("crypt.php"); //подключаем функции шифрования
     include "database_connect.php";
-    if(!$_GET["password"] && !$_GET["email"]) { //проверяем был ли отправлен пароль и имейл (другое может быть и пустым)
-        echo "'POST' data was unable to recieve";
+    if(!$_POST["password"] && !$_POST["email"]) { //проверяем был ли отправлен пароль и имейл (другое может быть и пустым)
+        echo "post fail";
         exit();
     }
-    $email = $_GET["email"];
-    if(empty($email) || empty($_GET["password"])) {
-        echo "Были проблемы с паролем или имейлом";
+    $email = $_POST["email"];
+    if(empty($email) || empty($_POST["password"])) {
+        echo "empty";
         exit();
+    } else {
+        if(!checkEmail($email)) {
+            echo "wrong email";
+            exit();
+        } else {
+            if(!checkPassword($_POST["password"])) {
+                echo "wrong pass";
+                exit();
+            }
+        }
     }
     $search_query = "SELECT id FROM `User` WHERE `email` = '" . $email . "'";
     $result = mysql_query($search_query);
@@ -21,18 +27,28 @@
         echo "exists";
         exit();
     } else {
-        $password = get_crypted_password($_GET["password"]);
-        $phone = (empty($_GET["phone"])) ? "NULL" : "'" . $_GET["phone"] . "'";
-        $country = (empty($_GET["country"])) ? "NULL" : "'" . $_GET["country"] . "'";
-        $gender = (empty($_GET["gender"])) ? "NULL" : "'" . $_GET["gender"] . "'";
-        $name = (empty($_GET["name"])) ? "NULL" : "'" . $_GET["name"] . "'";
+        $password = get_crypted_password($_POST["password"]);
+        $phone = (empty($_POST["phone"])) ? "NULL" : "'" . $_POST["phone"] . "'";
+        $country = (empty($_POST["country"])) ? "NULL" : "'" . $_POST["country"] . "'";
+        $gender = (empty($_POST["gender"])) ? "NULL" : "'" . $_POST["gender"] . "'";
+        $name = (empty($_POST["name"])) ? "NULL" : "'" . $_POST["name"] . "'";
         $insert_query = "INSERT INTO `User` (`email`, `password`, `name`, `gender`, `country`, `phone`) 
             VALUES ('" . $email . "', '" . $password . "', " . $name . ", " . $gender . ", " . $country . ", " . $phone . ")";
         $result_insert = mysql_query($insert_query);
         if(!$result_insert) { //вдруг не удалось сделать запрос
-            echo "Send error: " . mysql_error();
+            echo "not sent";
             exit();
         }
-        echo "OK\n";
+        echo "OK";
+    }
+
+    function checkEmail($email) {
+        $pattern = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i';
+        return (preg_match($pattern, $email));
+    }
+
+    function checkPassword($password) {
+        $pattern = '/^[a-z0-9_-]{6,18}$/i';
+        return (preg_match($pattern, $password));
     }
 ?>
