@@ -5,8 +5,8 @@
     background-color: silver;
 }
 
-.reg {
-
+.reg_error {
+    color: red;
 }
 
 .reg_box {
