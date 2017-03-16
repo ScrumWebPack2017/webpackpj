@@ -13,5 +13,4 @@ if (!$db_selected) {
     echo "error db";
     exit();
 }
-echo "OK";
 ?>
