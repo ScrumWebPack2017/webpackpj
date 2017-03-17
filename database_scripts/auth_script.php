@@ -20,17 +20,17 @@
         }
     }
     $tmp_pass = get_crypted_password($_POST["password"]);
-    $search_query = "SELECT name, phone, gender, country FROM `User` WHERE (`email` = '" . $_POST["email"] . "' OR `phone` = '" . $_POST["email"] . "') AND `password` = '". $tmp_pass ."'";
+    $search_query = "SELECT email, name, phone, gender, country FROM `User` WHERE (`email` = '" . $_POST["email"] . "' OR `phone` = '" . $_POST["email"] . "') AND `password` = '". $tmp_pass ."'";
     $result = mysql_query($search_query);
     if(!$result) {
-        echo "retrieve error";
+        echo "retrieve error: " . mysql_error();
         exit();
     }
     $count = 0;
     $send_to;
     while($row = mysql_fetch_array($result)) {
         ++$count;
-        $send_to = array('name'=>$row["name"], 'email'=>$_POST["email"], 'phone'=>$row["phone"], 'gender'=>$row["gender"], 'country'=>$row["country"],);
+        $send_to = array('name'=>$row["name"], 'email'=>$row["email"], 'phone'=>$row["phone"], 'gender'=>$row["gender"], 'country'=>$row["country"],);
     }
     if ($count > 1) {
         unset($send_to);
@@ -43,7 +43,7 @@
         }
     }
     session_start();
-    $_SESSION["user"] = $_POST["email"];
+    $_SESSION["user"] = $send_to['email'];
     echo json_encode($send_to);
 
     function checkEmailPhone($email) {

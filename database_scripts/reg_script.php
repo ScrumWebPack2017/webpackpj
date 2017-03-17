@@ -34,7 +34,7 @@
             VALUES ('" . $email . "', '" . $password . "', " . $name . ", " . $gender . ", " . $country . ", " . $phone . ")";
         $result_insert = mysql_query($insert_query);
         if(!$result_insert) { //вдруг не удалось сделать запрос
-            echo "not sent";
+            echo "not sent: " . mysql_error();
             exit();
         }
         echo "OK";
