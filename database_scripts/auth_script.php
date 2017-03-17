@@ -47,9 +47,9 @@
     echo json_encode($send_to);
 
     function checkEmailPhone($email) {
-        /*$pattern = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i';
-        return (preg_match($pattern, $email));*/
-        //тут еще нажо написать регулярку для телефона
+        $patterne = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i';
+        $patternp = '/^[0-9()-]{6,18}$/i';
+        return (preg_match($patterne, $email) or  preg_match($patternp, $email));
         return true;
     }
 
