@@ -12,6 +12,15 @@ window.onload = function() {
 
 function instaRegCheck() {
 
+    $('#pass_input1').keyup(function() {
+        var p1 = $('#pass_input1').val();
+        var p2 = $('#pass_input2').val();
+        if (p1 == p2) {
+            borderDefault('pass_input2');
+            $('#pass2_msg').html('');
+        }
+    });
+
     $('#pass_input1').blur(function() {
         var p1 = $('#pass_input1').val();
         var p2 = $('#pass_input2').val();
@@ -23,6 +32,9 @@ function instaRegCheck() {
         if (p2 != p1 && p2 != "") {
             borderRed('pass_input2');
             $('#pass2_msg').html('Passwords are not equal');
+        } else if (p1 == p2) {
+            borderDefault('pass_input2');
+            $('#pass2_msg').html('');
         }
         var pattern = /^[a-z0-9_-]{6,18}$/i;
         if (!pattern.test(p1)) {
@@ -80,8 +92,10 @@ function instaRegCheck() {
 // Checkers :
 function checkCountry() {
     var country = $('#country_input').val();
-    if (country.indexOf(' ')) {
-        var pattern = /^[a-zA-Zа-яА-Я()-]{2,28}$/i;
+    if (country.length == 0)
+        return true;
+    if (country.indexOf(' ') != 0) {
+        var pattern = /^[a-zA-Zа-яА-ЯЇї()-]{2,28}$/i;
         if (!pattern.test(country)) {
             borderRed('country_input');
             $('#country_msg').html('Invalid input');
@@ -93,6 +107,8 @@ function checkCountry() {
 
 function checkPhone() {
     var phone = $('#phone_input').val();
+    if (phone.length == 0)
+        return true;
     if (phone.indexOf(' ') != 0) {
         var pattern = /^[0-9()-]{6,18}$/i;
         if (!pattern.test(phone)) {
