@@ -1,7 +1,7 @@
 window.onload = function() {
     centerize();
-    $('#registration_form').submit(function(e) {
-        e.preventDefault();
+    $('#registration_form').submit(function(event) {
+        event.preventDefault();
         if (validateRegistration())
             sendRegistration();
         else
