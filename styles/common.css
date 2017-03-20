@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('../fonts/CaviarDreams.ttf');
+}
+
+body {
+    margin: 0;
+    background: url('../images/reg_background3.jpg');
+    background-size: cover;
+}
+
+header {
+    height: 200px;
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+    background-color: yellow;
+}
+
+#user_block {
+    position: relative;
+    float: right;
+    width: 200px;
+    height: 180px;
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.auth_box {
+    margin: auto;
+    padding: 0 10px;
+    width: 160px;
+
+}
+
+.auth_input {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    box-sizing: border-box;
+    line-height: 16px;
+    padding: 0;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    width: 160px;
+    margin: 0;
+    height: 34px;
+    font-size: 21px;
+    font-family: "CaviarDreams";
+}
+
+#content {
+    position: absolute;
+    width: 100%;
+    background-color: antiquewhite;
+    min-height: 500px;
+}
+
+#left_bar {
+    position: fixed;
+    z-index: 10;
+    top: 200px;
+    width: 200px;
+    background-color: aqua;
+}

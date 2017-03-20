@@ -12,7 +12,7 @@
     <form id="registration_form" method="get">
         <div class="reg_box">
             <label class="reg_lbl_left"> E-mail:* </label>
-            <input type="text" id="email_input" class="reg_input" name="email" pattern="([^@\s]+@[^@\s]+\.[^@\s]+)">
+            <input type="text" id="email_input" class="reg_input" name="email">
             <p class="reg_error" id="email_msg">  </p>
             <p class="reg_error" id="email_msg2">  </p>
         </div>
@@ -40,7 +40,7 @@
         <div class="reg_box">
             <label class="reg_lbl_left"> Select your gender: </label>
             <select id="gender_input" class="reg_input" name="gender">
-                <option> </option>
+                <option value=""> Not selected </option>
                 <option> Female </option>
                 <option> Male </option>
             </select>

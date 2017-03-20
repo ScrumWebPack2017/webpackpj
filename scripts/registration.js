@@ -1,4 +1,5 @@
 window.onload = function() {
+    centerize();
     $('#registration_form').submit(function(e) {
         e.preventDefault();
         if (validateRegistration())
@@ -19,6 +20,7 @@ function instaRegCheck() {
             borderDefault('pass_input2');
             $('#pass2_msg').html('');
         }
+        centerize();
     });
 
     $('#pass_input1').blur(function() {
@@ -42,6 +44,7 @@ function instaRegCheck() {
             $('#pass1_msg2').html('Password contains irregular symbols');
         }
         normalizeBorders();
+        centerize();
     });
 
     $('#pass_input2').blur(function() {
@@ -53,18 +56,22 @@ function instaRegCheck() {
             $('#pass2_msg').html('Passwords are not equal');
         }
         normalizeBorders();
+        centerize();
     });
 
     $('#email_input').blur(function(e) {
         checkEmail();
+        centerize();
     });
 
     $('#phone_input').blur(function() {
         checkPhone();
+        centerize();
     });
 
     $('#country_input').blur(function() {
         checkCountry();
+        centerize();
     });
 
     $('.reg_input').focus(function() {
@@ -86,7 +93,13 @@ function instaRegCheck() {
             $('#country_msg').html('');
         }
         normalizeBorders();
+        centerize();
     });
+}
+
+function centerize() {
+    var height = document.body.scrollHeight;
+    $('#registration').css('top', (height - $('#registration').css('height').split('p')[0] - 40)/2);
 }
 
 // Checkers :
