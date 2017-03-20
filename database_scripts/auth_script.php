@@ -9,7 +9,7 @@
         echo "empty";
         exit();
     } else {
-        if(!checkEmailPhone($_POST["email"])) {
+        if(!checkEmail($_POST["email"])) {
             echo "wrong email";
             exit();
         } else {
@@ -20,7 +20,7 @@
         }
     }
     $tmp_pass = get_crypted_password($_POST["password"]);
-    $search_query = "SELECT email, name, phone, gender, country FROM `User` WHERE (`email` = '" . $_POST["email"] . "' OR `phone` = '" . $_POST["email"] . "') AND `password` = '". $tmp_pass ."'";
+    $search_query = "SELECT email, name, phone, gender, country FROM `User` WHERE `email` = '" . $_POST["email"] . "' AND `password` = '". $tmp_pass ."'";
     $result = mysql_query($search_query);
     if(!$result) {
         echo "retrieve error: " . mysql_error();
@@ -46,11 +46,9 @@
     $_SESSION["user"] = $send_to['email'];
     echo json_encode($send_to);
 
-    function checkEmailPhone($email) {
+    function checkEmail($email) {
         $patterne = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i';
-        $patternp = '/^[0-9()-]{6,18}$/i';
-        return (preg_match($patterne, $email) or  preg_match($patternp, $email));
-        return true;
+        return (preg_match($patterne, $email));
     }
 
     function checkPassword($password) {

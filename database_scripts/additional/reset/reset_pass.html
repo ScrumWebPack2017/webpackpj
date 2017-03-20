@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../../styles/registration.css">
+    <script type="text/javascript" src="registration.js"></script>
+    <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<div id="registration">
+    <form id="registration_form_reset_send">
+        <div class="reg_box">
+            <label class="reg_lbl_left"> E-mail:* </label>
+            <input type="text" id="email_input" class="reg_input" name="email" pattern="([^@\s]+@[^@\s]+\.[^@\s]+)">
+            <p class="reg_error" id="email_msg">  </p>
+            <p class="reg_error" id="email_msg2">  </p>
+        </div>
+        <div class="reg_box">
+            <input type="submit" id="reg_btn" value="Proceed">
+        </div>
+    </form>
+</div>
+</body>
+</html>

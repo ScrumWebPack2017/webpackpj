@@ -1,5 +1,4 @@
 <?php
-    namespace WebPack;
     require ("database_framework.php");
     include "database_connect.php";
     if(!$_POST["email"]) {
