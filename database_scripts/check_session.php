@@ -3,6 +3,10 @@
 	session_start();
 
 	if(isset($_SESSION["user"])){
+        if(contains($_SESSION["user"])){
+            echo "error with ' symbol";
+            exit();
+        }
         $found = "SELECT * FROM `User` WHERE `email` = '".$_SESSION["user"]."'";
         $fdata = mysql_query($found);
         if(!$fdata) {

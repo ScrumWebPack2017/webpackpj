@@ -16,6 +16,7 @@
     }
 
     function checkForKey($email) {
+        if(contains($email)) return false;
         $search_query = "SELECT id FROM `Reset` WHERE `email` = '" . $email . "'";
         $result = mysql_query($search_query);
         if(!$result) {
@@ -41,6 +42,7 @@ function checkEmailFW($email) {
     }
 
     function getKey($email, $key) {
+        if(contains($email) || contains($key)) return false;
         $search_query = "SELECT id FROM `Reset` WHERE `email` = '" . $email . "' AND `keyTemp` = '" . $key . "'";
         $result = mysql_query($search_query);
         if(!$result) {
@@ -69,5 +71,10 @@ function checkEmailFW($email) {
             }
         }
         return $answer;
+    }
+
+    function contains($str) {
+       if(strpos($str, "'") !== false) return true;
+       return false;
     }
 ?>

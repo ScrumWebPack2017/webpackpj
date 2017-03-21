@@ -22,10 +22,14 @@ function sendAuthorization() {
         data: data,
         dataType: 'text',
         success: function (data) {
-            if (data == 'bad data')
-                errorAuth(data);
-            else {
-                location.reload();
+            if(data == "not confirmed") {
+                errorAuth("Confirm your email first!");
+            } else {
+                if (data == 'bad data')
+                    errorAuth(data);
+                else {
+                    location.reload();
+                }
             }
         }
     });

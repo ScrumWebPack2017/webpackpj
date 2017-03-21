@@ -13,7 +13,7 @@
     <header>
         <div id="user_block">
             <?php
-            if(!$_SESSION['user'])
+            if(!$_SESSION['user'] && !$_SESSION['uname'])
                 echo
                 '<form id="authorization_form">
                     <div class="auth_box">
@@ -36,7 +36,7 @@
                 <div class="auth_box" id="reg_btn_box" style="padding-top: 28px">
                     <a href="registration.html"> <button class="auth_btn" id="reg_btn"> Registration </button> </a>
                 </div>';
-                else echo 'Hello, '.$_SESSION['user'].'!';
+                else echo 'Hello, ' . $_SESSION['uname'] . '!';
             ?>
         </div>
 

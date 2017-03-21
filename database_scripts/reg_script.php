@@ -37,7 +37,13 @@
             echo "not sent: " . mysql_error();
             exit();
         }
-        echo "OK";
+        $string_url = "http://webpackpj.com/database_scripts/confirm_mail.php?email=" . $email;
+        if(mail($email, "Password reset", "Hi, it`s WebPack.\nConfirm your account by following this link: \n" . $string_url)) {
+            echo "OK";
+        }
+        else {
+            echo "fault";
+        }
     }
 
     function checkEmail($email) {

@@ -270,7 +270,7 @@ function sendRegistrationReset() {
             }
             if(data == "Success!" || data == "Crirical Error") {
                 setTimeout(function () {
-                    window.location.replace("../../../index.html");
+                    window.location.replace("../../../index.php");
                 }, 500);
             }
         }
