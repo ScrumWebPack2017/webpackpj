@@ -36,7 +36,17 @@
                 <div class="auth_box" id="reg_btn_box" style="padding-top: 28px">
                     <a href="registration.html"> <button class="auth_btn" id="reg_btn"> Registration </button> </a>
                 </div>';
-                else echo 'Hello, ' . $_SESSION['uname'] . '!';
+                else echo '
+                    <div class="auth_box">
+                        Hello,'.$_SESSION['uname'].'!
+                    </div>
+                    <div class="auth_box">
+                        <a href=""> Personal cabinet </a>
+                    </div>
+                    <div class="auth_box" onclick="logOut()" id="logOut">
+                        Log Out
+                    </div>
+                ';
             ?>
         </div>
 

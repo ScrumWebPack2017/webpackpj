@@ -6,13 +6,30 @@ window.onload = function() {
         if (validateAuth()) {
             sendAuthorization();
         } else {
-            alert("Error");
+            //alert("Error");
         }
 
     });
 }
 
+function logOut() {
+    $.ajax({
+        url: 'database_scripts/session_close.php',
+        success: function (data) {
+            if (data == 'closing')
+                location.reload();
+        }
+    });
+}
 
+
+/* Authorization
+
+
+
+
+
+ */
 
 function sendAuthorization() {
     var data = $('#authorization_form').serialize();
@@ -84,9 +101,7 @@ function validateAuth() {
 }
 
 function instaValidate() {
-    $('#email_input').blur(function() {
-        checkEmailAuth();
-    }).focus(function() {
+    $('#email_input').focus(function() {
         borderDefault('email_input');
         borderDefault('pass_input');
         errorAuth('');
