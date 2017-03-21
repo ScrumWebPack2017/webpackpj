@@ -64,7 +64,7 @@ body {
     font-family: "CaviarDreams";
 }
 
-#reg_btn {
+.reg_btn {
     box-shadow: inset 1px 1px 5px 0 #eee;
     font-size: 25px;
     border-radius: 4px;

@@ -22,7 +22,6 @@ function logOut() {
     });
 }
 
-
 /* Authorization
 
 

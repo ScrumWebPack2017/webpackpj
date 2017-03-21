@@ -219,7 +219,15 @@ function sendRegistration() {
         data: data,
         dataType: 'text',
         success: function (data) {
-            alert(data);
+            if (data == 'OK') {
+                var str = '<div class="reg_box" style="text-align: center; padding: 0 0 40px 0;"> ' +
+                    '<p> Registration completed successfully. </p> ' +
+                    'Please check your email for confirmation! </div>' +
+                    '<div class="reg_box" style="padding-bottom: 20px;">' +
+                    '<a href="index.php"> <button class="reg_btn"> Main page </button> </a> </div>'
+                $('#registration').html(str);
+            }
+
         }
     });
 }
