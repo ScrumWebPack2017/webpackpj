@@ -34,8 +34,8 @@
     $row = mysql_fetch_array($result_sch);
 
     if($row[0] != 0) {
-        echo "Restricted. Redirecting to main page...";
-        header("refresh:2;url=../index.php");
+        //echo "Restricted. Redirecting to main page...";///Изменить способ вывода ошибки так как
+        header("refresh:2;url=../index.php");///Будет крашится страница
     }
 
     $update_query = "UPDATE `User` SET `checked` = '1' WHERE `email` = '" . $email . "'";
@@ -44,6 +44,7 @@
         echo "Update error: " . mysql_error();
         exit();
     }
-    echo "Confirmed. Redirecting to main page...";
-    header("refresh:1;url=webpackpj.com");
+    //echo "Confirmed. Redirecting to main page...";// Сдесь вывод вообще не нужен наверное
+    header("refresh:1;url=../index.php");// Ошибка была не в пути, поменял обратно, с webpackpj.com
+					//вообще не работало
 ?>
