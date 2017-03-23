@@ -45,5 +45,5 @@
         exit();
     }
     echo "Confirmed. Redirecting to main page...";
-    header("refresh:1;url=webpackpj.com");
+    header("refresh:1;url=../index.php");
 ?>
