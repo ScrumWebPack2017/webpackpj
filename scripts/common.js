@@ -10,8 +10,41 @@ window.onload = function() {
         }
 
     });
+};
+
+function shiftAuth() {
+
+
+    var x = $('#user_block').css('width').split('p')[0];
+    alert(x);
+    if (x == 200) {
+        ('#user_block').animate({width: '0'}, 400);
+    }
+    else {
+        ('#user_block').animate({width: '200px'}, 400);
+    }
 }
 
+function shiftLeftBar() {
+    var x = $('#left_bar').css('left').split('p')[0];
+    if (x == 0) {
+        $('#left_bar').animate({ left: "-220px" } , 400);
+        $('#left_btn').html('>');
+    } else {
+        $('#left_bar').animate({ left: "0px" } , 400);
+        $('#left_btn').html('<');
+    }
+}
+
+
+
+/* Authorization
+
+
+
+
+
+ */
 function logOut() {
     $.ajax({
         url: 'database_scripts/session_close.php',
@@ -21,14 +54,6 @@ function logOut() {
         }
     });
 }
-
-/* Authorization
-
-
-
-
-
- */
 
 function sendAuthorization() {
     var data = $('#authorization_form').serialize();

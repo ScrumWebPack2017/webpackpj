@@ -3,11 +3,6 @@
     src: url('../fonts/CaviarDreams.ttf');
 }
 
-a {
-    font-family: 'CaviarDreams';
-}
-
-
 body {
     margin: 0;
     background: url('../images/reg_background3.jpg');
@@ -20,70 +15,42 @@ header {
     width: 100%;
     position: fixed;
     z-index: 5;
-    background-color: yellow;
+    background-color: lightblue;
+}
+.header_elements {
+    position: relative;
+    float: right;
 }
 
 #user_block {
-    position: relative;
-    float: right;
-    width: 240px;
+    width: 200px;
     height: 180px;
     background-color: aliceblue;
     padding: 10px;
 }
 
-.auth_box {
-    margin: auto;
-    padding: 8px 0;
+#logo {
     width: 220px;
-
+    height: 100%;
+    background: url("../images/logo2.jpg");
+    background-size: cover;
 }
 
-.auth_input {
-    box-shadow: inset 1px 1px 5px 0 #eee;
-    box-sizing: border-box;
-    padding: 0;
-    border-radius: 3px;
-    border: 1px solid #e7e7e7;
-    width: 220px;
-    margin: 0;
-    height: 28px;
-    font-size: 16px;
-    font-family: "CaviarDreams";
+#top_menu {
+    width: calc(100% - 440px);
+    height: inherit;
+    background-color: #adf6b9;
 }
 
-#error_lbl {
-    width: 220px;
-    margin: auto;
-    color: red;
+#header_menu_control {
+    width: 30px;
+    height: inherit;
+    background-color: aqua;
 }
 
-.auth_btn {
-    box-shadow: inset 1px 1px 5px 0 #eee;
-    font-size: 18px;
-    border-radius: 4px;
-    border: 1px solid silver;
-    width: 80px;
-    height: 28px;
-    background: radial-gradient(#adf6b9, lightgreen);
-    font-family: "CaviarDreams";
-}
-
-.auth_btns {
-    position: relative;
-    float: left;
+#hide_auth {
     height: 30px;
-    padding-bottom: 4px;
-}
-
-#reg_btn {
-    background: radial-gradient(indianred, orangered);
-    width: 100%;
-}
-
-#reg_btn_box {
-    padding-top: 8px;
-
+    background-color: red;
 }
 
 #content {
@@ -97,6 +64,85 @@ header {
     position: fixed;
     z-index: 10;
     top: 200px;
-    width: 200px;
+    left: 0;
+    width: 240px;
+    background-color: transparent;
+}
+
+#left_btn_col {
+    position: relative;
+    float: right;
+    width: 20px;
+    height: inherit;
+    background-color: inherit;
+}
+
+#left_btn {
+    height: 20px;
+    background-color: brown;
+    cursor: pointer;
+}
+
+#left_menu {
+    position: relative;
+    float: right;
+    width: 220px;
+    height: inherit;
     background-color: aqua;
+}
+
+
+
+.auth_box {
+    margin: auto;
+    padding: 8px 0;
+    width: 200px;
+
+}
+
+.auth_input {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    width: 200px;
+    margin: 0;
+    height: 28px;
+    font-size: 16px;
+    font-family: "CaviarDreams";
+}
+
+#error_lbl {
+    width: 200px;
+    margin: auto;
+    color: red;
+}
+
+.auth_btn {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid silver;
+    width: 74px;
+    height: 28px;
+    background: radial-gradient(#adf6b9, lightgreen);
+    font-family: "CaviarDreams";
+}
+
+.auth_btns {
+    position: relative;
+    float: left;
+    font-size: 16px;
+    height: 30px;
+    padding-bottom: 4px;
+}
+
+#reg_btn {
+    background: radial-gradient(indianred, orangered);
+    width: 100%;
+}
+
+#reg_btn_box {
+    padding-top: 8px;
 }
