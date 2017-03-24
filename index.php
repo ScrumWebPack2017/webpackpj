@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <div class="header_elements" id="user_block">
+        <div id="user_block">
             <?php
             if(!$_SESSION['user'] && !$_SESSION['uname'])
                 echo
@@ -27,7 +27,7 @@
                         <div class="auth_btns" style="padding-right: 12px">
                             <input type="submit" class="auth_btn" id="signin_btn" value="Sign In">
                         </div>
-                        <div class="auth_btns" style="font-size: 16px; padding: 4px 0 0 0;">
+                        <div class="auth_btns" style="font-size: 18px; padding: 4px 0 0 0;">
                             <a href="database_scripts/additional/reset/reset_pass.html">  Reset password </a>
                         </div>
                     </div>
@@ -49,6 +49,7 @@
                 ';
             ?>
         </div>
+<<<<<<< HEAD
         <div class="header_elements" id="top_menu">
             <div class="header_elements" id="header_menu_wrap">
                 <div id="header_menu_tabs">
@@ -70,19 +71,24 @@
         <div class="header_elements" id="logo">
 
         </div>
+=======
+
+>>>>>>> origin/master
     </header>
     <div id="content">
 
     </div>
     <div id="left_bar">
+<<<<<<< HEAD
         <div id="left_btn_col">
             <div id="left_btn" onclick="shiftLeftBar()">
                 <!-- <img src="images/arrLeft.png" id="left_col_img" width="20"> -->
             </div>
         </div>
         <div id="left_menu">
+=======
+>>>>>>> origin/master
 
-        </div>
     </div>
 </body>
 </html>
