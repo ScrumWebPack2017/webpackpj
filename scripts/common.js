@@ -1,6 +1,7 @@
 window.onload = function() {
     normalizePage();
     instaValidate();
+    tabControl();
     $('#authorization_form').submit(function (event) {
         event.preventDefault();
         if (validateAuth()) {
@@ -12,9 +13,16 @@ window.onload = function() {
     });
 };
 
+function tabControl() {
+    $('.menu_tab').click(function () {
+        if (this.id == 'source_code_btn')
+            return;
+        $('.menu_tab').removeClass('selected_tab');
+        this.setAttribute('class', 'menu_tab selected_tab');
+    })
+}
+
 function shiftAuth() {
-
-
     var x = $('#user_block').css('width').split('p')[0];
     alert(x);
     if (x == 200) {
@@ -28,15 +36,20 @@ function shiftAuth() {
 function shiftLeftBar() {
     var x = $('#left_bar').css('left').split('p')[0];
     if (x == 0) {
-        $('#left_bar').animate({ left: "-220px" } , 400);
-        $('#left_btn').html('>');
+        $('#left_bar').animate({ left: "-200px" } , 400);
+        $('#left_btn').css('backgroundImage', 'url(images/arrRight.png)');
     } else {
         $('#left_bar').animate({ left: "0px" } , 400);
-        $('#left_btn').html('<');
+        $('#left_btn').css('backgroundImage', 'url(images/arrLeft.png)');
     }
 }
 
+function normalizePage() {
+    var h = document.body.scrollHeight;
+    $('#left_bar').css('height', h - 200);
+    $('#left_btn_col').css('padding-top', (h - 240)/2);
 
+}
 
 /* Authorization
 
@@ -127,11 +140,9 @@ function validateAuth() {
 function instaValidate() {
     $('#email_input').focus(function() {
         borderDefault('email_input');
-        borderDefault('pass_input');
         errorAuth('');
     });
     $('#pass_input').focus(function() {
-        borderDefault('email_input');
         borderDefault('pass_input');
         errorAuth('');
     });
@@ -143,9 +154,4 @@ function borderRed(id) {
 
 function borderDefault(id) {
     $('#' + id).css('border', '1px solid #e7e7e7');
-}
-
-function normalizePage() {
-    var h = document.body.scrollHeight;
-    $('#left_bar').css('height', h - 200);
 }

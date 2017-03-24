@@ -50,13 +50,21 @@
             ?>
         </div>
         <div class="header_elements" id="top_menu">
-            <div  class="header_elements" id="header_menu_control">
-                <div id="hide_auth" onclick="">
-
-                </div>
-            </div>
             <div class="header_elements" id="header_menu_wrap">
-
+                <div id="header_menu_tabs">
+                    <div class="menu_tab selected_tab">
+                        Properties1
+                    </div>
+                    <div class="menu_tab">
+                        Properties2
+                    </div>
+                    <div class="menu_tab">
+                        Properties3
+                    </div>
+                    <div class="menu_tab" id="source_code_btn">
+                        Source code
+                    </div>
+                </div>
             </div>
         </div>
         <div class="header_elements" id="logo">
@@ -69,7 +77,7 @@
     <div id="left_bar">
         <div id="left_btn_col">
             <div id="left_btn" onclick="shiftLeftBar()">
-                >
+                <!-- <img src="images/arrLeft.png" id="left_col_img" width="20"> -->
             </div>
         </div>
         <div id="left_menu">

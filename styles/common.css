@@ -5,8 +5,6 @@
 
 body {
     margin: 0;
-    background: url('../images/reg_background3.jpg');
-    background-size: cover;
     font-family: "CaviarDreams";
 }
 
@@ -25,38 +23,66 @@ header {
 #user_block {
     width: 200px;
     height: 180px;
-    background-color: aliceblue;
-    padding: 10px;
+    background-color: #d0d1d3;
+    padding: 8px;
+    border: 2px solid #547898;
 }
 
 #logo {
     width: 220px;
     height: 100%;
-    background: url("../images/logo2.jpg");
+    background: url("../images/logo4.jpg");
     background-size: cover;
 }
 
 #top_menu {
     width: calc(100% - 440px);
-    height: inherit;
-    background-color: #adf6b9;
+    height: 196px;
+    background-color: #e1e8ea;
+    border-bottom: 2px solid #547898;
+    border-top: 2px solid #547898;
 }
 
-#header_menu_control {
-    width: 30px;
+#header_menu_wrap {
+    width: 100%;
     height: inherit;
-    background-color: aqua;
+    visibility: visible;
 }
 
-#hide_auth {
+#header_menu_tabs {
     height: 30px;
-    background-color: red;
+    background-color: #d0d1d3;
+    padding: 10px 10px 0 10px;
+}
+
+.menu_tab {
+    position: relative;
+    float: left;
+    height: 16px;
+    width: calc((100% - 43px) / 4);
+    margin: 0 5px;
+    text-align: center;
+    font-size: 16px;
+    padding: 7px 0 7px 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.selected_tab {
+    background-color: #e1e8ea;
+}
+
+#source_code_btn {
+    background: #5d89ae;
+    color: white;
 }
 
 #content {
     position: absolute;
     width: 100%;
-    background-color: antiquewhite;
+    background-color: white;
     min-height: 500px;
 }
 
@@ -65,7 +91,7 @@ header {
     z-index: 10;
     top: 200px;
     left: 0;
-    width: 240px;
+    width: 220px;
     background-color: transparent;
 }
 
@@ -74,24 +100,27 @@ header {
     float: right;
     width: 20px;
     height: inherit;
-    background-color: inherit;
+    background-color: #e1e8ea;
 }
 
 #left_btn {
     height: 20px;
-    background-color: brown;
+    font-stretch: ultra-condensed;
+    text-align: center;
     cursor: pointer;
+    background-image: url(../images/arrLeft.png);
+    background-size: cover;
+    font-family: "Century Gothic";
 }
 
 #left_menu {
     position: relative;
     float: right;
-    width: 220px;
+    width: 200px;
     height: inherit;
-    background-color: aqua;
+    background-color: #e1e8ea;
+
 }
-
-
 
 .auth_box {
     margin: auto;
@@ -123,10 +152,11 @@ header {
     box-shadow: inset 1px 1px 5px 0 #eee;
     font-size: 16px;
     border-radius: 4px;
-    border: 1px solid silver;
+    border: 1px solid white;
     width: 74px;
     height: 28px;
-    background: radial-gradient(#adf6b9, lightgreen);
+    background: #99d9ea;
+    color: #000000;
     font-family: "CaviarDreams";
 }
 
@@ -139,8 +169,10 @@ header {
 }
 
 #reg_btn {
-    background: radial-gradient(indianred, orangered);
+    background: #5d89ae;
     width: 100%;
+    color: white;
+    border: 1px solid #ffffff;
 }
 
 #reg_btn_box {
