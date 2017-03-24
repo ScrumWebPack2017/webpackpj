@@ -3,11 +3,6 @@
     src: url('../fonts/CaviarDreams.ttf');
 }
 
-a {
-    font-family: 'CaviarDreams';
-}
-
-
 body {
     margin: 0;
     font-family: "CaviarDreams";
@@ -18,20 +13,21 @@ header {
     width: 100%;
     position: fixed;
     z-index: 5;
-    background-color: yellow;
+    background-color: lightblue;
+}
+.header_elements {
+    position: relative;
+    float: right;
 }
 
 #user_block {
-    position: relative;
-    float: right;
-    width: 240px;
+    width: 200px;
     height: 180px;
     background-color: #d0d1d3;
     padding: 8px;
     border: 2px solid #547898;
 }
 
-<<<<<<< HEAD
 #logo {
     width: 220px;
     height: 100%;
@@ -112,7 +108,7 @@ header {
     font-stretch: ultra-condensed;
     text-align: center;
     cursor: pointer;
-    background-image: url(../images/arrLeft.png);
+    background: url(../images/arrLeft.png);
     background-size: cover;
     font-family: "Century Gothic";
 }
@@ -126,12 +122,10 @@ header {
 
 }
 
-=======
->>>>>>> origin/master
 .auth_box {
     margin: auto;
     padding: 8px 0;
-    width: 220px;
+    width: 200px;
 
 }
 
@@ -141,7 +135,7 @@ header {
     padding: 0;
     border-radius: 3px;
     border: 1px solid #e7e7e7;
-    width: 220px;
+    width: 200px;
     margin: 0;
     height: 28px;
     font-size: 16px;
@@ -149,22 +143,17 @@ header {
 }
 
 #error_lbl {
-    width: 220px;
+    width: 200px;
     margin: auto;
     color: red;
 }
 
 .auth_btn {
     box-shadow: inset 1px 1px 5px 0 #eee;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 4px;
-<<<<<<< HEAD
     border: 1px solid white;
     width: 74px;
-=======
-    border: 1px solid silver;
-    width: 80px;
->>>>>>> origin/master
     height: 28px;
     background: #99d9ea;
     color: #000000;
@@ -174,6 +163,7 @@ header {
 .auth_btns {
     position: relative;
     float: left;
+    font-size: 16px;
     height: 30px;
     padding-bottom: 4px;
 }
@@ -187,20 +177,4 @@ header {
 
 #reg_btn_box {
     padding-top: 8px;
-
-}
-
-#content {
-    position: absolute;
-    width: 100%;
-    background-color: antiquewhite;
-    min-height: 500px;
-}
-
-#left_bar {
-    position: fixed;
-    z-index: 10;
-    top: 200px;
-    width: 200px;
-    background-color: aqua;
 }
