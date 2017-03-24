@@ -11,7 +11,7 @@ window.onload = function() {
         }
 
     });
-<<<<<<< HEAD
+
 };
 
 function tabControl() {
@@ -59,10 +59,7 @@ function normalizePage() {
 
 
  */
-=======
-}
 
->>>>>>> origin/master
 function logOut() {
     $.ajax({
         url: 'database_scripts/session_close.php',
