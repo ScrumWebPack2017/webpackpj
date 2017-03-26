@@ -1,0 +1,180 @@
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('../fonts/CaviarDreams.ttf');
+}
+
+body {
+    margin: 0;
+    font-family: "CaviarDreams";
+}
+
+header {
+    height: 200px;
+    width: 100%;
+    position: fixed;
+    z-index: 5;
+    background-color: lightblue;
+}
+.header_elements {
+    position: relative;
+    float: right;
+}
+
+#user_block {
+    width: 200px;
+    height: 180px;
+    background-color: #d0d1d3;
+    padding: 8px;
+    border: 2px solid #547898;
+}
+
+#logo {
+    width: 220px;
+    height: 100%;
+    background: url("../images/logo4.jpg");
+    background-size: cover;
+}
+
+#top_menu {
+    width: calc(100% - 440px);
+    height: 196px;
+    background-color: #e1e8ea;
+    border-bottom: 2px solid #547898;
+    border-top: 2px solid #547898;
+}
+
+#header_menu_wrap {
+    width: 100%;
+    height: inherit;
+    visibility: visible;
+}
+
+#header_menu_tabs {
+    height: 30px;
+    background-color: #d0d1d3;
+    padding: 10px 10px 0 10px;
+}
+
+.menu_tab {
+    position: relative;
+    float: left;
+    height: 16px;
+    width: calc((100% - 43px) / 4);
+    margin: 0 5px;
+    text-align: center;
+    font-size: 16px;
+    padding: 7px 0 7px 0;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.selected_tab {
+    background-color: #e1e8ea;
+}
+
+#source_code_btn {
+    background: #5d89ae;
+    color: white;
+}
+
+#content {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    min-height: 500px;
+}
+
+#left_bar {
+    position: fixed;
+    z-index: 10;
+    top: 200px;
+    left: 0;
+    width: 220px;
+    background-color: transparent;
+}
+
+#left_btn_col {
+    position: relative;
+    float: right;
+    width: 20px;
+    height: inherit;
+    background-color: #e1e8ea;
+}
+
+#left_btn {
+    height: 20px;
+    font-stretch: ultra-condensed;
+    text-align: center;
+    cursor: pointer;
+    background: url(../images/arrLeft.png);
+    background-size: cover;
+    font-family: "Century Gothic";
+}
+
+#left_menu {
+    position: relative;
+    float: right;
+    width: 200px;
+    height: inherit;
+    background-color: #e1e8ea;
+
+}
+
+.auth_box {
+    margin: auto;
+    padding: 8px 0;
+    width: 200px;
+
+}
+
+.auth_input {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    width: 200px;
+    margin: 0;
+    height: 28px;
+    font-size: 16px;
+    font-family: "CaviarDreams";
+}
+
+#error_lbl {
+    width: 200px;
+    margin: auto;
+    color: red;
+}
+
+.auth_btn {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid white;
+    width: 74px;
+    height: 28px;
+    background: #99d9ea;
+    color: #000000;
+    font-family: "CaviarDreams";
+}
+
+.auth_btns {
+    position: relative;
+    float: left;
+    font-size: 16px;
+    height: 30px;
+    padding-bottom: 4px;
+}
+
+#reg_btn {
+    background: #5d89ae;
+    width: 100%;
+    color: white;
+    border: 1px solid #ffffff;
+}
+
+#reg_btn_box {
+    padding-top: 8px;
+}

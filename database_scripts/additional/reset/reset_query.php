@@ -45,7 +45,7 @@
     }
     $string_url = "http://webpackpj.com/database_scripts/additional/reset/reset_pass.php?email=" . $email . "&keyt=" . $keyt;
     if(mail($email, "Password reset", "Hi, it`s WebPack.\nWe got your message about password resetting. Follow the link to reset the password\n" . $string_url)) {
-            echo "OK";
+            echo "We have reset your password. Check your email.";
     }
     else
     {
