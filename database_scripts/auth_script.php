@@ -44,12 +44,12 @@
         exit();
     } else {
         if ($count == 0) {
-            echo "Check the validity of input";
+            echo "bad data";
             exit();
         }
     }
     if($send_to['checked'] == "0" || $send_to['checked'] == 0) {
-        echo "Confirm your mail";
+        echo "not confirmed";
         exit();
     }
     session_start();

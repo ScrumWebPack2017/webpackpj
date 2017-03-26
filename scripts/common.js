@@ -90,7 +90,7 @@ function sendAuthorization() {
                 errorAuth("Confirm your email first!");
             } else {
                 if (data == 'bad data')
-                    errorAuth(data);
+                    errorAuth('Wrong input data');
                 else {
                     location.reload();
                 }
