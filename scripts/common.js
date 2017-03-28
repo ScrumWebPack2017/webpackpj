@@ -1,4 +1,7 @@
 window.onload = function() {
+    $(window).resize(function () {
+        normalizePage();
+    });
     normalizePage();
     instaValidate();
     tabControl();
@@ -20,6 +23,7 @@ function tabControl() {
             return;
         $('.menu_tab').removeClass('selected_tab');
         this.setAttribute('class', 'menu_tab selected_tab');
+
     })
 }
 
@@ -46,9 +50,16 @@ function shiftLeftBar() {
 }
 
 function normalizePage() {
+    var w = document.body.scrollWidth;
     var h = document.body.scrollHeight;
     $('#left_bar').css('height', h - 200);
     $('#left_btn_col').css('padding-top', (h - 240)/2);
+    if (w > 1800)
+        $('.menu_tab').css('width', (w - 460)/4 - 12);
+    else if (w > 2400)
+        $('.menu_tab').css('width', (w - 460)/4 - 14);
+    else
+        $('.menu_tab').css('width', (w - 460)/4 - 10.5);
 
 }
 
@@ -101,10 +112,10 @@ function sendAuthorization() {
 
 function errorAuth(text) {
     if (text != '') {
-        $('#reg_btn_box').css('padding-top', '9px');
+        $('#reg_btn').css('margin-top', '5px');
         $('#error_lbl').html(text);
     } else {
-        $('#reg_btn_box').css('padding-top', '28px');
+        $('#reg_btn').css('margin-top', '24px');
         $('#error_lbl').html('');
     }
 }

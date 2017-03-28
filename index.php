@@ -5,7 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/common.css">
+    <link rel="stylesheet" type="text/css" href="styles/editor.css">
+
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
+
+    <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
     <title>Title</title>
 </head>
@@ -23,17 +28,15 @@
                         <input type="password" id="pass_input" name="password" class="auth_input" placeholder="Password">
                     </div>
                     <div id="error_lbl"></div>
-                    <div class="auth_box">
-                        <div class="auth_btns" style="padding-right: 12px">
-                            <input type="submit" class="auth_btn" id="signin_btn" value="Sign In">
-                        </div>
-                        <div class="auth_btns" style="font-size: 16px; padding: 4px 0 0 0;">
+                    <div class="auth_box" style="font-size: 14px">
                             <a href="database_scripts/additional/reset/reset_pass.html">  Reset password </a>
-                        </div>
+                    </div>
+                    <div class="auth_box" style="padding-bottom: 0px">
+                            <input type="submit" class="auth_btn"  value="Sign In">
                     </div>
                 </form>
-                <br>
-                <div class="auth_box" id="reg_btn_box" style="padding-top: 28px">
+               
+                <div class="auth_box" id="reg_btn_box" style="">
                     <a href="registration.html"> <button class="auth_btn" id="reg_btn"> Registration </button> </a>
                 </div>';
                 else echo '
@@ -81,7 +84,36 @@
             </div>
         </div>
         <div id="left_menu">
+            <ul id="red" class="treeview-red">
+                <li> <span>Item 1</span>
+                    <ul class="elements">
+                        <li><span>Item 1.0</span>
 
+                        </li>
+                        <li><span>Item 1.1</span></li>
+                        <li><span>Item 1.2</span>
+
+                        </li>
+                    </ul>
+                </li>
+                <li> <span>Item 2</span>
+                    <ul class="elements">
+                        <li><span>Item 2.0</span>
+
+                        </li>
+                        <li><span>Item 2.1</span>
+
+                        </li>
+                    </ul>
+                </li>
+                <li><span>Item 3</span>
+                    <ul class="elements">
+                        <li><span>Item 3.0</span>
+
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 </body>
