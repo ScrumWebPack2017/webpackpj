@@ -112,10 +112,10 @@ function sendAuthorization() {
 
 function errorAuth(text) {
     if (text != '') {
-        $('#reg_btn').css('margin-top', '5px');
+        $('#res_pass').css('margin-top', '0px');
         $('#error_lbl').html(text);
     } else {
-        $('#reg_btn').css('margin-top', '24px');
+        $('#res_pass').css('margin-top', '19px');
         $('#error_lbl').html('');
     }
 }

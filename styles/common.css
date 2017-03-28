@@ -10,6 +10,7 @@ body {
 
 ul li {
     list-style: none;
+    cursor: pointer;
 }
 
 #red {
@@ -97,7 +98,7 @@ header {
 
 #source_code_btn {
     background: linear-gradient(#dfc9b1, #f4e7d9);
-    color: white;
+    color: black;
 }
 
 #content {
@@ -113,19 +114,21 @@ header {
     top: 200px;
     left: 0;
     width: 220px;
-    background-color: transparent;
+    background: linear-gradient(#fefefd, #f0e8d5);
 }
 
 #left_btn_col {
     position: relative;
     float: right;
-    width: 20px;
+    width: 17px;
     height: inherit;
-    background-color: #e1e8ea;
+    border-right: 2px solid #547898;
+    border-left: 1px solid #837565;
+    background-color: transparent;
 }
 
 #left_btn {
-    height: 20px;
+    height: 16px;
     font-stretch: ultra-condensed;
     text-align: center;
     cursor: pointer;
@@ -139,7 +142,7 @@ header {
     float: right;
     width: 200px;
     height: inherit;
-    background-color: #e1e8ea;
+    background-color: transparent;
 
 }
 
@@ -165,6 +168,7 @@ header {
 
 #error_lbl {
     width: 200px;
+    padding-bottom: 0px;
     margin: auto;
     color: red;
     text-align: center;
@@ -186,7 +190,7 @@ header {
 #reg_btn {
     background: #5d89ae;
     width: 100%;
-    margin-top: 24px;
+    margin-top: 8px;
     color: white;
     border: 1px solid #ffffff;
     font-size: 18px;

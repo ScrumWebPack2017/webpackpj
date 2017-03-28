@@ -28,7 +28,7 @@
                         <input type="password" id="pass_input" name="password" class="auth_input" placeholder="Password">
                     </div>
                     <div id="error_lbl"></div>
-                    <div class="auth_box" style="font-size: 14px">
+                    <div class="auth_box" id="res_pass" style="font-size: 14px; margin-top: 1px">
                             <a href="database_scripts/additional/reset/reset_pass.html">  Reset password </a>
                     </div>
                     <div class="auth_box" style="padding-bottom: 0px">
@@ -74,7 +74,7 @@
 
         </div>
     </header>
-    <div id="content">
+    <div id="workplace">
 
     </div>
     <div id="left_bar">
@@ -85,14 +85,17 @@
         </div>
         <div id="left_menu">
             <ul id="red" class="treeview-red">
-                <li> <span>Item 1</span>
+                <li>
+                    <span> Blocks </span>
                     <ul class="elements">
-                        <li><span>Item 1.0</span>
-
+                        <li id="el_div" class="element">
+                            <span> Div </span>
                         </li>
-                        <li><span>Item 1.1</span></li>
-                        <li><span>Item 1.2</span>
-
+                        <li>
+                            <span> Span </span>
+                        </li>
+                        <li>
+                            <span> P </span>
                         </li>
                     </ul>
                 </li>
