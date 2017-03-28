@@ -89,13 +89,13 @@
                     <span> Blocks </span>
                     <ul class="elements">
                         <li id="el_div" class="element">
-                            <span> Div </span>
+                            <span class="inner_element" id="div"> Div </span>
                         </li>
                         <li>
-                            <span> Span </span>
+                            <span class="inner_element" id="span"> Span </span>
                         </li>
                         <li>
-                            <span> P </span>
+                            <span class="inner_element" id="p"> P </span>
                         </li>
                     </ul>
                 </li>

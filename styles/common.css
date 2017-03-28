@@ -115,6 +115,7 @@ header {
     left: 0;
     width: 220px;
     background: linear-gradient(#fefefd, #f0e8d5);
+    opacity: 0.5;
 }
 
 #left_btn_col {
