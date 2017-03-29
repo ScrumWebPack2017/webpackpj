@@ -6,9 +6,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/editor.css">
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
 
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
+    <script type="text/javascript" src="scripts/jquery-ui.js"></script>
 
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>

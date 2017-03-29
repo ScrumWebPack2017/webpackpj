@@ -1,26 +1,16 @@
 var generatedElements = new Array(0);
+
+var focusedElement;
+
 $(document).ready(function(){
-
-    /*var e = {
-        type: "div",
-        position: "absolute",
-        width: "100px",
-        height: "100px",
-        background: "yellow"
-    }*/
-
-    $("#red").treeview({
-        animated: "normal",
-        collapsed: true,
-        control: "#treecontrol"
-    });
+    createLeftMenu();
 
     $('.inner_element').click(function () {
         var e = {
-            id:"",
+            id: "",
             type: this.id,
             parent: "#workplace",
-            position: "relative",
+            position: "absolute",
             float: 'right',
             margin: '5px',
             width: "200px",
@@ -41,6 +31,18 @@ $(document).ready(function(){
         $('#left_bar').animate({"opacity":"0.5"}, 500);
     });
 });
+
+
+
+
+function createLeftMenu() {
+    $("#red").treeview({
+        animated: "normal",
+        collapsed: true,
+        control: "#treecontrol"
+    });
+
+}
 
 function generateElement(element) {
     var el = document.createElement(element.type);
@@ -70,24 +72,30 @@ function generateElement(element) {
     $("#" + identifier).attr('tabindex', 1).focus(function() {
         $("#" + identifier).css({outline:"dashed 2px #878787"});
         element.focused = true;
+        focusedElement = $("#" + identifier);
     });
 
     $("#" + identifier).blur(function() {
         $("#" + identifier).css({outline:"", cursor:"auto"});
         element.focused = false;
+        focusedElement = null;
     });
 
     $(".work_elements").mousemove(function(event){
         var element = findElem(this.id);
+
         if(element != null) {
             var offset = $(this).offset(),
                 x = event.pageX - offset.left,
                 y = event.pageY - offset.top;
                 h = $("#" + this.id).height();
                 w = $("#" + this.id).width();
-                checkPos(x, y, w, h, this.id);
+                cursorType($(this), event);
+                //checkPos(x, y, w, h, this.id);
         }
-    });
+
+    }).resizable().draggable();
+
 }
 
 function getRandomColorAndSize(element){
@@ -102,8 +110,7 @@ function getRandomColorAndSize(element){
     element.height = widthheight + "px";
 };
 
-function getRandomInt(min, max)
-{
+function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -114,6 +121,42 @@ function findElem(id) {
         }
     }
     return null;
+}
+
+function cursorType(element, event) {
+    var x = event.pageX - element.offset().left;
+    var y = event.pageY - element.offset().top;
+    var h = element.height();
+    var w = element.width();
+    if (x >= 0 && x <= 8) {
+        if (y >= -4 && y <= 8 + 4) {
+            element.css('cursor', 'nw-resize');
+        } else if (y >= h - 8 && y <= h + 4) {
+            element.css('cursor', 'sw-resize');
+        } else {
+            element.css('cursor', 'w-resize');
+        }
+    } else if (x >= w - 8 && x <= w + 4) {
+        if (y >= -4 && y <= 8) {
+            element.css('cursor', 'ne-resize');
+        } else if (y >= h - 8 && y <= h + 4) {
+            element.css('cursor', 'se-resize');
+        } else {
+            element.css('cursor', 'e-resize');
+        }
+    } else {
+        if (y >= -4 && y <= 8) {
+            element.css('cursor', 'n-resize');
+        } else if (y >= h - 8 && y <= h + 4) {
+            element.css('cursor', 's-resize');
+        } else {
+            element.css('cursor', 'auto');
+            resizeFlag = false;
+            return false;
+        }
+    }
+    resizeFlag = true;
+    return true;
 }
 
 function checkPos(x, y, w, h, id) {
