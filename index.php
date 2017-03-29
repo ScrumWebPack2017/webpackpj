@@ -121,5 +121,6 @@
             </ul>
         </div>
     </div>
+    <div id="size_container"></div>
 </body>
 </html>

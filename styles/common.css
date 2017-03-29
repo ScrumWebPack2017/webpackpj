@@ -116,7 +116,6 @@ header {
     left: 0;
     width: 220px;
     background: linear-gradient(#fefefd, #f0e8d5);
-    opacity: 0.5;
 }
 
 #left_btn_col {
@@ -201,4 +200,16 @@ header {
 
 #reg_btn_box {
     padding-top: 0;
+}
+
+#size_container {
+    position: absolute;
+    width: 70px;
+    height: 22px;
+    background: #e7e7e7;
+    border: 1px solid #575757;
+    text-align: center;
+    color: #000000;
+    font-size: 14px;
+    opacity: 0;
 }
