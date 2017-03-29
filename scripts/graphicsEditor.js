@@ -1,11 +1,10 @@
 var generatedElements = new Array(0);
 
-var focusedElement;
-
 $(document).ready(function(){
     createLeftMenu();
 
     $('.inner_element').click(function () {
+        shiftLeftBar();
         var e = {
             id: "",
             type: this.id,
@@ -72,16 +71,18 @@ function generateElement(element) {
     $("#" + identifier).attr('tabindex', 1).focus(function() {
         $("#" + identifier).css({outline:"dashed 2px #878787"});
         element.focused = true;
-        focusedElement = $("#" + identifier);
     });
 
     $("#" + identifier).blur(function() {
         $("#" + identifier).css({outline:"", cursor:"auto"});
         element.focused = false;
-        focusedElement = null;
     });
 
-    $(".work_elements").mousemove(function(event){
+    $(".work_elements").mousedown(function () {
+        $("#" + identifier).css({outline:"dashed 2px #878787"});
+    }).resizable().draggable({ containment: "#workplace" });
+
+    /* $(".work_elements").mousemove(function(event){
         var element = findElem(this.id);
 
         if(element != null) {
@@ -90,12 +91,11 @@ function generateElement(element) {
                 y = event.pageY - offset.top;
                 h = $("#" + this.id).height();
                 w = $("#" + this.id).width();
-                cursorType($(this), event);
-                //checkPos(x, y, w, h, this.id);
+
+                checkPos(x, y, w, h, this.id);
         }
 
-    }).resizable().draggable();
-
+    }).resizable().draggable(); */
 }
 
 function getRandomColorAndSize(element){
