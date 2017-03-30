@@ -2,7 +2,7 @@ var generatedElements = new Array(0);
 
 $(document).ready(function() {
     createLeftMenu();
-
+    normalizeWorkplace();
     $('.inner_element').click(function() {
         shiftLeftBar();
         var e = {
@@ -25,7 +25,12 @@ $(document).ready(function() {
 });
 
 
+function normalizeWorkplace() {
+    var w = document.body.scrollWidth;
+    $('#workplace').css('width', w - 12);
 
+
+}
 
 function createLeftMenu() {
     $("#red").treeview({

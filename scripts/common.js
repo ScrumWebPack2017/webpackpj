@@ -55,7 +55,7 @@ function normalizePage() {
     $('#left_bar').css('height', h - 200);
     $('#left_btn_col').css('padding-top', (h - 240)/2);
     if (w > 1800)
-        $('.menu_tab').css('width', (w - 460)/4 - 12);
+        $('.menu_tab').css('width', Math.floor((w - 460)/4) - 12);
     else if (w > 2400)
         $('.menu_tab').css('width', (w - 460)/4 - 14);
     else

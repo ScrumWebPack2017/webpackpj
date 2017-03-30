@@ -104,7 +104,6 @@ header {
 #workplace {
     top: 204px;
     position: absolute;
-    width: 100%;
     background-color: white;
     min-height: 500px;
 }
