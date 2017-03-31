@@ -1,4 +1,6 @@
 var generatedElements = new Array(0);
+var focusedElement;
+var focusTimer;
 
 $(document).ready(function() {
     createLeftMenu();
@@ -27,10 +29,38 @@ $(document).ready(function() {
 
 function normalizeWorkplace() {
     var w = document.body.scrollWidth;
-    $('#workplace').css('width', w - 12);
+    $('#workplace').css('width', w - 20);
 
 
 }
+
+function deleteFocused() {
+    if (performance.now() - focusTimer < 400) {
+        focusedElement.remove();
+    } else {
+        alert("Element isn't selected!");
+    }
+}
+
+function parentFocus() {
+    if (performance.now() - focusTimer < 400) {
+        var event = new Event("focus");
+        $('#' + searchParent(focusedElement.attr('id'))).focus();
+    } else {
+        alert("Element isn't selected!");
+    }
+}
+
+function printStatus(id) {
+    $('#current_id').val(id);
+    $('#current_width').val($("#" + id).width());
+    $('#current_height').val($("#" + id).height());
+}
+function clearStatus() {
+    $('#current_id').val('');
+    $('#current_width').val('');
+    $('#current_height').val('');
+};
 
 function createLeftMenu() {
     $("#red").treeview({
@@ -40,6 +70,7 @@ function createLeftMenu() {
     });
 
 }
+
 
 function generateElement(element) {
     var el = document.createElement(element.type);
@@ -66,12 +97,20 @@ function generateElement(element) {
         background: element.background
     });
 
-    $("#" + identifier).attr('tabindex', 1).focus(function() {
+    //printStatus(identifier);
+
+    $("#" + identifier).attr('tabindex', 1).focus(function(event) {
         $("#" + identifier).css({
             outline: "dashed 2px #878787"
         });
+        focusedElement = $(this);
+        printStatus(identifier);
     }).resizable({
         resize: function(event, ui) {
+
+            // id, width and height on status line
+            printStatus(identifier);
+
             document.getElementById("size_container").innerHTML = $("#" + identifier).width() + "x" + $("#" + identifier).height();
             $("#size_container").css({
                 top: event.pageY - 45,
@@ -88,7 +127,8 @@ function generateElement(element) {
             });
         }
     }).draggable({
-        containment: "#workplace"
+        containment: "#workplace",
+        scroll: true
     });
 
     $("#" + identifier).blur(function() {
@@ -96,6 +136,8 @@ function generateElement(element) {
             outline: "",
             cursor: "auto"
         });
+        clearStatus();
+        focusTimer = performance.now();
     });
 
 }
@@ -116,11 +158,19 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function searchParent(id) {
+    for (var i = 0; i < generatedElements.length; ++i) {
+        if (generatedElements[i].id == id) {
+            return generatedElements[i].parent;
+        }
+    }
+}
+
 function findElem(id) {
     for (var i = 0; i < generatedElements.length; ++i) {
-        if (generatedElements[i].id == id && generatedElements[i].focused) {
-            return generatedElements[i];
-        }
+        //if (generatedElements[i].id == id && generatedElements[i].focused) {
+            alert(generatedElements[i]);
+        //}
     }
     return null;
 }

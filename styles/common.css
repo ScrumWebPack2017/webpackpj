@@ -33,7 +33,7 @@ header {
 }
 .header_elements {
     position: relative;
-    float: right;
+    float: left;
 }
 
 #user_block {
@@ -52,7 +52,6 @@ header {
 }
 
 #top_menu {
-    width: calc(100% - 440px);
     height: 196px;
     background: linear-gradient(#fefefd, #f0e8d5);
     border-bottom: 2px solid #547898;
@@ -66,10 +65,40 @@ header {
 
 }
 
+#status_line {
+    height: 20px;
+    border-top: 1px solid #837565;
+    padding: 4px 10px 4px 10px;
+}
+
+#properties {
+    height: 124px;
+}
+
+.status_element {
+    position: relative;
+    float: left;
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.status_input {
+    box-shadow: inset 1px 1px 5px 0 #eee;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    width: 40px;
+    margin: 0;
+    height: 22px;
+    font-size: 18px;
+    font-family: "CaviarDreams";
+}
+
 #header_menu_tabs {
     height: 31px;
     background: linear-gradient(#dbc9b3, #c9ae91);
-    border-bottom: 1px solid #837565;;
+    border-bottom: 1px solid #837565;
     padding: 10px 10px 0 10px;
 
 }
@@ -113,22 +142,14 @@ header {
     z-index: 10;
     top: 200px;
     left: 0;
-    width: 220px;
+    width: 218px;
     background: linear-gradient(#fefefd, #f0e8d5);
-}
-
-#left_btn_col {
-    position: relative;
-    float: right;
-    width: 17px;
-    height: inherit;
     border-right: 2px solid #547898;
-    border-left: 1px solid #837565;
-    background-color: transparent;
 }
 
 #left_btn {
-    height: 16px;
+    height: 21px;
+    width: 21px;
     font-stretch: ultra-condensed;
     text-align: center;
     cursor: pointer;
@@ -140,7 +161,7 @@ header {
 #left_menu {
     position: relative;
     float: right;
-    width: 200px;
+    width: 218px;
     height: inherit;
     background-color: transparent;
 
@@ -168,7 +189,7 @@ header {
 
 #error_lbl {
     width: 200px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     margin: auto;
     color: red;
     text-align: center;
@@ -211,4 +232,10 @@ header {
     color: #000000;
     font-size: 14px;
     opacity: 0;
+    z-index: 1000;
 }
+
+#control_panel {
+
+}
+

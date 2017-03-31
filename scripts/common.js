@@ -1,8 +1,9 @@
-window.onload = function() {
+$(document).ready(function() {
+    normalizePage();
     $(window).resize(function () {
         normalizePage();
     });
-    normalizePage();
+
     instaValidate();
     tabControl();
     $('#authorization_form').submit(function (event) {
@@ -15,7 +16,7 @@ window.onload = function() {
 
     });
 
-};
+});
 
 function tabControl() {
     $('.menu_tab').click(function () {
@@ -41,7 +42,7 @@ function shiftAuth() {
 function shiftLeftBar() {
     var x = $('#left_bar').css('left').split('p')[0];
     if (x == 0) {
-        $('#left_bar').animate({ left: "-200px" } , 400);
+        $('#left_bar').animate({ left: "-220px" } , 400);
         $('#left_btn').css('backgroundImage', 'url(images/arrRight.png)');
     } else {
         $('#left_bar').animate({ left: "0px" } , 400);
@@ -50,16 +51,18 @@ function shiftLeftBar() {
 }
 
 function normalizePage() {
-    var w = document.body.scrollWidth;
-    var h = document.body.scrollHeight;
+    var w = document.documentElement.clientWidth;
+
+    var h = document.documentElement.clientHeight;
+    $('#top_menu').css('width', w - 440);
     $('#left_bar').css('height', h - 200);
     $('#left_btn_col').css('padding-top', (h - 240)/2);
     if (w > 1800)
-        $('.menu_tab').css('width', Math.floor((w - 460)/4) - 12);
+        $('.menu_tab').css('width', Math.floor((w - 460)/4) - 13);
     else if (w > 2400)
-        $('.menu_tab').css('width', (w - 460)/4 - 14);
+        $('.menu_tab').css('width', (w - 460)/4 - 16);
     else
-        $('.menu_tab').css('width', (w - 460)/4 - 10.5);
+        $('.menu_tab').css('width', (w - 460)/4 - 11);
 
 }
 

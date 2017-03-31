@@ -18,6 +18,53 @@
 </head>
 <body>
     <header>
+        <div class="header_elements" id="logo">
+
+        </div>
+        <div class="header_elements" id="top_menu">
+            <div class="header_elements" id="header_menu_wrap">
+                <div id="header_menu_tabs">
+                    <div class="menu_tab selected_tab">
+                        Properties1
+                    </div>
+                    <div class="menu_tab">
+                        Properties2
+                    </div>
+                    <div class="menu_tab">
+                        Properties3
+                    </div>
+                    <div class="menu_tab" id="source_code_btn">
+                        Source code
+                    </div>
+                </div>
+                <div id="properties">
+
+                </div>
+                <div id="status_line">
+                    <div id="left_btn" class="status_element" onclick="shiftLeftBar()"></div>
+                    <div class="status_element" onclick="deleteFocused()" style="cursor: pointer">
+                        roflanPomoika
+                    </div>
+
+                    <div class="status_element">
+                        Width:
+                        <input class="status_input"  id="current_width" type="text" disabled>
+
+                    </div>
+                    <div class="status_element" >
+                        Height:
+                        <input class="status_input" id="current_height" type="text" disabled>
+                    </div>
+                    <div class="status_element" >
+                        Id:
+                        <input class="status_input" id="current_id" type="text" style="width: 100px" disabled>
+                    </div>
+                    <div class="status_element" id="status_parent" onclick="parentFocus()" style="cursor: pointer">
+                        Parent
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="header_elements" id="user_block">
             <?php
             if(!$_SESSION['user'] && !$_SESSION['uname'])
@@ -54,37 +101,13 @@
                 ';
             ?>
         </div>
-        <div class="header_elements" id="top_menu">
-            <div class="header_elements" id="header_menu_wrap">
-                <div id="header_menu_tabs">
-                    <div class="menu_tab selected_tab">
-                        Properties1
-                    </div>
-                    <div class="menu_tab">
-                        Properties2
-                    </div>
-                    <div class="menu_tab">
-                        Properties3
-                    </div>
-                    <div class="menu_tab" id="source_code_btn">
-                        Source code
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header_elements" id="logo">
 
-        </div>
+
     </header>
     <div id="workplace">
 
     </div>
     <div id="left_bar">
-        <div id="left_btn_col">
-            <div id="left_btn" onclick="shiftLeftBar()">
-                <!-- <img src="images/arrLeft.png" id="left_col_img" width="20"> -->
-            </div>
-        </div>
         <div id="left_menu">
             <ul id="red" class="treeview-red">
                 <li>
