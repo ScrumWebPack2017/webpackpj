@@ -22,3 +22,7 @@ function fillPropertiesTable(focused) {
         $(el).val(focused.css($.trim($(el).parent().children()[0].innerHTML.toLowerCase())));
     });
 }
+
+function clearproperty(){
+    $('.property_input').val("");
+}

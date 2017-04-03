@@ -3,7 +3,16 @@ var focusedElement = null;
 var focusedId;
 var focusTimer;
 var buffer = null;
-var clicks = { work:false, element:false };
+var zindex = 1;
+var clicks = {
+    work: false,
+    element: false
+};
+
+var keys = {
+    right: false,
+    left: false
+}
 
 $(document).ready(function() {
     createLeftMenu();
@@ -21,12 +30,15 @@ $(document).ready(function() {
             parent: "#workplace",
             position: "absolute",
             float: 'right',
-            margin: '5px',
+            margin: '',
             width: "200px",
             height: "200px",
             background: "lawngreen",
+            zIndex_: zindex,
             focused: false
         };
+
+        ++zindex;
 
         generatedElements.push(e);
         generateElement(e, true);
@@ -36,15 +48,17 @@ $(document).ready(function() {
         manipulate(event);
     });
 
-    $(document).on("click", "#workplace", function (event) {
+    $(document).on("click", "#workplace", function(event) {
         clicks.work = true;
-        if(clicks.work && !clicks.element && focusedElement != null) {
+        if (clicks.work && !clicks.element && focusedElement != null) {
             $("#" + focusedId).css({
                 outline: "",
                 cursor: "auto"
             });
             focusedElement = null;
             focusedId = null;
+            clearStatus();
+            clearproperty();
         }
         clicks.work = false;
         clicks.element = false;
@@ -56,7 +70,9 @@ $(document).ready(function() {
 function normalizeWorkplace() {
     var w = document.body.scrollWidth;
     $('#workplace').css('width', w - 20);
-    $("#res_pass").css({marginTop:"19px"});
+    $("#res_pass").css({
+        marginTop: "19px"
+    });
 
 }
 
@@ -83,6 +99,7 @@ function printStatus(id) {
     $('#current_width').val(Math.floor($("#" + id).width()));
     $('#current_height').val(Math.floor($("#" + id).height()));
 }
+
 function clearStatus() {
     $('#current_id').val('');
     $('#current_width').val('');
@@ -111,7 +128,7 @@ function generateElement(element, point) {
 
     $(element.parent).append(el);
 
-    if(point)
+    if (point)
         getRandomColorAndSize(element);
 
     $("#" + identifier).css({
@@ -120,38 +137,121 @@ function generateElement(element, point) {
         margin: element.margin,
         width: element.width,
         height: element.height,
-        background: element.background
+        background: element.background,
+        zIndex: element.zIndex_
     });
 
     //printStatus(identifier);
 
-    $("#" + identifier).click(function() {
+    $("#" + identifier).on("click", function(e) {
         clicks.element = true;
-        if(focusedElement != null && focusedId != null && identifier != focusedId) {
+        if (focusedElement != null && focusedId != null && identifier != focusedId) {
             $("#" + focusedId).css({
                 outline: "",
                 cursor: "auto"
             });
         }
-            $("#" + identifier).css({
-                outline: "dashed 2px #878787"
-            });
+        $("#" + identifier).css({
+            outline: "dashed 2px #878787"
+        });
         focusedElement = $(this);
         focusedId = identifier;
         fillPropertiesTable(focusedElement);
         printStatus(identifier);
-    }).resizable({resize:function () {
-        if(focusedId != null) {
-            printStatus(focusedId);
-            elem = findElemPos(focusedId);
-            if(elem != -1) {
-                generatedElements[elem].width = $("#" + identifier).width();
-                generatedElements[elem].height = $("#" + identifier).height();
+    }).resizable({
+        resize: function(event, ui) {
+            var parent_id = $("#" + this.id).parent().attr("id");
+            if (parent_id != "workplace") {
+                console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
+                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
+            }
+            keys.left = false;
+            keys.right = false;
+            if (focusedId != null) {
+                printStatus(focusedId);
+                elem = findElemPos(focusedId);
+                if (elem != -1) {
+                    generatedElements[elem].width = $("#" + identifier).width();
+                    generatedElements[elem].height = $("#" + identifier).height();
+                }
             }
         }
-    }}).draggable({
+    }).draggable({
         containment: "#workplace",
-        scroll: true
+        scroll: true,
+        drag: function(event, ui) {
+            var parent_id = $("#" + this.id).parent().attr("id");
+            if (parent_id != "workplace") {
+                console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
+                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
+            }
+        }
+    }).droppable({
+        over: function(event, ui) {
+            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id) return;
+            swapIndexes(event, ui, this);
+            checkSizes(event, ui, this);
+        },
+        out: function(event, ui) {
+            clearOutlines(this);
+        },
+        drop: function(event, ui) {
+            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id) return;
+            if (checkSizes(event, ui, this)) {
+                var div = $("#" + ui.draggable.prop('id')).detach();
+                $(this).append(div);
+                $("#" + ui.draggable.prop('id')).css({
+                    top: 0,
+                    left: 0
+                });
+                $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
+                $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
+                $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
+                $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+            } else {
+
+            }
+            clearOutlines(this);
+        }
+    });
+}
+
+function clearOutlines(thisel) {
+    $("#" + thisel.id).css({
+        "outline": ""
+    });
+}
+
+function checkSizes(event, ui, thisel) {
+    var parent_width = $("#" + thisel.id).width();
+    var parent_height = $("#" + thisel.id).height();
+    var child_width = $("#" + ui.draggable.prop('id')).width();
+    var child_height = $("#" + ui.draggable.prop('id')).height();
+    if (parent_width <= child_width || parent_height <= child_height) {
+        $("#" + thisel.id).css({
+            "outline": "solid 3px #FF5F5F"
+        });
+        return false;
+    }
+    $("#" + thisel.id).css({
+        "outline": "solid 3px #6CFF69"
+    });
+    return true;
+}
+
+function swapIndexes(event, ui, thisel) {
+    var index1 = $(thisel).css("z-index");
+    var index2 = $("#" + ui.draggable.prop('id')).css("z-index");
+    console.log(index1 + ":" + index2);
+    var maxi = index1 < index2 ? index2 : index1;
+    var mini = index1 < index2 ? index1 : index2;
+    $(thisel).css({
+        zIndex: mini
+    });
+    $("#" + ui.draggable.prop('id')).css({
+        zIndex: maxi
     });
 }
 
@@ -197,7 +297,7 @@ function findElemPos(id) {
     return -1;
 }
 
-function countType(type){
+function countType(type) {
     var count = 0;
     for (var i = 0; i < generatedElements.length; ++i) {
         if (generatedElements[i].type == type) {
@@ -207,17 +307,17 @@ function countType(type){
     return count;
 }
 
-function manipulate(eve){
-    if(eve.which == 46){
+function manipulate(eve) {
+    if (eve.which == 46) {
         deleteFocused();
     } else {
-        if(eve.which == 67 && eve.ctrlKey) {
+        if (eve.which == 67 && eve.ctrlKey) {
             copy();
         } else {
-            if(eve.which == 86 && eve.ctrlKey) {
+            if (eve.which == 86 && eve.ctrlKey) {
                 paste();
             } else {
-                if(eve.which == 88 && eve.ctrlKey) {
+                if (eve.which == 88 && eve.ctrlKey) {
                     cut();
                 }
             }
@@ -226,16 +326,19 @@ function manipulate(eve){
 }
 
 function copy() {
-    if(focusedId == null)
+    if (focusedId == null)
         return;
     var elem = findElem(focusedId);
-    if(elem != null) {
-        buffer = { element:elem, type:"copy" };
+    if (elem != null) {
+        buffer = {
+            element: elem,
+            type: "copy"
+        };
     }
 }
 
 function paste() {
-    if(buffer != null) {
+    if (buffer != null) {
         var e = {
             id: "",
             type: buffer.element.type,
@@ -246,27 +349,32 @@ function paste() {
             width: buffer.element.width,
             height: buffer.element.height,
             background: buffer.element.background,
-            focused: false
+            focused: false,
+            zIndex_: zindex
         };
+        ++zindex;
         generatedElements.push(e);
         generateElement(e, false);
-        if(buffer.type == "cut")
+        if (buffer.type == "cut")
             buffer = null;
     }
 }
 
 function cut() {
-    if(focusedId == null)
+    if (focusedId == null)
         return;
     var elem = findElemPos(focusedId);
-    if(elem != -1) {
+    if (elem != -1) {
         focusedElement.remove();
         clearStatus();
 
         var tmp = new Array(0);
         for (var i = generatedElements.length - 1; i >= 0; --i) {
             if (i == elem) {
-                buffer = { element:generatedElements.pop(), type:"cut" };
+                buffer = {
+                    element: generatedElements.pop(),
+                    type: "cut"
+                };
                 continue;
             }
             tmp.push(generatedElements.pop());
@@ -277,13 +385,13 @@ function cut() {
 }
 
 function maxId(type) {
-    if(generatedElements.length == 0) return 0;
+    if (generatedElements.length == 0) return 0;
     var maxid = -1;
     for (var i = 0; i < generatedElements.length; ++i) {
         if (+(generatedElements[i].id.split("_")[1]) > maxid && generatedElements[i].type == type) {
             maxid = +(generatedElements[i].id.split("_")[1]);
         }
     }
-    if(maxid == -1) return 0;
+    if (maxid == -1) return 0;
     return maxid;
 }
