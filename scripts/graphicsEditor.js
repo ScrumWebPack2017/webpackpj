@@ -8,6 +8,11 @@ var clicks = { work:false, element:false };
 $(document).ready(function() {
     createLeftMenu();
     normalizeWorkplace();
+
+    $('.property_input').blur(function() {
+        propertyValidation("string", $(this), 100, focusedElement);
+    });
+
     $('.inner_element').click(function() {
         shiftLeftBar();
         var e = {
@@ -133,9 +138,11 @@ function generateElement(element, point) {
             });
         focusedElement = $(this);
         focusedId = identifier;
+        fillPropertiesTable(focusedElement);
         printStatus(identifier);
     }).resizable({resize:function () {
         if(focusedId != null) {
+            printStatus(focusedId);
             elem = findElemPos(focusedId);
             if(elem != -1) {
                 generatedElements[elem].width = $("#" + identifier).width();

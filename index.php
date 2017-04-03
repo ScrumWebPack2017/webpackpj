@@ -11,6 +11,7 @@
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/library.js"></script>
 
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
@@ -24,13 +25,13 @@
         <div class="header_elements" id="top_menu">
             <div class="header_elements" id="header_menu_wrap">
                 <div id="header_menu_tabs">
-                    <div class="menu_tab selected_tab">
+                    <div class="menu_tab selected_tab" id="props1tab">
                         Properties1
                     </div>
-                    <div class="menu_tab">
+                    <div class="menu_tab" id="props2tab">
                         Properties2
                     </div>
-                    <div class="menu_tab">
+                    <div class="menu_tab" id="props3tab">
                         Properties3
                     </div>
                     <div class="menu_tab" id="source_code_btn">
@@ -38,7 +39,108 @@
                     </div>
                 </div>
                 <div id="properties">
-
+                    <div id="props1" class="property_list" style="z-index: 5; visibility: visible">
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Float </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Width </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Height </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Margin </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Padding </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                    </div>
+                    <div id="props2" class="property_list" style="z-index: 6">
+                        <div class="property">
+                            <div class="property_label"> Background </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Border </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Border-radius </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Height </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Margin </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Padding </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                    </div>
+                    <div id="props3" class="property_list" style="z-index: 7">
+                        <div class="property">
+                            <div class="property_label"> Font-size </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Color </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Text-decoration </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Height </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Margin </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Padding </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                        <div class="property">
+                            <div class="property_label"> Position </div>
+                            <input class="property_input" type="text">
+                        </div>
+                    </div>
                 </div>
                 <div id="status_line">
                     <div id="left_btn" class="status_element" onclick="shiftLeftBar()"></div>

@@ -26,19 +26,10 @@ function tabControl() {
             return;
         $('.menu_tab').removeClass('selected_tab');
         this.setAttribute('class', 'menu_tab selected_tab');
+        $('.property_list').css('visibility', 'hidden');
+        $('#'+this.id.split('t')[0]).css('visibility', 'visible');
 
     })
-}
-
-function shiftAuth() {
-    var x = $('#user_block').css('width').split('p')[0];
-    alert(x);
-    if (x == 200) {
-        ('#user_block').animate({width: '0'}, 400);
-    }
-    else {
-        ('#user_block').animate({width: '200px'}, 400);
-    }
 }
 
 function shiftLeftBar() {
@@ -59,6 +50,7 @@ function normalizePage() {
     $('#top_menu').css('width', w - 440);
     $('#left_bar').css('height', h - 200);
     $('#left_btn_col').css('padding-top', (h - 240)/2);
+
     if (w > 1800)
         $('.menu_tab').css('width', Math.floor((w - 460)/4) - 13);
     else if (w > 2400)
@@ -66,6 +58,10 @@ function normalizePage() {
     else
         $('.menu_tab').css('width', (w - 460)/4 - 11);
 
+
+    $('.property').css('width', $('#properties').width() / 2 - 40);
+    $('.property_label').css('width', $('.property').width() * 0.3);
+    $('.property_input').css('width', $('.property').width() * 0.7 - 10);
 }
 
 /* Authorization
