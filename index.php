@@ -43,7 +43,7 @@
                 <div id="status_line">
                     <div id="left_btn" class="status_element" onclick="shiftLeftBar()"></div>
                     <div class="status_element" onclick="deleteFocused()" style="cursor: pointer">
-                        roflanPomoika
+                        Delete
                     </div>
 
                     <div class="status_element">

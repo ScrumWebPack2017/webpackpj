@@ -16,6 +16,8 @@ $(document).ready(function() {
 
     });
 
+    $("#res_pass").css({marginTop:"19px"});
+
 });
 
 function tabControl() {

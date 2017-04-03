@@ -168,7 +168,7 @@ header {
 }
 
 .auth_box {
-    margin: auto;
+    margin-top: auto;
     padding: 0 0 8px 0;
     width: 200px;
     text-align: center;
@@ -207,7 +207,6 @@ header {
     font-family: "CaviarDreams";
 }
 
-
 #reg_btn {
     background: #5d89ae;
     width: 100%;
@@ -235,7 +234,7 @@ header {
     z-index: 1000;
 }
 
-#control_panel {
-
+#res_pass {
+    margin-top: 19px;
 }
 

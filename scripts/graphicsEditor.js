@@ -1,8 +1,9 @@
 var generatedElements = new Array(0);
-var focusedElement;
+var focusedElement = null;
 var focusedId;
 var focusTimer;
 var buffer = null;
+var clicks = { work:false, element:false };
 
 $(document).ready(function() {
     createLeftMenu();
@@ -30,28 +31,43 @@ $(document).ready(function() {
         manipulate(event);
     });
 
+    $(document).on("click", "#workplace", function (event) {
+        clicks.work = true;
+        if(clicks.work && !clicks.element && focusedElement != null) {
+            $("#" + focusedId).css({
+                outline: "",
+                cursor: "auto"
+            });
+            focusedElement = null;
+            focusedId = null;
+        }
+        clicks.work = false;
+        clicks.element = false;
+    });
+
 });
 
 
 function normalizeWorkplace() {
     var w = document.body.scrollWidth;
     $('#workplace').css('width', w - 20);
-
+    $("#res_pass").css({marginTop:"19px"});
 
 }
 
 function deleteFocused() {
-    if (performance.now() - focusTimer < 400) {
+    if (focusedElement != null) {
         focusedElement.remove();
+        clearStatus();
     } else {
         alert("Element isn't selected!");
     }
 }
 
 function parentFocus() {
-    if (performance.now() - focusTimer < 400) {
-        var event = new Event("focus");
-        $('#' + searchParent(focusedElement.attr('id'))).focus();
+    if (focusedElement != null) {
+        var event = new Event("click");
+        $('#' + searchParent(focusedElement.attr('id'))).click();
     } else {
         alert("Element isn't selected!");
     }
@@ -104,10 +120,17 @@ function generateElement(element, point) {
 
     //printStatus(identifier);
 
-    $("#" + identifier).attr('tabindex', 1).focus(function(event) {
-        $("#" + identifier).css({
-            outline: "dashed 2px #878787"
-        });
+    $("#" + identifier).click(function() {
+        clicks.element = true;
+        if(focusedElement != null && focusedId != null && identifier != focusedId) {
+            $("#" + focusedId).css({
+                outline: "",
+                cursor: "auto"
+            });
+        }
+            $("#" + identifier).css({
+                outline: "dashed 2px #878787"
+            });
         focusedElement = $(this);
         focusedId = identifier;
         printStatus(identifier);
@@ -122,16 +145,6 @@ function generateElement(element, point) {
     }}).draggable({
         containment: "#workplace",
         scroll: true
-    });
-
-    $("#" + identifier).blur(function() {
-        $("#" + identifier).css({
-            outline: "",
-            cursor: "auto"
-        });
-        clearStatus();
-        focusedId = null;
-        focusTimer = performance.now();
     });
 }
 
@@ -189,8 +202,7 @@ function countType(type){
 
 function manipulate(eve){
     if(eve.which == 46){
-        focusedElement.remove();
-        clearStatus();
+        deleteFocused();
     } else {
         if(eve.which == 67 && eve.ctrlKey) {
             copy();
