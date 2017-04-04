@@ -13,7 +13,7 @@ var upperID = null;
 var keys = {
     right: false,
     left: false
-}
+};
 
 $(document).ready(function() {
     $(document).tooltip();
@@ -22,7 +22,10 @@ $(document).ready(function() {
     normalizeWorkplace();
 
     $('.property_input').blur(function() {
-        propertyValidation("string", $(this), 100, focusedElement);
+        propertyValidation("string", $(this), focusedElement);
+    }).keydown(function(e){
+       if (e.which == 13)
+           propertyValidation("string", $(this), focusedElement);
     });
 
     $('.inner_element').click(function() {
@@ -197,6 +200,7 @@ function generateElement(element, point) {
                 cursor: "auto"
             });
         }
+        alert(checkChildren(identifier, "div_1"));
         $("#" + identifier).css({
             outline: "dashed 2px #878787"
         });

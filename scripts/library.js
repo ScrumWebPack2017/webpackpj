@@ -1,4 +1,4 @@
-function propertyValidation(type, field, defVal, focused) {
+function propertyValidation(type, field, focused) {
 
     var pattern;
     if (type == "string") {
@@ -25,4 +25,8 @@ function fillPropertiesTable(focused) {
 
 function clearproperty(){
     $('.property_input').val("");
+}
+
+function checkChildren(parentId, childId) {
+    return $('#' + parentId).html().indexOf(childId) != -1;
 }
