@@ -164,6 +164,8 @@
                     <div class="status_element" id="status_parent" onclick="parentFocus()" style="cursor: pointer">
                         Parent
                     </div>
+                    <div id="locker_ico" class="status_element" title="Lock\unlock focused element to enable\disable element interaction.">
+                    </div>
                 </div>
             </div>
         </div>

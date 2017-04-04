@@ -109,6 +109,15 @@ header {
     font-size: 18px;
 }
 
+#locker_ico {
+    width: 30px;
+    height: 26px;
+    margin-top: -2px;
+    background: url("../images/lock-icon-17.png") no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
 .status_input {
     box-shadow: inset 1px 1px 5px 0 #eee;
     box-sizing: border-box;
