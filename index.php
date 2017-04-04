@@ -248,6 +248,30 @@
             </ul>
         </div>
     </div>
-    <div id="size_container"></div>
+    <div id="context_menu">
+        <ul>
+            <li>
+                <div class="context_item" id="context_delete" onclick="deleteFocused()">
+                    Delete
+                </div>
+            </li>
+            <li>
+                <div class="context_item" id="context_styles">
+                    Show styles
+                </div>
+            </li>
+            <li>
+                <div class="context_item" id="context_1">
+                    choto eshe
+                </div>
+            </li>
+            <li>
+                <div class="context_item" id="context_2">
+                    i eshe
+                </div>
+            </li>
+        </ul>
+    </div>
+
 </body>
 </html>

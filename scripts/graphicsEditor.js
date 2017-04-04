@@ -21,6 +21,17 @@ $(document).ready(function() {
     createLeftMenu();
     normalizeWorkplace();
 
+
+
+    document.oncontextmenu = function(e) {
+        $('#context_menu').css('visibility', 'visible');
+        return false;
+    }
+
+    document.onclick = function() {
+        $('#context_menu').css('visibility', 'hidden');
+    };
+
     $('.property_input').blur(function() {
         propertyValidation("string", $(this), focusedElement);
     }).keydown(function(e){
