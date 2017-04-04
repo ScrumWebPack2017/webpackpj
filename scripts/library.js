@@ -26,7 +26,3 @@ function fillPropertiesTable(focused) {
 function clearproperty(){
     $('.property_input').val("");
 }
-
-function checkChildren(parentId, childId) {
-    return $('#' + parentId).html().indexOf(childId) != -1;
-}

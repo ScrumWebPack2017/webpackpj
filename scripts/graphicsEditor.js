@@ -24,9 +24,27 @@ $(document).ready(function() {
 
 
     document.oncontextmenu = function(e) {
-        $('#context_menu').css('visibility', 'visible');
+        var w = document.documentElement.clientWidth;
+        var h = document.documentElement.clientHeight;
+        var x = e.pageX;
+        var y = e.pageY;
+        var elW = $('#context_menu').width();
+        var elH = $('#context_menu').height();
+        if (w - x < 190) {
+            x -= elW + 10;
+        } else {
+            x += 10;
+        }
+        if (h - y < 190) {
+            y -= elH;
+        }
+        $('#context_menu').css({
+            'top': y,
+            'left': x,
+            'visibility': 'visible'
+        });
         return false;
-    }
+    };
 
     document.onclick = function() {
         $('#context_menu').css('visibility', 'hidden');
@@ -211,7 +229,6 @@ function generateElement(element, point) {
                 cursor: "auto"
             });
         }
-        alert(checkChildren(identifier, "div_1"));
         $("#" + identifier).css({
             outline: "dashed 2px #878787"
         });

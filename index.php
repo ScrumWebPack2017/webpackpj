@@ -249,27 +249,43 @@
         </div>
     </div>
     <div id="context_menu">
-        <ul>
+        <ul id="context_ul">
             <li>
                 <div class="context_item" id="context_delete" onclick="deleteFocused()">
                     Delete
                 </div>
             </li>
             <li>
-                <div class="context_item" id="context_styles">
-                    Show styles
+                <div class="context_item" id="context_detach" onclick="detach_child()">
+                    Detach
                 </div>
             </li>
             <li>
-                <div class="context_item" id="context_1">
-                    choto eshe
+                <div class="context_item" id="context_1" onclick="">
+                    To front
                 </div>
             </li>
             <li>
-                <div class="context_item" id="context_2">
-                    i eshe
+                <div class="context_item" id="context_2" onclick="">
+                    To back
                 </div>
             </li>
+            <li>
+                <div class="context_item" id="context_2" onclick="">
+                    Copy
+                </div>
+            </li>
+            <li>
+                <div class="context_item" id="context_2" onclick="">
+                    Cut
+                </div>
+            </li>
+            <li>
+                <div class="context_item" id="context_2" onclick="">
+                    Paste
+                </div>
+            </li>
+
         </ul>
     </div>
 
