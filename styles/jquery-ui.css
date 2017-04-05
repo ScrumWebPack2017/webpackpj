@@ -64,6 +64,11 @@
 	pointer-events: none;
 }
 
+.ui-state-enabled {
+	cursor: auto;
+	pointer-events: auto;
+}
+
 
 /* Icons
 ----------------------------------*/
