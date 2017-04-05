@@ -16,7 +16,7 @@ ul li {
 #red {
     width: 100%;
     font-size: 16px;
-    padding: 10px 0 10px 20px;
+    padding: 50px 0 10px 0px;
 }
 
 .elements {
@@ -27,7 +27,7 @@ header {
     height: 200px;
     width: 100%;
     position: fixed;
-    z-index: 5;
+    z-index: 9999;
     background-color: lightblue;
 }
 
@@ -206,6 +206,7 @@ header {
     width: 218px;
     background: linear-gradient(#fefefd, #f0e8d5);
     border-right: 2px solid #547898;
+    overflow-y: scroll;
 }
 
 #left_btn {
@@ -314,3 +315,23 @@ header {
     height: 32px;
     font-size: 18px;
 }
+
+.inner_element {
+    padding-left: 30px;
+}
+
+.outer_element {
+    display: inline-block;
+    width: 88%;
+    background: -webkit-linear-gradient(left, rgba(250, 248, 241, 0) 0%, rgba(207, 183, 156, 1) 49%, rgba(250, 248, 241, 0) 100%);
+    margin: 5px 0 5px 0;
+    padding: 7px 0 7px 25px;
+
+    border-top-style: solid;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-left-style: none;
+
+    border-width: 1px;
+}
+

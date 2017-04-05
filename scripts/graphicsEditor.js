@@ -9,6 +9,7 @@ var clicks = {
     element: false,
     menu: false
 };
+var allowkeys = true;
 var upperID = null;
 
 var keys = {
@@ -18,6 +19,11 @@ var keys = {
 
 $(document).ready(function() {
     $(document).tooltip();
+
+    $('.property_input').focus(function () {
+        allowkeys = false;
+        console.log(allowkeys);
+    });
 
     createLeftMenu();
     normalizeWorkplace();
@@ -45,10 +51,17 @@ $(document).ready(function() {
     });
 
     $('.property_input').blur(function() {
-        propertyValidation("string", $(this), focusedElement);
-    }).keydown(function(e) {
-        if (e.which == 13)
+        if(focusedElement != null) {
             propertyValidation("string", $(this), focusedElement);
+        }
+        allowkeys = true;
+        console.log(allowkeys);
+    }).keydown(function(e) {
+        if (e.which == 13) {
+            if(focusedElement != null) {
+                propertyValidation("string", $(this), focusedElement);
+            }
+        }
     });
 
     $('.inner_element').click(function() {
@@ -122,10 +135,12 @@ $(document).ready(function() {
     });
 
     $(document).keydown(function(event) {
-        if (event.which == 68) {
-            event.preventDefault();
+        if(allowkeys != false) {
+            if (event.which == 68) {
+                event.preventDefault();
+            }
+            manipulate(event);
         }
-        manipulate(event);
     });
 
     $(document).on("click", "#workplace", function(event) {
@@ -166,6 +181,10 @@ function normalizeWorkplace() {
 
 function deleteFocused() {
     if (focusedElement != null) {
+        if($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
+        }
         focusedElement.remove();
         clearStatus();
         clearproperty();
@@ -441,33 +460,36 @@ function countType(type) {
 }
 
 function manipulate(eve) {
-    if (eve.which == 46) {
-        deleteFocused();
-    } else {
-        if (eve.which == 67 && eve.ctrlKey) {
-            copy();
+        if (eve.which == 46) {
+            deleteFocused();
         } else {
-            if (eve.which == 86 && eve.ctrlKey) {
-                paste();
+            if (eve.which == 67 && eve.ctrlKey) {
+                copy();
             } else {
-                if (eve.which == 88 && eve.ctrlKey) {
-                    cut();
+                if (eve.which == 86 && eve.ctrlKey) {
+                    paste();
                 } else {
-                    if (eve.which == 68 && eve.ctrlKey) {
-                        detach_child();
+                    if (eve.which == 88 && eve.ctrlKey) {
+                        cut();
+                    } else {
+                        if (eve.which == 68 && eve.ctrlKey) {
+                            detach_child();
+                        }
                     }
                 }
             }
         }
-    }
 }
 
 function detach_child() {
     if (focusedElement != null) {
         if ($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
             $("#workplace").append(elem);
+
             $("#" + focusedId).resizable("option", "minHeight", '');
             $("#" + focusedId).resizable("option", "minWidth", '');
             $("#" + focusedId).draggable("option", "containment", $("#workplace"));
@@ -536,6 +558,10 @@ function cut() {
     if (elem != -1) {
         clearStatus();
         clearproperty();
+        if($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
+        }
         focusedElement = null;
         focusedId = null;
         $("#paste_list").parent().removeClass('ui-state-disabled');

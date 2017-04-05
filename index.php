@@ -257,34 +257,194 @@
 <div id="left_bar">
     <div id="left_menu">
         <ul id="red" class="treeview-red">
-            <li>
-                <span> Blocks </span>
+            <li><span class="outer_element" id="shit"> Semantic elements </span>
                 <ul class="elements">
-                    <li id="el_div" class="element">
+                    <li>
+                        <span class="inner_element" id="article"> Article </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="aside"> Aside </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="details"> Details </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="figcaption"> Figcaption </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="figure"> Figure </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="footer"> Footer </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="header"> Header </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="main"> Main </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="mark"> Mark </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="nav"> Nav </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="section"> Section </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="summary"> Summary </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="time"> Time </span>
+                    </li>
+                </ul>
+            </li>
+            <li><span class="outer_element"> Forms </span>
+                <ul class="elements">
+                    <li>
+                        <span class="inner_element" id="form"> Form </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="select"> Select </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="option"> Option </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="textarea"> Textarea </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="input"> Input </span>
+                    </li>
+                </ul>
+            </li>
+            <li><span class="outer_element"> Tables </span>
+                <ul class="elements">
+                    <li>
+                        <span class="inner_element" id="table"> Table </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="tr"> Tr </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="td"> Td </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="th"> Th </span>
+                    </li>
+                </ul>
+            </li>
+            <li><span class="outer_element"> Block elements </span>
+                <ul class="elements">
+                    <li>
                         <span class="inner_element" id="div"> Div </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="span"> Span </span>
+                        <span class="inner_element" id="pre"> Pre </span>
                     </li>
                     <li>
                         <span class="inner_element" id="p"> P </span>
                     </li>
+                    <li>
+                        <span class="inner_element" id="hr"> Hr </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="blockquote"> Blockquote </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="h1"> H1 </span>
+                    </li>
                 </ul>
             </li>
-            <li> <span>Item 2</span>
+            <li><span class="outer_element"> Lists </span>
                 <ul class="elements">
-                    <li><span>Item 2.0</span>
-
+                    <li>
+                        <span class="inner_element" id="dl"> Dl </span>
                     </li>
-                    <li><span>Item 2.1</span>
-
+                    <li>
+                        <span class="inner_element" id="dt"> Dt </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="dd"> Dd </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="ol"> Ol </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="ul"> Ul </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="li"> Li </span>
                     </li>
                 </ul>
             </li>
-            <li><span>Item 3</span>
+            <li><span class="outer_element"> Text formatting </span>
                 <ul class="elements">
-                    <li><span>Item 3.0</span>
-
+                    <li>
+                        <span class="inner_element" id="span"> Span </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="br"> Br </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="a"> A </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="h1"> H1 </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="pre"> Pre </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="b"> B </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="i"> I </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="cite"> Cite </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="em"> Em </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="img"> Img </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="small"> Small </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="strong"> Strong </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="sub"> Sub </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="sup"> Sup </span>
+                    </li>
+                </ul>
+            </li>
+            <li><span class="outer_element"> Major tags </span>
+                <ul class="elements">
+                    <li>
+                        <span class="inner_element" id="html"> Html </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="head"> Head </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="body"> Body </span>
+                    </li>
+                </ul>
+            </li>
+            <li><span class="outer_element"> Headings </span>
+                <ul class="elements">
+                    <li>
+                        <span class="inner_element" id="title"> Title </span>
+                    </li>
+                    <li>
+                        <span class="inner_element" id="meta"> Meta </span>
                     </li>
                 </ul>
             </li>
