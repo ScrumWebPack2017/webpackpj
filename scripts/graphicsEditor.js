@@ -172,7 +172,7 @@ $(document).ready(function() {
 
     $(document).keydown(function(event) {
         if(allowkeys != false) {
-            if (event.which == 68) {
+            if (event.which == 68 && event.ctrlKey) {
                 event.preventDefault();
             }
             manipulate(event);
@@ -381,9 +381,6 @@ function generateElement(element, point) {
             clearOutlines(this);
         }
     });
-
-    $("#" + identifier).children().eq(4).removeClass("ui-icon-gripsmall-diagonal-se");
-    $("#" + identifier).children().eq(4).removeClass("ui-icon");
 }
 
 function lock(ider) {

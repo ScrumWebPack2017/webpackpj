@@ -431,29 +431,6 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Major tags </span>
-                <ul class="elements">
-                    <li>
-                        <span class="inner_element" id="html"> Html </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="head"> Head </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="body"> Body </span>
-                    </li>
-                </ul>
-            </li>
-            <li><span class="outer_element"> Headings </span>
-                <ul class="elements">
-                    <li>
-                        <span class="inner_element" id="title"> Title </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="meta"> Meta </span>
-                    </li>
-                </ul>
-            </li>
         </ul>
     </div>
 </div>
