@@ -251,31 +251,6 @@
                     <div><span class="ui-icon ui-icon-arrowthick-1-s"></span>To Back</div>
                 </li>
             </ul>
-<<<<<<< HEAD
-        </div>
-    </div>
-    <div id="context_menu">
-        <ul id="context_ul">
-            <li>
-                <div class="context_item" id="context_delete" onclick="deleteFocused()">
-                    Delete
-                </div>
-            </li>
-            <li>
-                <div class="context_item" id="context_detach" onclick="detach_child()">
-                    Detach
-                </div>
-            </li>
-            <li>
-                <div class="context_item" id="context_1" onclick="">
-                    To front
-                </div>
-            </li>
-            <li>
-                <div class="context_item" id="context_2" onclick="">
-                    To back
-                </div>
-=======
         </li>
     </ul>
 </div>
@@ -472,24 +447,7 @@
                         <span class="inner_element" id="meta"> Meta </span>
                     </li>
                 </ul>
->>>>>>> origin/master
             </li>
-            <li>
-                <div class="context_item" id="context_2" onclick="">
-                    Copy
-                </div>
-            </li>
-            <li>
-                <div class="context_item" id="context_2" onclick="">
-                    Cut
-                </div>
-            </li>
-            <li>
-                <div class="context_item" id="context_2" onclick="">
-                    Paste
-                </div>
-            </li>
-
         </ul>
     </div>
 </div>

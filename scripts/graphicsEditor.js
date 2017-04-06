@@ -39,31 +39,6 @@ $(document).ready(function() {
     });
 
 
-<<<<<<< HEAD
-    document.oncontextmenu = function(e) {
-        var w = document.documentElement.clientWidth;
-        var h = document.documentElement.clientHeight;
-        var x = e.pageX;
-        var y = e.pageY;
-        var elW = $('#context_menu').width();
-        var elH = $('#context_menu').height();
-        if (w - x < 190) {
-            x -= elW + 10;
-        } else {
-            x += 10;
-        }
-        if (h - y < 190) {
-            y -= elH;
-        }
-        $('#context_menu').css({
-            'top': y,
-            'left': x,
-            'visibility': 'visible'
-        });
-        return false;
-    };
-=======
->>>>>>> origin/master
 
     $("#workplace").on("contextmenu", function(e) {
         e.preventDefault();
@@ -291,10 +266,7 @@ function generateElement(element, point) {
                 cursor: "auto"
             });
         }
-<<<<<<< HEAD
-=======
         //alert(checkChildren(identifier, "div_1"));
->>>>>>> origin/master
         $("#" + identifier).css({
             outline: "dashed 2px #878787"
         });
@@ -488,25 +460,25 @@ function countType(type) {
 }
 
 function manipulate(eve) {
-        if (eve.which == 46) {
-            deleteFocused();
+    if (eve.which == 46) {
+        deleteFocused();
+    } else {
+        if (eve.which == 67 && eve.ctrlKey) {
+            copy();
         } else {
-            if (eve.which == 67 && eve.ctrlKey) {
-                copy();
+            if (eve.which == 86 && eve.ctrlKey) {
+                paste();
             } else {
-                if (eve.which == 86 && eve.ctrlKey) {
-                    paste();
+                if (eve.which == 88 && eve.ctrlKey) {
+                    cut();
                 } else {
-                    if (eve.which == 88 && eve.ctrlKey) {
-                        cut();
-                    } else {
-                        if (eve.which == 68 && eve.ctrlKey) {
-                            detach_child();
-                        }
+                    if (eve.which == 68 && eve.ctrlKey) {
+                        detach_child();
                     }
                 }
             }
         }
+    }
 }
 
 function detach_child() {

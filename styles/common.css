@@ -304,33 +304,16 @@ header {
     top: 300px;
     left: 300px;
     width: 200px;
-    height: 180px;
-    background-color: #99d9ea;
+    height: 200px;
+    background-color: silver;
     visibility: hidden;
     border-radius: 6px;
-    padding: 5px;
-}
-
-#context_menu ul {
-    padding: 0;
-    margin: 0;
-}
-
-.context_ul {
-    margin: 0;
-    padding: 0;
-}
-
-.context_ul li {
-    margin: 0;
-    padding: 0;
 }
 
 .context_item {
     width: 100%;
-    height: 24px;
+    height: 32px;
     font-size: 18px;
-    border-bottom: 1px solid #837565;
 }
 
 .inner_element {
@@ -351,4 +334,3 @@ header {
 
     border-width: 1px;
 }
-
