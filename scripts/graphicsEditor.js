@@ -21,7 +21,7 @@ $(document).ready(function() {
     $(document).tooltip();
 
     $('#elements_search').on('#elements_search keyup', function(e) {
-        var val = $('#elements_search').val();
+        var val = $('#elements_search').val().toLowerCase();
         if (val != '') {
             $('#search_result').css('visibility', 'visible').html('<span class="outer_element" id="shit"> Result </span>');
             $('#red').css('visibility', 'hidden');
