@@ -6,8 +6,10 @@ var buffer = null;
 var zindex = 1;
 var clicks = {
     work: false,
-    element: false
+    element: false,
+    menu: false
 };
+var allowkeys = true;
 var upperID = null;
 
 var keys = {
@@ -18,11 +20,26 @@ var keys = {
 $(document).ready(function() {
     $(document).tooltip();
 
+    $('.property_input').focus(function () {
+        allowkeys = false;
+        console.log(allowkeys);
+    });
+
     createLeftMenu();
     normalizeWorkplace();
 
+    $("#menu_tools").menu().position({
+        collision: function() {
+            console.log("vihodit");
+        }
+    });
+
+    $("#menu_tools").click(function() {
+        clicks.menu = true;
+    });
 
 
+<<<<<<< HEAD
     document.oncontextmenu = function(e) {
         var w = document.documentElement.clientWidth;
         var h = document.documentElement.clientHeight;
@@ -45,16 +62,31 @@ $(document).ready(function() {
         });
         return false;
     };
+=======
+>>>>>>> origin/master
 
-    document.onclick = function() {
-        $('#context_menu').css('visibility', 'hidden');
-    };
+    $("#workplace").on("contextmenu", function(e) {
+        e.preventDefault();
+        $('#menu_tools').css('visibility', 'visible');
+        $("#menu_tools").css({
+            left: e.pageX,
+            top: e.pageY - 200
+        });
+        return false;
+    });
 
     $('.property_input').blur(function() {
-        propertyValidation("string", $(this), focusedElement);
-    }).keydown(function(e){
-       if (e.which == 13)
-           propertyValidation("string", $(this), focusedElement);
+        if(focusedElement != null) {
+            propertyValidation("string", $(this), focusedElement);
+        }
+        allowkeys = true;
+        console.log(allowkeys);
+    }).keydown(function(e) {
+        if (e.which == 13) {
+            if(focusedElement != null) {
+                propertyValidation("string", $(this), focusedElement);
+            }
+        }
     });
 
     $('.inner_element').click(function() {
@@ -78,6 +110,24 @@ $(document).ready(function() {
 
         generatedElements.push(e);
         generateElement(e, true);
+    });
+
+    $("#camera_ico").click(function(event) {
+        $("#camera_ico").effect("transfer", {
+            to: "#workplace",
+            className: "ui-effects-transfer"
+        }, 700, function() {
+            html2canvas($("#workplace"), {
+                onrendered: function(canvas) {
+                    theCanvas = canvas;
+
+
+                    canvas.toBlob(function(blob) {
+                        saveAs(blob, "MySite.png");
+                    });
+                }
+            });
+        });
     });
 
     $("#locker_ico").click(function() {
@@ -110,15 +160,18 @@ $(document).ready(function() {
     });
 
     $(document).keydown(function(event) {
-        if (event.which == 68) {
-            event.preventDefault();
+        if(allowkeys != false) {
+            if (event.which == 68) {
+                event.preventDefault();
+            }
+            manipulate(event);
         }
-        manipulate(event);
     });
 
     $(document).on("click", "#workplace", function(event) {
+        $('#menu_tools').css('visibility', 'hidden');
         clicks.work = true;
-        if (clicks.work && !clicks.element && focusedElement != null) {
+        if (clicks.work && !clicks.element && !clicks.menu && focusedElement != null) {
             $("#" + focusedId).css({
                 outline: "",
                 cursor: "auto"
@@ -127,9 +180,15 @@ $(document).ready(function() {
             focusedId = null;
             clearStatus();
             clearproperty();
+            $("#delete_list").parent().addClass('ui-state-disabled');
+            $("#copy_list").parent().addClass('ui-state-disabled');
+            $("#cut_list").parent().addClass('ui-state-disabled');
+            $("#detach_list").parent().addClass('ui-state-disabled');
+            $("#parentFoc_list").parent().addClass('ui-state-disabled');
         }
         clicks.work = false;
         clicks.element = false;
+        clicks.menu = false;
         upperID = null;
     });
 
@@ -147,19 +206,24 @@ function normalizeWorkplace() {
 
 function deleteFocused() {
     if (focusedElement != null) {
+        if($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
+        }
         focusedElement.remove();
         clearStatus();
-    } else {
-        alert("Element isn't selected!");
+        clearproperty();
+        $("#delete_list").parent().addClass('ui-state-disabled');
+        $("#copy_list").parent().addClass('ui-state-disabled');
+        $("#cut_list").parent().addClass('ui-state-disabled');
+        $("#detach_list").parent().addClass('ui-state-disabled');
+        $("#parentFoc_list").parent().addClass('ui-state-disabled');
     }
 }
 
 function parentFocus() {
     if (focusedElement != null) {
-        var event = new Event("click");
-        $('#' + searchParent(focusedElement.attr('id'))).click();
-    } else {
-        alert("Element isn't selected!");
+        $("#" + $("#" + focusedId).parent().attr('id')).trigger('click');
     }
 }
 
@@ -192,8 +256,6 @@ function generateElement(element, point) {
     element.id = identifier;
     el.setAttribute('id', identifier);
     el.setAttribute('class', 'work_elements');
-
-    el.innerHTML = "Hi, i`m " + element.type;
 
     $(element.parent).append(el);
 
@@ -229,14 +291,25 @@ function generateElement(element, point) {
                 cursor: "auto"
             });
         }
+<<<<<<< HEAD
+=======
+        //alert(checkChildren(identifier, "div_1"));
+>>>>>>> origin/master
         $("#" + identifier).css({
             outline: "dashed 2px #878787"
         });
+
+        $("#delete_list").parent().removeClass('ui-state-disabled');
+        $("#copy_list").parent().removeClass('ui-state-disabled');
+        $("#cut_list").parent().removeClass('ui-state-disabled');
+        $("#detach_list").parent().removeClass('ui-state-disabled');
+        $("#parentFoc_list").parent().removeClass('ui-state-disabled');
         focusedElement = $(this);
         focusedId = identifier;
         fillPropertiesTable(focusedElement);
         printStatus(identifier);
     }).resizable({
+        handles: 'all',
         resize: function(event, ui) {
             $("#" + this.id).trigger("click");
             var parent_id = $("#" + this.id).parent().attr("id");
@@ -300,6 +373,9 @@ function generateElement(element, point) {
             clearOutlines(this);
         }
     });
+
+    $("#" + identifier).children().eq(4).removeClass("ui-icon-gripsmall-diagonal-se");
+    $("#" + identifier).children().eq(4).removeClass("ui-icon");
 }
 
 function lock(ider) {
@@ -412,33 +488,36 @@ function countType(type) {
 }
 
 function manipulate(eve) {
-    if (eve.which == 46) {
-        deleteFocused();
-    } else {
-        if (eve.which == 67 && eve.ctrlKey) {
-            copy();
+        if (eve.which == 46) {
+            deleteFocused();
         } else {
-            if (eve.which == 86 && eve.ctrlKey) {
-                paste();
+            if (eve.which == 67 && eve.ctrlKey) {
+                copy();
             } else {
-                if (eve.which == 88 && eve.ctrlKey) {
-                    cut();
+                if (eve.which == 86 && eve.ctrlKey) {
+                    paste();
                 } else {
-                    if (eve.which == 68 && eve.ctrlKey) {
-                        detach_child();
+                    if (eve.which == 88 && eve.ctrlKey) {
+                        cut();
+                    } else {
+                        if (eve.which == 68 && eve.ctrlKey) {
+                            detach_child();
+                        }
                     }
                 }
             }
         }
-    }
 }
 
 function detach_child() {
     if (focusedElement != null) {
         if ($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
             $("#workplace").append(elem);
+
             $("#" + focusedId).resizable("option", "minHeight", '');
             $("#" + focusedId).resizable("option", "minWidth", '');
             $("#" + focusedId).draggable("option", "containment", $("#workplace"));
@@ -462,29 +541,41 @@ function copy() {
             type: "copy"
         };
     }
+    $("#paste_list").parent().removeClass('ui-state-disabled');
 }
 
 function paste() {
     if (buffer != null) {
-        var e = {
-            id: "",
-            type: buffer.element.type,
-            parent: buffer.element.parent,
-            position: buffer.element.position,
-            float: buffer.element.float,
-            margin: buffer.element.margin,
-            width: buffer.element.width,
-            height: buffer.element.height,
-            background: buffer.element.background,
-            focused: false,
-            zIndex_: zindex,
-            locked: false
-        };
-        ++zindex;
-        generatedElements.push(e);
-        generateElement(e, false);
-        if (buffer.type == "cut")
+        if (buffer.type == "cut") {
+            buffer.element.draggable("option", "containment", $("#workplace"));
+            buffer.element.resizable("option", "minWidth", '');
+            buffer.element.resizable("option", "minHeight", '');
+            buffer.element.css({
+                left: 0,
+                top: 0
+            });
+            $("#workplace").append(buffer.element);
             buffer = null;
+            $("#paste_list").parent().addClass('ui-state-disabled');
+        } else {
+            var e = {
+                id: "",
+                type: buffer.element.type,
+                parent: buffer.element.parent,
+                position: buffer.element.position,
+                float: buffer.element.float,
+                margin: buffer.element.margin,
+                width: buffer.element.width,
+                height: buffer.element.height,
+                background: buffer.element.background,
+                focused: false,
+                zIndex_: zindex,
+                locked: false
+            };
+            ++zindex;
+            generatedElements.push(e);
+            generateElement(e, false);
+        }
     }
 }
 
@@ -493,22 +584,31 @@ function cut() {
         return;
     var elem = findElemPos(focusedId);
     if (elem != -1) {
-        focusedElement.remove();
         clearStatus();
+        clearproperty();
+        if($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
+        }
+        focusedElement = null;
+        focusedId = null;
+        $("#paste_list").parent().removeClass('ui-state-disabled');
+        $("#delete_list").parent().addClass('ui-state-disabled');
+        $("#copy_list").parent().addClass('ui-state-disabled');
+        $("#cut_list").parent().addClass('ui-state-disabled');
+        $("#detach_list").parent().addClass('ui-state-disabled');
+        $("#parentFoc_list").parent().addClass('ui-state-disabled');
 
         var tmp = new Array(0);
         for (var i = generatedElements.length - 1; i >= 0; --i) {
             if (i == elem) {
                 buffer = {
-                    element: generatedElements.pop(),
+                    element: $("#" + generatedElements[i].id).detach(),
                     type: "cut"
                 };
-                continue;
+                break;
             }
-            tmp.push(generatedElements.pop());
         }
-
-        generatedElements = tmp;
     }
 }
 

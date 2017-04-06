@@ -16,9 +16,8 @@ ul li {
 #red {
     width: 100%;
     font-size: 16px;
-    padding: 10px 0 10px 20px;
+    padding: 50px 0 10px 0px;
 }
-
 
 .elements {
     padding-left: 10px;
@@ -28,9 +27,10 @@ header {
     height: 200px;
     width: 100%;
     position: fixed;
-    z-index: 5;
+    z-index: 9999;
     background-color: lightblue;
 }
+
 .header_elements {
     position: relative;
     float: left;
@@ -62,7 +62,6 @@ header {
     width: 100%;
     height: inherit;
     visibility: visible;
-
 }
 
 #status_line {
@@ -91,7 +90,8 @@ header {
     padding: 0 10px;
 }
 
-.property_label, .property_label  {
+.property_label,
+.property_label {
     position: relative;
     float: left;
     margin: 0 0 0 0;
@@ -100,7 +100,6 @@ header {
 .property_label {
     padding-top: 2px;
 }
-
 
 .status_element {
     position: relative;
@@ -116,6 +115,33 @@ header {
     background: url("../images/lock-icon-17.png") no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
+}
+
+#camera_ico {
+    width: 26px;
+    height: 26px;
+    margin-top: -2px;
+    background: url("../images/photo-video-slr-camera-icon-512x512-pixel-12.png") no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+
+.ui-effects-transfer {
+    border: 4px dotted #2f2f2f;
+}
+
+.ui-menu {
+    width: 150px;
+}
+
+#menu_tools {
+    visibility: hidden;
+    z-index: 1500;
+    position: absolute;
+}
+
+#menu_tools li {
+    background: #eedcc6;
 }
 
 .status_input {
@@ -136,7 +162,6 @@ header {
     background: linear-gradient(#dbc9b3, #c9ae91);
     border-bottom: 1px solid #837565;
     padding: 10px 10px 0 10px;
-
 }
 
 .menu_tab {
@@ -181,6 +206,7 @@ header {
     width: 218px;
     background: linear-gradient(#fefefd, #f0e8d5);
     border-right: 2px solid #547898;
+    overflow-y: scroll;
 }
 
 #left_btn {
@@ -200,7 +226,6 @@ header {
     width: 218px;
     height: inherit;
     background-color: transparent;
-
 }
 
 .auth_box {
@@ -306,5 +331,24 @@ header {
     height: 24px;
     font-size: 18px;
     border-bottom: 1px solid #837565;
+}
+
+.inner_element {
+    padding-left: 30px;
+}
+
+.outer_element {
+    display: inline-block;
+    width: 88%;
+    background: -webkit-linear-gradient(left, rgba(250, 248, 241, 0) 0%, rgba(207, 183, 156, 1) 49%, rgba(250, 248, 241, 0) 100%);
+    margin: 5px 0 5px 0;
+    padding: 7px 0 7px 25px;
+
+    border-top-style: solid;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-left-style: none;
+
+    border-width: 1px;
 }
 
