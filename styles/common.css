@@ -3,6 +3,21 @@
     src: url('../fonts/CaviarDreams.ttf');
 }
 
+.property_input {
+    margin: 0;
+    padding: 0;
+    border: 1px solid #837565;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+}
+
 body {
     margin: 0;
     font-family: "CaviarDreams";
@@ -202,7 +217,7 @@ header {
 
 #left_bar {
     position: fixed;
-    z-index: 10;
+    z-index: 100000;
     top: 200px;
     left: 0;
     width: 218px;
@@ -347,7 +362,7 @@ header {
 }
 
 #search_result {
-    width: 216px;
+    width: 200px;
     padding-top: 10px;
     visibility: hidden;
     position: absolute;

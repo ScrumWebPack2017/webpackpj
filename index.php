@@ -46,7 +46,15 @@
                 <div id="props1" class="property_list" style="z-index: 5; visibility: visible">
                     <div class="property">
                         <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
+                        <select class="property_input">
+                            <option>  </option>
+                            <option> absolute </option>
+                            <option> fixed </option>
+                            <option> relative </option>
+                            <option> static </option>
+                            <option> inherit </option>
+                        </select>
+                        <!--<input class="property_input" type="text"> -->
                     </div>
                     <div class="property">
                         <div class="property_label"> Float </div>

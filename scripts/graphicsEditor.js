@@ -208,7 +208,7 @@ $(document).ready(function() {
 
 function normalizeWorkplace() {
     var w = document.body.scrollWidth;
-    $('#workplace').css('width', w - 20);
+    $('#workplace').css('width', w - 5);
     $("#res_pass").css({
         marginTop: "19px"
     });
