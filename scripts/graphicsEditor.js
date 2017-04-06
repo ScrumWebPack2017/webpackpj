@@ -520,21 +520,24 @@ function manipulate(eve) {
 function detach_child() {
     if (focusedElement != null) {
         if ($("#" + focusedId).parent().attr('id') != "workplace") {
+            $("#" + focusedId).draggable({ disabled: true });
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
             $("#workplace").append(elem);
-
-            $("#" + focusedId).resizable("option", "minHeight", '');
-            $("#" + focusedId).resizable("option", "minWidth", '');
-            $("#" + focusedId).draggable("option", "containment", $("#workplace"));
-            $("#" + focusedId).resizable("option", "containment", '');
             $("#" + focusedId).css({
                 left: pos.left,
                 top: (pos.top - 204)
             });
-            $("#" + focusedId).effect('highlight', {}, 700, function() {});
+            setTimeout(function(){
+                $("#" + focusedId).effect('highlight', {}, 200, function() {});
+                $("#" + focusedId).draggable({ disabled: false });
+            }, 200);
+            $("#" + focusedId).resizable("option", "minHeight", '');
+            $("#" + focusedId).resizable("option", "minWidth", '');
+            $("#" + focusedId).draggable("option", "containment", $("#workplace"));
+            $("#" + focusedId).resizable("option", "containment", '');
         }
     }
 }
