@@ -14,9 +14,11 @@ ul li {
 }
 
 #red {
+    position: absolute;
+    z-index: 2;
     width: 100%;
     font-size: 16px;
-    padding: 50px 0 10px 0px;
+    padding: 10px 0 10px 0px;
 }
 
 .elements {
@@ -333,4 +335,21 @@ header {
     border-left-style: none;
 
     border-width: 1px;
+}
+
+#elements_search {
+    margin: 15px 0 0 22px;
+    position: relative;
+    width: 190px;
+    height: 30px;
+    border-radius: 3px;
+
+}
+
+#search_result {
+    width: 100%;
+    padding-top: 10px;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
 }

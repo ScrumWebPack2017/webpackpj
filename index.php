@@ -256,6 +256,12 @@
 </div>
 <div id="left_bar">
     <div id="left_menu">
+        <input type="text" id="elements_search" class="auth_input">
+
+        <ul class="elements" id="search_result">
+            <span class="outer_element" id="shit"> Result </span>
+
+        </ul>
         <ul id="red" class="treeview-red">
             <li><span class="outer_element" id="shit"> Semantic elements </span>
                 <ul class="elements">

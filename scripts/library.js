@@ -23,6 +23,16 @@ function fillPropertiesTable(focused) {
     });
 }
 
+function elementsSearch(e) {
+    var val = $('#elements_search').val();
+    alert(val);
+    if (val != '') {
+        $('#red').css('visibility', 'hidden');
+    } else {
+        $('#red').css('visibility', 'visible');
+    }
+}
+
 function clearproperty(){
     $('.property_input').val("");
 }

@@ -20,6 +20,42 @@ var keys = {
 $(document).ready(function() {
     $(document).tooltip();
 
+    $('#elements_search').on('#elements_search keyup', function(e) {
+        var val = $('#elements_search').val();
+        if (val != '') {
+            $('#search_result').css('visibility', 'visible').html('<span class="outer_element" id="shit"> Result </span>');
+            $('#red').css('visibility', 'hidden');
+            $("#red ul li  span[id^=" +val+ "]").each(function (i, el) {
+                $('#search_result').append($(el).parent().clone());
+            });
+        } else {
+            $('#search_result').css('visibility', 'hidden');
+            $('#red').css('visibility', 'visible');
+        }
+    });
+    $('#left_bar').on("click", '.inner_element', function() {
+        shiftLeftBar();
+        var e = {
+            id: "",
+            type: this.id,
+            parent: "#workplace",
+            position: "absolute",
+            float: 'right',
+            margin: '',
+            width: "200px",
+            height: "200px",
+            background: "lawngreen",
+            zIndex_: zindex,
+            focused: false,
+            locked: false
+        };
+
+        ++zindex;
+
+        generatedElements.push(e);
+        generateElement(e, true);
+    });
+
     $('.property_input').focus(function () {
         allowkeys = false;
         console.log(allowkeys);
@@ -63,7 +99,7 @@ $(document).ready(function() {
             }
         }
     });
-
+/*
     $('.inner_element').click(function() {
         shiftLeftBar();
         var e = {
@@ -86,7 +122,7 @@ $(document).ready(function() {
         generatedElements.push(e);
         generateElement(e, true);
     });
-
+*/
     $("#camera_ico").click(function(event) {
         $("#camera_ico").effect("transfer", {
             to: "#workplace",
