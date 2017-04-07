@@ -35,23 +35,8 @@ $(document).ready(function() {
     });
     $('#left_bar').on("click", '.inner_element', function() {
         shiftLeftBar();
-        var e = {
-            id: "",
-            type: this.id,
-            parent: "#workplace",
-            position: "absolute",
-            float: 'right',
-            margin: '',
-            width: "200px",
-            height: "200px",
-            background: "lawngreen",
-            zIndex_: zindex,
-            focused: false,
-            locked: false
-        };
-
+        var e = elementPreProperties(this.id);
         ++zindex;
-
         generatedElements.push(e);
         generateElement(e, true);
     });
@@ -260,128 +245,7 @@ function createLeftMenu() {
 }
 
 
-function generateElement(element, point) {
-    var el = document.createElement(element.type);
-    var identifier = element.type + '_' + (maxId(element.type) + 1);
 
-    element.id = identifier;
-    el.setAttribute('id', identifier);
-    el.setAttribute('class', 'work_elements');
-
-    $(element.parent).append(el);
-
-    if (point)
-        getRandomColorAndSize(element);
-
-    $("#" + identifier).css({
-        position: element.position,
-        float: element.float,
-        margin: element.margin,
-        width: element.width,
-        height: element.height,
-        background: element.background,
-        zIndex: element.zIndex_
-    });
-
-    //printStatus(identifier);
-
-    $("#" + identifier).on("click", function(e) {
-        if (upperID == null) {
-            upperID = this.id;
-        } else {
-            if (checkChildren(this.id, upperID)) {
-                upperID = this.id;
-                return;
-            }
-        }
-        lock(this.id);
-        clicks.element = true;
-        if (focusedElement != null && focusedId != null && identifier != focusedId) {
-            $("#" + focusedId).css({
-                outline: "",
-                cursor: "auto"
-            });
-        }
-        //alert(checkChildren(identifier, "div_1"));
-        $("#" + identifier).css({
-            outline: "dashed 2px #878787"
-        });
-
-        $("#delete_list").parent().removeClass('ui-state-disabled');
-        $("#copy_list").parent().removeClass('ui-state-disabled');
-        $("#cut_list").parent().removeClass('ui-state-disabled');
-        $("#detach_list").parent().removeClass('ui-state-disabled');
-        $("#parentFoc_list").parent().removeClass('ui-state-disabled');
-        focusedElement = $(this);
-        focusedId = identifier;
-        fillPropertiesTable(focusedElement);
-        printStatus(identifier);
-    }).resizable({
-        handles: 'all',
-        resize: function(event, ui) {
-            $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
-            }
-            keys.left = false;
-            keys.right = false;
-            if (focusedId != null) {
-                printStatus(focusedId);
-                elem = findElemPos(focusedId);
-                if (elem != -1) {
-                    generatedElements[elem].width = $("#" + identifier).width();
-                    generatedElements[elem].height = $("#" + identifier).height();
-                }
-            }
-        }
-    }).draggable({
-        containment: "#workplace",
-        scroll: true,
-        drag: function(event, ui) {
-            $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
-            }
-        }
-    }).droppable({
-        over: function(event, ui) {
-            var pps = findElemPos(this.id);
-            if (generatedElements[pps].locked == true) return;
-            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
-            swapIndexes(event, ui, this);
-            checkSizes(event, ui, this);
-        },
-        out: function(event, ui) {
-            clearOutlines(this);
-        },
-        drop: function(event, ui) {
-            var pps = findElemPos(this.id);
-            if (generatedElements[pps].locked == true) return;
-            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
-            if (checkSizes(event, ui, this)) {
-                var div = $("#" + ui.draggable.prop('id')).detach();
-                $(this).append(div);
-                $("#" + ui.draggable.prop('id')).css({
-                    top: 0,
-                    left: 0
-                });
-                $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
-                $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
-                $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
-                $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
-            } else {
-
-            }
-            clearOutlines(this);
-        }
-    });
-}
 
 function lock(ider) {
     for (var i = 0; i < generatedElements.length; ++i) {
@@ -440,17 +304,6 @@ function swapIndexes(event, ui, thisel) {
     });
 }
 
-function getRandomColorAndSize(element) {
-    var r = getRandomInt(0, 255);
-    var g = getRandomInt(0, 255);
-    var b = getRandomInt(0, 255);
-    element.background = "rgb(" + r + ", " + g + ", " + b + ")";
-
-    var widthheight = getRandomInt(70, 200);
-
-    element.width = widthheight + "px";
-    element.height = widthheight + "px";
-};
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
