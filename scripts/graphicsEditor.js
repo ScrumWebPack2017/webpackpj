@@ -261,16 +261,37 @@ function createLeftMenu() {
 
 
 function generateElement(element, point) {
-    var el = document.createElement(element.type);
-    var identifier = element.type + '_' + (maxId(element.type) + 1);
+    var tp;
+    if(element.type == "input" || element.type == "textarea" || element.type == "select") {
+        tp = 'div';
+    } else {
+        tp = element.type;
+    }
+    el = document.createElement(tp);
+    var identifier = element.type + '_' + (maxId(tp) + 1);
 
     element.id = identifier;
     el.setAttribute('id', identifier);
     el.setAttribute('class', 'work_elements');
 
     $(element.parent).append(el);
+    if(element.type == "input") {
+        var el1 = document.createElement('input');
+        $("#" + identifier).append(el1);
+    } else {
+        if(element.type == "textarea") {
+            var el1 = document.createElement('textarea');
+            $("#" + identifier).append(el1);
+        } else {
+            if(element.type == "select") {
+                var el1 = document.createElement('select');
+                $("#" + identifier).append(el1);
+                $("#" + identifier + " select").css({width: '100px', height: '25px'});
+            }
+        }
+    }
 
-    if (point)
+    if (point && element.type != "input" && element.type != "textarea" && element.type != "select")
         getRandomColorAndSize(element);
 
     $("#" + identifier).css({
@@ -283,7 +304,16 @@ function generateElement(element, point) {
         zIndex: element.zIndex_
     });
 
-    //printStatus(identifier);
+    if(element.type == "input" || element.type == "textarea" || element.type == "select") {
+        $("#" + identifier).css({
+            background:"rgba(0,0,0,0)",
+            width: '',
+            height: ''
+        });
+    }
+
+
+    //printStatus(identifier)
 
     $("#" + identifier).on("click", function(e) {
         if (upperID == null) {
@@ -337,18 +367,6 @@ function generateElement(element, point) {
                 }
             }
         }
-    }).draggable({
-        containment: "#workplace",
-        scroll: true,
-        drag: function(event, ui) {
-            $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
-            }
-        }
     }).droppable({
         over: function(event, ui) {
             var pps = findElemPos(this.id);
@@ -380,9 +398,57 @@ function generateElement(element, point) {
             }
             clearOutlines(this);
         }
+    }).draggable({
+        cancel: null,
+        containment: "#workplace",
+        scroll: true,
+        drag: function(event, ui) {
+            $("#" + this.id).trigger("click");
+            var parent_id = $("#" + this.id).parent().attr("id");
+            if (parent_id != "workplace") {
+                //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
+                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
+            }
+        }
     });
-}
 
+    if(element.type == "input") {
+        $("#" + identifier + " input").css({ border: 'black 1px solid' });
+        $("#" + identifier).resizable({
+            alsoResize: $("#" + identifier + " input"),
+            minWidth: '50',
+            minHeight: '20'
+        });
+        $("#" + identifier).dblclick(function () {
+            $("#" + identifier + " input").trigger('focus');
+        });
+    } else {
+        if(element.type == "textarea") {
+            $("#" + identifier + " textarea").css({ border: 'black 1px solid', resize: 'none' });
+            $("#" + identifier).resizable({
+                alsoResize: $("#" + identifier + " textarea"),
+                minWidth: '50',
+                minHeight: '50'
+            });
+            $("#" + identifier).dblclick(function () {
+                $("#" + identifier + " textarea").trigger('focus');
+            });
+        } else {
+            if(element.type == "select") {
+                $("#" + identifier + " select").css({ border: 'black 1px solid' });
+                $("#" + identifier).resizable({
+                    alsoResize: $("#" + identifier + " select"),
+                    minWidth: '50',
+                    minHeight: '20'
+                });
+                $("#" + identifier).dblclick(function () {
+                    $("#" + identifier + " select").trigger('focus');
+                });
+            }
+        }
+    }
+}
 function lock(ider) {
     for (var i = 0; i < generatedElements.length; ++i) {
         if (generatedElements[i].id == ider) {
