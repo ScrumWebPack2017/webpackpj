@@ -35,23 +35,8 @@ $(document).ready(function() {
     });
     $('#left_bar').on("click", '.inner_element', function() {
         shiftLeftBar();
-        var e = {
-            id: "",
-            type: this.id,
-            parent: "#workplace",
-            position: "absolute",
-            float: 'right',
-            margin: '',
-            width: "200px",
-            height: "200px",
-            background: "lawngreen",
-            zIndex_: zindex,
-            focused: false,
-            locked: false
-        };
-
+        var e = elementPreProperties(this.id);
         ++zindex;
-
         generatedElements.push(e);
         generateElement(e, true);
     });
@@ -260,6 +245,7 @@ function createLeftMenu() {
 }
 
 
+<<<<<<< HEAD
 function generateElement(element, point) {
     var tp;
     if(element.type == "input" || element.type == "textarea" || element.type == "select") {
@@ -412,6 +398,9 @@ function generateElement(element, point) {
             }
         }
     });
+=======
+
+>>>>>>> refs/remotes/origin/master
 
     if(element.type == "input") {
         $("#" + identifier + " input").css({ border: 'black 1px solid' });
@@ -506,17 +495,6 @@ function swapIndexes(event, ui, thisel) {
     });
 }
 
-function getRandomColorAndSize(element) {
-    var r = getRandomInt(0, 255);
-    var g = getRandomInt(0, 255);
-    var b = getRandomInt(0, 255);
-    element.background = "rgb(" + r + ", " + g + ", " + b + ")";
-
-    var widthheight = getRandomInt(70, 200);
-
-    element.width = widthheight + "px";
-    element.height = widthheight + "px";
-};
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
