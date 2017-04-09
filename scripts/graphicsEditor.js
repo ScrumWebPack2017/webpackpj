@@ -245,7 +245,6 @@ function createLeftMenu() {
 }
 
 
-<<<<<<< HEAD
 function generateElement(element, point) {
     var tp;
     if(element.type == "input" || element.type == "textarea" || element.type == "select") {
@@ -398,9 +397,7 @@ function generateElement(element, point) {
             }
         }
     });
-=======
 
->>>>>>> refs/remotes/origin/master
 
     if(element.type == "input") {
         $("#" + identifier + " input").css({ border: 'black 1px solid' });

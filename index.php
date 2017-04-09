@@ -15,6 +15,7 @@
     <script type="text/javascript" src="scripts/library.js"></script>
     <script type="text/javascript" src="scripts/html2canvas.js"></script>
     <script type="text/javascript" src="scripts/FileSaver.js"></script>
+	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
 
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
