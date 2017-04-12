@@ -332,6 +332,9 @@ function generateElement(element, point) {
         fillPropertiesTable(focusedElement);
         printStatus(identifier);
     }).resizable({
+        // be careful!
+        containment: "#workplace",
+        // !!!
         handles: 'all',
         resize: function(event, ui) {
             $("#" + this.id).trigger("click");
