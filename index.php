@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/editor.css">
     <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="styles/panel.css">
 
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
@@ -15,6 +16,7 @@
     <script type="text/javascript" src="scripts/library.js"></script>
     <script type="text/javascript" src="scripts/html2canvas.js"></script>
     <script type="text/javascript" src="scripts/FileSaver.js"></script>
+    <script src="scripts/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
 
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
@@ -442,30 +444,18 @@
         </ul>
     </div>
 </div>
-<!--<div id="context_menu">
-    <ul>
-        <li>
-            <div class="context_item" id="context_delete" onclick="deleteFocused()">
-                Delete
-            </div>
-        </li>
-        <li>
-            <div class="context_item" id="context_styles">
-                Show styles
-            </div>
-        </li>
-        <li>
-            <div class="context_item" id="context_1">
-                choto eshe
-            </div>
-        </li>
-        <li>
-            <div class="context_item" id="context_2">
-                i eshe
-            </div>
-        </li>
-    </ul>
-</div>-->
+
+<div id="source_code_wrapper">
+
+</div>
+<div id="source_code_panel">
+    <div id="source_code_html" class="source_code_block">
+
+    </div>
+    <div id="source_code_css" class="source_code_block">
+
+    </div>
+</div>
 
 </body>
 

@@ -1,0 +1,38 @@
+#source_code_wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 999998;
+    width: 100%;
+    background: silver;
+    opacity: 0.8;
+
+}
+
+#source_code_panel {
+    width: 900px;
+    height: 500px;
+    margin: 50px auto;
+    display: none;
+    z-index: 999999;
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 8px;
+}
+
+.source_code_block {
+    position: relative;
+    float: left;
+    width: 449px;
+    height: inherit;
+
+}
+#source_code_css {
+    border-left: 2px solid white;
+}
+

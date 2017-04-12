@@ -4,6 +4,17 @@ $(document).ready(function() {
         normalizePage();
     });
 
+
+    var editorHTML = ace.edit("source_code_html");
+    editorHTML.setTheme("ace/theme/monokai");
+    editorHTML.getSession().setMode("ace/mode/html");
+    var editorCSS = ace.edit("source_code_css");
+    editorCSS.setTheme("ace/theme/monokai");
+    editorCSS.getSession().setMode("ace/mode/css");
+
+
+
+
     instaValidate();
     tabControl();
     $('#authorization_form').submit(function (event) {
@@ -18,17 +29,42 @@ $(document).ready(function() {
 
     $("#res_pass").css({marginTop:"19px"});
 
+    $('#source_code_wrapper').click(function() {
+        $('#source_code_wrapper').css({
+            'display':'none'
+        });
+        $('#source_code_panel').css('display','none');
+    });
 });
+
+function showSourceCode() {
+    if ($('#source_code_wrapper').css('display') == 'block') {
+        $('#source_code_wrapper').css('display', 'none');
+        $('#source_code_panel').css('display', 'none');
+    } else {
+        $('#source_code_wrapper').css('display', 'block');
+        $('#source_code_panel').css('display', 'block');
+        generateHTML();
+    }
+
+}
+
+function generateHTML() {
+    //var html = $('#workplace').html();
+
+    //alert(html);
+}
 
 function tabControl() {
     $('.menu_tab').click(function () {
-        if (this.id == 'source_code_btn')
-            return;
-        $('.menu_tab').removeClass('selected_tab');
-        this.setAttribute('class', 'menu_tab selected_tab');
-        $('.property_list').css('visibility', 'hidden');
-        $('#'+this.id.split('t')[0]).css('visibility', 'visible');
-
+        if (this.id == 'source_code_btn') {
+            showSourceCode();
+        } else {
+            $('.menu_tab').removeClass('selected_tab');
+            this.setAttribute('class', 'menu_tab selected_tab');
+            $('.property_list').css('visibility', 'hidden');
+            $('#'+this.id.split('t')[0]).css('visibility', 'visible');
+        }
     })
 }
 
@@ -68,6 +104,8 @@ function normalizePage() {
     $('select.property_input').css({
         'width': $('.property_input').width() + 4
     });
+
+    $('#source_code_wrapper').css('height', h);
 }
 
 /* Authorization
