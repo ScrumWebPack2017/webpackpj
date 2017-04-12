@@ -17,7 +17,7 @@
     <script type="text/javascript" src="scripts/html2canvas.js"></script>
     <script type="text/javascript" src="scripts/FileSaver.js"></script>
     <script src="scripts/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
-
+	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
     <title>Title</title>
