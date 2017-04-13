@@ -1,14 +1,16 @@
+var editorHTML;
+var editorCSS;
+
 $(document).ready(function() {
     normalizePage();
     $(window).resize(function () {
         normalizePage();
     });
 
-
-    var editorHTML = ace.edit("source_code_html");
+    editorHTML = ace.edit("source_code_html");
+    editorCSS = ace.edit("source_code_css");
     editorHTML.setTheme("ace/theme/monokai");
     editorHTML.getSession().setMode("ace/mode/html");
-    var editorCSS = ace.edit("source_code_css");
     editorCSS.setTheme("ace/theme/monokai");
     editorCSS.getSession().setMode("ace/mode/css");
 
@@ -43,16 +45,50 @@ function showSourceCode() {
         $('#source_code_panel').css('display', 'none');
     } else {
         $('#source_code_wrapper').css('display', 'block');
-        $('#source_code_panel').css('display', 'block');
+        $('#source_code_panel').css('dis' +
+            'play', 'block');
         generateHTML();
     }
 
 }
 
 function generateHTML() {
-    //var html = $('#workplace').html();
+    var innerHTML = $('#workplace').html();
+    $("[class^='ui']").remove();
 
-    //alert(html);
+    var html = $('#workplace').html();
+    //var css = '';
+    var result = '';
+    while (true) {
+        var tmpPos = html.indexOf('class="');
+        if (tmpPos != -1) {
+            result += html.substr(0, tmpPos);
+            var i;
+            for (i = tmpPos + 8; html[i] != '"'; ++i);
+            html = html.substring(i + 2);
+        } else {
+            break;
+        }
+    }
+    result += html;
+    /*
+    $.trim(result);
+    while (true) {
+        var idPos = result.indexOf('id="');
+        alert(idPos);
+        if (idPos == -1) {
+            break;
+        } else {
+            var ip;
+            for (ip = idPos + 4; result[ip] != '"'; ++ip);
+            var tmpId = html.substr(idPos + 4, ip);
+            alert(tmpId);
+            break;
+        }
+    }*/
+    editorHTML.setValue(result);
+    //$('#source_code_html').text(result);
+    $('#workplace').html(innerHTML);
 }
 
 function tabControl() {
