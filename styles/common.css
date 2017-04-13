@@ -118,6 +118,23 @@ header {
     padding-top: 2px;
 }
 
+#changes_menu {
+    position: fixed;
+    z-index: 100000;
+    top: 200px;
+    right: 0;
+    width: 218px;
+    height: 300px;
+    background: linear-gradient(#fefefd, #f0e8d5);
+    overflow-y: scroll;
+    border: 1px solid #547898;
+    border-top: none;
+}
+
+#changes_menu label {
+    margin-top: 5px;
+}
+
 .status_element {
     position: relative;
     float: left;

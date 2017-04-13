@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="styles/panel.css">
 
+    <script type="text/javascript" src="scripts/menus_and_elements.js"></script>
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
@@ -443,6 +444,9 @@
             </li>
         </ul>
     </div>
+</div>
+
+<div id="changes_menu">
 </div>
 
 <div id="source_code_wrapper">

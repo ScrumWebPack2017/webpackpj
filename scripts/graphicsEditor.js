@@ -17,8 +17,15 @@ var keys = {
     left: false
 };
 
+var changes = new Array(0);
+var cursor = 0;
+
 $(document).ready(function() {
     $(document).tooltip();
+
+    $("#changes_menu input").checkboxradio();
+    getStartObj(changes, cursor);
+    ++cursor;
 
     $('#elements_search').on('#elements_search keyup', function(e) {
         var val = $('#elements_search').val().toLowerCase();
@@ -206,6 +213,8 @@ function deleteFocused() {
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
         }
+        createNewStatus(findElem(focusedId).id + " was deleted", cursor, changes);
+        ++cursor;
         focusedElement.remove();
         clearStatus();
         clearproperty();
