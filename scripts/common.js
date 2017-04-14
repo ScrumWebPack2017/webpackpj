@@ -1,5 +1,7 @@
 var editorHTML;
 var editorCSS;
+var tab = "    ";
+
 
 $(document).ready(function() {
     normalizePage();
@@ -48,19 +50,24 @@ function showSourceCode() {
         $('#source_code_panel').css('dis' +
             'play', 'block');
         generateHTML();
+
+
     }
 
 }
 
 function generateHTML() {
-    var innerHTML = $('#workplace').html();
-    $("[class^='ui']").remove();
+    var innerHTML = $('#workplace').clone().addClass("toSource");
+    $('body').append(innerHTML);
+    $(".toSource [class^='ui']").remove();
 
-    var html = $('#workplace').html();
-    //var css = '';
+    var html = $('.toSource').html();
+    $('div:last').remove();
+    var css = new Array(0);
     var result = '';
     while (true) {
         var tmpPos = html.indexOf('class="');
+
         if (tmpPos != -1) {
             result += html.substr(0, tmpPos);
             var i;
@@ -71,24 +78,91 @@ function generateHTML() {
         }
     }
     result += html;
-    /*
-    $.trim(result);
+
+    result = trim(result);
+    var resultWithoutStyles = "<";
+    var tmp = 0;
     while (true) {
-        var idPos = result.indexOf('id="');
-        alert(idPos);
+        var idPos = result.indexOf('id="', tmp);
+        css.push("");
         if (idPos == -1) {
             break;
         } else {
             var ip;
             for (ip = idPos + 4; result[ip] != '"'; ++ip);
-            var tmpId = html.substr(idPos + 4, ip);
-            alert(tmpId);
-            break;
+            var tmpId = result.substring(idPos + 4, ip);
+            css[css.length - 1] += "#" + tmpId + " {\n";
+            var stylesPos = result.indexOf('style="', tmp);
+
+            for (ip = stylesPos + 8; result[ip] != '"'; ++ip);
+            var styles = result.substring(stylesPos + 7, ip);
+            styles = parseStylesString(styles);
+            css[css.length - 1] += styles + "}\n\n";
+            resultWithoutStyles += result.substring(tmp + 1, stylesPos - 1);
+            tmp = ip;
+
         }
-    }*/
-    editorHTML.setValue(result);
-    //$('#source_code_html').text(result);
-    $('#workplace').html(innerHTML);
+    }
+
+   //var resultedCSS =
+
+
+    resultWithoutStyles += result.substring(tmp + 1);
+    resultWithoutStyles = parseHTML(resultWithoutStyles);
+    editorHTML.setValue(resultWithoutStyles);
+    editorCSS.setValue(css.join(''));
+
+
+}
+
+function parseHTML(str) {
+    var tagQueue = new Array(0);
+    var result = "";
+    var shift = "";
+    var flag = false;
+    var curPos = 0;
+    for (var i = 0; i < str.length; ++i) {
+        shift = "";
+        if (str[i] == '<') {
+            if (str[i + 1] != '/') {
+                var j = 0;
+                for (j = i; j < str.length && str[j] != ' '; ++j);
+                tagQueue.push(str.substring(i, j) + '>');
+            } else {
+                flag = true;
+            }
+        }
+        if (str[i] == '>') {
+            for (var k = 0; k < tagQueue.length - 1; ++k)
+                shift += tab;
+            result += shift + str.substring(curPos, i + 1) + '\n';
+            curPos = i + 1;
+            if (flag) {
+                tagQueue.pop();
+                flag = false;
+            }
+        }
+    }
+    return result;
+}
+
+function parseStylesString(str) {
+    var result = "";
+    var curPos = 0;
+    for (var i = 0; i < str.length; ++i) {
+        if (str[i] == ';') {
+            result += tab + str.substring(curPos, i + 1) + '\n';
+            curPos = i + 2;
+        }
+    }
+    return result;
+}
+
+function trim(str) {
+    var i = 0;
+    for (i = 0; str[i] != '<'; ++i);
+    return str.substring(i);
+
 }
 
 function tabControl() {
