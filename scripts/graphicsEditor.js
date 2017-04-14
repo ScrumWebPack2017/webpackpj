@@ -23,8 +23,11 @@ var cursor = 0;
 $(document).ready(function() {
     $(document).tooltip();
 
+    $("#changes_menu").dialog();
     $("#changes_menu input").checkboxradio();
-    getStartObj(changes, cursor);
+    $("#changes_menu").css({ overflowX: "hidden" });
+    $("#changes_menu").parent().draggable({ containment: $("#workplace") }).css({ width: '200px' });
+    createNewStatus("Load", cursor, changes);
     ++cursor;
 
     $('#elements_search').on('#elements_search keyup', function(e) {
@@ -213,8 +216,6 @@ function deleteFocused() {
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
         }
-        createNewStatus(findElem(focusedId).id + " was deleted", cursor, changes);
-        ++cursor;
         focusedElement.remove();
         clearStatus();
         clearproperty();
@@ -223,6 +224,8 @@ function deleteFocused() {
         $("#cut_list").parent().addClass('ui-state-disabled');
         $("#detach_list").parent().addClass('ui-state-disabled');
         $("#parentFoc_list").parent().addClass('ui-state-disabled');
+        createNewStatus(focusedId + " was deleted", cursor, changes);
+        ++cursor;
     }
 }
 
@@ -447,6 +450,7 @@ function generateElement(element, point) {
         }
     }
 }
+
 function lock(ider) {
     for (var i = 0; i < generatedElements.length; ++i) {
         if (generatedElements[i].id == ider) {

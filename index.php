@@ -446,7 +446,7 @@
     </div>
 </div>
 
-<div id="changes_menu">
+<div id="changes_menu" title="Changes menu">
 </div>
 
 <div id="source_code_wrapper">
