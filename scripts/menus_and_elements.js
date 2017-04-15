@@ -1,12 +1,15 @@
+var active_id = null;
+
 function createNewStatus(mesg, pos, array) {
     var date = new Date();
     var time = date.getHours() + ":" + date.getMinutes();
+
+    var d = $("#menu_tools").clone();
 
     var innerHTML = $('#workplace').clone().attr('id', 'wk');
 
     $("body").append(innerHTML);
     $("#wk div[class^='ui']").remove();
-    $("#wk").remove("#menu_tools");
     var elems_el = new Array(0);
     var elems = $("#wk .work_elements").each(function() {
         elems_el.push({
@@ -22,6 +25,7 @@ function createNewStatus(mesg, pos, array) {
         time: time,
         msg: mesg
     });
+
     var input = document.createElement("input");
     input.setAttribute('class', '.status_radio');
     input.setAttribute('type', 'radio');
@@ -32,13 +36,21 @@ function createNewStatus(mesg, pos, array) {
     label.innerHTML = array[pos].msg + "   " + time;
     $("#changes_menu").append(label);
     $("#changes_menu").append(input);
+    active_id = "#" + 'radio_' + pos;
+    
+
     $("#" + 'radio_' + pos).checkboxradio({
         icon: false
     }).trigger("click");
 
     $("#" + 'radio_' + pos).on("click", function() {
+        if(active_id == "#" + 'radio_' + pos) return;
+        active_id = "#" + 'radio_' + pos;
         readChanges(this, array);
     });
+
+
+    $("#workplace").append(d);
 }
 
 function readChanges(thise, elems) {
@@ -140,7 +152,7 @@ function generateAgain(element, css) {
         printStatus(element.id);
     }).resizable({
         // be careful!
-        containment: "#workplace",
+        containment: element.parent,
         // !!!
         handles: 'all',
         resize: function(event, ui) {
@@ -188,6 +200,7 @@ function generateAgain(element, css) {
                 $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                 $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
                 $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+                findElemPos(ui.draggable.prop('id')).parent = "#" + this.id;
             } else {
 
             }
@@ -195,7 +208,7 @@ function generateAgain(element, css) {
         }
     }).draggable({
         cancel: null,
-        containment: "#workplace",
+        containment: element.parent,
         scroll: true,
         drag: function(event, ui) {
             $("#" + this.id).trigger("click");
@@ -250,5 +263,20 @@ function generateAgain(element, css) {
                 });
             }
         }
+    }
+
+    if(element.parent != "#workplace") {
+        $(element.parent).trigger('drop', $("#" + element.id));
+    }
+}
+
+function showChangesWindow() {
+    if($("#changes_menu").parent().position().top == 0) {
+        $("#changes_menu").parent().css({top:'200px'});
+    }
+    if($("#changes_menu").parent().css('opacity') == 0 ) {
+        $("#changes_menu").parent().animate({'opacity':'1'}, 400);
+    } else {
+        $("#changes_menu").parent().animate({'opacity':'0'}, 400);
     }
 }

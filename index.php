@@ -263,6 +263,9 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <div onclick="showChangesWindow()"><span class="ui-icon ui-icon-clock"></span>Changes</div>
+        </li>
     </ul>
 </div>
 <div id="left_bar">

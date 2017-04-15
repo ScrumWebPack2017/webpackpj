@@ -119,7 +119,7 @@ header {
 }
 
 #changes_menu {
-
+    max-height: 300px;
 }
 
 #changes_menu label {

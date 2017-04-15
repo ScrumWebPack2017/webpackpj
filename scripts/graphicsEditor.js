@@ -23,13 +23,6 @@ var cursor = 0;
 $(document).ready(function() {
     $(document).tooltip();
 
-    $("#changes_menu").dialog();
-    $("#changes_menu input").checkboxradio();
-    $("#changes_menu").css({ overflowX: "hidden" });
-    $("#changes_menu").parent().draggable({ containment: $("#workplace") }).css({ width: '200px' });
-    createNewStatus("Load", cursor, changes);
-    ++cursor;
-
     $('#elements_search').on('#elements_search keyup', function(e) {
         var val = $('#elements_search').val().toLowerCase();
         if (val != '') {
@@ -49,6 +42,8 @@ $(document).ready(function() {
         ++zindex;
         generatedElements.push(e);
         generateElement(e, true);
+        createNewStatus("New " + e.type + " was created (" + e.id + ")", cursor, changes);
+        ++cursor;
     });
 
     $('.property_input').focus(function () {
@@ -197,6 +192,16 @@ $(document).ready(function() {
         clicks.menu = false;
         upperID = null;
     });
+
+    $("#changes_menu").dialog();
+    $("#changes_menu input").checkboxradio();
+    $("#changes_menu").css({ overflowX: "hidden" });
+    $("#changes_menu").parent().css({height: '', maxHeight: '180px', overflow:'auto', top: '200px', left: ($("#workplace").width() - 200) + "px"});
+    $("#changes_menu").parent().draggable({ containment: $("#workplace") }).css({ width: '200px' });
+    createNewStatus("Load", cursor, changes);
+    ++cursor;
+    $("#changes_menu").parent().css({opacity: '0', top: '0'});
+    $('.ui-dialog-titlebar-close').remove();
 
 });
 
@@ -389,6 +394,7 @@ function generateElement(element, point) {
                     top: 0,
                     left: 0
                 });
+                findElem(ui.draggable.prop('id')).parent = "#" + this.id;
                 $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
                 $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                 $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
@@ -449,6 +455,8 @@ function generateElement(element, point) {
             }
         }
     }
+
+
 }
 
 function lock(ider) {
@@ -579,6 +587,7 @@ function detach_child() {
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
+            findElem(focusedId).parent = "#workplace";
             $("#workplace").append(elem);
             $("#" + focusedId).css({
                 left: pos.left,
