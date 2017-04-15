@@ -1,6 +1,7 @@
 var active_id = null;
+var super_array_elems = null;
 
-function createNewStatus(mesg, pos, array) {
+function createNewStatus(mesg, pos, array, super_array) {
     var date = new Date();
     var time = date.getHours() + ":" + date.getMinutes();
 
@@ -19,12 +20,16 @@ function createNewStatus(mesg, pos, array) {
     });
 
     $("#wk").remove();
-
+    console.log(super_array.length);
+    var allofElements = jQuery.extend(true, [], super_array);;
     array.push({
         html: elems_el,
         time: time,
-        msg: mesg
+        msg: mesg,
+        elementors: allofElements
     });
+
+    super_array_elems = allofElements;
 
     var input = document.createElement("input");
     input.setAttribute('class', '.status_radio');
@@ -37,7 +42,7 @@ function createNewStatus(mesg, pos, array) {
     $("#changes_menu").append(label);
     $("#changes_menu").append(input);
     active_id = "#" + 'radio_' + pos;
-    
+
 
     $("#" + 'radio_' + pos).checkboxradio({
         icon: false
@@ -57,20 +62,21 @@ function readChanges(thise, elems) {
     $('#workplace').html("");
     var idx = $(thise).index();
     var text = $("#changes_menu").children().eq(idx - 1).html();
-    var element = null;
+    var e = null;
     for (var i = 0; i < elems.length; ++i) {
         if ((elems[i].msg + "   " + elems[i].time) == text) {
-            element = elems[i];
+            e = elems[i];
             break;
         }
     }
 
-    if (element == null) return;
+    if (e == null) return;
 
-    var allEl = element.html;
+    var allEl = e.html;
+    console.info(e.elementors);
 
     for (var i = 0; i < allEl.length; ++i) {
-        var temp = findElem(allEl[i].elem);
+        var temp = findElem(allEl[i].elem, e.elementors);
         generateAgain(temp, allEl[i].css);
     }
 
@@ -167,7 +173,7 @@ function generateAgain(element, css) {
             keys.right = false;
             if (focusedId != null) {
                 printStatus(focusedId);
-                elem = findElemPos(focusedId);
+                elem = findElemPos(focusedId, super_array_elems);
                 if (elem != -1) {
                     generatedElements[elem].width = $("#" + element.id).width();
                     generatedElements[elem].height = $("#" + element.id).height();
@@ -176,7 +182,7 @@ function generateAgain(element, css) {
         }
     }).droppable({
         over: function(event, ui) {
-            var pps = findElemPos(this.id);
+            var pps = findElemPos(this.id, super_array_elems);
             if (generatedElements[pps].locked == true) return;
             if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
             swapIndexes(event, ui, this);
@@ -186,7 +192,7 @@ function generateAgain(element, css) {
             clearOutlines(this);
         },
         drop: function(event, ui) {
-            var pps = findElemPos(this.id);
+            var pps = findElemPos(this.id, super_array_elems);
             if (generatedElements[pps].locked == true) return;
             if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
             if (checkSizes(event, ui, this)) {
@@ -200,7 +206,9 @@ function generateAgain(element, css) {
                 $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                 $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
                 $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
-                findElemPos(ui.draggable.prop('id')).parent = "#" + this.id;
+                findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
+                createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
+                ++cursor;
             } else {
 
             }
@@ -264,8 +272,12 @@ function generateAgain(element, css) {
             }
         }
     }
+    
+    $("#" + element.id).trigger("resize");
 
     if(element.parent != "#workplace") {
+        var ee = $("#" + element.id).detach();
+        $(element.parent).append(ee);
         $(element.parent).trigger('drop', $("#" + element.id));
     }
 }

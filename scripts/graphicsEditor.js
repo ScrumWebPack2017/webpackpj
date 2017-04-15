@@ -42,8 +42,6 @@ $(document).ready(function() {
         ++zindex;
         generatedElements.push(e);
         generateElement(e, true);
-        createNewStatus("New " + e.type + " was created (" + e.id + ")", cursor, changes);
-        ++cursor;
     });
 
     $('.property_input').focus(function () {
@@ -198,7 +196,7 @@ $(document).ready(function() {
     $("#changes_menu").css({ overflowX: "hidden" });
     $("#changes_menu").parent().css({height: '', maxHeight: '180px', overflow:'auto', top: '200px', left: ($("#workplace").width() - 200) + "px"});
     $("#changes_menu").parent().draggable({ containment: $("#workplace") }).css({ width: '200px' });
-    createNewStatus("Load", cursor, changes);
+    createNewStatus("Load", cursor, changes, generatedElements);
     ++cursor;
     $("#changes_menu").parent().css({opacity: '0', top: '0'});
     $('.ui-dialog-titlebar-close').remove();
@@ -229,7 +227,7 @@ function deleteFocused() {
         $("#cut_list").parent().addClass('ui-state-disabled');
         $("#detach_list").parent().addClass('ui-state-disabled');
         $("#parentFoc_list").parent().addClass('ui-state-disabled');
-        createNewStatus(focusedId + " was deleted", cursor, changes);
+        createNewStatus(focusedId + " was deleted", cursor, changes, generatedElements);
         ++cursor;
     }
 }
@@ -277,6 +275,7 @@ function generateElement(element, point) {
     el.setAttribute('class', 'work_elements');
 
     $(element.parent).append(el);
+
     if(element.type == "input") {
         var el1 = document.createElement('input');
         $("#" + identifier).append(el1);
@@ -365,7 +364,7 @@ function generateElement(element, point) {
             keys.right = false;
             if (focusedId != null) {
                 printStatus(focusedId);
-                elem = findElemPos(focusedId);
+                elem = findElemPos(focusedId, generatedElements);
                 if (elem != -1) {
                     generatedElements[elem].width = $("#" + identifier).width();
                     generatedElements[elem].height = $("#" + identifier).height();
@@ -374,7 +373,7 @@ function generateElement(element, point) {
         }
     }).droppable({
         over: function(event, ui) {
-            var pps = findElemPos(this.id);
+            var pps = findElemPos(this.id, generatedElements);
             if (generatedElements[pps].locked == true) return;
             if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
             swapIndexes(event, ui, this);
@@ -384,7 +383,7 @@ function generateElement(element, point) {
             clearOutlines(this);
         },
         drop: function(event, ui) {
-            var pps = findElemPos(this.id);
+            var pps = findElemPos(this.id, generatedElements);
             if (generatedElements[pps].locked == true) return;
             if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
             if (checkSizes(event, ui, this)) {
@@ -394,11 +393,13 @@ function generateElement(element, point) {
                     top: 0,
                     left: 0
                 });
-                findElem(ui.draggable.prop('id')).parent = "#" + this.id;
+                findElem(ui.draggable.prop('id'), generatedElements).parent = "#" + this.id;
                 $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
                 $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                 $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
                 $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+                createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
+                ++cursor;
             } else {
 
             }
@@ -456,6 +457,8 @@ function generateElement(element, point) {
         }
     }
 
+    createNewStatus("New " + element.type + " was created (" + element.id + ")", cursor, changes, generatedElements);
+    ++cursor;
 
 }
 
@@ -529,18 +532,18 @@ function searchParent(id) {
     }
 }
 
-function findElem(id) {
-    for (var i = 0; i < generatedElements.length; ++i) {
-        if (generatedElements[i].id == id) {
-            return generatedElements[i];
+function findElem(id, array) {
+    for (var i = 0; i < array.length; ++i) {
+        if (array[i].id == id) {
+            return array[i];
         }
     }
     return null;
 }
 
-function findElemPos(id) {
-    for (var i = 0; i < generatedElements.length; ++i) {
-        if (generatedElements[i].id == id) {
+function findElemPos(id, array) {
+    for (var i = 0; i < array.length; ++i) {
+        if (array[i].id == id) {
             return i;
         }
     }
@@ -587,7 +590,7 @@ function detach_child() {
             $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
-            findElem(focusedId).parent = "#workplace";
+            findElem(focusedId, generatedElements).parent = "#workplace";
             $("#workplace").append(elem);
             $("#" + focusedId).css({
                 left: pos.left,
@@ -608,7 +611,7 @@ function detach_child() {
 function copy() {
     if (focusedId == null)
         return;
-    var elem = findElem(focusedId);
+    var elem = findElem(focusedId, generatedElements);
     if (elem != null) {
         buffer = {
             element: elem,
@@ -650,13 +653,15 @@ function paste() {
             generatedElements.push(e);
             generateElement(e, false);
         }
+        createNewStatus(e.id + " was pasted", cursor, changes, generatedElements);
+        ++cursor;
     }
 }
 
 function cut() {
     if (focusedId == null)
         return;
-    var elem = findElemPos(focusedId);
+    var elem = findElemPos(focusedId, generatedElements);
     if (elem != -1) {
         clearStatus();
         clearproperty();
