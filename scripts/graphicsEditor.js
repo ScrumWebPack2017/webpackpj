@@ -279,15 +279,17 @@ function generateElement(element, point) {
     if(element.type == "input") {
         var el1 = document.createElement('input');
         $("#" + identifier).append(el1);
+        $("#" + identifier + " input").css({width: '100px', height: '35px'});
     } else {
         if(element.type == "textarea") {
             var el1 = document.createElement('textarea');
             $("#" + identifier).append(el1);
+            $("#" + identifier + " textarea").css({width: '100px', height: '35px'});
         } else {
             if(element.type == "select") {
                 var el1 = document.createElement('select');
                 $("#" + identifier).append(el1);
-                $("#" + identifier + " select").css({width: '100px', height: '25px'});
+                $("#" + identifier + " select").css({width: '100px', height: '35px'});
             }
         }
     }
@@ -433,8 +435,8 @@ function generateElement(element, point) {
         $("#" + identifier + " input").css({ border: 'black 1px solid' });
         $("#" + identifier).resizable({
             alsoResize: $("#" + identifier + " input"),
-            minWidth: '50',
-            minHeight: '20'
+            minWidth: 100,
+            minHeight: 35
         });
         $("#" + identifier).dblclick(function () {
             $("#" + identifier + " input").trigger('focus');
@@ -444,8 +446,8 @@ function generateElement(element, point) {
             $("#" + identifier + " textarea").css({ border: 'black 1px solid', resize: 'none' });
             $("#" + identifier).resizable({
                 alsoResize: $("#" + identifier + " textarea"),
-                minWidth: '50',
-                minHeight: '50'
+                minWidth: 100,
+                minHeight: 35
             });
             $("#" + identifier).dblclick(function () {
                 $("#" + identifier + " textarea").trigger('focus');
@@ -455,8 +457,8 @@ function generateElement(element, point) {
                 $("#" + identifier + " select").css({ border: 'black 1px solid' });
                 $("#" + identifier).resizable({
                     alsoResize: $("#" + identifier + " select"),
-                    minWidth: '50',
-                    minHeight: '20'
+                    minWidth: 100,
+                    minHeight: 35
                 });
                 $("#" + identifier).dblclick(function () {
                     $("#" + identifier + " select").trigger('focus');
