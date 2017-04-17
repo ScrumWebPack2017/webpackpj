@@ -1,0 +1,4 @@
+Панель меню:
+size: hight - 200px; width - 40px;  
+color: #EFE6D1
+border: 1pt; #534741 
