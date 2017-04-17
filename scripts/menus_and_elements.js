@@ -1,9 +1,20 @@
 var active_id = null;
 var super_array_elems = null;
+var cur_pos = -1;
 
 function createNewStatus(mesg, pos, array, super_array) {
+    if(cur_pos + 1 < pos && cur_pos != -1) {
+        while(showCursor() > cur_pos + 1) {
+            $("#radio_" + (showCursor() - 1)).remove();
+            $('#changes_menu label[for="radio_' + (showCursor() - 1) + '"]').remove();
+            cursorMinus();
+            array.pop();
+        }
+        console.log(showCursor());
+    }
+    pos = showCursor();
     var date = new Date();
-    var time = date.getHours() + ":" + date.getMinutes();
+    var time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
     var d = $("#menu_tools").clone();
 
@@ -20,8 +31,7 @@ function createNewStatus(mesg, pos, array, super_array) {
     });
 
     $("#wk").remove();
-    console.log(super_array.length);
-    var allofElements = jQuery.extend(true, [], super_array);;
+    var allofElements = jQuery.extend(true, [], super_array);
     array.push({
         html: elems_el,
         time: time,
@@ -38,10 +48,11 @@ function createNewStatus(mesg, pos, array, super_array) {
     input.setAttribute('name', 'radio_s');
     var label = document.createElement("label");
     label.setAttribute('for', 'radio_' + pos);
-    label.innerHTML = array[pos].msg + "   " + time;
+    label.innerHTML = mesg + "   " + time;
     $("#changes_menu").append(label);
     $("#changes_menu").append(input);
     active_id = "#" + 'radio_' + pos;
+    cur_pos = pos;
 
 
     $("#" + 'radio_' + pos).checkboxradio({
@@ -51,6 +62,7 @@ function createNewStatus(mesg, pos, array, super_array) {
     $("#" + 'radio_' + pos).on("click", function() {
         if(active_id == "#" + 'radio_' + pos) return;
         active_id = "#" + 'radio_' + pos;
+        cur_pos = pos;
         readChanges(this, array);
     });
 
@@ -73,7 +85,6 @@ function readChanges(thise, elems) {
     if (e == null) return;
 
     var allEl = e.html;
-    console.info(e.elementors);
 
     for (var i = 0; i < allEl.length; ++i) {
         var temp = findElem(allEl[i].elem, e.elementors);
@@ -124,6 +135,7 @@ function generateAgain(element, css) {
     //printStatus(identifier)
 
     $("#" + element.id).attr('style', css);
+    $("#" + element.id).css({outline: ''});
 
     $("#" + element.id).on("click", function(e) {
         if (upperID == null) {
@@ -137,7 +149,7 @@ function generateAgain(element, css) {
         lock(this.id);
         clicks.element = true;
         if (focusedElement != null && focusedId != null && element.id != focusedId) {
-            $("#" + focusedId).css({
+             $("#" + focusedId).css({
                 outline: "",
                 cursor: "auto"
             });
@@ -179,6 +191,10 @@ function generateAgain(element, css) {
                     generatedElements[elem].height = $("#" + element.id).height();
                 }
             }
+        },
+        stop: function (event, ui) {
+            createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
+            setCur(1);
         }
     }).droppable({
         over: function(event, ui) {
@@ -207,8 +223,8 @@ function generateAgain(element, css) {
                 $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
                 $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
                 findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
-                createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
-                ++cursor;
+                createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, showCursor(), showChanges(), showGE());
+                setCur(1);
             } else {
 
             }
@@ -226,6 +242,10 @@ function generateAgain(element, css) {
                 $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
                 $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
             }
+        },
+        stop: function (event, ui) {
+            createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
+            setCur(1);
         }
     });
 

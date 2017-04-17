@@ -370,6 +370,10 @@ function generateElement(element, point) {
                     generatedElements[elem].height = $("#" + identifier).height();
                 }
             }
+        },
+        stop: function(event, ui) {
+            createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), cursor, changes, generatedElements);
+            ++cursor;
         }
     }).droppable({
         over: function(event, ui) {
@@ -417,6 +421,10 @@ function generateElement(element, point) {
                 $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
                 $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
             }
+        },
+        stop: function (event, ui) {
+            createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", cursor, changes, generatedElements);
+            ++cursor;
         }
     });
 
@@ -457,8 +465,10 @@ function generateElement(element, point) {
         }
     }
 
-    createNewStatus("New " + element.type + " was created (" + element.id + ")", cursor, changes, generatedElements);
-    ++cursor;
+    if(point == true) {
+        createNewStatus("New " + element.type + " was created (" + element.id + ")", cursor, changes, generatedElements);
+        ++cursor;
+    }
 
 }
 
@@ -604,6 +614,8 @@ function detach_child() {
             $("#" + focusedId).resizable("option", "minWidth", '');
             $("#" + focusedId).draggable("option", "containment", $("#workplace"));
             $("#" + focusedId).resizable("option", "containment", '');
+            createNewStatus("Block " + focusedId + " was detached", cursor, changes, generatedElements);
+            ++cursor;
         }
     }
 }
@@ -705,4 +717,29 @@ function maxId(type) {
 
 function checkChildren(parentId, childId) {
     return $('#' + parentId).html().indexOf(childId) != -1;
+}
+
+function changeCurrent(pos) {
+    current_cursor = pos;
+    return current_cursor;
+}
+
+function showCursor() {
+    return cursor;
+}
+
+function cursorMinus() {
+    --cursor;
+}
+
+function showGE() {
+    return generatedElements;
+}
+
+function showChanges() {
+    return changes;
+}
+
+function setCur(val) {
+    cursor += val;
 }
