@@ -3,8 +3,8 @@ var super_array_elems = null;
 var cur_pos = -1;
 
 function createNewStatus(mesg, pos, array, super_array) {
-    if(cur_pos + 1 < pos && cur_pos != -1) {
-        while(showCursor() > cur_pos + 1) {
+    if (cur_pos + 1 < pos && cur_pos != -1) {
+        while (showCursor() > cur_pos + 1) {
             $("#radio_" + (showCursor() - 1)).remove();
             $('#changes_menu label[for="radio_' + (showCursor() - 1) + '"]').remove();
             cursorMinus();
@@ -22,8 +22,10 @@ function createNewStatus(mesg, pos, array, super_array) {
 
     $("body").append(innerHTML);
     $("#wk div[class^='ui']").remove();
+    $("#wk #menu_tools").remove();
     var elems_el = new Array(0);
     var elems = $("#wk .work_elements").each(function() {
+        console.log($(this).attr('id'));
         elems_el.push({
             elem: $(this).attr('id'),
             css: $(this).attr('style')
@@ -60,7 +62,7 @@ function createNewStatus(mesg, pos, array, super_array) {
     }).trigger("click");
 
     $("#" + 'radio_' + pos).on("click", function() {
-        if(active_id == "#" + 'radio_' + pos) return;
+        if (active_id == "#" + 'radio_' + pos) return;
         active_id = "#" + 'radio_' + pos;
         cur_pos = pos;
         readChanges(this, array);
@@ -96,7 +98,9 @@ function readChanges(thise, elems) {
 function generateAgain(element, css) {
     el = document.createElement(element.type);
     el.setAttribute('id', element.id);
-    el.setAttribute('class', 'work_elements');
+    if (element.type != "textarea" && element.type != "input" && element.type != "select") {
+        el.setAttribute('class', 'work_elements');
+    }
     $(element.parent).append(el);
 
     /*if(element.type == "input") {
@@ -135,167 +139,172 @@ function generateAgain(element, css) {
     //printStatus(identifier)
 
     $("#" + element.id).attr('style', css);
-    $("#" + element.id).css({outline: ''});
-
-    $("#" + element.id).on("click", function(e) {
-        if (upperID == null) {
-            upperID = this.id;
-        } else {
-            if (checkChildren(this.id, upperID)) {
-                upperID = this.id;
-                return;
-            }
-        }
-        lock(this.id);
-        clicks.element = true;
-        if (focusedElement != null && focusedId != null && element.id != focusedId) {
-             $("#" + focusedId).css({
-                outline: "",
-                cursor: "auto"
-            });
-        }
-        //alert(checkChildren(identifier, "div_1"));
-        $("#" + element.id).css({
-            outline: "dashed 2px #878787"
-        });
-
-        $("#delete_list").parent().removeClass('ui-state-disabled');
-        $("#copy_list").parent().removeClass('ui-state-disabled');
-        $("#cut_list").parent().removeClass('ui-state-disabled');
-        $("#detach_list").parent().removeClass('ui-state-disabled');
-        $("#parentFoc_list").parent().removeClass('ui-state-disabled');
-        focusedElement = $(this);
-        focusedId = element.id;
-        fillPropertiesTable(focusedElement);
-        printStatus(element.id);
-    }).resizable({
-        // be careful!
-        containment: element.parent,
-        // !!!
-        handles: 'all',
-        resize: function(event, ui) {
-            $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
-            }
-            keys.left = false;
-            keys.right = false;
-            if (focusedId != null) {
-                printStatus(focusedId);
-                elem = findElemPos(focusedId, super_array_elems);
-                if (elem != -1) {
-                    generatedElements[elem].width = $("#" + element.id).width();
-                    generatedElements[elem].height = $("#" + element.id).height();
-                }
-            }
-        },
-        stop: function (event, ui) {
-            createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
-            setCur(1);
-        }
-    }).droppable({
-        over: function(event, ui) {
-            var pps = findElemPos(this.id, super_array_elems);
-            if (generatedElements[pps].locked == true) return;
-            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
-            swapIndexes(event, ui, this);
-            checkSizes(event, ui, this);
-        },
-        out: function(event, ui) {
-            clearOutlines(this);
-        },
-        drop: function(event, ui) {
-            var pps = findElemPos(this.id, super_array_elems);
-            if (generatedElements[pps].locked == true) return;
-            if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
-            if (checkSizes(event, ui, this)) {
-                var div = $("#" + ui.draggable.prop('id')).detach();
-                $(this).append(div);
-                $("#" + ui.draggable.prop('id')).css({
-                    top: 0,
-                    left: 0
-                });
-                $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
-                $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
-                $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
-                $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
-                findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
-                createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, showCursor(), showChanges(), showGE());
-                setCur(1);
-            } else {
-
-            }
-            clearOutlines(this);
-        }
-    }).draggable({
-        cancel: null,
-        containment: element.parent,
-        scroll: true,
-        drag: function(event, ui) {
-            $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
-            }
-        },
-        stop: function (event, ui) {
-            createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
-            setCur(1);
-        }
+    $("#" + element.id).css({
+        outline: ''
     });
 
 
+    if (element.type != "textarea" && element.type != "input" && element.type != "select") {
+        $("#" + element.id).on("click", function(e) {
+            if (upperID == null) {
+                upperID = this.id;
+            } else {
+                if (checkChildren(this.id, upperID)) {
+                    upperID = this.id;
+                    return;
+                }
+            }
+            lock(this.id);
+            clicks.element = true;
+            if (focusedElement != null && focusedId != null && element.id != focusedId) {
+                $("#" + focusedId).css({
+                    outline: "",
+                    cursor: "auto"
+                });
+            }
+            //alert(checkChildren(identifier, "div_1"));
+            $("#" + element.id).css({
+                outline: "dashed 2px #878787"
+            });
+
+            $("#delete_list").parent().removeClass('ui-state-disabled');
+            $("#copy_list").parent().removeClass('ui-state-disabled');
+            $("#cut_list").parent().removeClass('ui-state-disabled');
+            $("#detach_list").parent().removeClass('ui-state-disabled');
+            $("#parentFoc_list").parent().removeClass('ui-state-disabled');
+            focusedElement = $(this);
+            focusedId = element.id;
+            fillPropertiesTable(focusedElement);
+            printStatus(element.id);
+        }).resizable({
+            // be careful!
+            containment: element.parent,
+            // !!!
+            handles: 'all',
+            resize: function(event, ui) {
+                $("#" + this.id).trigger("click");
+                var parent_id = $("#" + this.id).parent().attr("id");
+                if (parent_id != "workplace") {
+                    //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                    $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
+                    $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
+                }
+                keys.left = false;
+                keys.right = false;
+                if (focusedId != null) {
+                    printStatus(focusedId);
+                    elem = findElemPos(focusedId, super_array_elems);
+                    if (elem != -1) {
+                        generatedElements[elem].width = $("#" + element.id).width();
+                        generatedElements[elem].height = $("#" + element.id).height();
+                    }
+                }
+            },
+            stop: function(event, ui) {
+                createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
+                setCur(1);
+            }
+        }).droppable({
+            over: function(event, ui) {
+                var pps = findElemPos(this.id, super_array_elems);
+                if (generatedElements[pps].locked == true) return;
+                if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
+                swapIndexes(event, ui, this);
+                checkSizes(event, ui, this);
+            },
+            out: function(event, ui) {
+                clearOutlines(this);
+            },
+            drop: function(event, ui) {
+                var pps = findElemPos(this.id, super_array_elems);
+                if (generatedElements[pps].locked == true) return;
+                if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
+                if (checkSizes(event, ui, this)) {
+                    var div = $("#" + ui.draggable.prop('id')).detach();
+                    $(this).append(div);
+                    $("#" + ui.draggable.prop('id')).css({
+                        top: 0,
+                        left: 0
+                    });
+                    $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
+                    $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
+                    $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
+                    $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+                    findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
+                    createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, showCursor(), showChanges(), showGE());
+                    setCur(1);
+                } else {
+
+                }
+                clearOutlines(this);
+            }
+        }).draggable({
+            cancel: null,
+            containment: element.parent,
+            scroll: true,
+            drag: function(event, ui) {
+                $("#" + this.id).trigger("click");
+                var parent_id = $("#" + this.id).parent().attr("id");
+                if (parent_id != "workplace") {
+                    //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                    $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
+                    $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
+                }
+            },
+            stop: function(event, ui) {
+                createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
+                setCur(1);
+            }
+        });
+    }
+
+
     if (element.type == "input") {
-        $("#" + element.id + " input").css({
+        $("#" + element.id).css({
             border: 'black 1px solid'
         });
-        $("#" + element.id).resizable({
-            alsoResize: $("#" + element.id + " input"),
-            minWidth: '50',
-            minHeight: '20'
+        $(element.parent).resizable({
+            alsoResize: $("#" + element.id),
+            minWidth: '100',
+            minHeight: '35'
         });
-        $("#" + element.id).dblclick(function() {
-            $("#" + element.id + " input").trigger('focus');
+        $(element.parent).dblclick(function() {
+            $("#" + element.id).trigger('focus');
         });
     } else {
         if (element.type == "textarea") {
-            $("#" + element.id + " textarea").css({
+            $("#" + element.id).css({
                 border: 'black 1px solid',
                 resize: 'none'
             });
-            $("#" + element.id).resizable({
-                alsoResize: $("#" + element.id + " textarea"),
-                minWidth: '50',
-                minHeight: '50'
+            $(element.parent).resizable({
+                alsoResize: $("#" + element.id),
+                minWidth: '100',
+                minHeight: '35'
             });
-            $("#" + element.id).dblclick(function() {
-                $("#" + element.id + " textarea").trigger('focus');
+            $(element.parent).dblclick(function() {
+                $("#" + element.id).trigger('focus');
             });
         } else {
             if (element.type == "select") {
-                $("#" + element.id + " select").css({
+                $("#" + element.id).css({
                     border: 'black 1px solid'
                 });
-                $("#" + element.id).resizable({
-                    alsoResize: $("#" + element.id + " select"),
-                    minWidth: '50',
-                    minHeight: '20'
+                $(element.parent).resizable({
+                    alsoResize: $("#" + element.id),
+                    minWidth: '100',
+                    minHeight: '35'
                 });
-                $("#" + element.id).dblclick(function() {
-                    $("#" + element.id + " select").trigger('focus');
+                $(element.parent).dblclick(function() {
+                    $("#" + element.id).trigger('focus');
                 });
             }
         }
     }
-    
-    $("#" + element.id).trigger("resize");
 
-    if(element.parent != "#workplace") {
+    //$("#" + element.id).trigger("resize");
+
+    if (element.parent != "#workplace") {
         var ee = $("#" + element.id).detach();
         $(element.parent).append(ee);
         $(element.parent).trigger('drop', $("#" + element.id));
@@ -303,12 +312,18 @@ function generateAgain(element, css) {
 }
 
 function showChangesWindow() {
-    if($("#changes_menu").parent().position().top == 0) {
-        $("#changes_menu").parent().css({top:'200px'});
+    if ($("#changes_menu").parent().position().top == 0) {
+        $("#changes_menu").parent().css({
+            top: '200px'
+        });
     }
-    if($("#changes_menu").parent().css('opacity') == 0 ) {
-        $("#changes_menu").parent().animate({'opacity':'1'}, 400);
+    if ($("#changes_menu").parent().css('opacity') == 0) {
+        $("#changes_menu").parent().animate({
+            'opacity': '1'
+        }, 400);
     } else {
-        $("#changes_menu").parent().animate({'opacity':'0'}, 400);
+        $("#changes_menu").parent().animate({
+            'opacity': '0'
+        }, 400);
     }
 }

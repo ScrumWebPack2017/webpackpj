@@ -329,9 +329,6 @@
                         <span class="inner_element" id="select"> Select </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="option"> Option </span>
-                    </li>
-                    <li>
                         <span class="inner_element" id="textarea"> Textarea </span>
                     </li>
                     <li>
