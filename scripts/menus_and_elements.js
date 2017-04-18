@@ -22,7 +22,7 @@ function createNewStatus(mesg, pos, array, super_array) {
 
     $("body").append(innerHTML);
     $("#wk div[class^='ui']").remove();
-    $("#wk #menu_tools").remove();
+    $("#wk ul[id='menu_tools']").remove();
     var elems_el = new Array(0);
     var elems = $("#wk .work_elements").each(function() {
         console.log($(this).attr('id'));
@@ -66,9 +66,21 @@ function createNewStatus(mesg, pos, array, super_array) {
         active_id = "#" + 'radio_' + pos;
         cur_pos = pos;
         readChanges(this, array);
+        if($('#menu_tools').length) { return; }
+        $(d).menu().position({
+            collision: function() {
+                console.log("vihodit");
+            }
+        });
+
+        $(d).click(function() {
+            clicks.menu = true;
+        });
+
+        $("#workplace").append(d);
     });
 
-
+    if($('#menu_tools').length) { return; }
     $("#workplace").append(d);
 }
 
@@ -91,6 +103,9 @@ function readChanges(thise, elems) {
     for (var i = 0; i < allEl.length; ++i) {
         var temp = findElem(allEl[i].elem, e.elementors);
         generateAgain(temp, allEl[i].css);
+        var elems = $("#workplace .work_elements").each(function(event) {
+            $(this).children().removeClass('ui-icon');
+        });
     }
 
 }
@@ -309,6 +324,7 @@ function generateAgain(element, css) {
         $(element.parent).append(ee);
         $(element.parent).trigger('drop', $("#" + element.id));
     }
+
 }
 
 function showChangesWindow() {
