@@ -50,7 +50,7 @@ function showSourceCode() {
         $('#source_code_panel').css('dis' +
             'play', 'block');
         generateHTML();
-
+        $('.toSource').remove();
 
     }
 
@@ -62,7 +62,8 @@ function generateHTML() {
     $(".toSource [class^='ui']").remove();
 
     var html = $('.toSource').html();
-    $('div:last').remove();
+
+    $('.toSource').remove();
     var css = new Array(0);
     var result = '';
     while (true) {
@@ -104,15 +105,10 @@ function generateHTML() {
         }
     }
 
-   //var resultedCSS =
-
-
     resultWithoutStyles += result.substring(tmp + 1);
     resultWithoutStyles = parseHTML(resultWithoutStyles);
     editorHTML.setValue(resultWithoutStyles);
     editorCSS.setValue(css.join(''));
-
-
 }
 
 function parseHTML(str) {
