@@ -280,16 +280,16 @@
             <li><span class="outer_element" id="shit"> Semantic elements </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="article"> Article </span>
+                        <span class="inner_element" id="article"> &lt;article&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="aside"> Aside </span>
+                        <span class="inner_element" id="aside"> &lt;aside&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="details"> Details </span>
+                        <span class="inner_element" id="details"> &lt;details&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="figcaption"> Figcaption </span>
+                        <span class="inner_element" id="figcaption"> &lt;figcaption&gt; </span>
                     </li>
                     <li>
                         <span class="inner_element" id="figure"> Figure </span>
