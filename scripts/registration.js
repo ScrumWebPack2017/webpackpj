@@ -156,7 +156,7 @@ function checkEmail() {
         success: function (data) {
             if (data.indexOf('yes') == -1) {
                 borderRed('email_input');
-                $('#email_msg').html('Email is exists');
+                $('#email_msg').html('Email exists');
             }
         }
     });

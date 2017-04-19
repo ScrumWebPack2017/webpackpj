@@ -459,6 +459,14 @@
     <div id="source_code_css" class="source_code_block">
 
     </div>
+    <div id="source_code_btns">
+        <div class="out_btn" id="save_changes" onclick="closeWithChanges()">
+            Save
+        </div>
+        <div class="out_btn" id="discard_changes" style="margin-left: 10px;" onclick="showSourceCode()">
+            Close
+        </div>
+    </div>
 </div>
 
 </body>

@@ -9,15 +9,19 @@ $(document).ready(function() {
         normalizePage();
     });
 
+    $(document).keyup(function(event) {
+        if (event.keyCode == 27) {
+            showSourceCode();
+        }
+
+    });
+
     editorHTML = ace.edit("source_code_html");
     editorCSS = ace.edit("source_code_css");
-    editorHTML.setTheme("ace/theme/monokai");
+    editorHTML.setTheme("ace/theme/chrome");
     editorHTML.getSession().setMode("ace/mode/html");
-    editorCSS.setTheme("ace/theme/monokai");
+    editorCSS.setTheme("ace/theme/chrome");
     editorCSS.getSession().setMode("ace/mode/css");
-
-
-
 
     instaValidate();
     tabControl();
@@ -34,12 +38,15 @@ $(document).ready(function() {
     $("#res_pass").css({marginTop:"19px"});
 
     $('#source_code_wrapper').click(function() {
-        $('#source_code_wrapper').css({
-            'display':'none'
-        });
-        $('#source_code_panel').css('display','none');
+        showSourceCode();
     });
 });
+
+function closeWithChanges() {
+    submitChangesCSS();
+    $('#source_code_wrapper').css('display', 'none');
+    $('#source_code_panel').css('display', 'none');
+}
 
 function showSourceCode() {
     if ($('#source_code_wrapper').css('display') == 'block') {
@@ -47,14 +54,56 @@ function showSourceCode() {
         $('#source_code_panel').css('display', 'none');
     } else {
         $('#source_code_wrapper').css('display', 'block');
-        $('#source_code_panel').css('dis' +
-            'play', 'block');
+        $('#source_code_panel').css('display', 'block');
         generateHTML();
         $('.toSource').remove();
+        editorHTML.setReadOnly(true);
+        editorHTML.clearSelection();
+        editorCSS.clearSelection();
+    }
+}
 
+function getStylePairs(str) {
+    var result = str.split(':');
+    if (result.length == 1)
+        return null;
+    result[0] = $.trim(result[0]);
+    result[1] = $.trim(result[1]);
+    result[1]= result[1].substring(0, result[1].length - 1);
+    return result;
+}
+
+function submitChangesCSS() {
+    var styles = $.trim(editorCSS.getSession().getValue());
+    var styleArr = new Array(0);
+    var tmpPointer = 0;
+    var pair;
+    var tmpId;
+    var i = 0;
+    while (i < styles.length) {
+        if (styles[i] == '#') {
+            var j;
+            for (j = i; styles[j] != ' '; ++j);
+            tmpId = styles.substring(i, j);
+            i = j + 1;
+            tmpPointer = i;
+            for (;styles[i] != '}';++i);
+            var tmpStyles = styles.substring(tmpPointer, i + 1).split('\n');
+            for (var k = 1; k < tmpStyles.length - 1; ++k) {
+                pair = getStylePairs(tmpStyles[k]);
+                if (pair != null) {
+                    $(tmpId).css(pair[0], pair[1]);
+                }
+
+            }
+        } else {
+            i++;
+        }
     }
 
 }
+
+
 
 function generateHTML() {
     var innerHTML = $('#workplace').clone().addClass("toSource");
@@ -64,6 +113,9 @@ function generateHTML() {
     var html = $('.toSource').html();
 
     $('.toSource').remove();
+    if (html.length < 10) {
+        return;
+    }
     var css = new Array(0);
     var result = '';
     while (true) {
@@ -111,8 +163,17 @@ function generateHTML() {
     editorCSS.setValue(css.join(''));
 }
 
+function checkTag(tag) {
+    var singleTags = ['br', 'hr', 'img', 'input'];
+    for (var i = 0; i < singleTags.length; ++i)
+        if (tag == singleTags[i])
+            return false;
+    return true;
+}
+
 function parseHTML(str) {
-    var tagQueue = new Array(0);
+    var tagSingle = false;
+    var tagQ = 0;
     var result = "";
     var shift = "";
     var flag = false;
@@ -123,18 +184,31 @@ function parseHTML(str) {
             if (str[i + 1] != '/') {
                 var j = 0;
                 for (j = i; j < str.length && str[j] != ' '; ++j);
-                tagQueue.push(str.substring(i, j) + '>');
+                var currTag = str.substring(i + 1, j);
+                if (checkTag(currTag)) {
+                    tagQ++;
+
+                } else {
+                    tagSingle = true;
+                }
+
             } else {
                 flag = true;
             }
         }
         if (str[i] == '>') {
-            for (var k = 0; k < tagQueue.length - 1; ++k)
+            for (var k = 0; k < tagQ - 1; ++k)
                 shift += tab;
+            if (tagSingle) {
+                shift += tab;
+                tagSingle = false;
+            }
+
             result += shift + str.substring(curPos, i + 1) + '\n';
             curPos = i + 1;
             if (flag) {
-                tagQueue.pop();
+                tagQ--;
+                tagSingle = false;
                 flag = false;
             }
         }
