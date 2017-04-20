@@ -53,16 +53,13 @@ $(document).ready(function() {
 
     $('.property_input').focus(function() {
         allowkeys = false;
-        console.log(allowkeys);
     });
 
     createLeftMenu();
     normalizeWorkplace();
 
     $("#menu_tools").menu().position({
-        collision: function() {
-            console.log("vihodit");
-        }
+        collision: function() {}
     });
 
     $("#menu_tools").click(function() {
@@ -86,7 +83,6 @@ $(document).ready(function() {
             propertyValidation("string", $(this), focusedElement);
         }
         allowkeys = true;
-        console.log(allowkeys);
     }).keydown(function(e) {
         if (e.which == 13) {
             if (focusedElement != null) {
@@ -431,21 +427,30 @@ function generateElement(element, point, tt) {
         // !!!
         handles: 'all',
         resize: function(event, ui) {
+
             $("#" + this.id).trigger("click");
-            var parent_id = $("#" + this.id).parent().attr("id");
-            if (parent_id != "workplace") {
-                //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
-            }
-            keys.left = false;
-            keys.right = false;
-            if (focusedId != null) {
-                printStatus(focusedId);
-                elem = findElemPos(focusedId, generatedElements);
-                if (elem != -1) {
-                    generatedElements[elem].width = $("#" + identifier).width();
-                    generatedElements[elem].height = $("#" + identifier).height();
+            var ch = preventAxis(event, ui, this);
+            if (ch) {
+                $(this).resizable('option', 'minWidth', $(this).width());
+                $(this).resizable('option', 'minHeight', $(this).height());
+            } else {
+                $(this).resizable('option', 'minWidth', '');
+                $(this).resizable('option', 'minHeight', '');
+                var parent_id = $("#" + this.id).parent().attr("id");
+                if (parent_id != "workplace") {
+                    //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                    //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
+                    //$("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
+                }
+                keys.left = false;
+                keys.right = false;
+                if (focusedId != null) {
+                    printStatus(focusedId);
+                    elem = findElemPos(focusedId, generatedElements);
+                    if (elem != -1) {
+                        generatedElements[elem].width = $("#" + identifier).width();
+                        generatedElements[elem].height = $("#" + identifier).height();
+                    }
                 }
             }
         },
@@ -478,8 +483,8 @@ function generateElement(element, point, tt) {
                 findElem(ui.draggable.prop('id'), generatedElements).parent = "#" + this.id;
                 $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
                 $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
-                $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
-                $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+                //$("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
+                //$("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
                 createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
                 ++cursor;
             } else {
@@ -496,8 +501,8 @@ function generateElement(element, point, tt) {
             var parent_id = $("#" + this.id).parent().attr("id");
             if (parent_id != "workplace") {
                 //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
-                $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
+                //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
+                // $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
             }
         },
         stop: function(event, ui) {
@@ -683,8 +688,8 @@ function detach_child() {
             $("#" + focusedId).draggable({
                 disabled: true
             });
-            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
-            $("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
+            //$("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minWidth", '');
+            //$("#" + $("#" + focusedId).parent().attr('id')).resizable("option", "minHeight", '');
             var pos = $("#" + focusedId).offset();
             var elem = $("#" + focusedId).detach();
             findElem(focusedId, generatedElements).parent = "#workplace";

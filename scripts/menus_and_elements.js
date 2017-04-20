@@ -25,7 +25,6 @@ function createNewStatus(mesg, pos, array, super_array) {
     $("#wk ul[id='menu_tools']").remove();
     var elems_el = new Array(0);
     var elems = $("#wk .work_elements").each(function() {
-        console.log($(this).attr('id'));
         elems_el.push({
             elem: $(this).attr('id'),
             css: $(this).attr('style')
@@ -66,7 +65,9 @@ function createNewStatus(mesg, pos, array, super_array) {
         active_id = "#" + 'radio_' + pos;
         cur_pos = pos;
         readChanges(this, array);
-        if($('#menu_tools').length) { return; }
+        if ($('#menu_tools').length) {
+            return;
+        }
         $(d).menu().position({
             collision: function() {
                 console.log("vihodit");
@@ -80,7 +81,9 @@ function createNewStatus(mesg, pos, array, super_array) {
         $("#workplace").append(d);
     });
 
-    if($('#menu_tools').length) { return; }
+    if ($('#menu_tools').length) {
+        return;
+    }
     $("#workplace").append(d);
 }
 
@@ -197,21 +200,30 @@ function generateAgain(element, css) {
             // !!!
             handles: 'all',
             resize: function(event, ui) {
+
                 $("#" + this.id).trigger("click");
-                var parent_id = $("#" + this.id).parent().attr("id");
-                if (parent_id != "workplace") {
-                    //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                    $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
-                    $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
-                }
-                keys.left = false;
-                keys.right = false;
-                if (focusedId != null) {
-                    printStatus(focusedId);
-                    elem = findElemPos(focusedId, super_array_elems);
-                    if (elem != -1) {
-                        generatedElements[elem].width = $("#" + element.id).width();
-                        generatedElements[elem].height = $("#" + element.id).height();
+                var ch = preventAxis(event, ui, this);
+                if (ch) {
+                    $(this).resizable('option', 'minWidth', $(this).width());
+                    $(this).resizable('option', 'minHeight', $(this).height());
+                } else {
+                    $(this).resizable('option', 'minWidth', '');
+                    $(this).resizable('option', 'minHeight', '');
+                    var parent_id = $("#" + this.id).parent().attr("id");
+                    if (parent_id != "workplace") {
+                        //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
+                        //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() - 1 + $("#" + this.id).position().top));
+                        //$("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() - 1 + $("#" + this.id).position().left));
+                    }
+                    keys.left = false;
+                    keys.right = false;
+                    if (focusedId != null) {
+                        printStatus(focusedId);
+                        elem = findElemPos(focusedId, generatedElements);
+                        if (elem != -1) {
+                            generatedElements[elem].width = $("#" + element.id).width();
+                            generatedElements[elem].height = $("#" + element.id).height();
+                        }
                     }
                 }
             },
@@ -243,8 +255,8 @@ function generateAgain(element, css) {
                     });
                     $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
                     $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
-                    $("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
-                    $("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
+                    //$("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
+                    //$("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
                     findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
                     createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, showCursor(), showChanges(), showGE());
                     setCur(1);
@@ -262,8 +274,8 @@ function generateAgain(element, css) {
                 var parent_id = $("#" + this.id).parent().attr("id");
                 if (parent_id != "workplace") {
                     //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
-                    $("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
-                    $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
+                    //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
+                    //$("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
                 }
             },
             stop: function(event, ui) {
@@ -342,4 +354,55 @@ function showChangesWindow() {
             'opacity': '0'
         }, 400);
     }
+}
+
+function preventAxis(event, ui, temp) {
+    var count2 = $(temp).children().length;
+    if (count2 > 0) {
+        var dir = $(ui.element).data('ui-resizable').axis;
+        switch (dir) {
+            case "w":
+            case "s":
+            case "n":
+            case "e":
+            case "ne":
+            case "sw":
+            case "se":
+            case "nw":
+                return checkResize(temp);
+        }
+    }
+    return false;
+}
+
+function checkResize(temp) {
+    var checker = false;
+    var elems = $(temp).children('.work_elements').each(function() {
+        var w = $(this).width();
+        var h = $(this).height();
+        var x = $(this).position().left;
+        var y = $(this).position().top;
+        checker = pos(temp, w, h, x, y);
+        if (checker) return false;
+    });
+    return checker;
+}
+
+function pos(temp, w, h, x, y) {
+    var wW = $(temp).width();
+    var wH = $(temp).height();
+    var wX = $(temp).position().left;
+    var wY = $(temp).position().top;
+    var formulaeW = w + x;
+    var formulaeH = h + y;
+    if (formulaeH >= wH) {
+        $(temp).height(formulaeH);
+        return true;
+    } else {
+        if (formulaeW >= wW) {
+            $(temp).width(formulaeW);
+            return true;
+        }
+    }
+    return false;
 }
