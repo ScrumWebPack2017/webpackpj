@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,17 +24,20 @@
         #font {  content: url('design/menu/icons/font_icon.png');  }
 
         #shadow_container {
+            border: 1pt solid #534741;
             width: 200px;
             height: 140px;
             background-color: #EFE6D1;
         }
         #color_container {
+            border: 1pt solid #534741;
             width: 120px;
             height: 65px;
             background-color: #EFE6D1;
             padding: 4px 4px 0 4px;
         }
         #border_container {
+            border: 1pt solid #534741;
             width: 180px;
             height: 120px;
             background-color: #EFE6D1;
@@ -44,6 +46,8 @@
             width: 200px;
             height: 140px;
             background-color: #EFE6D1;
+            padding-top: 10px;
+            border: 1pt solid #534741;
         }
         #color_picker {
             width: 20px;
@@ -61,13 +65,12 @@
             padding-top: 5px;
         }
         #border_first_block {
-            background-color: #7bc744;
             float: top;
             width: 100%;
             height: 65%;
         }
         #border_second_block {
-            background-color: #007fff;
+            border-top: 1pt solid #BF9130;
             float: top;
             width: 100%;
             height: 35%;
@@ -75,24 +78,25 @@
         #border_topics_container {
             float: left;
             width: 25%;
-            height: 100%;
-            margin: 2px 0 0 2px;
+            height: 93%;
+            margin: 4px 0 0 4px;
         }
         #border_slider_and_colors_container {
             float: left;
-            width: 68%;
+            width: 65%;
             height: 100%;
             margin-left: 10px;
         }
         #border_style_title {
             float: left;
-            width: 20%;
-            height: 90%;
+            width: 25%;
+            height: 100%;
+            margin: 10px 0 0 7px;
         }
         #border_styles_container {
             float: left;
-            width: 60%;
-            height: 90%;
+            width: 70%;
+            height: 100%;
         }
         .color_div {
             display: inline-block;
@@ -116,21 +120,44 @@
             margin-top: 8px;
         }
         .border_type {
+            display: inline-block;
             width: 20%;
             height: 13%;
             border: 1pt solid #534741;
-            display: inline-block;
-            margin: 7px 2px 0 2px;
+            margin: 9px 2px 0 2px;
         }
         .border_topic {
             margin: 3px 0 0 3px;
         }
         .border_style_block {
             display: inline-block;
-            width: 17.5%;
-            height: 33.5%;
+            width: 17%;
+            height: 28%;
             border: 1pt solid #534741;
-            margin: 2px;
+            margin: 3px 0 0 3px;
+        }
+        .font_inner_container {
+            float: top;
+            width: 100%;
+            height: 19%;
+        }
+        .font_topic {
+            margin: 2px 0 0 10px;
+            float: left;
+        }
+        .font_pic {
+            display: inline-block;
+            width: 20%;
+            height: 98%;
+            margin: 2px 1px 2px 5px;
+        }
+        .choose_div {
+            display: inline-block;
+            float: left;
+            width: 15%;
+            height: 60%;
+            border: 1pt solid #534741;
+            margin: 4px 2px 0 4px;
         }
     </style>
 </head>
@@ -196,13 +223,52 @@
             <div class="border_style_block"></div>
             <div class="border_style_block"></div>
         </div>
-
     </div>
-
-
 </div>
 <div id="font_container" class="context_menu_element">
-
+    <div class="font_inner_container">
+        <div class="font_topic"> Font: </div>
+        <div class="font_topic">
+            <select>
+                <option value="what"> What </option>
+                <option value="the"> The </option>
+                <option value="fuck"> Fuck </option>
+            </select>
+        </div>
+    </div>
+    <div class="font_inner_container">
+        <div class="font_topic"> Size: </div>
+        <div class="font_topic">
+            <select>
+                <option value="8"> 8 пт </option>
+                <option value="9"> 9 пт </option>
+                <option value="10"> 10 пт </option>
+                <option value="11"> 11 пт </option>
+                <option value="12"> 12 пт </option>
+                <option value="13"> 13 пт </option>
+                <option value="14"> 14 пт </option>
+                <option value="15"> 15 пт </option>
+                <option value="16"> 16 пт </option>
+            </select>
+        </div>
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_5.png'); width: 30px;"></div>
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_6.png'); width: 30px;"></div>
+    </div>
+    <div class="font_inner_container">
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_1.png');"></div>
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_2.png');"></div>
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_3.png');"></div>
+        <div class="font_pic" style="content: url('design/menu/icons/font_icon_4.png');"></div>
+    </div>
+    <div class="font_inner_container">
+        <div class="font_topic"> Color: </div>
+        <div class="choose_div"></div>
+    </div>
+    <div class="font_inner_container">
+        <div class="font_topic"> Border: </div>
+        <div class="choose_div"></div>
+        <div class="choose_div"></div>
+    </div>
 </div>
 </body>
 </html>
