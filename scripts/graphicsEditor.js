@@ -23,8 +23,8 @@ var cursor = 0;
 $(document).ready(function() {
     $(document).tooltip();
 
-    $('#elements_search').on('#elements_search keyup', function(e) {
-        var val = $('#elements_search').val().toLowerCase();
+    $('#elements_search').on('#search_input keyup', function(e) {
+        var val = $('#search_input').val().toLowerCase();
         if (val != '') {
             $('#search_result').css('visibility', 'visible').html('<span class="outer_element" id="shit"> Result </span>');
             $('#red').css('visibility', 'hidden');

@@ -103,8 +103,6 @@ function submitChangesCSS() {
 
 }
 
-
-
 function generateHTML() {
     var innerHTML = $('#workplace').clone().addClass("toSource");
     $('body').append(innerHTML);
@@ -337,7 +335,7 @@ function sendAuthorization() {
 
 function errorAuth(text) {
     if (text != '') {
-        $('#res_pass').css('margin-top', '0px');
+        $('#res_pass').css('margin-top', '2px');
         $('#error_lbl').html(text);
     } else {
         $('#res_pass').css('margin-top', '19px');

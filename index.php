@@ -49,15 +49,7 @@
                 <div id="props1" class="property_list" style="z-index: 5; visibility: visible">
                     <div class="property">
                         <div class="property_label"> Position </div>
-                        <select class="property_input">
-                            <option>  </option>
-                            <option> absolute </option>
-                            <option> fixed </option>
-                            <option> relative </option>
-                            <option> static </option>
-                            <option> inherit </option>
-                        </select>
-                        <!--<input class="property_input" type="text"> -->
+                        <input class="property_input" type="text">
                     </div>
                     <div class="property">
                         <div class="property_label"> Float </div>
@@ -198,10 +190,10 @@
                         <input type="password" id="pass_input" name="password" class="auth_input" placeholder="Password">
                     </div>
                     <div id="error_lbl"></div>
-                    <div class="auth_box" id="res_pass" style="font-size: 14px; margin-top: 1px">
-                            <a href="database_scripts/additional/reset/reset_pass.html">  Reset password </a>
+                    <div class="auth_box" id="res_pass" style="font-size: 14px; margin-top: 0px">
+                            <a href="database_scripts/additional/reset/reset_pass.html" style="color: #c2c7cb">  Reset password </a>
                     </div>
-                    <div class="auth_box" style="padding-bottom: 0px">
+                    <div class="auth_box" style="padding-bottom: 0">
                             <input type="submit" class="auth_btn"  value="Sign In">
                     </div>
                 </form>
@@ -270,14 +262,22 @@
 </div>
 <div id="left_bar">
     <div id="left_menu">
-        <input type="text" id="elements_search" class="auth_input">
+        <div id="elements_search">
+            <input type="text" id="search_input" class="auth_input">
+            <div id="search_ico"></div>
+        </div>
+
 
         <ul class="elements" id="search_result">
             <span class="outer_element" id="shit"> Result </span>
 
         </ul>
         <ul id="red" class="treeview-red">
-            <li><span class="outer_element" id="shit"> Semantic elements </span>
+            <li>
+                <span class="outer_element" id="shit">
+                    <div class="el_arrow"></div>
+                    Semantic elements
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="article"> &lt;article&gt; </span>
@@ -320,7 +320,11 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Forms </span>
+            <li>
+                <span class="outer_element">
+                    <div class="el_arrow"></div>
+                    Forms
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="form"> Form </span>
@@ -336,7 +340,11 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Tables </span>
+            <li>
+                <span class="outer_element">
+                    <div class="el_arrow"></div>
+                    Tables
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="table"> Table </span>
@@ -352,7 +360,12 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Block elements </span>
+            <li>
+
+                <span class="outer_element">
+                    <div class="el_arrow"></div>
+                    Block elements
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="div"> Div </span>
@@ -374,7 +387,11 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Lists </span>
+            <li>
+                <span class="outer_element">
+                    <div class="el_arrow"></div>
+                    Lists
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="dl"> Dl </span>
@@ -396,7 +413,11 @@
                     </li>
                 </ul>
             </li>
-            <li><span class="outer_element"> Text formatting </span>
+            <li>
+                <span class="outer_element" style="border-bottom: 1px solid #768888;">
+                    <div class="el_arrow"></div>
+                    Text formatting
+                </span>
                 <ul class="elements">
                     <li>
                         <span class="inner_element" id="span"> Span </span>
@@ -449,24 +470,45 @@
 <div id="changes_menu" title="Changes menu">
 </div>
 
-<div id="source_code_wrapper">
 
-</div>
+<div id="source_code_wrapper"></div>
 <div id="source_code_panel">
+    <div id="source_code_control">
+        <div class="source_icon" id="source_switch" onclick="source_switchTheme()">
+
+        </div>
+        <div class="source_icon" id="source_vsplit" onclick="source_vSplit()">
+
+        </div>
+        <div class="source_icon" id="source_hsplit" onclick="source_hSplit()">
+
+        </div>
+        <div class="source_icon" id="source_comment" onclick="source_comment()">
+
+        </div>
+        <div class="source_icon" id="source_uncomment" onclick="source_uncomment()">
+
+        </div>
+        <div class="source_icon" id="source_undo" onclick="source_undo()">
+
+        </div>
+        <div class="source_icon" id="source_repeat" onclick="source_repeat()">
+
+        </div>
+        <div class="out_btn source_icon" id="discard_changes" style="margin-left: 10px;" onclick="showSourceCode()">
+            Close
+        </div>
+        <div class="out_btn source_icon" id="save_changes" onclick="closeWithChanges()">
+            Save
+        </div>
+    </div>
     <div id="source_code_html" class="source_code_block">
 
     </div>
     <div id="source_code_css" class="source_code_block">
 
     </div>
-    <div id="source_code_btns">
-        <div class="out_btn" id="save_changes" onclick="closeWithChanges()">
-            Save
-        </div>
-        <div class="out_btn" id="discard_changes" style="margin-left: 10px;" onclick="showSourceCode()">
-            Close
-        </div>
-    </div>
+
 </div>
 
 </body>

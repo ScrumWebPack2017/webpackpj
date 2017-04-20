@@ -1,3 +1,64 @@
+var dark = false;
+var vSplit = true;
+
+function source_switchTheme() {
+    if (dark) {
+        editorHTML.setTheme("ace/theme/chrome");
+        editorCSS.setTheme("ace/theme/chrome");
+        $('#source_code_panel').css({
+            background: '#eaeef1'
+        });
+        $('.out_btn').css('color', 'black');
+        $('#source_switch').css('backgroundImage', 'url("images/code_editor/switch_light.jpg")');
+        $('#source_vsplit').css('backgroundImage', 'url("images/code_editor/vSplit_light.jpg")');
+        $('#source_hsplit').css('backgroundImage', 'url("images/code_editor/hSplit_light.jpg")');
+        $('#source_comment').css('backgroundImage', 'url("images/code_editor/comment_light.jpg")');
+        $('#source_uncomment').css('backgroundImage', 'url("images/code_editor/uncomment_light.jpg")');
+        $('#source_undo').css('backgroundImage', 'url("images/code_editor/undo_light.jpg")');
+        $('#source_repeat').css('backgroundImage', 'url("images/code_editor/repeat_light.jpg")');
+        dark = false;
+    } else {
+        editorHTML.setTheme("ace/theme/monokai");
+        editorCSS.setTheme("ace/theme/monokai");
+        $('#source_code_panel').css({
+            background: '#1f272a'
+        });
+        $('.out_btn').css('color', 'white');
+        $('#source_switch').css('backgroundImage', 'url("images/code_editor/switch_dark.jpg")');
+        $('#source_vsplit').css('backgroundImage', 'url("images/code_editor/vSplit_dark.jpg")');
+        $('#source_hsplit').css('backgroundImage', 'url("images/code_editor/hSplit_dark.jpg")');
+        $('#source_comment').css('backgroundImage', 'url("images/code_editor/comment_dark.jpg")');
+        $('#source_uncomment').css('backgroundImage', 'url("images/code_editor/uncomment_dark.jpg")');
+        $('#source_undo').css('backgroundImage', 'url("images/code_editor/undo_dark.jpg")');
+        $('#source_repeat').css('backgroundImage', 'url("images/code_editor/repeat_dark.jpg")');
+        dark = true;
+    }
+}
+
+function source_vSplit() {
+
+}
+
+function source_hSplit() {
+
+}
+
+function source_comment() {
+
+}
+
+function source_uncomment() {
+
+}
+
+function source_undo() {
+
+}
+
+function source_repeat() {
+
+}
+
 function elementPreProperties(type) {
     var e = {
         id: "",
@@ -235,7 +296,6 @@ function generateElement(element, point) {
     });
 }
 
-
 function getRandomColorAndSize(element) {
     var r = getRandomInt(0, 255);
     var g = getRandomInt(0, 255);
@@ -247,7 +307,6 @@ function getRandomColorAndSize(element) {
     //element.width = widthheight + "px";
     //element.height = widthheight + "px";
 }
-
 
 function propertyValidation(type, field, focused) {
 

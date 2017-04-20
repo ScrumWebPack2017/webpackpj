@@ -16,7 +16,7 @@
     margin: 50px auto;
     display: none;
     z-index: 999999;
-    background: #fff;
+    background: #eaeef1;
     position: fixed;
     left: 0;
     right: 0;
@@ -34,27 +34,86 @@
 
 }
 #source_code_css {
-    border-left: 2px solid white;
+    margin-left: 2px;
 }
 
-#source_code_btns {
-    float: right;
+#source_code_control {
+    height: 30px;
+    width: inherit;
     z-index: 1000000;
+    margin-bottom: 2px;
+
+}
+
+.source_icon {
+    float: left;
+    position: relative;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-right: 2px;
 
 }
 
 .out_btn {
-    position: relative;
-    float: left;
+    float: right;
     width: 80px;
     height: 22px;
     padding: 2px 0 6px 0;
     font-size: 22px;
     text-align: center;
-
     cursor: pointer;
-    border: 1px solid black;
-    border-top: none;
-    background-color: #ebebeb;
+    font-family: 'GothaProMed';
+}
+
+
+
+
+#source_switch {
+    width: 45px;
+    height: 30px;
+    background: url('../images/code_editor/switch_light.jpg');
+    background-size: cover;
+}
+
+#source_vsplit {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/vSplit_light.jpg');
+    background-size: cover;
+}
+
+#source_hsplit {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/hSplit_light.jpg');
+    background-size: cover;
+}
+
+#source_comment {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/comment_light.jpg');
+    background-size: cover;
+}
+
+#source_uncomment {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/uncomment_light.jpg');
+    background-size: cover;
+}
+
+#source_undo {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/undo_light.jpg');
+    background-size: cover;
+}
+
+#source_repeat {
+    width: 30px;
+    height: 30px;
+    background: url('../images/code_editor/repeat_light.jpg');
+    background-size: cover;
 }
 

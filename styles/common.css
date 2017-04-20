@@ -2,25 +2,26 @@
     font-family: 'CaviarDreams';
     src: url('../fonts/CaviarDreams.ttf');
 }
-
-.property_input {
-    margin: 0;
-    padding: 0;
-    border: 1px solid #837565;
-    text-rendering: auto;
-    color: initial;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
+@font-face {
+    font-family: 'GothaProLig';
+    src: url('../fonts/GothaProLig.otf');
 }
+@font-face {
+    font-family: 'GothaProMed';
+    src: url('../fonts/GothaProMed.otf');
+}
+@font-face {
+    font-family: 'GothaProReg';
+    src: url('../fonts/GothaProReg.otf');
+}
+
+
 
 body {
     margin: 0;
-    font-family: "CaviarDreams";
+    font-family: 'GothaProLig';
+
+
 }
 
 ul li {
@@ -46,6 +47,7 @@ header {
     position: fixed;
     z-index: 9999;
     background-color: lightblue;
+    border-bottom: 1px solid #9ccfd0;
 }
 
 .header_elements {
@@ -54,25 +56,24 @@ header {
 }
 
 #user_block {
-    width: 200px;
-    height: 180px;
-    background-color: #e6e6e6;
+    width: 202.5px;
+    height: 184px;
+    background-color: #87969b;
     padding: 8px;
-    border: 2px solid #547898;
+    border-left: 1px solid #9ccfd0;
 }
 
 #logo {
-    width: 220px;
+    width: 219px;
     height: 100%;
-    background: url("../images/logo4.jpg");
+    background: url("../images/logo5.jpg");
+    border-right: 1px solid #9ccfd0;
     background-size: cover;
 }
 
 #top_menu {
-    height: 196px;
-    background: linear-gradient(#fefefd, #f0e8d5);
-    border-bottom: 2px solid #547898;
-    border-top: 2px solid #547898;
+    height: 199px;
+    background: #b4d7bf;
 }
 
 #header_menu_wrap {
@@ -82,13 +83,16 @@ header {
 }
 
 #status_line {
-    height: 20px;
-    border-top: 1px solid #837565;
+    height: 21px;
+    background: #678375;
     padding: 4px 10px 4px 10px;
+    color: white;
+    font-family: 'GothaProMed';
 }
 
 #properties {
-    height: 124px;
+    height: 143px;
+    color: #678375;
 }
 
 .property_list {
@@ -102,19 +106,34 @@ header {
 .property {
     position: relative;
     float: left;
-    height: 22px;
+    height: 28px;
     margin: 3px 10px;
     padding: 0 10px;
+}
+
+.property_input {
+    margin: 0;
+    padding: 0 3px;
+    border: 1px solid #678375;
+    text-rendering: auto;
+    color: #678375;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    height: 22px;
+    font-size: 18px;
 }
 
 .property_label,
 .property_label {
     position: relative;
     float: left;
+    font-size: 18px;
     margin: 0 0 0 0;
-}
-
-.property_label {
     padding-top: 2px;
 }
 
@@ -172,48 +191,40 @@ header {
 .status_input {
     box-shadow: inset 1px 1px 5px 0 #eee;
     box-sizing: border-box;
-    padding: 0;
-    border-radius: 3px;
-    border: 1px solid #e7e7e7;
+    padding: 0 3px;
     width: 45px;
+    border: 1px solid #678375;
     margin: 0;
-    height: 22px;
+    height: 23px;
     font-size: 18px;
-    font-family: "CaviarDreams";
 }
 
 #header_menu_tabs {
-    height: 31px;
-    background: linear-gradient(#dbc9b3, #c9ae91);
-    border-bottom: 1px solid #837565;
-    padding: 10px 10px 0 10px;
+    height: 22px;
+    background: #2a4852;
+    padding: 2px 10px 4px 10px;
 }
 
 .menu_tab {
     position: relative;
     float: left;
-    height: 14px;
+    height: 16px;
     margin: 0 4px;
     text-align: center;
     font-size: 16px;
-    padding: 8px 0 8px 0;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    background-color: #ffffff;
-    border: 1px solid #837565;
-    border-bottom: none;
+    padding: 3px 0 4px 0;
+    border-right: 1px solid #304e58;
     cursor: pointer;
+    color: #a0a295;
+    font-family: 'GothaProMed';
 }
 
 .selected_tab {
-    background: linear-gradient(#f2ebda, #fefefd);
-    border-bottom: none;
-    height: 15px;
+    color: white;
 }
 
 #source_code_btn {
-    background: linear-gradient(#dfc9b1, #f4e7d9);
-    color: black;
+    color: white;
 }
 
 #workplace {
@@ -226,11 +237,11 @@ header {
 #left_bar {
     position: fixed;
     z-index: 100000;
-    top: 200px;
+    top: 202px;
     left: 0;
-    width: 218px;
-    background: linear-gradient(#fefefd, #f0e8d5);
-    border-right: 2px solid #547898;
+    width: 219px;
+    background: #2a4852;
+    border-right: 1px solid #9ccfd0;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -243,7 +254,6 @@ header {
     cursor: pointer;
     background: url(../images/arrLeft.png);
     background-size: cover;
-    font-family: "Century Gothic";
 }
 
 #left_menu {
@@ -259,19 +269,20 @@ header {
     padding: 0 0 8px 0;
     width: 200px;
     text-align: center;
+    font-family: "GothaProReg";
 }
 
 .auth_input {
     box-shadow: inset 1px 1px 5px 0 #eee;
     box-sizing: border-box;
-    padding: 0;
-    border-radius: 3px;
-    border: 1px solid #e7e7e7;
+    border: 0;
+    border-radius: 1px;
+    padding: 0 5px;
     width: 200px;
     margin: 0;
     height: 30px;
     font-size: 18px;
-    font-family: "CaviarDreams";
+    font-family: "GothaProLig";
 }
 
 #error_lbl {
@@ -280,26 +291,28 @@ header {
     margin: auto;
     color: red;
     text-align: center;
+    font-family: "GothaProLig";
 }
 
 .auth_btn {
-    box-shadow: inset 1px 1px 5px 0 #eee;
     font-size: 18px;
-    border-radius: 4px;
-    border: 1px solid white;
+    border: 1px solid #87969b;
+    border-radius: 1px;
     width: 100%;
     height: 28px;
-    background: #99d9ea;
-    color: #000000;
-    font-family: "CaviarDreams";
+    background: #98cbcc;
+    color: white;
+    font-family: "GothaProMed";
+
 }
 
 #reg_btn {
-    background: #5d89ae;
+    background: #7c9fbd;
     width: 100%;
+    border-radius: 1px;
+    border: 1px solid #87969b;
     margin-top: 8px;
     color: white;
-    border: 1px solid #ffffff;
     font-size: 18px;
     height: 28px;
 }
@@ -344,20 +357,55 @@ header {
 
 .inner_element {
     padding-left: 30px;
+    color: #768888;
+}
+
+.el_arrow {
+    position: relative;
+    float: left;
+    background: url('../images/el_arrow1.jpg');
+    margin-top: 0;
+    width: 18px;
+    height: 18px;
+    background-size: cover;
 }
 
 .outer_element {
     display: inline-block;
-    width: 88%;
-    background: -webkit-linear-gradient(left, rgba(250, 248, 241, 0) 0%, rgba(207, 183, 156, 1) 49%, rgba(250, 248, 241, 0) 100%);
-    margin: 5px 0 5px 0;
-    padding: 7px 0 7px 25px;
+    width: 100%;
+    background: transparent;
+    padding: 10px 0 10px 15px;
+    color: #768888;
+    font-family: 'GothaProMed';
+    font-size: 16px;
+    border: 1px solid #768888;
+    border-right: none;
+    border-bottom: none;
+}
 
-    border-top-style: solid;
-    border-right-style: none;
-    border-bottom-style: solid;
-    border-left-style: none;
-    border-width: 1px;
+.last {
+    padding-bottom: 8px;
+}
+
+#search_ico {
+    position: relative;
+    float: left;
+    height: inherit;
+    width: 32px;
+    border-left: 1px solid #5b5b5b;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    background: url('../images/search_ico.jpg');
+    background-size: cover;
+}
+
+#search_input {
+    position: relative;
+    float: left;
+    width: 152px;
+    height: inherit;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
 }
 
 #elements_search {
