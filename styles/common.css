@@ -82,6 +82,155 @@ header {
     visibility: visible;
 }
 
+#vertical_context_menu {
+    width: 39px;
+    height: 189px;
+    position: absolute;
+    background: #b4d7bf;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    border: 1px solid #2a4852;
+    z-index: 10000;
+}
+
+#layout_win {
+    height: 189px;
+    width: 300px;
+    position: absolute;
+    background: #b4d7bf;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    border: 1px solid #2a4852;
+    z-index: 10000;
+}
+
+#color_win {
+    height: 189px;
+    width: 39px;
+    position: absolute;
+    background: #b4d7bf;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    border: 1px solid #2a4852;
+    z-index: 10000;
+}
+
+.l_column {
+    width: 95px;
+    height: 189px;
+    float: left;
+    margin-left: 5px;
+}
+
+.r_column {
+    width: 200px;
+    height: 189px;
+    float: left;
+}
+
+.l_column .column_label {
+     height: 25px;
+     width: 91px;
+     margin: 10px 2px;
+     font-size: 15pt;
+     color: #2a4852;
+}
+
+#full_shad {
+    background: #2a4852;
+}
+
+#grad_shad {
+    background: -moz-linear-gradient(left, rgba(42,72,82,1) 0%, rgba(42,72,82,1) 50%, rgba(42,72,82,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(42,72,82,1) 0%,rgba(42,72,82,1) 50%,rgba(42,72,82,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(42,72,82,1) 0%,rgba(42,72,82,1) 50%,rgba(42,72,82,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a4852', endColorstr='#002a4852',GradientType=1 );
+}
+
+#no_shad {
+    background: url('../images/aaaacrosss.png') no-repeat;
+    background-size: 100% 100%;
+}
+
+.r_column .column_label {
+    height: 25px;
+    width: 196px;
+    margin: 10px 2px;
+    font-size: 15pt;
+    color: #2a4852;
+}
+
+.r_column .slide {
+    height: 15px;
+    width: 160px;
+    margin: 17px 20px;
+}
+
+.r_column .column_label .shadow_types {
+    height: 25px;
+    width: 60px;
+    float: left;
+    margin-left: 1px;
+    border: 1px solid #2a4852;
+}
+
+
+#vertical_context_menu .vertical_inner_icon {
+    width: 35px;
+    height: 35px;
+    margin: 2px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+#i_i_1 {
+    background: url('../images/menu/to_standard_size_icon.png') no-repeat;
+}
+
+#i_i_1:hover {
+    background: #2a4852 url('../images/menu/to_standard_size_icon1.png') no-repeat;
+    background-size: cover;
+}
+
+#i_i_2 {
+    background: url('../images/menu/shadow_icon.png') no-repeat;
+}
+
+#i_i_2:hover {
+    background: #2a4852 url('../images/menu/shadow_icon1.png') no-repeat;
+    background-size: cover;
+}
+
+#i_i_3 {
+    background: url('../images/menu/color_icon.png') no-repeat;
+}
+
+#i_i_3:hover {
+    background: #2a4852 url('../images/menu/color_icon1.png') no-repeat;
+    background-size: cover;
+}
+
+#i_i_4 {
+    background: url('../images/menu/border_icon.png') no-repeat;
+}
+
+#i_i_4:hover {
+    background: #2a4852 url('../images/menu/border_icon1.png') no-repeat;
+    background-size: cover;
+}
+
+#i_i_5 {
+    background: url('../images/menu/font_icon.png') no-repeat;
+}
+
+#i_i_5:hover {
+    background: #2a4852 url('../images/menu/font_icon1.png') no-repeat;
+    background-size: cover;
+}
+
 #status_line {
     height: 21px;
     background: #678375;
@@ -139,6 +288,7 @@ header {
 
 #changes_menu {
     max-height: 300px;
+    background: #b4d7bf;
 }
 
 #changes_menu label {
@@ -182,10 +332,15 @@ header {
     visibility: hidden;
     z-index: 1500;
     position: absolute;
+    border: 1px solid #2a4852;
+}
+
+#menu_tools ul {
+    border: 1px solid #2a4852;
 }
 
 #menu_tools li {
-    background: #eedcc6;
+    background: #b4d7bf;
 }
 
 .status_input {

@@ -194,21 +194,31 @@ function generateAgain(element, css) {
             focusedId = element.id;
             fillPropertiesTable(focusedElement);
             printStatus(element.id);
+            $("#vertical_context_menu").position({
+                my: 'left+5 top',
+                at: 'right top',
+                of: '#' + element.id,
+                collision: 'flip'
+            });
+            if(focusedId != element.id && focusedId != null) {
+                $("#vertical_context_menu").css({visibility: 'visible'});
+            }
         }).resizable({
             // be careful!
             containment: element.parent,
-            // !!!
+            minWidth: 25,
+            minHeight: 25,
             handles: 'all',
             resize: function(event, ui) {
-
+                $("#vertical_context_menu").css({visibility: 'hidden'});
                 $("#" + this.id).trigger("click");
                 var ch = preventAxis(event, ui, this);
                 if (ch) {
                     $(this).resizable('option', 'minWidth', $(this).width());
                     $(this).resizable('option', 'minHeight', $(this).height());
                 } else {
-                    $(this).resizable('option', 'minWidth', '');
-                    $(this).resizable('option', 'minHeight', '');
+                    $(this).resizable('option', 'minWidth', 25);
+                    $(this).resizable('option', 'minHeight', 25);
                     var parent_id = $("#" + this.id).parent().attr("id");
                     if (parent_id != "workplace") {
                         //console.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
@@ -230,6 +240,7 @@ function generateAgain(element, css) {
             stop: function(event, ui) {
                 createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
                 setCur(1);
+                $("#vertical_context_menu").css({visibility: 'visible'});
             }
         }).droppable({
             over: function(event, ui) {
@@ -264,6 +275,7 @@ function generateAgain(element, css) {
 
                 }
                 clearOutlines(this);
+                $(ui.draggable).trigger('click');
             }
         }).draggable({
             cancel: null,
@@ -337,6 +349,8 @@ function generateAgain(element, css) {
         $(element.parent).trigger('drop', $("#" + element.id));
     }
 
+    $("#" + element.id).trigger('click');
+
 }
 
 function showChangesWindow() {
@@ -357,7 +371,7 @@ function showChangesWindow() {
 }
 
 function preventAxis(event, ui, temp) {
-    var count2 = $(temp).children().length;
+    var count2 = $(temp).children('.work_elements').length;
     if (count2 > 0) {
         var dir = $(ui.element).data('ui-resizable').axis;
         switch (dir) {
@@ -382,7 +396,9 @@ function checkResize(temp) {
         var h = $(this).height();
         var x = $(this).position().left;
         var y = $(this).position().top;
-        checker = pos(temp, w, h, x, y);
+        if(checker == false) {
+            checker = pos(temp, w, h, x, y);
+        }
         if (checker) return false;
     });
     return checker;
@@ -405,4 +421,12 @@ function pos(temp, w, h, x, y) {
         }
     }
     return false;
+}
+
+function showWin(id) {
+    if($("#" + id).css("visibility") == "hidden") {
+        $("#" + id).css({visibility: 'visible'});
+    } else {
+        $("#" + id).css({visibility: 'hidden'});
+    }
 }

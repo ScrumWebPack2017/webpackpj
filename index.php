@@ -470,6 +470,40 @@
 <div id="changes_menu" title="Changes menu">
 </div>
 
+<div id="vertical_context_menu">
+    <div class="vertical_inner_icon" id="i_i_1"></div>
+    <div onclick="showWin('layout_win')" class="vertical_inner_icon" id="i_i_2"></div>
+    <div onclick="showWin('color_win')" class="vertical_inner_icon" id="i_i_3"></div>
+    <div class="vertical_inner_icon" id="i_i_4"></div>
+    <div class="vertical_inner_icon" id="i_i_5"></div>
+</div>
+<div class="near_block" id="layout_win">
+    <div class="l_column">
+        <div class="column_label">Color:</div>
+        <div class="column_label">Size:</div>
+        <div class="column_label">X-Shift:</div>
+        <div class="column_label">Y-Shift:</div>
+        <div class="column_label">Blur:</div>
+    </div>
+    <div class="r_column">
+        <div class="column_label colors_in">
+            <div class="shadow_types" id="full_shad">
+            </div>
+            <div class="shadow_types" id="grad_shad">
+            </div>
+            <div class="shadow_types" id="no_shad">
+            </div>
+        </div>
+        <div class="column_label slide"></div>
+        <div class="column_label slide"></div>
+        <div class="column_label slide"></div>
+        <div class="column_label slide"></div>
+    </div>
+</div>
+<div class="near_block" id="color_win">
+
+</div>
+
 
 <div id="source_code_wrapper"></div>
 <div id="source_code_panel">
