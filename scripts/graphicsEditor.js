@@ -520,9 +520,11 @@ function generateElement(element, point, tt) {
                 //$("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
                 createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
                 ++cursor;
+                $("#" + ui.draggable.prop('id')).trigger('click');
             } else {
 
             }
+
             clearOutlines(this);
         }
     }).draggable({

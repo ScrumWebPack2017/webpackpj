@@ -108,7 +108,7 @@ header {
 
 #color_win {
     height: 189px;
-    width: 39px;
+    width: 77px;
     position: absolute;
     background: #b4d7bf;
     top: 0;
@@ -140,19 +140,28 @@ header {
 }
 
 #full_shad {
-    background: #2a4852;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-top: -5px;
+    cursor: pointer;
 }
 
 #grad_shad {
-    background: -moz-linear-gradient(left, rgba(42,72,82,1) 0%, rgba(42,72,82,1) 50%, rgba(42,72,82,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgba(42,72,82,1) 0%,rgba(42,72,82,1) 50%,rgba(42,72,82,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgba(42,72,82,1) 0%,rgba(42,72,82,1) 50%,rgba(42,72,82,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2a4852', endColorstr='#002a4852',GradientType=1 );
+    text-align: center;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-top: -5px;
+    cursor: pointer;
 }
 
 #no_shad {
-    background: url('../images/aaaacrosss.png') no-repeat;
-    background-size: 100% 100%;
+    text-align: center;
+    font-size: 12px;
+    padding-top: 10px;
+    margin-top: -5px;
+    cursor: pointer;
+    border: 1px solid darkorange; !important;
 }
 
 .r_column .column_label {
@@ -184,6 +193,23 @@ header {
     margin: 2px;
     background-size: cover;
     cursor: pointer;
+}
+
+#color_win .vertical_inner_icon {
+    width: 28px;
+    height: 28px;
+    margin: 4px;
+    cursor: pointer;
+    border: 1px solid #2a4852;
+    float: left;
+    font-size: 12px;
+    text-align: center;
+}
+
+#color_win .vertical_inner_icon input {
+    width: 22px;
+    height: 24px;
+    float: left;
 }
 
 #i_i_1 {

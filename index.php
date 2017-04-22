@@ -488,10 +488,13 @@
     <div class="r_column">
         <div class="column_label colors_in">
             <div class="shadow_types" id="full_shad">
+                "outside"
             </div>
             <div class="shadow_types" id="grad_shad">
+                "inside"
             </div>
             <div class="shadow_types" id="no_shad">
+                "none"
             </div>
         </div>
         <div class="column_label slide"></div>
@@ -501,7 +504,18 @@
     </div>
 </div>
 <div class="near_block" id="color_win">
-
+    <div class="vertical_inner_icon" style="padding-top: 7px; height: 21px; !important;">T/P</div>
+    <div class="vertical_inner_icon" style="background: blue;"></div>
+    <div class="vertical_inner_icon" style="background: orange;"></div>
+    <div class="vertical_inner_icon" style="background: darkcyan;"></div>
+    <div class="vertical_inner_icon" style="background: pink;"></div>
+    <div class="vertical_inner_icon" style="background: darkgreen;"></div>
+    <div class="vertical_inner_icon" style="background: mediumpurple;"></div>
+    <div class="vertical_inner_icon" style="background: saddlebrown;"></div>
+    <div class="vertical_inner_icon" style="background: yellow"></div>
+    <div class="vertical_inner_icon">
+        <input type="color">
+    </div>
 </div>
 
 
