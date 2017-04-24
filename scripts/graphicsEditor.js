@@ -164,6 +164,8 @@ $(document).ready(function() {
 
     $('.slide').slider();
 
+    $(".border_types select").selectmenu();
+
     $(document).keydown(function(event) {
         if (allowkeys != false) {
             if (event.which == 68 && event.ctrlKey) {
@@ -186,6 +188,7 @@ $(document).ready(function() {
             clearStatus();
             clearproperty();
             $("#vertical_context_menu").css({visibility: "hidden"});
+            $(".near_block").css({visibility:'hidden'});
             $("#delete_list").parent().addClass('ui-state-disabled');
             $("#copy_list").parent().addClass('ui-state-disabled');
             $("#cut_list").parent().addClass('ui-state-disabled');
@@ -432,18 +435,14 @@ function generateElement(element, point, tt) {
             of: '#' + identifier,
             collision: 'flip flip'
         });
-        $("#layout_win").position({
+
+        $(".near_block").position({
             my: 'left+49 top',
             at: 'right top',
             of: '#' + identifier,
             collision: 'flip flip'
         });
-        $("#color_win").position({
-            my: 'left+49 top',
-            at: 'right top',
-            of: '#' + identifier,
-            collision: 'flip flip'
-        });
+
         if(!busy) {
             $("#vertical_context_menu").css({visibility: 'visible'});
         }
@@ -456,8 +455,7 @@ function generateElement(element, point, tt) {
         resize: function(event, ui) {
             busy = true;
             $("#vertical_context_menu").css({visibility: 'hidden'});
-            $("#layout_win").css({visibility: 'hidden'});
-            $("#color_win").css({visibility: 'hidden'});
+            $(".near_block").css({visibility: 'hidden'});
             $("#" + this.id).trigger("click");
             var ch = false;
            // var ch = preventAxis(event, ui, this);
@@ -534,8 +532,7 @@ function generateElement(element, point, tt) {
         drag: function(event, ui) {
             busy = true;
             $("#vertical_context_menu").css({visibility: 'hidden'});
-            $("#layout_win").css({visibility: 'hidden'});
-            $("#color_win").css({visibility: 'hidden'});
+            $(".near_block").css({visibility: 'hidden'});
             $("#" + this.id).trigger("click");
             var parent_id = $("#" + this.id).parent().attr("id");
             if (parent_id != "workplace") {
@@ -705,8 +702,7 @@ function manipulate(eve) {
     if (eve.which == 46) {
         deleteFocused();
         $("#vertical_context_menu").css({visibility: "hidden"});
-        $("#layout_win").css({visibility: 'hidden'});
-        $("#color_win").css({visibility: 'hidden'});
+        $(".near_block").css({visibility: 'hidden'});
     } else {
         if (eve.which == 67 && eve.ctrlKey) {
             copy();
@@ -717,8 +713,7 @@ function manipulate(eve) {
                 if (eve.which == 88 && eve.ctrlKey) {
                     cut();
                     $("#vertical_context_menu").css({visibility: "hidden"});
-                    $("#layout_win").css({visibility: 'hidden'});
-                    $("#color_win").css({visibility: 'hidden'});
+                    $(".near_block").css({visibility: 'hidden'});
                 } else {
                     if (eve.which == 68 && eve.ctrlKey) {
                         detach_child();

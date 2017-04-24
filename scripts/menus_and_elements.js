@@ -111,6 +111,13 @@ function readChanges(thise, elems) {
         });
     }
 
+    $("#workplace").trigger('click');
+
+    if(allEl.length == 0) {
+        $("#vertical_context_menu").css({visibility: 'hidden'});
+        $(".near_block").css({visibility: 'hidden'});
+    }
+
 }
 
 function generateAgain(element, css) {
@@ -197,10 +204,16 @@ function generateAgain(element, css) {
             $("#vertical_context_menu").position({
                 my: 'left+5 top',
                 at: 'right top',
-                of: '#' + element.id,
-                collision: 'flip'
+                of: "#" + element.id,
+                collision: 'flip flip'
             });
-            if(focusedId != element.id && focusedId != null) {
+            $(".near_block").position({
+                my: 'left+49 top',
+                at: 'right top',
+                of: "#" + element.id,
+                collision: 'flip flip'
+            });
+            if(!busy) {
                 $("#vertical_context_menu").css({visibility: 'visible'});
             }
         }).resizable({
@@ -210,7 +223,9 @@ function generateAgain(element, css) {
             minHeight: 25,
             handles: 'all',
             resize: function(event, ui) {
+                busy = true;
                 $("#vertical_context_menu").css({visibility: 'hidden'});
+                $(".near_block").css({visibility: 'hidden'});
                 $("#" + this.id).trigger("click");
                 var ch = preventAxis(event, ui, this);
                 if (ch) {
@@ -238,6 +253,7 @@ function generateAgain(element, css) {
                 }
             },
             stop: function(event, ui) {
+                busy = false;
                 createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
                 setCur(1);
                 $("#vertical_context_menu").css({visibility: 'visible'});
@@ -282,7 +298,10 @@ function generateAgain(element, css) {
             containment: element.parent,
             scroll: true,
             drag: function(event, ui) {
+                busy = true;
                 $("#" + this.id).trigger("click");
+                $("#vertical_context_menu").css({visibility: 'hidden'});
+                $(".near_block").css({visibility: 'hidden'});
                 var parent_id = $("#" + this.id).parent().attr("id");
                 if (parent_id != "workplace") {
                     //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
@@ -291,8 +310,10 @@ function generateAgain(element, css) {
                 }
             },
             stop: function(event, ui) {
+                busy = false;
                 createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
                 setCur(1);
+                $("#vertical_context_menu").css({visibility: 'visible'});
             }
         });
     }
@@ -424,6 +445,9 @@ function pos(temp, w, h, x, y) {
 }
 
 function showWin(id) {
+    var vs = $("#" + id).css('visibility');
+    $(".near_block").css({visibility: 'hidden'});
+    $("#" + id).css({visibility:vs});
     if($("#" + id).css("visibility") == "hidden") {
         $("#" + id).css({visibility: 'visible'});
     } else {

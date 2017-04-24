@@ -474,8 +474,8 @@
     <div class="vertical_inner_icon" id="i_i_1"></div>
     <div onclick="showWin('layout_win')" class="vertical_inner_icon" id="i_i_2"></div>
     <div onclick="showWin('color_win')" class="vertical_inner_icon" id="i_i_3"></div>
-    <div class="vertical_inner_icon" id="i_i_4"></div>
-    <div class="vertical_inner_icon" id="i_i_5"></div>
+    <div onclick="showWin('border_win')" class="vertical_inner_icon" id="i_i_4"></div>
+    <div onclick="showWin('font_win')" class="vertical_inner_icon" id="i_i_5"></div>
 </div>
 <div class="near_block" id="layout_win">
     <div class="l_column">
@@ -504,7 +504,7 @@
     </div>
 </div>
 <div class="near_block" id="color_win">
-    <div class="vertical_inner_icon" style="padding-top: 7px; height: 21px; !important;">T/P</div>
+    <div class="vertical_inner_icon" style="padding-top: 7px; height: 21px; !important; background: url('images/transparent_graphic.png') no-repeat;"></div>
     <div class="vertical_inner_icon" style="background: blue;"></div>
     <div class="vertical_inner_icon" style="background: orange;"></div>
     <div class="vertical_inner_icon" style="background: darkcyan;"></div>
@@ -515,6 +515,104 @@
     <div class="vertical_inner_icon" style="background: yellow"></div>
     <div class="vertical_inner_icon">
         <input type="color">
+    </div>
+</div>
+<div class="near_block" id="border_win">
+    <div class="l_column">
+        <div class="column_label">Color:</div>
+        <div class="column_label">Width:</div>
+        <div class="column_label">Radius:</div>
+        <div class="column_label" style="margin-top: 25px">Style:</div>
+    </div>
+    <div class="r_column" style="margin-top: -5px">
+        <div class="column_label colors_in">
+            <div class="border_types" style="background: #2a4852;">
+            </div>
+            <div class="border_types" style="background: url('images/transparent_graphic.png') no-repeat;">
+            </div>
+        </div>
+        <div class="column_label slide"></div>
+        <div class="column_label slide"></div>
+        <div class="column_label colors_in" id="bord_list">
+            <div class="border_types" style="border: 2px dotted #2a4852;">
+                dotted
+            </div>
+            <div class="border_types" style="border: 2px dashed #2a4852;">
+                dashed
+            </div>
+            <div class="border_types" style="border: 2px solid #2a4852;">
+                solid
+            </div>
+            <div class="border_types" style="border: 2px double #2a4852;">
+                double
+            </div>
+            <div class="border_types" style="border: 2px groove #2a4852;">
+                groove
+            </div>
+            <div class="border_types" style="border: 2px ridge #2a4852;">
+                ridge
+            </div>
+            <div class="border_types" style="border: 2px inset #2a4852;">
+                inset
+            </div>
+            <div class="border_types" style="border: 2px outset #2a4852;">
+                outset
+            </div>
+        </div>
+    </div>
+</div>
+<div class="near_block" id="font_win">
+    <div class="l_column" style="height: 149px">
+        <div class="column_label">Color:</div>
+        <div class="column_label">Border:</div>
+        <div class="column_label">Font:</div>
+        <div class="column_label">Size:</div>
+    </div>
+    <div class="r_column" style="height: 149px">
+        <div class="column_label colors_in font_linear">
+            <div class="border_types" style="background: #2a4852;">
+            </div>
+        </div>
+        <div class="column_label colors_in font_linear">
+            <div class="border_types" style="background: #2a4852;">
+            </div>
+            <div class="border_types" style="background: url('images/transparent_graphic.png') no-repeat;">
+            </div>
+        </div>
+        <div class="column_label colors_in">
+                <select class="op_picker" style="width: 170px; height: 25px">
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                    <option></option>
+                </select>
+        </div>
+        <div class="column_label colors_in">
+                <select class="op_picker" style="width: 170px; height: 25px">
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>12</option>
+                    <option>14</option>
+                    <option>18</option>
+                    <option>24</option>
+                    <option>28</option>
+                    <option>32</option>
+                </select>
+        </div>
+    </div>
+    <div class="formatting">
+        <div class="iconer" style="background: url('images/menu/font_icon_1.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" style="background: url('images/menu/a.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" style="background: url('images/menu/font_icon_3.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" style="background: url('images/menu/font_icon_4.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" style="background: url('images/menu/font_icon_5.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" style="background: url('images/menu/font_icon_6.png') no-repeat; background-size: 100% 100%;"></div>
     </div>
 </div>
 

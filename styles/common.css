@@ -95,6 +95,33 @@ header {
 }
 
 #layout_win {
+     height: 189px;
+     width: 300px;
+     position: absolute;
+     background: #b4d7bf;
+     top: 0;
+     left: 0;
+     visibility: hidden;
+     border: 1px solid #2a4852;
+     z-index: 10000;
+}
+
+.border_types {
+    width: 40px;
+    height: 20px;
+    float: left;
+    border: 1px solid #2a4852;
+    text-align: center;
+    font-size: 10px;
+    padding-top: 8px;
+    margin: 2px;
+}
+
+#bord_list {
+    margin-top: -8px;
+}
+
+#border_win {
     height: 189px;
     width: 300px;
     position: absolute;
@@ -105,6 +132,19 @@ header {
     border: 1px solid #2a4852;
     z-index: 10000;
 }
+
+#font_win {
+    height: 189px;
+    width: 300px;
+    position: absolute;
+    background: #b4d7bf;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    border: 1px solid #2a4852;
+    z-index: 10000;
+}
+
 
 #color_win {
     height: 189px;
@@ -263,6 +303,29 @@ header {
     padding: 4px 10px 4px 10px;
     color: white;
     font-family: 'GothaProMed';
+}
+
+.op_picker {
+    border: none;
+}
+
+.font_linear .border_types {
+    margin-top: -2px;
+    !important;
+}
+
+.formatting {
+    width: 300px;
+    height: 40px;
+    float: left;
+}
+
+.formatting .iconer {
+    width: 36px;
+    height: 36px;
+    margin: 2px 7px;
+    float: left;
+    background: red;
 }
 
 #properties {
