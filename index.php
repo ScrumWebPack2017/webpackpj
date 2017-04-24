@@ -292,31 +292,31 @@
                         <span class="inner_element" id="figcaption"> &lt;figcaption&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="figure"> Figure </span>
+                        <span class="inner_element" id="figure"> &lt;figure&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="footer"> Footer </span>
+                        <span class="inner_element" id="footer"> &lt;footer&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="header"> Header </span>
+                        <span class="inner_element" id="header"> &lt;header&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="main"> Main </span>
+                        <span class="inner_element" id="main"> &lt;main&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="mark"> Mark </span>
+                        <span class="inner_element" id="mark"> &lt;mark&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="nav"> Nav </span>
+                        <span class="inner_element" id="nav"> &lt;nav&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="section"> Section </span>
+                        <span class="inner_element" id="section"> &lt;section&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="summary"> Summary </span>
+                        <span class="inner_element" id="summary"> &lt;summary&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="time"> Time </span>
+                        <span class="inner_element" id="time"> &lt;time&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -327,16 +327,16 @@
                 </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="form"> Form </span>
+                        <span class="inner_element" id="form"> &lt;form&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="select"> Select </span>
+                        <span class="inner_element" id="select"> &lt;select&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="textarea"> Textarea </span>
+                        <span class="inner_element" id="textarea"> &lt;textarea&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="input"> Input </span>
+                        <span class="inner_element" id="input"> &lt;input&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -347,16 +347,16 @@
                 </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="table"> Table </span>
+                        <span class="inner_element" id="table"> &lt;table&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="tr"> Tr </span>
+                        <span class="inner_element" id="tr"> &lt;tr&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="td"> Td </span>
+                        <span class="inner_element" id="td"> &lt;td&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="th"> Th </span>
+                        <span class="inner_element" id="th"> &lt;th&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -368,22 +368,22 @@
                 </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="div"> Div </span>
+                        <span class="inner_element" id="div"> &lt;div&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="pre"> Pre </span>
+                        <span class="inner_element" id="pre"> &lt;pre&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="p"> P </span>
+                        <span class="inner_element" id="p"> &lt;p&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="hr"> Hr </span>
+                        <span class="inner_element" id="hr"> &lt;hr&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="blockquote"> Blockquote </span>
+                        <span class="inner_element" id="blockquote"> &lt;blockquote&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="h1"> H1 </span>
+                        <span class="inner_element" id="h1"> &lt;h1&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -394,22 +394,22 @@
                 </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="dl"> Dl </span>
+                        <span class="inner_element" id="dl"> &lt;dl&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="dt"> Dt </span>
+                        <span class="inner_element" id="dt"> &lt;dt&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="dd"> Dd </span>
+                        <span class="inner_element" id="dd"> &lt;dd&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="ol"> Ol </span>
+                        <span class="inner_element" id="ol"> &lt;ol&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="ul"> Ul </span>
+                        <span class="inner_element" id="ul"> &lt;ul&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="li"> Li </span>
+                        <span class="inner_element" id="li"> &lt;li&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -420,46 +420,46 @@
                 </span>
                 <ul class="elements">
                     <li>
-                        <span class="inner_element" id="span"> Span </span>
+                        <span class="inner_element" id="span"> &lt;span&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="br"> Br </span>
+                        <span class="inner_element" id="br"> &lt;br&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="a"> A </span>
+                        <span class="inner_element" id="a"> &lt;a&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="h1"> H1 </span>
+                        <span class="inner_element" id="h1"> &lt;h1&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="pre"> Pre </span>
+                        <span class="inner_element" id="pre"> &lt;pre&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="b"> B </span>
+                        <span class="inner_element" id="b"> &lt;b&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="i"> I </span>
+                        <span class="inner_element" id="i"> &lt;i&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="cite"> Cite </span>
+                        <span class="inner_element" id="cite"> &lt;cite&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="em"> Em </span>
+                        <span class="inner_element" id="em"> &lt;em&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="img"> Img </span>
+                        <span class="inner_element" id="img"> &lt;img&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="small"> Small </span>
+                        <span class="inner_element" id="small"> &lt;small&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="strong"> Strong </span>
+                        <span class="inner_element" id="strong"> &lt;strong&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="sub"> Sub </span>
+                        <span class="inner_element" id="sub"> &lt;sub&gt; </span>
                     </li>
                     <li>
-                        <span class="inner_element" id="sup"> Sup </span>
+                        <span class="inner_element" id="sup"> &lt;sup&gt; </span>
                     </li>
                 </ul>
             </li>
