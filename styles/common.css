@@ -43,7 +43,7 @@ ul li {
 
 header {
     height: 200px;
-    width: 100%;
+
     position: fixed;
     z-index: 9999;
     background-color: lightblue;
@@ -488,6 +488,7 @@ header {
     border-right: 1px solid #9ccfd0;
     overflow-y: scroll;
     overflow-x: hidden;
+    font-family: 'GothaProLig';
 }
 
 #left_btn {

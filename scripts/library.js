@@ -36,11 +36,24 @@ function source_switchTheme() {
 }
 
 function source_vSplit() {
+    if (!vSplit) {
+        $('#source_code_css, #source_code_html').css({
+            width: '447px',
+            height: '500px'
 
+        });
+        vSplit = true;
+    }
 }
 
 function source_hSplit() {
-
+    if (vSplit) {
+        $('#source_code_css, #source_code_html').css({
+            width: '890px',
+            height: '250px'
+        });
+        vSplit = false;
+    }
 }
 
 function source_comment() {
