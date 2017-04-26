@@ -21,6 +21,10 @@ var keys = {
 var changes = new Array(0);
 var cursor = 0;
 
+var borderWidth = 0;
+var borderColor = "#ffffff";
+var borderType = "solid";
+
 $(document).ready(function() {
     $(document).tooltip();
 
@@ -162,7 +166,18 @@ $(document).ready(function() {
         }
     });
 
-    $('.slide').slider();
+    $('.slide').slider({
+        change: function(event, ui) { borderWidthSlider(event, ui); },
+        slide: function(event, ui) { sliderDisplay(event, ui); }
+    });
+
+    $('#border_width').slider({
+        animate: 'slow',
+        min: 0,
+        max: 20,
+        change: function(event, ui) { borderWidthSlider(event, ui); },
+        slide: function(event, ui) { sliderDisplay(event, ui); }
+    });
 
     $(".border_types select").selectmenu();
 

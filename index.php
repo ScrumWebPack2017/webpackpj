@@ -477,6 +477,7 @@
     <div onclick="showWin('border_win')" class="vertical_inner_icon" id="i_i_4"></div>
     <div onclick="showWin('font_win')" class="vertical_inner_icon" id="i_i_5"></div>
 </div>
+
 <div class="near_block" id="layout_win">
     <div class="l_column">
         <div class="column_label">Color:</div>
@@ -503,20 +504,26 @@
         <div class="column_label slide"></div>
     </div>
 </div>
+
 <div class="near_block" id="color_win">
-    <div class="vertical_inner_icon" style="padding-top: 7px; height: 21px; !important; background: url('images/transparent_graphic.png') no-repeat;"></div>
-    <div class="vertical_inner_icon" style="background: blue;"></div>
-    <div class="vertical_inner_icon" style="background: orange;"></div>
-    <div class="vertical_inner_icon" style="background: darkcyan;"></div>
-    <div class="vertical_inner_icon" style="background: pink;"></div>
-    <div class="vertical_inner_icon" style="background: darkgreen;"></div>
-    <div class="vertical_inner_icon" style="background: mediumpurple;"></div>
-    <div class="vertical_inner_icon" style="background: saddlebrown;"></div>
-    <div class="vertical_inner_icon" style="background: yellow"></div>
+    <div class="vertical_inner_icon" onclick="colorTransparent()" style="padding-top: 7px; height: 21px; !important; background: url('images/transparent_graphic.png') no-repeat;"></div>
+    <div class="vertical_inner_icon color_item" style="background: blue;"></div>
+    <div class="vertical_inner_icon color_item" style="background: orange;"></div>
+    <div class="vertical_inner_icon color_item" style="background: darkcyan;"></div>
+    <div class="vertical_inner_icon color_item" style="background: pink;"></div>
+    <div class="vertical_inner_icon color_item" style="background: darkgreen;"></div>
+    <div class="vertical_inner_icon color_item" style="background: mediumpurple;"></div>
+    <div class="vertical_inner_icon color_item" style="background: saddlebrown;"></div>
+    <div class="vertical_inner_icon color_item" style="background: yellow"></div>
     <div class="vertical_inner_icon">
-        <input type="color">
+        <input type="color" id="color_changer" onchange="colorBgInput()">
     </div>
 </div>
+
+<div id="slider_display">
+
+</div>
+
 <div class="near_block" id="border_win">
     <div class="l_column">
         <div class="column_label">Color:</div>
@@ -526,13 +533,15 @@
     </div>
     <div class="r_column" style="margin-top: -5px">
         <div class="column_label colors_in">
-            <div class="border_types" style="background: #2a4852;">
+
+            <div class="border_types" style="background: #2a4852; padding: 0; height: 28px">
+                <input type="color" id="border_color_changer" onchange="colorBorderInput()" style="width: 34px; height: 24px; margin: 0;">
             </div>
-            <div class="border_types" style="background: url('images/transparent_graphic.png') no-repeat;">
-            </div>
+            <!-- <div class="border_types" style="background: url('images/transparent_graphic.png') no-repeat;">
+            </div> -->
         </div>
-        <div class="column_label slide"></div>
-        <div class="column_label slide"></div>
+        <div class="column_label slide" id="border_width"></div>
+        <div class="column_label slide" id="border_radius_input"></div>
         <div class="column_label colors_in" id="bord_list">
             <div class="border_types" style="border: 2px dotted #2a4852;">
                 dotted
@@ -561,6 +570,7 @@
         </div>
     </div>
 </div>
+
 <div class="near_block" id="font_win">
     <div class="l_column" style="height: 149px">
         <div class="column_label">Color:</div>
@@ -627,12 +637,6 @@
 
         </div>
         <div class="source_icon" id="source_hsplit" onclick="source_hSplit()">
-
-        </div>
-        <div class="source_icon" id="source_comment" onclick="source_comment()">
-
-        </div>
-        <div class="source_icon" id="source_uncomment" onclick="source_uncomment()">
 
         </div>
         <div class="source_icon" id="source_undo" onclick="source_undo()">

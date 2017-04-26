@@ -117,6 +117,19 @@ header {
     margin: 2px;
 }
 
+#slider_display {
+    position: fixed;
+    z-index: 9999999;
+    visibility: visible;
+    width: 20px;
+    height: 16px;
+    background: silver;
+    border-radius: 4px;
+    text-align: center;
+    padding: 2px 0 4px 0;
+    font-size: 16px;
+}
+
 #bord_list {
     margin-top: -8px;
 }
