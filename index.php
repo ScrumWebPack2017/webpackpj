@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
+    <script type="text/javascript" src="scripts/colResizable-1.6.js"></script>
     <title>Title</title>
 </head>
 
@@ -341,26 +342,6 @@
                 </ul>
             </li>
             <li>
-                <span class="outer_element">
-                    <div class="el_arrow"></div>
-                    Tables
-                </span>
-                <ul class="elements">
-                    <li>
-                        <span class="inner_element" id="table"> &lt;table&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="tr"> &lt;tr&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="td"> &lt;td&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="th"> &lt;th&gt; </span>
-                    </li>
-                </ul>
-            </li>
-            <li>
 
                 <span class="outer_element">
                     <div class="el_arrow"></div>
@@ -384,32 +365,6 @@
                     </li>
                     <li>
                         <span class="inner_element" id="h1"> &lt;h1&gt; </span>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <span class="outer_element">
-                    <div class="el_arrow"></div>
-                    Lists
-                </span>
-                <ul class="elements">
-                    <li>
-                        <span class="inner_element" id="dl"> &lt;dl&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="dt"> &lt;dt&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="dd"> &lt;dd&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="ol"> &lt;ol&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="ul"> &lt;ul&gt; </span>
-                    </li>
-                    <li>
-                        <span class="inner_element" id="li"> &lt;li&gt; </span>
                     </li>
                 </ul>
             </li>
@@ -476,6 +431,7 @@
     <div onclick="showWin('color_win')" class="vertical_inner_icon" id="i_i_3"></div>
     <div onclick="showWin('border_win')" class="vertical_inner_icon" id="i_i_4"></div>
     <div onclick="showWin('font_win')" class="vertical_inner_icon" id="i_i_5"></div>
+    <div onclick="showWin('table_win')" class="vertical_inner_icon" id="i_i_6" style="height: 0px;"></div>
 </div>
 
 <div class="near_block" id="layout_win">
@@ -499,17 +455,26 @@
 
 <div class="near_block" id="color_win">
     <div class="vertical_inner_icon" onclick="colorTransparent()" style="padding-top: 7px; height: 21px; !important; background: url('images/transparent_graphic.png') no-repeat;"></div>
-    <div class="vertical_inner_icon color_item" style="background: blue;"></div>
-    <div class="vertical_inner_icon color_item" style="background: orange;"></div>
-    <div class="vertical_inner_icon color_item" style="background: darkcyan;"></div>
-    <div class="vertical_inner_icon color_item" style="background: pink;"></div>
-    <div class="vertical_inner_icon color_item" style="background: darkgreen;"></div>
-    <div class="vertical_inner_icon color_item" style="background: mediumpurple;"></div>
-    <div class="vertical_inner_icon color_item" style="background: saddlebrown;"></div>
-    <div class="vertical_inner_icon color_item" style="background: yellow"></div>
+    <div class="vertical_inner_icon color_item" style="background: #FFFFFF;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #F9BD82;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #FF7BAC;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #7AC943;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #F0FF85;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #BDCCD4;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #97F2EB;"></div>
+    <div class="vertical_inner_icon color_item" style="background: #B3B3B3"></div>
     <div class="vertical_inner_icon">
         <input type="color" id="color_changer" onchange="colorBgInput()">
     </div>
+</div>
+
+<div class="near_block" id="table_win">
+    <div class="t_icon" onclick="createCol(focusedId, true, 'back')" style="background: url('images/2.png') no-repeat; background-size: 100% 100%;"></div>
+    <div class="t_icon" style="background: url('images/3.png') no-repeat; background-size: 100% 100%;"></div>
+    <div class="t_icon" style="background: url('images/4.png') no-repeat; background-size: 100% 100%;"></div>
+    <div class="t_icon" style="background: url('images/5.png') no-repeat; background-size: 100% 100%;"></div>
+    <div class="t_icon" style="background: url('images/6.png') no-repeat; background-size: 100% 100%;"></div>
+    <div class="t_icon" style="background: url('images/7.png') no-repeat; background-size: 100% 100%;"></div>
 </div>
 
 <div id="slider_display">

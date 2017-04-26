@@ -456,12 +456,22 @@ function generateElement(element, point, tt) {
             collision: 'flip flip'
         });
 
+        $("#vertical_context_menu").css({zIndex: $("#" + identifier).css('z-index')});
+
         $(".near_block").position({
             my: 'left+49 top',
             at: 'right top',
             of: '#' + identifier,
             collision: 'flip flip'
         });
+
+        $(".near_block").css({zIndex: $("#" + identifier).css('z-index')});
+
+        if(element.type == "table") {
+            $("#i_i_6").css({height: '35px'});
+        } else {
+            $("#i_i_6").css({height: '0px'});
+        }
 
         if(!busy) {
             $("#vertical_context_menu").css({visibility: 'visible'});
@@ -477,8 +487,7 @@ function generateElement(element, point, tt) {
             $("#vertical_context_menu").css({visibility: 'hidden'});
             $(".near_block").css({visibility: 'hidden'});
             $("#" + this.id).trigger("click");
-            var ch = false;
-           // var ch = preventAxis(event, ui, this);
+            var ch = preventAxis(event, ui, this);
             if (ch) {
                 $(this).resizable('option', 'minWidth', $(this).width());
                 $(this).resizable('option', 'minHeight', $(this).height());

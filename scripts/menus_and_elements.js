@@ -207,12 +207,18 @@ function generateAgain(element, css) {
                 of: "#" + element.id,
                 collision: 'flip flip'
             });
+
+            $("#vertical_context_menu").css({zIndex: $("#" + element.id).css('z-index')});
+
             $(".near_block").position({
                 my: 'left+49 top',
                 at: 'right top',
                 of: "#" + element.id,
                 collision: 'flip flip'
             });
+
+            $(".near_block").css({zIndex: $("#" + element.id).css('z-index')});
+
             if(!busy) {
                 $("#vertical_context_menu").css({visibility: 'visible'});
             }
@@ -454,3 +460,16 @@ function showWin(id) {
         $("#" + id).css({visibility: 'hidden'});
     }
 }
+
+jQuery.fn.appendAt = function( content, index ) {
+    this.each(function(i, item) {
+        var $content = $(content).clone();
+        if ( index === 0 ) {
+            $(item).prepend($content);
+        } else {
+            $content.insertAfter($(item).children().eq(index-1));
+        }
+    });
+    $(content).remove();
+    return this;
+};

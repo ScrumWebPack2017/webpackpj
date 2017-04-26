@@ -218,8 +218,8 @@ function elementPreProperties(type) {
         e.height = '23px';
         e.border = '1px solid black';
     } else if (type == 'table') {
-        e.width = '400px';
-        e.height = '400px';
+        e.width = '50px';
+        e.height = '150px';
     } else if (type == 'ul' || type == 'ol') {
         e.width = '250px';
         e.height = '150px';
