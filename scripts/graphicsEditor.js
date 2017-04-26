@@ -171,6 +171,11 @@ $(document).ready(function() {
         slide: function(event, ui) { sliderDisplay(event, ui); }
     });
 
+    $('.slide2').slider({
+        change: function(event, ui) { setBoxShadow(event, ui); },
+        slide: function(event, ui) { sliderDisplay(event, ui); }
+    });
+
     $('#border_width').slider({
         animate: 'slow',
         min: 0,

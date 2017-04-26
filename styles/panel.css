@@ -31,8 +31,9 @@
     width: 447px;
     height: 500px;
     border: 1px solid black;
-
+    font-style: normal;
 }
+
 #source_code_css {
     margin-left: 2px;
 }

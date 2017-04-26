@@ -1,5 +1,6 @@
 var dark = false;
 var vSplit = true;
+var shadow_col = '#000000';
 
 function colorBgInput() {
     focusedElement.css('background', $('#color_changer').val());
@@ -11,6 +12,51 @@ function colorTransparent() {
 
 function colorBorderInput() {
     focusedElement.css('borderColor', $('#border_color_changer').val());
+}
+
+function textAlignLeft() {
+    focusedElement.css('textAlign', 'left');
+}
+
+function textAlignCenter() {
+    focusedElement.css('textAlign', 'center');
+}
+
+function textAlignRight() {
+    focusedElement.css('textAlign', 'right');
+}
+
+function fontItalic() {
+    focusedElement.css('fontStyle', 'italic');
+}
+
+function fontBold() {
+    focusedElement.css('font-stretch', '800');
+}
+
+function fontSize() {
+    focusedElement.css('fontSize', $('#font_size_changer').val() + 'px');
+}
+
+function colorFontInput() {
+    focusedElement.css('color', $('#font_color_changer').val());
+}
+
+function fontFamilyChanger() {
+    focusedElement.css('fontFamily', $('#font_family_changer').val());
+}
+
+function shadowColorInput() {
+    shadow_col = $('#shadow_color_changer').val();
+    setBoxShadow();
+}
+
+function setBoxShadow() {
+    var str = $('#shadow_x').slider('option', 'value') + "px " + $('#shadow_y').slider('option', 'value') + "px " + $('#shadow_size').slider('option', 'value') + 'px ' + shadow_col;
+    focusedElement.css('boxShadow', str);
+    $('#slider_display').css({
+        visibility: 'hidden'
+    });
 }
 
 function sliderDisplay(event, ui) {

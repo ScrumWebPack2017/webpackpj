@@ -484,24 +484,16 @@
         <div class="column_label">Size:</div>
         <div class="column_label">X-Shift:</div>
         <div class="column_label">Y-Shift:</div>
-        <div class="column_label">Blur:</div>
     </div>
     <div class="r_column">
         <div class="column_label colors_in">
-            <div class="shadow_types" id="full_shad">
-                "outside"
-            </div>
-            <div class="shadow_types" id="grad_shad">
-                "inside"
-            </div>
-            <div class="shadow_types" id="no_shad">
-                "none"
+            <div class="border_types" style="background: #2a4852; padding: 0; height: 28px">
+                <input type="color" id="shadow_color_changer" onchange="shadowColorInput()" style="width: 34px; height: 24px; margin: 0;">
             </div>
         </div>
-        <div class="column_label slide"></div>
-        <div class="column_label slide"></div>
-        <div class="column_label slide"></div>
-        <div class="column_label slide"></div>
+        <div class="column_label slide slide2" id="shadow_size"></div>
+        <div class="column_label slide slide2" id="shadow_x"></div>
+        <div class="column_label slide slide2" id="shadow_y"></div>
     </div>
 </div>
 
@@ -574,36 +566,28 @@
 <div class="near_block" id="font_win">
     <div class="l_column" style="height: 149px">
         <div class="column_label">Color:</div>
-        <div class="column_label">Border:</div>
         <div class="column_label">Font:</div>
         <div class="column_label">Size:</div>
     </div>
     <div class="r_column" style="height: 149px">
         <div class="column_label colors_in font_linear">
-            <div class="border_types" style="background: #2a4852;">
-            </div>
-        </div>
-        <div class="column_label colors_in font_linear">
-            <div class="border_types" style="background: #2a4852;">
-            </div>
-            <div class="border_types" style="background: url('images/transparent_graphic.png') no-repeat;">
+            <div class="border_types" style="background: #2a4852; padding-top: 0; height: 28px">
+                <input type="color" id="font_color_changer" onchange="colorFontInput()" style="width: 34px; height: 24px; margin: 0;">
             </div>
         </div>
         <div class="column_label colors_in">
-                <select class="op_picker" style="width: 170px; height: 25px">
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
-                    <option></option>
+                <select class="op_picker" id="font_family_changer" onchange="fontFamilyChanger()" style="width: 170px; height: 25px">
+                    <option>Consolas</option>
+                    <option>Arial</option>
+                    <option>Cambria</option>
+                    <option>Tahoma</option>
+                    <option>sans-serif</option>
+                    <option>Verdana</option>
+                    <option>Calibri</option>
                 </select>
         </div>
         <div class="column_label colors_in">
-                <select class="op_picker" style="width: 170px; height: 25px">
+                <select class="op_picker" id="font_size_changer" onchange="fontSize()" style="width: 170px; height: 25px">
                     <option>8</option>
                     <option>9</option>
                     <option>10</option>
@@ -617,12 +601,11 @@
         </div>
     </div>
     <div class="formatting">
-        <div class="iconer" style="background: url('images/menu/font_icon_1.png') no-repeat; background-size: 100% 100%;"></div>
-        <div class="iconer" style="background: url('images/menu/a.png') no-repeat; background-size: 100% 100%;"></div>
-        <div class="iconer" style="background: url('images/menu/font_icon_3.png') no-repeat; background-size: 100% 100%;"></div>
-        <div class="iconer" style="background: url('images/menu/font_icon_4.png') no-repeat; background-size: 100% 100%;"></div>
-        <div class="iconer" style="background: url('images/menu/font_icon_5.png') no-repeat; background-size: 100% 100%;"></div>
-        <div class="iconer" style="background: url('images/menu/font_icon_6.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" onclick="textAlignLeft()" style="background: url('images/menu/font_icon_1.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" onclick="textAlignCenter()" style="background: url('images/menu/a.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" onclick="textAlignRight()" style="background: url('images/menu/font_icon_3.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" onclick="fontItalic()" style="background: url('images/menu/font_icon_5.png') no-repeat; background-size: 100% 100%;"></div>
+        <div class="iconer" onclick="fontBold()" style="background: url('images/menu/font_icon_6.png') no-repeat; background-size: 100% 100%;"></div>
     </div>
 </div>
 
