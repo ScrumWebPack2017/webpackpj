@@ -120,7 +120,19 @@ function source_vSplit() {
 
         });
         $('#source_code_css').css('margin', '0 0 0 2px');
-        vSplit = true;
+        vSplit = true
+        var css = editorCSS.getValue();
+        var html = editorHTML.getValue();
+        editorHTML = ace.edit("source_code_html");
+        editorCSS = ace.edit("source_code_css");
+        editorHTML.setTheme("ace/theme/chrome");
+        editorHTML.getSession().setMode("ace/mode/html");
+        editorCSS.setTheme("ace/theme/chrome");
+        editorCSS.getSession().setMode("ace/mode/css");
+        editorCSS.setValue(css);
+        editorHTML.setValue(html);
+        editorCSS.clearSelection();
+        editorHTML.clearSelection();
     }
 }
 
@@ -132,6 +144,18 @@ function source_hSplit() {
         });
         $('#source_code_css').css('margin', '2px 0 0 0');
         vSplit = false;
+        var css = editorCSS.getValue();
+        var html = editorHTML.getValue();
+        editorHTML = ace.edit("source_code_html");
+        editorCSS = ace.edit("source_code_css");
+        editorHTML.setTheme("ace/theme/chrome");
+        editorHTML.getSession().setMode("ace/mode/html");
+        editorCSS.setTheme("ace/theme/chrome");
+        editorCSS.getSession().setMode("ace/mode/css");
+        editorCSS.setValue(css);
+        editorHTML.setValue(html);
+        editorCSS.clearSelection();
+        editorHTML.clearSelection();
     }
 }
 
