@@ -113,9 +113,13 @@ function readChanges(thise, elems) {
 
     $("#workplace").trigger('click');
 
-    if(allEl.length == 0) {
-        $("#vertical_context_menu").css({visibility: 'hidden'});
-        $(".near_block").css({visibility: 'hidden'});
+    if (allEl.length == 0) {
+        $("#vertical_context_menu").css({
+            visibility: 'hidden'
+        });
+        $(".near_block").css({
+            visibility: 'hidden'
+        });
     }
 
 }
@@ -208,7 +212,9 @@ function generateAgain(element, css) {
                 collision: 'flip flip'
             });
 
-            $("#vertical_context_menu").css({zIndex: $("#" + element.id).css('z-index')});
+            $("#vertical_context_menu").css({
+                zIndex: $("#" + element.id).css('z-index')
+            });
 
             $(".near_block").position({
                 my: 'left+49 top',
@@ -217,10 +223,14 @@ function generateAgain(element, css) {
                 collision: 'flip flip'
             });
 
-            $(".near_block").css({zIndex: $("#" + element.id).css('z-index')});
+            $(".near_block").css({
+                zIndex: $("#" + element.id).css('z-index')
+            });
 
-            if(!busy) {
-                $("#vertical_context_menu").css({visibility: 'visible'});
+            if (!busy) {
+                $("#vertical_context_menu").css({
+                    visibility: 'visible'
+                });
             }
         }).resizable({
             // be careful!
@@ -230,8 +240,12 @@ function generateAgain(element, css) {
             handles: 'all',
             resize: function(event, ui) {
                 busy = true;
-                $("#vertical_context_menu").css({visibility: 'hidden'});
-                $(".near_block").css({visibility: 'hidden'});
+                $("#vertical_context_menu").css({
+                    visibility: 'hidden'
+                });
+                $(".near_block").css({
+                    visibility: 'hidden'
+                });
                 $("#" + this.id).trigger("click");
                 var ch = preventAxis(event, ui, this);
                 if (ch) {
@@ -262,7 +276,9 @@ function generateAgain(element, css) {
                 busy = false;
                 createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
                 setCur(1);
-                $("#vertical_context_menu").css({visibility: 'visible'});
+                $("#vertical_context_menu").css({
+                    visibility: 'visible'
+                });
             }
         }).droppable({
             over: function(event, ui) {
@@ -306,8 +322,12 @@ function generateAgain(element, css) {
             drag: function(event, ui) {
                 busy = true;
                 $("#" + this.id).trigger("click");
-                $("#vertical_context_menu").css({visibility: 'hidden'});
-                $(".near_block").css({visibility: 'hidden'});
+                $("#vertical_context_menu").css({
+                    visibility: 'hidden'
+                });
+                $(".near_block").css({
+                    visibility: 'hidden'
+                });
                 var parent_id = $("#" + this.id).parent().attr("id");
                 if (parent_id != "workplace") {
                     //ole.log($("#" + this.id).position().top + ":" + $("#" + this.id).position().left);
@@ -319,7 +339,9 @@ function generateAgain(element, css) {
                 busy = false;
                 createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
                 setCur(1);
-                $("#vertical_context_menu").css({visibility: 'visible'});
+                $("#vertical_context_menu").css({
+                    visibility: 'visible'
+                });
             }
         });
     }
@@ -423,7 +445,7 @@ function checkResize(temp) {
         var h = $(this).height();
         var x = $(this).position().left;
         var y = $(this).position().top;
-        if(checker == false) {
+        if (checker == false) {
             checker = pos(temp, w, h, x, y);
         }
         if (checker) return false;
@@ -452,22 +474,30 @@ function pos(temp, w, h, x, y) {
 
 function showWin(id) {
     var vs = $("#" + id).css('visibility');
-    $(".near_block").css({visibility: 'hidden'});
-    $("#" + id).css({visibility:vs});
-    if($("#" + id).css("visibility") == "hidden") {
-        $("#" + id).css({visibility: 'visible'});
+    $(".near_block").css({
+        visibility: 'hidden'
+    });
+    $("#" + id).css({
+        visibility: vs
+    });
+    if ($("#" + id).css("visibility") == "hidden") {
+        $("#" + id).css({
+            visibility: 'visible'
+        });
     } else {
-        $("#" + id).css({visibility: 'hidden'});
+        $("#" + id).css({
+            visibility: 'hidden'
+        });
     }
 }
 
-jQuery.fn.appendAt = function( content, index ) {
+jQuery.fn.appendAt = function(content, index) {
     this.each(function(i, item) {
         var $content = $(content).clone();
-        if ( index === 0 ) {
+        if (index === 0) {
             $(item).prepend($content);
         } else {
-            $content.insertAfter($(item).children().eq(index-1));
+            $content.insertAfter($(item).children().eq(index - 1));
         }
     });
     $(content).remove();

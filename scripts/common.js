@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
 
     normalizePage();
-    $(window).resize(function () {
+    $(window).resize(function() {
         normalizePage();
     });
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
 
     instaValidate();
     tabControl();
-    $('#authorization_form').submit(function (event) {
+    $('#authorization_form').submit(function(event) {
         event.preventDefault();
         if (validateAuth()) {
             sendAuthorization();
@@ -46,7 +46,9 @@ $(document).ready(function() {
 
     });
 
-    $("#res_pass").css({marginTop:"19px"});
+    $("#res_pass").css({
+        marginTop: "19px"
+    });
 
     $('#source_code_wrapper').click(function() {
         showSourceCode();
@@ -55,9 +57,14 @@ $(document).ready(function() {
 
 function closeWithChanges() {
     submitChangesCSS();
+    createNewStatus("CSS was changed with Editor", cursor, changes, generatedElements);
+    ++cursor;
     $('#source_code_wrapper').css('display', 'none');
     $('#source_code_panel').css('display', 'none');
     allowkeys = true;
+    if (focusedElement != null) {
+        fillPropertiesTable(focusedElement);
+    }
 }
 
 function showSourceCode() {
@@ -74,7 +81,9 @@ function showSourceCode() {
         editorHTML.clearSelection();
         editorCSS.clearSelection();
         allowkeys = false;
-        $("#vertical_context_menu").css({visibility: "hidden"});
+        $("#vertical_context_menu").css({
+            visibility: "hidden"
+        });
     }
 }
 
@@ -84,7 +93,7 @@ function getStylePairs(str) {
         return null;
     result[0] = $.trim(result[0]);
     result[1] = $.trim(result[1]);
-    result[1]= result[1].substring(0, result[1].length - 1);
+    result[1] = result[1].substring(0, result[1].length - 1);
     return result;
 }
 
@@ -102,7 +111,7 @@ function submitChangesCSS() {
             tmpId = styles.substring(i, j);
             i = j + 1;
             tmpPointer = i;
-            for (;styles[i] != '}';++i);
+            for (; styles[i] != '}'; ++i);
             var tmpStyles = styles.substring(tmpPointer, i + 1).split('\n');
             $(tmpId).attr('style', '""');
             for (var k = 1; k < tmpStyles.length - 1; ++k) {
@@ -250,14 +259,14 @@ function trim(str) {
 }
 
 function tabControl() {
-    $('.menu_tab').click(function () {
+    $('.menu_tab').click(function() {
         if (this.id == 'source_code_btn') {
             showSourceCode();
         } else {
             $('.menu_tab').removeClass('selected_tab');
             this.setAttribute('class', 'menu_tab selected_tab');
             $('.property_list').css('visibility', 'hidden');
-            $('#'+this.id.split('t')[0]).css('visibility', 'visible');
+            $('#' + this.id.split('t')[0]).css('visibility', 'visible');
         }
     })
 }
@@ -265,10 +274,14 @@ function tabControl() {
 function shiftLeftBar() {
     var x = $('#left_bar').css('left').split('p')[0];
     if (x == 0) {
-        $('#left_bar').animate({ left: "-230px" } , 400);
+        $('#left_bar').animate({
+            left: "-230px"
+        }, 400);
         $('#left_btn').css('backgroundImage', 'url(images/arrRight.png)');
     } else {
-        $('#left_bar').animate({ left: "0px" } , 400);
+        $('#left_bar').animate({
+            left: "0px"
+        }, 400);
         $('#left_btn').css('backgroundImage', 'url(images/arrLeft.png)');
     }
 }
@@ -281,14 +294,14 @@ function normalizePage() {
     else
         $('#top_menu').css('width', w - 440);
     $('#left_bar').css('height', h - 200);
-    $('#left_btn_col').css('padding-top', (h - 240)/2);
+    $('#left_btn_col').css('padding-top', (h - 240) / 2);
 
     if (w > 1800)
-        $('.menu_tab').css('width', Math.floor((w - 460)/4) - 13);
+        $('.menu_tab').css('width', Math.floor((w - 460) / 4) - 13);
     else if (w > 2400)
-        $('.menu_tab').css('width', (w - 460)/4 - 16);
+        $('.menu_tab').css('width', (w - 460) / 4 - 16);
     else
-        $('.menu_tab').css('width', (w - 460)/4 - 11);
+        $('.menu_tab').css('width', (w - 460) / 4 - 11);
 
 
     $('.property').css('width', $('#properties').width() / 2 - 40);
@@ -313,7 +326,7 @@ function normalizePage() {
 function logOut() {
     $.ajax({
         url: 'database_scripts/session_close.php',
-        success: function (data) {
+        success: function(data) {
             if (data == 'closing')
                 location.reload();
         }
@@ -335,8 +348,8 @@ function sendAuthorization() {
         type: 'POST',
         data: data,
         dataType: 'text',
-        success: function (data) {
-            if(data == "not confirmed") {
+        success: function(data) {
+            if (data == "not confirmed") {
                 errorAuth("Confirm your email first!");
             } else {
                 if (data == 'bad data')
@@ -380,7 +393,7 @@ function checkEmailAuth() {
         return false;
     } else {
         var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
-        if(!pattern.test(email)) {
+        if (!pattern.test(email)) {
             borderRed('email_input');
             return false;
         }

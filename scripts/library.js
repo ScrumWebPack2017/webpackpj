@@ -4,46 +4,68 @@ var shadow_col = '#000000';
 
 function colorBgInput() {
     focusedElement.css('background', $('#color_changer').val());
+    createNewStatus("Color was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function colorTransparent() {
     focusedElement.css('background', 'transparent');
+    createNewStatus(focusedId + " became transparent", cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function colorBorderInput() {
     focusedElement.css('borderColor', $('#border_color_changer').val());
+    createNewStatus("Border color was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function textAlignLeft() {
     focusedElement.css('textAlign', 'left');
+    createNewStatus("Text will align to left for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function textAlignCenter() {
     focusedElement.css('textAlign', 'center');
+    createNewStatus("Text will align to center for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function textAlignRight() {
     focusedElement.css('textAlign', 'right');
+    createNewStatus("Text will align to right for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function fontItalic() {
     focusedElement.css('fontStyle', 'italic');
+    createNewStatus("Font was changed to Italic for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function fontBold() {
     focusedElement.css('font-stretch', '800');
+    createNewStatus("Font thickness was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function fontSize() {
     focusedElement.css('fontSize', $('#font_size_changer').val() + 'px');
+    createNewStatus("Font size was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function colorFontInput() {
     focusedElement.css('color', $('#font_color_changer').val());
+    createNewStatus("Font color was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function fontFamilyChanger() {
     focusedElement.css('fontFamily', $('#font_family_changer').val());
+    createNewStatus("Font family was changed for " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function shadowColorInput() {
@@ -57,6 +79,8 @@ function setBoxShadow() {
     $('#slider_display').css({
         visibility: 'hidden'
     });
+    createNewStatus("Shadow was changed with " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function sliderDisplay(event, ui) {
@@ -68,14 +92,16 @@ function sliderDisplay(event, ui) {
 }
 
 function borderWidthSlider(event, ui) {
-    if($(ui.handle).parent().attr('id') == 'border_radius_input')
+    if ($(ui.handle).parent().attr('id') == 'border_radius_input')
         focusedElement.css('borderRadius', ui.value);
-    else if ($(ui.handle).parent().attr('id') == 'border_width'){
+    else if ($(ui.handle).parent().attr('id') == 'border_width') {
         focusedElement.css('borderWidth', ui.value);
     }
     $('#slider_display').css({
         visibility: 'hidden'
     });
+    createNewStatus("Border was changed with " + focusedId, cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function source_switchTheme() {
@@ -176,7 +202,7 @@ function elementPreProperties(type) {
     } else if (type == 'footer') {
         e.width = document.body.scrollWidth - 20;
         e.height = '100px';
-        e.margin = document.body.scrollHeight - 310 +"px 0 0 10px";
+        e.margin = document.body.scrollHeight - 310 + "px 0 0 10px";
     } else if (type == 'header') {
         e.width = document.body.scrollWidth - 20;
         e.height = '100px';
@@ -189,7 +215,7 @@ function elementPreProperties(type) {
         e.width = '400px';
         e.height = '50px';
         e.font_size = '16px';
-        e.left = (document.body.scrollWidth - 400)/2 + 'px';
+        e.left = (document.body.scrollWidth - 400) / 2 + 'px';
     } else if (type == 'aside') {
         e.width = '200px';
         e.height = '250px';
@@ -205,7 +231,7 @@ function elementPreProperties(type) {
         e.width = '1200px';
         e.height = '270px';
         e.top = '70px';
-        e.left = (document.body.scrollWidth - 1200)/2 + 'px';
+        e.left = (document.body.scrollWidth - 1200) / 2 + 'px';
     } else if (type == 'form') {
         e.width = '400px';
         e.height = '200px';
@@ -238,7 +264,7 @@ function elementPreProperties(type) {
     return e;
 }
 
-function  getDarkColor() {
+function getDarkColor() {
     var r = getRandomInt(0, 80);
     var g = getRandomInt(0, 80);
     var b = getRandomInt(0, 80);
@@ -269,7 +295,7 @@ function generateElement(element, point) {
     $(element.parent).append(el);
 
     //if (point)
-        //getRandomColorAndSize(element);
+    //getRandomColorAndSize(element);
 
     $("#" + identifier).css({
         position: element.position,
@@ -414,6 +440,9 @@ function propertyValidation(type, field, focused) {
     } else {
         focused.css(prop, field.val());
     }
+
+    createNewStatus("CSS values of " + focusedId + " were changed", cursor, changes, generatedElements);
+    ++cursor;
 }
 
 function fillPropertiesTable(focused) {
@@ -432,6 +461,6 @@ function elementsSearch(e) {
     }
 }
 
-function clearproperty(){
+function clearproperty() {
     $('.property_input').val("");
 }
