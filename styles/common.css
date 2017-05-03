@@ -373,7 +373,7 @@ header {
 
 #properties {
     height: 143px;
-    color: #678375;
+    color: #496456;
 }
 
 .property_list {
@@ -645,7 +645,7 @@ header {
 
 .inner_element {
     padding-left: 30px;
-    color: #768888;
+    color: #9fb2b2;
 }
 
 .el_arrow {
@@ -663,7 +663,7 @@ header {
     width: 100%;
     background: transparent;
     padding: 10px 0 10px 15px;
-    color: #768888;
+    color: #9fb2b2;
     font-family: 'GothaProMed';
     font-size: 16px;
     border: 1px solid #768888;
