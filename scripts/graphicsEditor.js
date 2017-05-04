@@ -177,15 +177,34 @@ $(document).ready(function() {
         min: 0,
         max: 99,
         change: function(event, ui) { setBoxShadow(event, ui); },
-        slide: function(event, ui) { sliderDisplay(event, ui); }
+        slide: function(event, ui) { sliderDisplay(event, ui); },
+        change: function(event, ui) {
+            borderWidthSlider(event, ui);
+        },
+        slide: function(event, ui) {
+            sliderDisplay(event, ui);
+        }
+    });
+
+    $('.slide2').slider({
+        change: function(event, ui) {
+            setBoxShadow(event, ui);
+        },
+        slide: function(event, ui) {
+            sliderDisplay(event, ui);
+        }
     });
 
     $('#border_width').slider({
         animate: 'slow',
         min: 0,
         max: 20,
-        change: function(event, ui) { borderWidthSlider(event, ui); },
-        slide: function(event, ui) { sliderDisplay(event, ui); }
+        change: function(event, ui) {
+            borderWidthSlider(event, ui);
+        },
+        slide: function(event, ui) {
+            sliderDisplay(event, ui);
+        }
     });
 
     $(".border_types select").selectmenu();
@@ -211,8 +230,12 @@ $(document).ready(function() {
             focusedId = null;
             clearStatus();
             clearproperty();
-            $("#vertical_context_menu").css({visibility: "hidden"});
-            $(".near_block").css({visibility:'hidden'});
+            $("#vertical_context_menu").css({
+                visibility: "hidden"
+            });
+            $(".near_block").css({
+                visibility: 'hidden'
+            });
             $("#delete_list").parent().addClass('ui-state-disabled');
             $("#copy_list").parent().addClass('ui-state-disabled');
             $("#cut_list").parent().addClass('ui-state-disabled');
@@ -460,7 +483,9 @@ function generateElement(element, point, tt) {
             collision: 'flip flip'
         });
 
-        $("#vertical_context_menu").css({zIndex: $("#" + identifier).css('z-index')});
+        $("#vertical_context_menu").css({
+            zIndex: $("#" + identifier).css('z-index')
+        });
 
         $(".near_block").position({
             my: 'left+49 top',
@@ -469,16 +494,24 @@ function generateElement(element, point, tt) {
             collision: 'flip flip'
         });
 
-        $(".near_block").css({zIndex: $("#" + identifier).css('z-index')});
+        $(".near_block").css({
+            zIndex: $("#" + identifier).css('z-index')
+        });
 
-        if(element.type == "table") {
-            $("#i_i_6").css({height: '35px'});
+        if (element.type == "table") {
+            $("#i_i_6").css({
+                height: '35px'
+            });
         } else {
-            $("#i_i_6").css({height: '0px'});
+            $("#i_i_6").css({
+                height: '0px'
+            });
         }
 
-        if(!busy) {
-            $("#vertical_context_menu").css({visibility: 'visible'});
+        if (!busy) {
+            $("#vertical_context_menu").css({
+                visibility: 'visible'
+            });
         }
     }).resizable({
         // be careful!
@@ -488,8 +521,12 @@ function generateElement(element, point, tt) {
         handles: 'all',
         resize: function(event, ui) {
             busy = true;
-            $("#vertical_context_menu").css({visibility: 'hidden'});
-            $(".near_block").css({visibility: 'hidden'});
+            $("#vertical_context_menu").css({
+                visibility: 'hidden'
+            });
+            $(".near_block").css({
+                visibility: 'hidden'
+            });
             $("#" + this.id).trigger("click");
             var ch = preventAxis(event, ui, this);
             if (ch) {
@@ -514,12 +551,14 @@ function generateElement(element, point, tt) {
                         generatedElements[elem].height = $("#" + identifier).height();
                     }
                 }
-           }
+            }
         },
         stop: function(event, ui) {
             createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), cursor, changes, generatedElements);
             ++cursor;
-            $("#vertical_context_menu").css({visibility: 'visible'});
+            $("#vertical_context_menu").css({
+                visibility: 'visible'
+            });
             busy = false;
         }
     }).droppable({
@@ -564,8 +603,12 @@ function generateElement(element, point, tt) {
         scroll: true,
         drag: function(event, ui) {
             busy = true;
-            $("#vertical_context_menu").css({visibility: 'hidden'});
-            $(".near_block").css({visibility: 'hidden'});
+            $("#vertical_context_menu").css({
+                visibility: 'hidden'
+            });
+            $(".near_block").css({
+                visibility: 'hidden'
+            });
             $("#" + this.id).trigger("click");
             var parent_id = $("#" + this.id).parent().attr("id");
             if (parent_id != "workplace") {
@@ -578,7 +621,9 @@ function generateElement(element, point, tt) {
             busy = false;
             createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", cursor, changes, generatedElements);
             ++cursor;
-            $("#vertical_context_menu").css({visibility: 'visible'});
+            $("#vertical_context_menu").css({
+                visibility: 'visible'
+            });
         }
     });
 
@@ -734,19 +779,31 @@ function countType(type) {
 function manipulate(eve) {
     if (eve.which == 46) {
         deleteFocused();
-        $("#vertical_context_menu").css({visibility: "hidden"});
-        $(".near_block").css({visibility: 'hidden'});
+        $("#vertical_context_menu").css({
+            visibility: "hidden"
+        });
+        $(".near_block").css({
+            visibility: 'hidden'
+        });
     } else {
         if (eve.which == 67 && eve.ctrlKey) {
             copy();
         } else {
             if (eve.which == 86 && eve.ctrlKey) {
                 paste();
+                createNewStatus(focusedId + " was pasted", cursor, changes, generatedElements);
+                ++cursor;
             } else {
                 if (eve.which == 88 && eve.ctrlKey) {
                     cut();
-                    $("#vertical_context_menu").css({visibility: "hidden"});
-                    $(".near_block").css({visibility: 'hidden'});
+                    createNewStatus(focusedId + " was cut", cursor, changes, generatedElements);
+                    ++cursor;
+                    $("#vertical_context_menu").css({
+                        visibility: "hidden"
+                    });
+                    $(".near_block").css({
+                        visibility: 'hidden'
+                    });
                 } else {
                     if (eve.which == 68 && eve.ctrlKey) {
                         detach_child();
