@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    position: relative;
+    background-color: #5b5b5b;
+    width: 800px;
+    margin: auto;
+    top: 50px;
+
+}

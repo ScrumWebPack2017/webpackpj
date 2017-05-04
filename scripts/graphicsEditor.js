@@ -167,11 +167,15 @@ $(document).ready(function() {
     });
 
     $('.slide').slider({
+        min: 0,
+        max: 99,
         change: function(event, ui) { borderWidthSlider(event, ui); },
         slide: function(event, ui) { sliderDisplay(event, ui); }
     });
 
     $('.slide2').slider({
+        min: 0,
+        max: 99,
         change: function(event, ui) { setBoxShadow(event, ui); },
         slide: function(event, ui) { sliderDisplay(event, ui); }
     });

@@ -5,6 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <title> ВьобПэк </title>
     <link rel="stylesheet" type="text/css" href="styles/common.css">
     <link rel="stylesheet" type="text/css" href="styles/editor.css">
     <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
@@ -22,7 +23,6 @@
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
     <script type="text/javascript" src="scripts/colResizable-1.6.js"></script>
-    <title>Title</title>
 </head>
 
 <body>
@@ -207,7 +207,7 @@
                         Hello,'.$_SESSION['uname'].'!
                     </div>
                     <div class="auth_box">
-                        <a href=""> Personal cabinet </a>
+                        <a href="personal_cabinet.php"> Personal cabinet </a>
                     </div>
                     <div class="auth_box" onclick="logOut()" id="logOut">
                         Log Out

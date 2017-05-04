@@ -120,7 +120,7 @@ header {
 #slider_display {
     position: fixed;
     z-index: 9999999;
-    visibility: visible;
+    visibility: hidden;
     width: 20px;
     height: 16px;
     background: silver;
