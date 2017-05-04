@@ -212,6 +212,12 @@
                     <div class="auth_box" onclick="logOut()" id="logOut">
                         Log Out
                     </div>
+                    <div id="saveTemplate" onclick="createTemplateString()">
+                        Save
+                    </div>
+                    <div id="appendTemplate" onclick="appendSaved()">
+                        Append
+                    </div>
                 ';
         ?>
     </div>

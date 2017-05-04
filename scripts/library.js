@@ -1,21 +1,53 @@
 var dark = false;
 var vSplit = true;
 var shadow_col = '#000000';
+var saved = "";
 
-function createTemplateString(wpml) {
+function createTemplateString() {
     var innerHTML = $('#workplace').clone().addClass("toSource");
     $('body').append(innerHTML);
     $(".toSource [class^='ui']").remove();
-
     var html = $('.toSource').html();
-
     $('.toSource').remove();
+    var result = "";
+    for (var i = 0; i < html.length; ++i) {
+        if (html[i] == '<' && html[i + 1] != '/') {
+            var current = "";
+            var endPos;
+            for (endPos = i + 1; html[endPos] != ' '; ++endPos);
+            var currentType = html.substring(i + 1, endPos);
+            var j;
+            for (j = endPos; html[j] != 'i' && html[j + 1] != 'd'; ++j);
+            j += 4;
+            for (endPos = j; html[endPos] != '"'; ++endPos);
+            var currentId = html.substring(j, endPos);
+            var k = html.indexOf("style=", endPos);
+            k += 7;
+            for (endPos = k; html[endPos] != '"'; ++endPos);
+            var currentStyle = html.substring(k, endPos);
+            var currentParent = $('#' + currentId).parent().attr('id');
+            current = "{ \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"" + currentParent + "\", \"style\":\"" + currentStyle + "\" } ?";
+            result += current;
+            i = endPos;
+        }
+
+    }
+
+    // Sending to DB...
+    //alert(result);
+    saved = result;
+
 }
 
-function parserRec(str) {
+function appendSaved() {
+    var array = saved.split('?');
+    var elements = new Array(0);
+    for (var i = 0; i < array.length; ++i) {
 
+        elements.push(JSON.parse(array[i]));
+        alert(elements[i].type + "\n" + elements[i].id + "\n" + elements[i].parent + "\n" + elements[i].style);
+    }
 }
-
 
 function generateHTML() {
     var innerHTML = $('#workplace').clone().addClass("toSource");

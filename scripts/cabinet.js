@@ -4,6 +4,9 @@ $(document).ready(function() {
         normalizeCabinet();
     });
 
+    $('#saveTemplate').click(function() {
+        createTemplateString();
+    });
 });
 
 function normalizeCabinet() {
