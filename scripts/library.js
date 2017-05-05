@@ -26,15 +26,30 @@ function createTemplateString() {
             for (endPos = k; html[endPos] != '"'; ++endPos);
             var currentStyle = html.substring(k, endPos);
             var currentParent = $('#' + currentId).parent().attr('id');
-            current = "{ \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"" + currentParent + "\", \"style\":\"" + currentStyle + "\" } ?";
+            current = "{ element:{locked:false, type:\"" + currentType + "\", id:\"" + currentId + "\", parent:\"#" + currentParent + "\" }, style:\"" + currentStyle + "\" }";
+            if(i < html.length - 1) {
+                current += "\r\n";
+            }
             result += current;
             i = endPos;
         }
 
     }
 
-    // Sending to DB...
-    //alert(result);
+    var query = "name=" + currentFile + "&data=" + result;
+
+    $.ajax({
+        url: 'database_scripts/saver.php',
+        type: 'POST',
+        data: query,
+        dataType: "text",
+        success: function (data) {
+            if (data.length > 0) {
+                console.log(data);
+            }
+        }
+    });
+
     saved = result;
 
 }

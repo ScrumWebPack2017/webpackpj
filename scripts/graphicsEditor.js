@@ -21,6 +21,8 @@ var keys = {
 var changes = new Array(0);
 var cursor = 0;
 
+var currentFile = null;
+
 var borderWidth = 0;
 var borderColor = "#ffffff";
 var borderType = "solid";
@@ -274,6 +276,30 @@ $(document).ready(function() {
     $('.ui-dialog-titlebar-close').remove();
     $("#changes_menu").parent().resizable("disable");
 
+    $("#newProject").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: 'database_scripts/file_creator.php',
+            type: 'POST',
+            data: "data=mypj",
+            dataType: "text",
+            success: function (data) {
+                console.log(data);
+                if (data.length > 0) {
+                    currentFile = data;
+                    $("#currentFile").html(currentFile);
+                }
+            }
+        });
+    });
+
+    $("#saveTemplate").click(function (e) {
+        e.preventDefault();
+        if(currentFile != null) {
+            createTemplateString();
+        }
+    });
+
 });
 
 
@@ -345,10 +371,10 @@ function generateElement(element, point, tt) {
 
     if (tt == "input") {
         var el1 = document.createElement('input');
-        el1.setAttribute('id', "inner_input_" + (maxId('input') + 1));
+        el1.setAttribute('id', "input_" + (maxId('input') + 1));
         el1.setAttribute('class', 'work_elements');
         var e = {
-            id: "inner_input_" + (maxId('input') + 1),
+            id: "input_" + (maxId('input') + 1),
             type: "input",
             parent: "#" + identifier,
             top: 0,
@@ -370,10 +396,10 @@ function generateElement(element, point, tt) {
     } else {
         if (tt == "textarea") {
             var el1 = document.createElement('textarea');
-            el1.setAttribute('id', "inner_textarea_" + (maxId("textarea") + 1));
+            el1.setAttribute('id', "textarea_" + (maxId("textarea") + 1));
             el1.setAttribute('class', 'work_elements');
             var e = {
-                id: "inner_textarea_" + (maxId("textarea") + 1),
+                id: "textarea_" + (maxId("textarea") + 1),
                 type: "textarea",
                 parent: "#" + identifier,
                 top: 0,
@@ -395,10 +421,10 @@ function generateElement(element, point, tt) {
         } else {
             if (tt == "select") {
                 var el1 = document.createElement('select');
-                el1.setAttribute('id', "inner_select_" + (maxId('select') + 1));
+                el1.setAttribute('id', "select_" + (maxId('select') + 1));
                 el1.setAttribute('class', 'work_elements');
                 var e = {
-                    id: "inner_select_" + (maxId('select') + 1),
+                    id: "select_" + (maxId('select') + 1),
                     type: "select",
                     parent: "#" + identifier,
                     top: 0,
