@@ -276,7 +276,7 @@ $(document).ready(function() {
     $('.ui-dialog-titlebar-close').remove();
     $("#changes_menu").parent().resizable("disable");
 
-    $("#newProject").click(function (e) {
+    /*$("#newProject").click(function (e) {
         e.preventDefault();
         $.ajax({
             url: 'database_scripts/file_creator.php',
@@ -291,14 +291,14 @@ $(document).ready(function() {
                 }
             }
         });
-    });
+    });*/
 
-    $("#saveTemplate").click(function (e) {
+    /*$("#saveTemplate").click(function (e) {
         e.preventDefault();
         if(currentFile != null) {
             createTemplateString();
         }
-    });
+    });*/
 
 });
 

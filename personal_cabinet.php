@@ -51,7 +51,7 @@
                 </div>
                 <div class="control_element" id="createForm">
                     <input type="text" id="projectName" class="control_element">
-                    <div id="createBtn" class="control_element" onclick="createProject()">
+                    <div id="createBtn" class="control_element">
                         Add
                     </div>
                 </div>
@@ -76,5 +76,7 @@
             </div>
         </div>
     </div>
+<div id="ajax">
+</div>
 </body>
 </html>

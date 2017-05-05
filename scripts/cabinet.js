@@ -1,22 +1,45 @@
+var focused = null;
+
 $(document).ready(function() {
     normalizeCabinet();
     $(window).resize(function () {
         normalizeCabinet();
     });
 
+    $.ajax({
+            url: 'database_scripts/load_projects.php',
+            type: 'POST',
+            data: '',
+            dataType: "text",
+            success: generateProjectTemplate
+    });
+
     $('#templates').on("mouseover", ".template_box",  function(e) {
-        $(this).css({
-            background: "#e4e8eb"
-        });
+        if(focused != this) {
+            $(this).css({
+                background: "#e4e8eb"
+            });
+        }
     }).on("mouseout", ".template_box", function(e) {
-        $(this).css({
-            background: "#ffffff"
-        });
+        if(focused != this) {
+            $(this).css({
+                background: "#ffffff"
+            });
+        }
+    }).on("click", ".template_box",  function(e) {
+        focused = this;
+        $(".template_box").css({ background: "#ffffff" });
+        $(this).css({ background: "#c0c5c8" });
     });
 
     $('#saveTemplate').click(function() {
         createTemplateString();
     });
+
+    $("#createBtn").click(function (event) {
+        event.preventDefault();
+        createProject();
+    })
 });
 
 function normalizeCabinet() {
@@ -32,24 +55,34 @@ function normalizeCabinet() {
     });
 }
 
-// New project
 function createProject() {
     var prjName = $('#projectName').val();
     $('#projectName').val('');
-
-    // prjName - name of the new project
-    showProjectFeild(); // hide field
+    //empty-featured2-1.png
+    var get;
+    var query = "data=" + prjName;
+    $.ajax({
+        url: 'database_scripts/file_creator.php',
+        type: 'POST',
+        data: query,
+        dataType: "text",
+        success: function (data) {
+            get = data + "=images/1234.png&";
+            generateProjectTemplate(get);
+            showProjectFeild();
+        }
+    });
 }
 
 // get string : "path=timer=image&path=timer=image..."
 function generateProjectTemplate(data) {
     // test data: data = 'SomeName=1023323=images/logo.jpg&SomeName=1023323=images/logo2.jpg';
     var projects = data.split('&');
-    for (var i = 0; i < projects.length; ++i) {
+    for (var i = 0; i < projects.length - 1; ++i) {
         var prjData = projects[i].split('=');
         var newEl =
             '<div class="template_box"><div class="template_img" style="background: url('+ prjData[2] +
-            '); background-size: cover;"></div><div class="template_name">' + prjData[0] +
+            '); background-size: 100% 100%;"></div><div class="template_name">' + prjData[0] +
             '</div><div class="template_time">' + prjData[1] +
             '</div></div>';
         $('#templates').append(newEl);
