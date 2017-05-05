@@ -1,13 +1,111 @@
+@font-face {
+    font-family: 'GothaProLig';
+    src: url('../fonts/GothaProLig.otf');
+}
+@font-face {
+    font-family: 'GothaProMed';
+    src: url('../fonts/GothaProMed.otf');
+}
+@font-face {
+    font-family: 'GothaProReg';
+    src: url('../fonts/GothaProReg.otf');
+}
+
 body {
     margin: 0;
     padding: 0;
+    font-family: "GothaProLig";
 }
 
 #wrapper {
     position: relative;
-    background-color: #5b5b5b;
-    width: 800px;
-    margin: auto;
-    top: 50px;
+    background-color: #ffffff;
+    width: 100%;
+    min-height: 800px;
+}
 
+#top {
+    width: inherit;
+    height: 90px;
+    background-color: #294752;
+}
+
+#top_logo {
+    position: relative;
+    float: left;
+    margin-left: 40px;
+}
+
+#top_photo {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    border-radius: 35px;
+    background-color: #fff;
+}
+
+#top_menu_box {
+    margin: 0 40px 0 40px;
+    padding: 25px 0 25px 0;
+}
+
+#top_name {
+    height: 36px;
+    margin: 27px 20px;
+    font-size: 36px;
+    color: #ffffff;
+    font-family: "GothaProLig";
+}
+
+.top {
+    position: relative;
+    float: right;
+    height: inherit;
+}
+
+#control_wrapper {
+    width: inherit;
+    height: 90px;
+
+}
+
+#control {
+    width: 80%;
+    height: inherit;
+    position: relative;
+    margin: auto;
+    border-bottom: 2px solid silver;
+}
+
+#templates_wrapper {
+    width: inherit;
+}
+
+#templates {
+    position: relative;
+    margin: auto;
+    width: 80%;
+    padding: 20px 0 0 0;
+}
+
+.template_box {
+    position: relative;
+    float: left;
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.template_img {
+    width: inherit;
+    height: 140px;
+    background-color: #def6f6;
+    margin: 0 0 15px 0;
+}
+
+.template_name, .template_time {
+    height: 16px;
+    font-size: 16px;
+    margin: 10px 0;
 }

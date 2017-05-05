@@ -49,6 +49,7 @@ function appendSaved() {
     }
 }
 
+
 function generateHTML() {
     var innerHTML = $('#workplace').clone().addClass("toSource");
     $('body').append(innerHTML);
