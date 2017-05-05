@@ -19,12 +19,21 @@
     }
     $found = mysql_num_rows($select_insert);
     $date = date('Y/m/d H:i:s');
+    $namer = $_POST["data"];
+    if(!preg_match("/[A-Za-z0-9]{1,}/", $namer, $matches, PREG_OFFSET_CAPTURE)) {
+        $namer = str_replace('С?','fgr43443443', $namer);
+        $namer = mb_convert_encoding($namer, "windows-1251", "utf-8");
+        $namer = str_replace('fgr43443443','ш',$namer);
+    }
+    $pathLocale;
     if($found > 0) {
         $path = $_POST["data"] . "(" . $found . ").webml";
+        $pathLocale = $namer . "(" . $found . ").webml";
     } else {
         $path = $_POST["data"] . ".webml";
+        $pathLocale = $namer . ".webml";
     }
-    $file = fopen("..\\userprojects\\" . $path, "w+");
+    $file = fopen("..\\userprojects\\" . $pathLocale, "w+");
 
     $insert_query = "INSERT INTO `Projects` (`userid`, `name`, `path`, `timer`, `image`)
                SELECT DISTINCT `id`, '" . $_POST["data"] . "', '" . $path . "', '" . $date . "', 'images/1234.png' FROM `User` WHERE `email` = '" . $email . "'";
