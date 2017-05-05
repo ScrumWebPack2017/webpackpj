@@ -46,11 +46,21 @@
         </div>
         <div id="control_wrapper">
             <div id="control">
-
+                <div class="control_element">
+                    <img src="images/cabinet/addProject.jpg" width="50" style="cursor: pointer" onclick="showProjectFeild()">
+                </div>
+                <div class="control_element" id="createForm">
+                    <input type="text" id="projectName" class="control_element">
+                    <div id="createBtn" class="control_element" onclick="createProject()">
+                        Add
+                    </div>
+                </div>
             </div>
         </div>
+
         <div id="templates_wrapper">
             <div id="templates">
+                <!--
                 <div class="template_box">
                     <div class="template_img">
 
@@ -62,61 +72,7 @@
                         1 year ago
                     </div>
                 </div>
-                <div class="template_box">
-                    <div class="template_img">
-
-                    </div>
-                    <div class="template_name">
-                        MyProject1
-                    </div>
-                    <div class="template_time">
-                        1 year ago
-                    </div>
-                </div>
-                <div class="template_box">
-                    <div class="template_img">
-
-                    </div>
-                    <div class="template_name">
-                        MyProject1
-                    </div>
-                    <div class="template_time">
-                        1 year ago
-                    </div>
-                </div>
-                <div class="template_box">
-                    <div class="template_img">
-
-                    </div>
-                    <div class="template_name">
-                        MyProject1
-                    </div>
-                    <div class="template_time">
-                        1 year ago
-                    </div>
-                </div>
-                <div class="template_box">
-                    <div class="template_img">
-
-                    </div>
-                    <div class="template_name">
-                        MyProject1
-                    </div>
-                    <div class="template_time">
-                        1 year ago
-                    </div>
-                </div>
-                <div class="template_box">
-                    <div class="template_img">
-
-                    </div>
-                    <div class="template_name">
-                        MyProject1
-                    </div>
-                    <div class="template_time">
-                        1 year ago
-                    </div>
-                </div>
+                -->
             </div>
         </div>
     </div>

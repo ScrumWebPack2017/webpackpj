@@ -4,11 +4,11 @@ $(document).ready(function() {
         normalizeCabinet();
     });
 
-    $(".template_box").on("mouseover", function(e) {
+    $('#templates').on("mouseover", ".template_box",  function(e) {
         $(this).css({
             background: "#e4e8eb"
         });
-    }).on("mouseout", function(e) {
+    }).on("mouseout", ".template_box", function(e) {
         $(this).css({
             background: "#ffffff"
         });
@@ -32,8 +32,38 @@ function normalizeCabinet() {
     });
 }
 
+// New project
+function createProject() {
+    var prjName = $('#projectName').val();
+    $('#projectName').val('');
 
-function selectProject() {
+    // prjName - name of the new project
+    showProjectFeild(); // hide field
+}
+
+// get string : "path=timer=image&path=timer=image..."
+function generateProjectTemplate(data) {
+    // test data: data = 'SomeName=1023323=images/logo.jpg&SomeName=1023323=images/logo2.jpg';
+    var projects = data.split('&');
+    for (var i = 0; i < projects.length; ++i) {
+        var prjData = projects[i].split('=');
+        var newEl =
+            '<div class="template_box"><div class="template_img" style="background: url('+ prjData[2] +
+            '); background-size: cover;"></div><div class="template_name">' + prjData[0] +
+            '</div><div class="template_time">' + prjData[1] +
+            '</div></div>';
+        $('#templates').append(newEl);
+    }
+    normalizeCabinet();
+}
+
+function showProjectFeild() {
+    if ($('#createForm').css('visibility') == 'hidden') {
+        $('#createForm').css('visibility', 'visible');
+        $('#projectName').val("");
+    } else {
+        $('#createForm').css('visibility', 'hidden');
+    }
 
 }
 

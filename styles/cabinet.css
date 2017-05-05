@@ -60,25 +60,61 @@ body {
 .top {
     position: relative;
     float: right;
-    height: inherit;
+
 }
 
 #control_wrapper {
     width: inherit;
-    height: 90px;
+    height: 50px;
+    padding: 5px 0 5px 0;
+}
 
+.control_element {
+    position: relative;
+    float: left;
 }
 
 #control {
     width: 80%;
-    height: inherit;
     position: relative;
+    height: 50px;
     margin: auto;
     border-bottom: 2px solid silver;
 }
 
+#control_add {
+    width: 50px;
+    height: 50px;
+
+}
+
+#createForm {
+    height: 30px;
+    margin: 10px 10px 10px 10px;
+    visibility: hidden;
+}
+
+#projectName {
+    margin: 0 10px;
+    height: 20px;
+    padding: 2px 4px 3px 4px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid silver;
+}
+
+#createBtn {
+    height: 20px;
+    padding: 4px 12px 3px 12px;
+    background-color: #7AC943;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
 #templates_wrapper {
     width: inherit;
+    min-height: 600px;
 }
 
 #templates {
@@ -102,6 +138,9 @@ body {
     height: 140px;
     background-color: #def6f6;
     margin: 0 0 15px 0;
+    border: 1px solid silver;
+    border-radius: 4px;
+    background-size: cover;
 }
 
 .template_name, .template_time {
@@ -109,3 +148,4 @@ body {
     font-size: 16px;
     margin: 10px 0;
 }
+
