@@ -39,7 +39,42 @@ $(document).ready(function() {
     $("#createBtn").click(function (event) {
         event.preventDefault();
         createProject();
-    })
+    });
+    
+    $("#load_btn").click(function (event) {
+       event.preventDefault();
+        if(focused != null) {
+            $.ajax({
+                url: 'database_scripts/load_p.php',
+                type: 'POST',
+                data: "filename=" + $(focused).children(".template_name").html(),
+                dataType: "text",
+                success: function (data) {
+                    if(data == "OK") {
+                        window.location.replace("http://webpackpj.com");
+                    }
+                }
+            });
+        }
+    });
+    
+    $("#delete_btn").click(function (event) {
+       event.preventDefault();
+       if(focused != null) {
+           $.ajax({
+               url: 'database_scripts/project_delete.php',
+               type: 'POST',
+               data: "pjname=" + $(focused).children(".template_name").html(),
+               dataType: "text",
+               success: function (data) {
+                   if(data == "OK") {
+                       $(focused).remove();
+                       focused = null;
+                   }
+               }
+           });
+       }
+    });
 });
 
 function normalizeCabinet() {

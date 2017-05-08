@@ -94,22 +94,17 @@ body {
     visibility: hidden;
 }
 
+#createBtn {
+    margin-top: -10px;
+}
+
 #projectName {
-    margin: 0 10px;
+    margin-left: 10px;
     height: 20px;
     padding: 2px 4px 3px 4px;
     font-size: 18px;
     border-radius: 4px;
     border: 1px solid silver;
-}
-
-#createBtn {
-    height: 20px;
-    padding: 4px 12px 3px 12px;
-    background-color: #7AC943;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
 }
 
 #templates_wrapper {

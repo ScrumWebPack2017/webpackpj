@@ -26,7 +26,7 @@ function createTemplateString() {
             for (endPos = k; html[endPos] != '"'; ++endPos);
             var currentStyle = html.substring(k, endPos);
             var currentParent = $('#' + currentId).parent().attr('id');
-            current = "{ element:{locked:false, type:\"" + currentType + "\", id:\"" + currentId + "\", parent:\"#" + currentParent + "\" }, style:\"" + currentStyle + "\" }";
+            current = "{ \"element\":{\"locked\":false, \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"#" + currentParent + "\" }, \"style\":\"" + currentStyle + "\" }";
             if(i < html.length - 1) {
                 current += "\r\n";
             }
@@ -54,13 +54,15 @@ function createTemplateString() {
 
 }
 
-function appendSaved() {
-    var array = saved.split('?');
+function appendSaved(data) {
+    var array = data.split('?');
     var elements = new Array(0);
-    for (var i = 0; i < array.length; ++i) {
-
-        elements.push(JSON.parse(array[i]));
-        alert(elements[i].type + "\n" + elements[i].id + "\n" + elements[i].parent + "\n" + elements[i].style);
+    generatedElements = new Array(0);
+    for (var i = 0; i < array.length - 1; ++i) {
+        var e = JSON.parse(array[i]);
+        console.log(e.element.id);
+        generatedElements.push(e.element);
+        generateAgain(e.element, e.style);
     }
 }
 
@@ -668,7 +670,6 @@ function fillPropertiesTable(focused) {
 
 function elementsSearch(e) {
     var val = $('#elements_search').val();
-    alert(val);
     if (val != '') {
         $('#red').css('visibility', 'hidden');
     } else {
@@ -678,4 +679,24 @@ function elementsSearch(e) {
 
 function clearproperty() {
     $('.property_input').val("");
+}
+
+function makeLoaded(data) {
+    var rrys = data.split("#");
+    var name = rrys[1];
+    $.ajax({
+        url: 'database_scripts/get_proj_containment.php',
+        type: 'POST',
+        data: '',
+        dataType: "text",
+        success: function(data) {
+            appendSaved(data);
+            createNewStatus("Load", cursor, changes, generatedElements);
+            ++cursor;
+            var elems = $("#workplace .work_elements").each(function(event) {
+                $(this).children().removeClass('ui-icon');
+            });
+            $("#workplace").trigger("click");
+        }
+    });
 }

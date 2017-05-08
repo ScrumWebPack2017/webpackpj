@@ -221,7 +221,7 @@
 <div id="workplace">
     <ul id="menu_tools">
         <li>
-            <div><span class="ui-icon ui-icon-disk"></span>Save</div>
+            <div onclick="createTemplateString()"><span class="ui-icon ui-icon-disk"></span>Save</div>
         </li>
         <li class="ui-state-disabled">
             <div onclick="detach_child()" id="detach_list"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Detach</div>

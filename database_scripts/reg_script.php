@@ -39,6 +39,7 @@
         }
         $string_url = "http://webpackpj.com/database_scripts/confirm_mail.php?email=" . $email;
         if(mail($email, "Password reset", "Hi, it`s WebPack.\nConfirm your account by following this link: \n" . $string_url)) {
+            mkdir("../userprojects/" . $email, 0700);
             echo "OK";
         }
         else {

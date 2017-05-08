@@ -28,6 +28,19 @@ var borderColor = "#ffffff";
 var borderType = "solid";
 
 $(document).ready(function() {
+
+    $.ajax({
+        url: 'database_scripts/check_session.php',
+        type: 'POST',
+        data: '',
+        dataType: "text",
+        success: function(data) {
+            if(data.indexOf("#") != -1) {
+                makeLoaded(data);
+            }
+        }
+    });
+
     $(document).tooltip();
 
     $('#elements_search').on('#search_input keyup', function(e) {
@@ -267,8 +280,8 @@ $(document).ready(function() {
     }).css({
         width: '200px'
     });
-    createNewStatus("Load", cursor, changes, generatedElements);
-    ++cursor;
+    /*createNewStatus("Load", cursor, changes, generatedElements);
+    ++cursor;*/
     $("#changes_menu").parent().css({
         opacity: '0',
         top: '0'
@@ -921,22 +934,16 @@ function paste() {
             $("#paste_list").parent().addClass('ui-state-disabled');
         } else {
             var e = {
-                id: "",
+                id: buffer.element.type + '_' + (maxId(buffer.element.type) + 1),
                 type: buffer.element.type,
-                parent: buffer.element.parent,
-                position: buffer.element.position,
-                float: buffer.element.float,
-                margin: buffer.element.margin,
-                width: buffer.element.width,
-                height: buffer.element.height,
-                background: buffer.element.background,
+                parent: "#workplace",
                 focused: false,
                 zIndex_: zindex,
                 locked: false
             };
             ++zindex;
             generatedElements.push(e);
-            generateElement(e, false, buffer.e_type);
+            generateAgain(e, $("#" + buffer.element.id).clone().css({left:'10px', top:'10px'}).attr('style'));
         }
         createNewStatus(e.id + " was pasted", cursor, changes, generatedElements);
         ++cursor;

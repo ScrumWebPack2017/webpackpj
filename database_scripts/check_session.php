@@ -1,5 +1,6 @@
 <?php
     include 'database_connect.php';
+    require ("database_framework.php");
 	session_start();
 
 	if(isset($_SESSION["user"])){
@@ -15,8 +16,12 @@
         }
         $result;
         while($row = mysql_fetch_array($found_data)) {
-            $result = $row['email'];
+            $result = $row["file"];
         }
-        echo $result;
+        if(isset($_SESSION["file"])) {
+            echo $result . "#" . $_SESSION["file"];
+        } else {
+            echo $result;
+        }
     }
 ?>

@@ -33,7 +33,7 @@
         $path = $_POST["data"] . ".webml";
         $pathLocale = $namer . ".webml";
     }
-    $file = fopen("..\\userprojects\\" . $pathLocale, "w+");
+    $file = fopen("..\\userprojects\\" . $_SESSION["user"] . "\\" . $pathLocale, "w+");
 
     $insert_query = "INSERT INTO `Projects` (`userid`, `name`, `path`, `timer`, `image`)
                SELECT DISTINCT `id`, '" . $_POST["data"] . "', '" . $path . "', '" . $date . "', 'images/1234.png' FROM `User` WHERE `email` = '" . $email . "'";

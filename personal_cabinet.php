@@ -46,14 +46,20 @@
         </div>
         <div id="control_wrapper">
             <div id="control">
+                <div class="control_element" id="load_btn">
+                    <img src="images/cabinet/icons_DB/iconsDB_01.png" width="50" style="cursor: pointer">
+                </div>
+                <div class="control_element" id="delete_btn">
+                    <img src="images/cabinet/icons_DB/iconsDB_02.gif" width="50" style="cursor: pointer">
+                </div>
                 <div class="control_element">
-                    <img src="images/cabinet/addProject.jpg" width="50" style="cursor: pointer" onclick="showProjectFeild()">
+                    <img src="images/cabinet/icons_DB/iconsDB_03.gif" width="50" style="cursor: pointer" onclick="showProjectFeild()">
                 </div>
                 <div class="control_element" id="createForm">
                     <input type="text" id="projectName" class="control_element">
-                    <div id="createBtn" class="control_element">
-                        Add
-                    </div>
+                        <div class="control_element" id="createBtn">
+                            <img src="images/cabinet/icons_DB/iconsDB_04.gif" width="50" style="cursor: pointer">
+                        </div>
                 </div>
             </div>
         </div>
