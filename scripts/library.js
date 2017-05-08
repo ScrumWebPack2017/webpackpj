@@ -4,54 +4,76 @@ var shadow_col = '#000000';
 var saved = "";
 
 function createTemplateString() {
-    var innerHTML = $('#workplace').clone().addClass("toSource");
-    $('body').append(innerHTML);
-    $(".toSource [class^='ui']").remove();
-    var html = $('.toSource').html();
-    $('.toSource').remove();
-    var result = "";
-    for (var i = 0; i < html.length; ++i) {
-        if (html[i] == '<' && html[i + 1] != '/') {
-            var current = "";
-            var endPos;
-            for (endPos = i + 1; html[endPos] != ' '; ++endPos);
-            var currentType = html.substring(i + 1, endPos);
-            var j;
-            for (j = endPos; html[j] != 'i' && html[j + 1] != 'd'; ++j);
-            j += 4;
-            for (endPos = j; html[endPos] != '"'; ++endPos);
-            var currentId = html.substring(j, endPos);
-            var k = html.indexOf("style=", endPos);
-            k += 7;
-            for (endPos = k; html[endPos] != '"'; ++endPos);
-            var currentStyle = html.substring(k, endPos);
-            var currentParent = $('#' + currentId).parent().attr('id');
-            current = "{ \"element\":{\"locked\":false, \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"#" + currentParent + "\" }, \"style\":\"" + currentStyle + "\" }";
-            if(i < html.length - 1) {
-                current += "\r\n";
+    if(currentFile != null) {
+        var innerHTML = $('#workplace').clone().addClass("toSource");
+        $('body').append(innerHTML);
+        $(".toSource [class^='ui']").remove();
+        var html = $('.toSource').html();
+        $('.toSource').remove();
+        var result = "";
+        for (var i = 0; i < html.length; ++i) {
+            if (html[i] == '<' && html[i + 1] != '/') {
+                var current = "";
+                var endPos;
+                for (endPos = i + 1; html[endPos] != ' '; ++endPos);
+                var currentType = html.substring(i + 1, endPos);
+                var j;
+                for (j = endPos; html[j] != 'i' && html[j + 1] != 'd'; ++j);
+                j += 4;
+                for (endPos = j; html[endPos] != '"'; ++endPos);
+                var currentId = html.substring(j, endPos);
+                var k = html.indexOf("style=", endPos);
+                k += 7;
+                for (endPos = k; html[endPos] != '"'; ++endPos);
+                var currentStyle = html.substring(k, endPos);
+                var currentParent = $('#' + currentId).parent().attr('id');
+                current = "{ \"element\":{\"locked\":false, \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"#" + currentParent + "\" }, \"style\":\"" + currentStyle + "\" }";
+                if (i < html.length - 1) {
+                    current += "\r\n";
+                }
+                result += current;
+                i = endPos;
             }
-            result += current;
-            i = endPos;
+
         }
 
+        var query = "name=" + currentFile + "&data=" + result;
+
+        $.ajax({
+            url: 'database_scripts/saver.php',
+            type: 'POST',
+            data: query,
+            dataType: "text",
+            success: function (data) {
+                if (data.length > 0) {
+                    showTime(data);
+                }
+            }
+        });
+
+        html2canvas($("#workplace"), {
+            onrendered: function(canvas) {
+                theCanvas = canvas;
+                var dataURL = canvas.toDataURL();
+                $.ajax({
+                    url: 'database_scripts/photo_saver.php',
+                    type: 'POST',
+                    data: {
+                        img: dataURL
+                    }
+                });
+            }
+        });
+        document.title = currentFile;
+        saved = result;
+    } else {
+        $("#last_time").html("You cannot save until you sign up");
     }
+}
 
-    var query = "name=" + currentFile + "&data=" + result;
-
-    $.ajax({
-        url: 'database_scripts/saver.php',
-        type: 'POST',
-        data: query,
-        dataType: "text",
-        success: function (data) {
-            if (data.length > 0) {
-                console.log(data);
-            }
-        }
-    });
-
-    saved = result;
-
+function showTime(data) {
+    var time = data.split(" ")[1];
+    $("#last_time").html("Last save: " + time);
 }
 
 function appendSaved(data) {
@@ -60,7 +82,6 @@ function appendSaved(data) {
     generatedElements = new Array(0);
     for (var i = 0; i < array.length - 1; ++i) {
         var e = JSON.parse(array[i]);
-        console.log(e.element.id);
         generatedElements.push(e.element);
         generateAgain(e.element, e.style);
     }
@@ -683,7 +704,7 @@ function clearproperty() {
 
 function makeLoaded(data) {
     var rrys = data.split("#");
-    var name = rrys[1];
+    var name = rrys[rrys.length - 2];
     $.ajax({
         url: 'database_scripts/get_proj_containment.php',
         type: 'POST',

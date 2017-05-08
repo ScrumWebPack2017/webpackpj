@@ -20,6 +20,7 @@ var keys = {
 
 var changes = new Array(0);
 var cursor = 0;
+var my_cur = cursor;
 
 var currentFile = null;
 
@@ -29,17 +30,33 @@ var borderType = "solid";
 
 $(document).ready(function() {
 
-    $.ajax({
+    /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',
         data: '',
         dataType: "text",
         success: function(data) {
             if(data.indexOf("#") != -1) {
+                $("#left_btn").trigger('click');
+                currentFile = data.split("#")[data.split("#").length - 2];
                 makeLoaded(data);
+                $("#last_time").html("Last modifications: " + data.split("#")[data.split("#").length - 1]);
+
             }
         }
+    });*/
+
+    $.when(run()).done(function () {
+        setTimeout(function () {
+            $("#cover").css({visibility: 'hidden', zIndex: '0'});
+        }, 3000);
     });
+
+    var timer = setInterval(function () {
+        if(currentFile != null) {
+            createTemplateString();
+        }
+    }, 60000);
 
     $(document).tooltip();
 
@@ -315,6 +332,23 @@ $(document).ready(function() {
 
 });
 
+function run() {
+    $.ajax({
+        url: 'database_scripts/check_session.php',
+        type: 'POST',
+        data: '',
+        dataType: "text",
+        success: function(data) {
+            if(data.indexOf("#") != -1) {
+                $("#left_btn").trigger('click');
+                currentFile = data.split("#")[data.split("#").length - 2];
+                makeLoaded(data);
+                $("#last_time").html("Last modifications: " + data.split("#")[data.split("#").length - 1]);
+
+            }
+        }
+    });
+}
 
 function normalizeWorkplace() {
     var w = document.body.scrollWidth;
@@ -341,6 +375,7 @@ function deleteFocused() {
         $("#parentFoc_list").parent().addClass('ui-state-disabled');
         createNewStatus(focusedId + " was deleted", cursor, changes, generatedElements);
         ++cursor;
+        my_cur = cursor
     }
 }
 
@@ -595,6 +630,7 @@ function generateElement(element, point, tt) {
         stop: function(event, ui) {
             createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), cursor, changes, generatedElements);
             ++cursor;
+            my_cur = cursor
             $("#vertical_context_menu").css({
                 visibility: 'visible'
             });
@@ -629,6 +665,7 @@ function generateElement(element, point, tt) {
                 //$("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
                 createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, cursor, changes, generatedElements);
                 ++cursor;
+                my_cur = cursor
                 $("#" + ui.draggable.prop('id')).trigger('click');
             } else {
 
@@ -660,6 +697,7 @@ function generateElement(element, point, tt) {
             busy = false;
             createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", cursor, changes, generatedElements);
             ++cursor;
+            my_cur = cursor
             $("#vertical_context_menu").css({
                 visibility: 'visible'
             });
@@ -713,6 +751,7 @@ function generateElement(element, point, tt) {
     if (point == true) {
         createNewStatus("New " + element.type + " was created (" + element.id + ")", cursor, changes, generatedElements);
         ++cursor;
+        my_cur = cursor
     }
 
 }
@@ -832,11 +871,13 @@ function manipulate(eve) {
                 paste();
                 createNewStatus(focusedId + " was pasted", cursor, changes, generatedElements);
                 ++cursor;
+                my_cur = cursor
             } else {
                 if (eve.which == 88 && eve.ctrlKey) {
                     cut();
                     createNewStatus(focusedId + " was cut", cursor, changes, generatedElements);
                     ++cursor;
+                    my_cur = cursor;
                     $("#vertical_context_menu").css({
                         visibility: "hidden"
                     });
@@ -846,6 +887,27 @@ function manipulate(eve) {
                 } else {
                     if (eve.which == 68 && eve.ctrlKey) {
                         detach_child();
+                    } else {
+                        if (eve.which == 83 && eve.ctrlKey) {
+                            eve.preventDefault();
+                            createTemplateString();
+                        } else {
+                            if (eve.which == 90 && eve.ctrlKey) {
+                                eve.preventDefault();
+                                if(my_cur>= 0) {
+                                    --my_cur;
+                                    $("#" + 'radio_' + my_cur).trigger('click');
+                                }
+                            } else {
+                                if (eve.which == 89 && eve.ctrlKey) {
+                                    eve.preventDefault();
+                                    if(my_cur <= ($("#changes_menu").children().length / 2) - 1) {
+                                        my_cur++;
+                                        $("#" + 'radio_' + my_cur).trigger('click');
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -881,6 +943,7 @@ function detach_child() {
             $("#" + focusedId).resizable("option", "containment", '');
             createNewStatus("Block " + focusedId + " was detached", cursor, changes, generatedElements);
             ++cursor;
+            my_cur = cursor
         }
     }
 }
@@ -947,6 +1010,7 @@ function paste() {
         }
         createNewStatus(e.id + " was pasted", cursor, changes, generatedElements);
         ++cursor;
+        my_cur = cursor;
     }
 }
 

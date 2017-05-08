@@ -1,7 +1,0 @@
-{ "element":{"locked":false, "type":"div", "id":"div_1", "parent":"#workplace" }, "style":"position: absolute; float: right; background: rgba(0, 0, 0, 0); z-index: 1; left: 193px; top: 66px; cursor: auto;" }
-{ "element":{"locked":false, "type":"input", "id":"input_1", "parent":"#div_1" }, "style":"width: 100px; height: 35px; border: 1px solid black;" }
-{ "element":{"locked":false, "type":"div", "id":"div_2", "parent":"#workplace" }, "style":"position: absolute; float: right; background: rgba(0, 0, 0, 0); z-index: 1; left: 726px; top: 115px; cursor: auto;" }
-{ "element":{"locked":false, "type":"textarea", "id":"textarea_1", "parent":"#div_2" }, "style":"width: 100px; height: 35px; border: 1px solid black; resize: none;" }
-{ "element":{"locked":false, "type":"div", "id":"div_3", "parent":"#workplace" }, "style":"position: absolute; float: right; width: 200px; height: 200px; background: rgb(244, 85, 155); z-index: 1; left: 418px; top: 182px; cursor: auto;" }
-{ "element":{"locked":false, "type":"div", "id":"div_4", "parent":"#workplace" }, "style":"position: absolute; float: right; background: rgba(0, 0, 0, 0); z-index: 2; left: 692px; top: 255px; cursor: auto;" }
-{ "element":{"locked":false, "type":"input", "id":"input_2", "parent":"#div_4" }, "style":"width: 100px; height: 35px; border: 1px solid black;" }

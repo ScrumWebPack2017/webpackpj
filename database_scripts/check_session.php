@@ -19,7 +19,16 @@
             $result = $row["file"];
         }
         if(isset($_SESSION["file"])) {
-            echo $result . "#" . $_SESSION["file"];
+            $search_query = "SELECT DISTINCT `Projects`.`timer` as 'timer' FROM `User`, `Projects` 
+                    WHERE `User`.`email` = '" . $_SESSION["user"] . "' AND `User`.`id` = `Projects`.`userid` 
+                    AND `Projects`.`path` = '" . $_SESSION["file"] . "'";
+            $result = mysql_query($search_query);
+            if(!$result) {
+                echo "retrieve error: " . mysql_error();
+                exit();
+            }
+            $row = mysql_fetch_array($result);
+            echo $result . "#" . $_SESSION["file"] . "#" . $row["timer"] ;
         } else {
             echo $result;
         }

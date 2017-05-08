@@ -176,6 +176,8 @@
                 </div>
                 <div id="camera_ico" class="status_element" title="Save workplace as image.">
                 </div>
+                <div class="status_element" id="last_time">
+                </div>
             </div>
         </div>
     </div>
@@ -419,6 +421,20 @@
                 </ul>
             </li>
         </ul>
+    </div>
+</div>
+
+<div id="cover">
+    <div class="cssload-fond">
+        <div class="cssload-container-general">
+            <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
+            <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_2"> </div></div>
+            <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_3"> </div></div>
+            <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_4"> </div></div>
+        </div>
+    </div>
+    <div id="webpack_logos">
+
     </div>
 </div>
 

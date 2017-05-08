@@ -3,14 +3,17 @@ var super_array_elems = null;
 var cur_pos = -1;
 
 function createNewStatus(mesg, pos, array, super_array) {
-    if (cur_pos + 1 < pos && cur_pos != -1) {
-        while (showCursor() > cur_pos + 1) {
+    if (my_cur + 1 < pos && my_cur != -1) {
+        while (showCursor() > my_cur + 1) {
             $("#radio_" + (showCursor() - 1)).remove();
             $('#changes_menu label[for="radio_' + (showCursor() - 1) + '"]').remove();
             cursorMinus();
             array.pop();
         }
         console.log(showCursor());
+    }
+    if(currentFile != null) {
+        document.title = "* " + currentFile;
     }
     pos = showCursor();
     var date = new Date();
@@ -53,7 +56,7 @@ function createNewStatus(mesg, pos, array, super_array) {
     $("#changes_menu").append(label);
     $("#changes_menu").append(input);
     active_id = "#" + 'radio_' + pos;
-    cur_pos = pos;
+    my_cur = pos;
 
 
     $("#" + 'radio_' + pos).checkboxradio({
@@ -63,7 +66,7 @@ function createNewStatus(mesg, pos, array, super_array) {
     $("#" + 'radio_' + pos).on("click", function() {
         if (active_id == "#" + 'radio_' + pos) return;
         active_id = "#" + 'radio_' + pos;
-        cur_pos = pos;
+        my_cur = pos;
         readChanges(this, array);
         if ($('#menu_tools').length) {
             return;
