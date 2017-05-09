@@ -27,7 +27,7 @@ function createTemplateString() {
                 for (endPos = k; html[endPos] != '"'; ++endPos);
                 var currentStyle = html.substring(k, endPos);
                 var currentParent = $('#' + currentId).parent().attr('id');
-                current = "{ \"element\":{\"locked\":false, \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"#" + currentParent + "\" }, \"style\":\"" + currentStyle + "\" }";
+                current = "{ \"element\":{\"locked\":" + findElem(currentId, generatedElements).locked + ", \"type\":\"" + currentType + "\", \"id\":\"" + currentId + "\", \"parent\":\"#" + currentParent + "\" }, \"style\":\"" + currentStyle + "\" }";
                 if (i < html.length - 1) {
                     current += "\r\n";
                 }
