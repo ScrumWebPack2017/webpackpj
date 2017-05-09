@@ -7,9 +7,11 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="styles/cabinet.css">
 
+
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
     <script type="text/javascript" src="scripts/cabinet.js"></script>
+
     <!--
     <script type="text/javascript" src="scripts/menus_and_elements.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
@@ -27,12 +29,12 @@
     <div id="wrapper">
         <div id="top">
             <div id="top_logo">
-                <img src="images/cabinet/logo.jpg" height="90">
+                <img src="images/cabinet/logo.jpg" height="72">
             </div>
 
             <!-- float changed -->
             <div id="top_menu_box" class="top" style="margin: 0 40px 0 40px;">
-                <img src="images/cabinet/menu.jpg" height="40" style="cursor: pointer;">
+                <img src="images/cabinet/menu.jpg" height="30" style="cursor: pointer;" onclick="dropMenu()">
             </div>
             <div id="top_name_box" class="top">
                 <div id="top_name">
@@ -47,15 +49,15 @@
         <div id="control_wrapper">
             <div id="control">
                 <div class="control_element" id="load_btn">
-                    <img src="images/cabinet/icons_DB/iconsDB_01.png" width="50" style="cursor: pointer">
+                    <img src="images/cabinet/icons_DB/iconDB1.png" width="46" style="cursor: pointer">
                 </div>
                 <div class="control_element" id="delete_btn">
-                    <img src="images/cabinet/icons_DB/iconsDB_02.gif" width="50" style="cursor: pointer">
+                    <img src="images/cabinet/icons_DB/iconDB2.png" width="46" style="cursor: pointer">
                 </div>
                 <div class="control_element">
-                    <img src="images/cabinet/icons_DB/iconsDB_03.gif" width="50" style="cursor: pointer" onclick="showProjectFeild()">
+                    <img src="images/cabinet/icons_DB/iconDB3.png" width="46" style="cursor: pointer" onclick="showProjectFeild()">
                 </div>
-                <div class="control_element" id="createForm">
+                <div class="control_element" id="createForm" style="margin-left: 40px">
                     <input type="text" id="projectName" class="control_element">
                         <div class="control_element" id="createBtn">
                             <img src="images/cabinet/icons_DB/iconsDB_04.gif" width="50" style="cursor: pointer">
@@ -82,7 +84,126 @@
             </div>
         </div>
     </div>
-<div id="ajax">
-</div>
+
+    <div id="drop_menu">
+        <div class="drop_menu_line">
+            <div class=" drop drop_left">
+                E-mail:
+            </div>
+            <div class="drop drop_center"  id="drop_email">
+                testlongemail@mail.ru
+            </div>
+            <div class="drop drop_right">
+                <img src="images/cabinet/top_arrow.jpg" height="34" style="cursor: pointer;" onclick="dropMenu()">
+            </div>
+        </div>
+        <div class="drop_menu_line">
+            <div class="drop drop_left">
+                Phone:
+            </div>
+            <div class="drop drop_center"  id="drop_phone">
+                380669341903
+            </div>
+            <div class="drop drop_right">
+                <img src="images/cabinet/pencil.jpg" height="34" style="cursor: pointer;" onclick="showChangeMenu()">
+            </div>
+        </div>
+        <div class="drop_menu_line">
+            <div class="drop drop_left">
+                Gender:
+            </div>
+            <div class="drop drop_center" id="drop_gender">
+                Male
+            </div>
+            <div class="drop drop_right">
+                <img src="images/cabinet/stats.jpg" height="34" style="cursor: pointer;">
+            </div>
+        </div>
+        <div class="drop_menu_line">
+            <div class="drop drop_left">
+                Country:
+            </div>
+            <div class="drop drop_center" id="drop_country">
+                Ukraine
+            </div>
+            <div class="drop drop_right">
+                <img src="images/cabinet/exit.jpg" height="34" style="cursor: pointer;">
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div id="change_menu_wrapper" onclick="showChangeMenu()"> </div>
+    <div id="change_menu_panel">
+        <div id="tab_line">
+            <div id="change_user_tab" class="tab" onclick="showUserDataChanger()">
+                Change personal data
+            </div>
+            <div id="change_pass_tab" class="tab" onclick="showPassChanger()">
+                Change password
+            </div>
+        </div>
+
+        <div id="change_user_box" class="change_box">
+            <div class="change_line">
+                <div class="descr">
+                    E-mail:
+                </div>
+                <div class="input">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="change_line">
+                <div class="descr">
+                    Login:
+                </div>
+                <div class="input">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="change_line">
+                <div class="descr">
+                    Phone:
+                </div>
+                <div class="input">
+                    <input type="text">
+                </div>
+            </div>
+
+            <div class="change_line">
+                <div class="descr">
+                    Country:
+                </div>
+                <div class="input">
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+
+        <div id="change_pass_box" class="change_box">
+            <div class="change_line">
+                <div class="descr">
+                    Enter previous password:
+                </div>
+                <div class="input">
+                    <input type="password">
+                </div>
+            </div>
+            <div class="change_line">
+                <div class="descr">
+                    Enter new password:
+                </div>
+                <div class="input">
+                    <input type="password">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="ajax"></div>
 </body>
 </html>
