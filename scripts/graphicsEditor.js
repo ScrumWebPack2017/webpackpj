@@ -516,7 +516,6 @@ function generateElement(element, point, tt) {
         });
     }
 
-
     //printStatus(identifier)
 
     $("#" + identifier).on("click", function(e) {
@@ -678,6 +677,7 @@ function generateElement(element, point, tt) {
         containment: "#workplace",
         scroll: true,
         drag: function(event, ui) {
+
             busy = true;
             $("#vertical_context_menu").css({
                 visibility: 'hidden'
@@ -1006,7 +1006,7 @@ function paste() {
             };
             ++zindex;
             generatedElements.push(e);
-            generateAgain(e, $("#" + buffer.element.id).clone().css({left:'10px', top:'10px'}).attr('style'));
+            generateAgain(e, $("#" + buffer.element.id).clone().css({left:'10px', top:'10px'}).attr('style'), false);
         }
         createNewStatus(e.id + " was pasted", cursor, changes, generatedElements);
         ++cursor;

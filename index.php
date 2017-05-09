@@ -13,13 +13,13 @@
 
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="scripts/menus_and_elements.js"></script>
     <script type="text/javascript" src="scripts/jquery.treeview.js"></script>
     <script type="text/javascript" src="scripts/library.js"></script>
     <script type="text/javascript" src="scripts/html2canvas.js"></script>
     <script type="text/javascript" src="scripts/FileSaver.js"></script>
     <script src="scripts/src-min/ace.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
     <script type="text/javascript" src="scripts/graphicsEditor.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
     <script type="text/javascript" src="scripts/colResizable-1.6.js"></script>
@@ -223,7 +223,7 @@
 <div id="workplace">
     <ul id="menu_tools">
         <li>
-            <div onclick="createTemplateString()"><span class="ui-icon ui-icon-disk"></span>Save</div>
+            <div onclick="saveFromMenu()"><span class="ui-icon ui-icon-disk"></span>Save</div>
         </li>
         <li class="ui-state-disabled">
             <div onclick="detach_child()" id="detach_list"><span class="ui-icon ui-icon-arrowrefresh-1-e"></span>Detach</div>

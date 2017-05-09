@@ -82,9 +82,15 @@ function appendSaved(data) {
     generatedElements = new Array(0);
     for (var i = 0; i < array.length - 1; ++i) {
         var e = JSON.parse(array[i]);
-        generatedElements.push(e.element);
-        generateAgain(e.element, e.style);
+        var b = jQuery.extend(true, {}, e.element);
+        generatedElements.push(b);
+        generateAgain(b, e.style, true);
     }
+}
+
+function saveFromMenu() {
+    $('#menu_tools').css('visibility', 'hidden');
+    createTemplateString();
 }
 
 
@@ -523,7 +529,7 @@ function getRandColor() {
     return "rgb(" + r + ", " + g + ", " + b + ")";
 }
 
-function generateElement(element, point) {
+/*function generateElement(element, point) {
     var el = document.createElement(element.type);
     var identifier = element.type + '_' + (maxId(element.type) + 1);
 
@@ -617,6 +623,7 @@ function generateElement(element, point) {
         }
     }).droppable({
         over: function(event, ui) {
+
             var pps = findElemPos(this.id);
             if (generatedElements[pps].locked == true) return;
             if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
@@ -647,7 +654,7 @@ function generateElement(element, point) {
             clearOutlines(this);
         }
     });
-}
+}*/
 
 function getRandomColorAndSize(element) {
     var r = getRandomInt(0, 255);
@@ -714,6 +721,7 @@ function makeLoaded(data) {
             appendSaved(data);
             createNewStatus("Load", cursor, changes, generatedElements);
             ++cursor;
+            document.title = currentFile;
             var elems = $("#workplace .work_elements").each(function(event) {
                 $(this).children().removeClass('ui-icon');
             });

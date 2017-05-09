@@ -10,7 +10,8 @@ function createNewStatus(mesg, pos, array, super_array) {
             cursorMinus();
             array.pop();
         }
-        console.log(showCursor());
+        generatedElements = new Array(0);
+        generatedElements = jQuery.extend(true, [], array[array.length - 1].elementors);
     }
     if(currentFile != null) {
         document.title = "* " + currentFile;
@@ -43,7 +44,7 @@ function createNewStatus(mesg, pos, array, super_array) {
         elementors: allofElements
     });
 
-    super_array_elems = allofElements;
+    super_array_elems = jQuery.extend(true, [], super_array);
 
     var input = document.createElement("input");
     input.setAttribute('class', '.status_radio');
@@ -108,7 +109,7 @@ function readChanges(thise, elems) {
 
     for (var i = 0; i < allEl.length; ++i) {
         var temp = findElem(allEl[i].elem, e.elementors);
-        generateAgain(temp, allEl[i].css);
+        generateAgain(temp, allEl[i].css, false);
         var elems = $("#workplace .work_elements").each(function(event) {
             $(this).children().removeClass('ui-icon');
         });
@@ -127,13 +128,17 @@ function readChanges(thise, elems) {
 
 }
 
-function generateAgain(element, css) {
+function generateAgain(element, css, isLoading) {
     el = document.createElement(element.type);
     el.setAttribute('id', element.id);
     if (element.type != "textarea" && element.type != "input" && element.type != "select") {
         el.setAttribute('class', 'work_elements');
     }
     $(element.parent).append(el);
+
+    if(isLoading) {
+        super_array_elems = generatedElements;
+    }
 
     /*if(element.type == "input") {
      var el1 = document.createElement('input');
@@ -278,14 +283,16 @@ function generateAgain(element, css) {
             stop: function(event, ui) {
                 busy = false;
                 createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), showCursor(), showChanges(), showGE());
-                setCur(1);
+                cursor++;
+                my_cur = cursor;
                 $("#vertical_context_menu").css({
                     visibility: 'visible'
                 });
             }
         }).droppable({
             over: function(event, ui) {
-                var pps = findElemPos(this.id, super_array_elems);
+                var pps = findElemPos(this.id, generatedElements);
+
                 if (generatedElements[pps].locked == true) return;
                 if ($("#" + ui.draggable.prop('id')).parent().attr("id") == this.id || checkChildren(this.id, ui.draggable.prop('id'))) return;
                 swapIndexes(event, ui, this);
@@ -305,24 +312,27 @@ function generateAgain(element, css) {
                         top: 0,
                         left: 0
                     });
-                    $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
-                    $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                     //$("#" + this.id).resizable("option", "minHeight", ($("#" + ui.draggable.prop('id')).height() + 1));
                     //$("#" + this.id).resizable("option", "minWidth", ($("#" + ui.draggable.prop('id')).width() + 1));
-                    findElemPos(ui.draggable.prop('id'), super_array_elems).parent = "#" + this.id;
+
+                    findElem(ui.draggable.prop('id'), generatedElements).parent = "#" + this.id;
+                    $("#" + ui.draggable.prop('id')).draggable("option", "containment", $("#" + this.id));
+                    $("#" + ui.draggable.prop('id')).resizable("option", "containment", $("#" + this.id));
                     createNewStatus(ui.draggable.prop('id') + " was dropped into " + this.id, showCursor(), showChanges(), showGE());
-                    setCur(1);
+                    cursor++;
+                    my_cur = cursor;
+                    $(ui.draggable).trigger('click');
                 } else {
 
                 }
                 clearOutlines(this);
-                $(ui.draggable).trigger('click');
             }
         }).draggable({
             cancel: null,
             containment: element.parent,
             scroll: true,
             drag: function(event, ui) {
+
                 busy = true;
                 $("#" + this.id).trigger("click");
                 $("#vertical_context_menu").css({
@@ -341,7 +351,8 @@ function generateAgain(element, css) {
             stop: function(event, ui) {
                 busy = false;
                 createNewStatus("Block " + this.id + " was moved to (" + $(this).position().left + ", " + $(this).position().top + ")", showCursor(), showChanges(), showGE());
-                setCur(1);
+                cursor++;
+                my_cur = cursor;
                 $("#vertical_context_menu").css({
                     visibility: 'visible'
                 });
