@@ -1,10 +1,43 @@
 var focused = null;
+var t, l = (new Date()).getTime();
+
+/*
+ confirmUserInfo() - send changed data
+ serializeUserForm() - GET string for used info
+
+ */
+
 
 $(document).ready(function() {
+    centerize();
     normalizeCabinet();
-
+    feelUserInfo("someEmail.@gmail.com", "Sonya Marmeladova", "3807766999", "Male", "USA");
     $(window).resize(function () {
         normalizeCabinet();
+    });
+
+    $('#change_user_box input').focus(function() {
+        if (this.id == 'input_email') {
+            borderDefault(this.id);
+            $('#email_error').html('');
+        } else if (this.id == 'input_phone') {
+            borderDefault(this.id);
+            $('#phone_error').html('');
+        } else if (this.id == 'input_country') {
+            borderDefault(this.id);
+            $('#country_error').html('');
+        }
+        normalizeBorders();
+    });
+
+    $('#control_wrapper, #templates_wrapper').on("click", function() {if($('#drop_menu').css('visibility') == 'visible') {
+        dropMenu();
+    }})
+
+    $(document).on("scroll",function(){
+        if($('#drop_menu').css('visibility') == 'visible') {
+            dropMenu();
+        }
     });
 
     $.ajax({
@@ -77,6 +110,54 @@ $(document).ready(function() {
        }
     });
 });
+
+function centerize() {
+    var height = document.documentElement.clientHeight;
+    $('#change_menu_panel').css('top', (height - $('#change_menu_panel').css('height').split('p')[0] - 30)/2);
+}
+
+function logOut() {
+    $.ajax({
+        url: 'database_scripts/session_close.php',
+        success: function(data) {
+            if (data == 'closing')
+                window.location.replace("http://webpackpj.com");
+        }
+    });
+
+}
+
+// Function to put userInfo
+function feelUserInfo(email, login, phone, gender, country) {
+    $('#drop_email').html(email);
+    $('#input_email').val(email);
+    if (login != 0) {
+        $('#top_name').html(login);
+        $('#input_login').val(login);
+    } else {
+        $('#top_name').html(email);
+    }
+    if (phone != 0) {
+        $('#drop_phone').html(phone);
+        $('#input_phone').val(phone);
+    } else {
+        $('#drop_phone').html('-');
+    }
+    if (gender != 0) {
+        $('#drop_gender').html(gender);
+        $('#input_gender').val(gender);
+    } else {
+        $('#drop_phone').html('-');
+    }
+    if (country != 0) {
+        $('#drop_cpuntry').html(country);
+        $('#input_country').val(country);
+
+    } else {
+        $('#drop_phone').html('-');
+    }
+}
+
 
 function showPassChanger() {
     $('#change_pass_tab').css('color', '#ffffff');
@@ -170,5 +251,135 @@ function showChangeMenu() {
     }
 }
 
+function serializeUserForm() {
+    var result = "email=";
+    result += $('#input_email').val();
+    result += "&login=";
+    result += $('#input_login').val();
+    result += "&phone=";
+    result += $('#input_phone').val();
+    result += "&country=";
+    result += $('#input_country').val();
+    alert(result);
+}
 
+function confirmNewPassword() {
+    if (checkPassword()) {
+        var password = "password=" + $('#input_new_pass').val();
+
+        //sending to DB...
+    }
+}
+
+function checkPrevPassword(prevPass) {
+    // prevPass - string
+    // return true; if input is equal to DB value
+}
+
+function checkPassword() {
+    var newPass = $('#input_new_pass').val();
+    var prevPass = $('#input_prev_pass').val();
+
+    if (!checkPrevPassword(prevPass)) {
+        borderRed('input_prev_pass');
+        $('#prev_pass_error').html('Password is incorrect');
+        return false;
+    }
+
+    if (newPass.length < 6) {
+        borderRed('input_new_pass');
+        $('#new_pass_error').html('Password must contain at least 6 symbols');
+        return false;
+    }
+
+    var pattern = /^[a-z0-9_-]{6,18}$/i;
+    if (!pattern.test(newPass)) {
+        borderRed('input_new_pass');
+        $('#new_pass_error1').html('Password contains irregular symbols');
+        return false;
+        // Invalid
+    }
+    return true;
+
+}
+
+function checkCountry() {
+    var country = $('#input_country').val();
+    if (country.length == 0)
+        return true;
+    if (country.indexOf(' ') != 0) {
+        var pattern = /^[a-zA-Zа-яА-ЯЇї()-]{2,28}$/i;
+        if (!pattern.test(country)) {
+            borderRed('input_country');
+            $('#country_error').html('Invalid input');
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkPhone() {
+    var phone = $('#input_phone').val();
+    if (phone.length == 0)
+        return true;
+    if (phone.indexOf(' ') != 0) {
+        var pattern = /^[0-9()-]{6,18}$/i;
+        if (!pattern.test(phone)) {
+            borderRed('input_phone');
+            $('#phone_error').html('Invalid phone');
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkEmail() {
+    var email = $('#input_email').val();
+    if (email == "") {
+        borderRed('input_email');
+        $('#email_error').html('This field is required');
+        return false;
+    } else {
+        var pattern = /^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,4}\.)?[a-z]{2,4}$/i;
+        if(!pattern.test(email)) {
+            borderRed('input_email');
+            $('#email_error').html('Invalid input');
+            return false;
+        }
+    }
+    var data = "email=" + $('#input_email').val();
+    $.ajax({
+        url: 'database_scripts/emailChecker.php',
+        type: 'POST',
+        data: data,
+        dataType: 'text',
+        success: function (data) {
+            if (data.indexOf('yes') == -1) {
+                borderRed('input_email');
+                $('#email_error').html('Email exists');
+            }
+        }
+    });
+    return $('#email_error').html().length == 0;
+}
+
+function borderRed(id) {
+    $('#' + id).css('border', '1px solid red');
+}
+
+function borderDefault(id) {
+    $('#' + id).css('border', '1px solid #e7e7e7');
+}
+
+function confirmUserInfo() {
+    if(checkUserInfo()) {
+        var get = serializeUserForm();
+
+        // send info
+    }
+}
+
+function checkUserInfo() {
+    return checkEmail() & checkPhone() & checkCountry();
+}
 

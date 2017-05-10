@@ -127,7 +127,7 @@
                 Ukraine
             </div>
             <div class="drop drop_right">
-                <img src="images/cabinet/exit.jpg" height="34" style="cursor: pointer;">
+                <img src="images/cabinet/exit.jpg" height="34" style="cursor: pointer;" onclick="logOut()">
             </div>
         </div>
 
@@ -141,64 +141,83 @@
             <div id="change_user_tab" class="tab" onclick="showUserDataChanger()">
                 Change personal data
             </div>
-            <div id="change_pass_tab" class="tab" onclick="showPassChanger()">
+            <div id="change_pass_tab" class="tab" onclick="showPassChanger()" style="border-right: none;">
                 Change password
             </div>
         </div>
 
-        <div id="change_user_box" class="change_box">
-            <div class="change_line">
-                <div class="descr">
-                    E-mail:
+        <div id="changers_wrapper">
+            <div id="change_user_box" class="change_box">
+                <div class="change_line">
+                    <div class="descr">
+                        E-mail:
+                    </div>
+                    <div class="inputs">
+                        <input type="text" id="input_email">
+                    </div>
+                    <div id="email_error" class="error_changer"></div>
                 </div>
-                <div class="input">
-                    <input type="text">
+
+                <div class="change_line">
+                    <div class="descr">
+                        Login:
+                    </div>
+                    <div class="inputs">
+                        <input type="text" id="input_login">
+                    </div>
+                    <div id="login_error" class="error_changer"></div>
+                </div>
+
+                <div class="change_line">
+                    <div class="descr">
+                        Phone:
+                    </div>
+                    <div class="inputs">
+                        <input type="text" id="input_phone">
+                    </div>
+                    <div id="phone_error" class="error_changer"></div>
+                </div>
+
+                <div class="change_line">
+                    <div class="descr">
+                        Country:
+                    </div>
+                    <div class="inputs">
+                        <input type="text" id="input_country">
+                    </div>
+                    <div id="country_error" class="error_changer"></div>
+                </div>
+                <div class="change_line">
+                    <div id="user_info_confirm" onclick="confirmUserInfo()" class="confirmBtn">
+                        Confirm
+                    </div>
                 </div>
             </div>
 
-            <div class="change_line">
-                <div class="descr">
-                    Login:
+            <div id="change_pass_box" class="change_box">
+                <div class="change_line">
+                    <div class="descr">
+                        Enter previous password:
+                    </div>
+                    <div class="inputs">
+                        <input type="password" id="input_prev_pass">
+                    </div>
+                    <div id="prev_pass_error" class="error_changer"></div>
                 </div>
-                <div class="input">
-                    <input type="text">
+                <div class="change_line">
+                    <div class="descr">
+                        Enter new password:
+                    </div>
+                    <div class="inputs">
+                        <input type="password" id="input_new_pass">
+                    </div>
+                    <div id="new_pass_error" class="error_changer"></div>
+                    <div id="new_pass_error1" class="error_changer"></div>
                 </div>
-            </div>
-
-            <div class="change_line">
-                <div class="descr">
-                    Phone:
-                </div>
-                <div class="input">
-                    <input type="text">
-                </div>
-            </div>
-
-            <div class="change_line">
-                <div class="descr">
-                    Country:
-                </div>
-                <div class="input">
-                    <input type="text">
-                </div>
-            </div>
-        </div>
-
-        <div id="change_pass_box" class="change_box">
-            <div class="change_line">
-                <div class="descr">
-                    Enter previous password:
-                </div>
-                <div class="input">
-                    <input type="password">
-                </div>
-            </div>
-            <div class="change_line">
-                <div class="descr">
-                    Enter new password:
-                </div>
-                <div class="input">
-                    <input type="password">
+                <div class="change_line">
+                    <div id="password_confirm" onclick="confirmNewPassword()" class="confirmBtn">
+                        Confirm
+                    </div>
                 </div>
             </div>
         </div>
