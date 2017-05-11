@@ -57,6 +57,7 @@ $(document).ready(function() {
             if(data != "Error") {
                 var input = data.split("*");
                 feelUserInfo(input[0], input[1], input[2], input[3], input[4]);
+                $("#top_photo img").attr('src', "../images/png/" + input[5]);
             }
         }
     });

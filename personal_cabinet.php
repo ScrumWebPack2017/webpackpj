@@ -42,7 +42,9 @@
                 </div>
             </div>
             <div id="top_photo_box" class="top" style="margin-right: 40px;">
-                <div id="top_photo"></div>
+                <div id="top_photo">
+                    <img src="images/png/boy-0.png">
+                </div>
             </div>
 
         </div>

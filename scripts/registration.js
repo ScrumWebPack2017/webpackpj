@@ -1,11 +1,19 @@
+var group = null;
+
 window.onload = function() {
     centerize();
+
     $('#registration_form').submit(function(event) {
         event.preventDefault();
         if (validateRegistration())
             sendRegistration();
         else
             errorRegistration();
+    });
+
+    $('#country_input').change(function() {
+        var selected = $(':selected', this);
+        group = selected.closest('optgroup').attr('label');
     });
 
     instaRegCheck();
@@ -104,7 +112,7 @@ function centerize() {
 
 // Checkers :
 function checkCountry() {
-    var country = $('#country_input').val();
+    /*var country = $('#country_input option:selected').text();
     if (country.length == 0)
         return true;
     if (country.indexOf(' ') != 0) {
@@ -114,7 +122,7 @@ function checkCountry() {
             $('#country_msg').html('Invalid input');
             return false;
         }
-    }
+    }*/
     return true;
 }
 
@@ -212,11 +220,20 @@ function checkPassword() {
 }
 
 function sendRegistration() {
-    var data = $('#registration_form').serialize();
+    var image = defineImage($("#gender_input").val());
+    var data = $('#registration_form').serialize() + "&image=" + image;
+    var tmp = data.split("&");
+    for(var i = 0; i < tmp.length; ++i) {
+        if(tmp[i].indexOf("country=") != -1) {
+            tmp[i] = "country=" + $('#country_input option:selected').text();
+            break;
+        }
+    }
+    data = tmp.join("&");
     $.ajax({
         url: 'database_scripts/reg_script.php',
         type: 'POST',
-        data: data,
+        data: data ,
         dataType: 'text',
         success: function (data) {
             if (data == 'OK') {
@@ -230,6 +247,42 @@ function sendRegistration() {
 
         }
     });
+}
+
+function defineImage(gender) {
+    var avatars = [
+        {
+            name: "Africa",
+            gender: "Male",
+            indexes: [6, 10, 12, 20, 22]
+        },
+        {
+            name: "Africa",
+            gender: "Female",
+            indexes: [1, 2, 7, 14, 20, 25, 10]
+        },
+        {
+            name: "AmericasAsiaEuropeOceania",
+            gender: "Male",
+            indexes: [0, 1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 21]
+        },
+        {
+            name: "AmericasAsiaEuropeOceania",
+            gender: "Female",
+            indexes: [0, 3, 4, 5, 6, 8, 9, 11, 12, 13, 15, 16, 17, 18, 19, 21, 22, 23, 24, 26]
+        },
+    ];
+
+    var gen = gender == "Male" ? "boy" : "girl";
+
+    for(var i = 0; i < 4; ++i) {
+        if(avatars[i].name.indexOf(group) != -1 && gender == avatars[i].gender) {
+            var file = gen + "-" + avatars[i].indexes[Math.floor(Math.random() * avatars[i].indexes.length)] + ".png";
+            return file;
+        }
+    }
+
+    return "mystery.png";
 }
 
 function errorRegistration() {

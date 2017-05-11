@@ -29,7 +29,11 @@ var borderColor = "#ffffff";
 var borderType = "solid";
 
 $(document).ready(function() {
-
+    $(window).unload(function() {
+        if(currentFile != null) {
+            createTemplateString();
+        }
+    });
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',

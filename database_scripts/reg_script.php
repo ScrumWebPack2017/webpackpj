@@ -30,8 +30,9 @@
         $country = (empty($_POST["country"])) ? "NULL" : "'" . $_POST["country"] . "'";
         $gender = (empty($_POST["gender"])) ? "NULL" : "'" . $_POST["gender"] . "'";
         $name = (empty($_POST["name"])) ? "NULL" : "'" . $_POST["name"] . "'";
-        $insert_query = "INSERT INTO `User` (`email`, `password`, `name`, `gender`, `country`, `phone`) 
-            VALUES ('" . $email . "', '" . $password . "', " . $name . ", " . $gender . ", " . $country . ", " . $phone . ")";
+        $image = $_POST["image"];
+        $insert_query = "INSERT INTO `User` (`email`, `password`, `name`, `gender`, `country`, `phone`, `image`) 
+            VALUES ('" . $email . "', '" . $password . "', " . $name . ", " . $gender . ", " . $country . ", " . $phone . ", '" . $image . "')";
         $result_insert = mysql_query($insert_query);
         if(!$result_insert) { //вдруг не удалось сделать запрос
             echo "not sent: " . mysql_error();

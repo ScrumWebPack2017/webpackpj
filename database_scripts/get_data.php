@@ -7,7 +7,7 @@
     if(isset($_SESSION["user"])) {
         $email = $_SESSION["user"];
 
-        $select_query = "SELECT `User`.`email` as 'email', `User`.`name` as 'name', `User`.`phone` as 'phone', `User`.`gender` as 'gender', `User`.`country` as 'country' 
+        $select_query = "SELECT `User`.`email` as 'email', `User`.`name` as 'name', `User`.`phone` as 'phone', `User`.`gender` as 'gender', `User`.`country` as 'country', `User`.`image` as 'image'
             FROM `User` WHERE `User`.`email` = '" . $email . "'";
         $q_result = mysql_query($select_query);
         if(!$q_result) {
@@ -19,7 +19,8 @@
         $phone = ($row['phone'] == null || $row['phone'] == 'NULL') ? "0" : $row['phone'];
         $gender = ($row['gender'] == null || $row['gender'] == 'NULL') ? "0" : $row['gender'];
         $country = ($row['country'] == null || $row['country'] == 'NULL') ? "0" : $row['country'];
-        $result = $row['email'] . "*" . $name . "*" . $phone . "*" . $gender . "*" . $country;
+        $image = $row['image'];
+        $result = $row['email'] . "*" . $name . "*" . $phone . "*" . $gender . "*" . $country . "*" . $image;
         echo $result;
     } else {
         echo "Error";
