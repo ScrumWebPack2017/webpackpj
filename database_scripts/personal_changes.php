@@ -2,28 +2,32 @@
     require ("database_framework.php");
     include "database_connect.php";
 
-    if(!$_POST["name"] && !$_POST["gender"] && !$_POST["country"] && !$_POST["phone"]) {
+    session_start();
+
+    if(!$_POST["email"] && !$_POST["name"] && !$_POST["country"] && !$_POST["phone"]) {
         echo "post fail";
         exit();
     }
 
+    $email = $_POST["email"];
     $name = empty($_POST["name"]) ? "NULL" : $_POST["name"];
-    $gender = empty($_POST["gender"]) ? "NULL" : $_POST["gender"];
     $country = empty($_POST["country"]) ? "NULL" : $_POST["country"];
     $phone = empty($_POST["phone"]) ? "NULL" : $_POST["phone"];
-    if(!$_SESSION["user"]) {
+    if(!isset($_SESSION["user"])) {
         echo "session error";
         exit();
     }
 
     $mail = $_SESSION["user"];
 
-    $update_query = "UPDATE `User` SET `name` = '". $name ."', `gender` = '". $gender ."', `country` = '". $country ."', `phone` = '". $phone ."'  WHERE `email` = '" . $mail . "'";
+    $update_query = "UPDATE `User` SET `email` = '" . $email . "' `name` = '". $name ."', `country` = '". $country ."', `phone` = '". $phone ."'  WHERE `email` = '" . $mail . "'";
     $result_update = mysql_query($update_query);
     if(!$result_update) {
         echo "update error: " . mysql_error();
         exit();
     }
+
+    $_SESSION["user"] = $email;
 
     echo "OK";
 ?>
