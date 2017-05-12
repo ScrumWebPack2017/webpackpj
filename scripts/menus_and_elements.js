@@ -486,7 +486,69 @@ function pos(temp, w, h, x, y) {
     return false;
 }
 
+function getHexRGBColor(color) {
+    color = color.replace(/\s/g,"");
+    var aRGB = color.match(/^rgb\((\d{1,3}[%]?),(\d{1,3}[%]?),(\d{1,3}[%]?)\)$/i);
+    if(aRGB) {
+        color = '';
+        for (var i=1;  i<=3; i++) color += Math.round((aRGB[i][aRGB[i].length-1]=="%"?2.55:1)*parseInt(aRGB[i])).toString(16).replace(/^(.)$/,'0$1');
+    }
+    else color = color.replace(/^#?([\da-f])([\da-f])([\da-f])$/i, '$1$1$2$2$3$3');
+    return "#" + color;
+}
+
+
 function showWin(id) {
+    if (id == "layout_win") {
+        if (focusedElement.css('box-shadow') == "none") {
+            $('#shadow_color_changer').val("#000000");
+            $('#shadow_x').slider( "value", 0);
+            $('#shadow_y').slider( "value", 0);
+            $('#shadow_size').slider( "value", 0);
+        } else {
+            var style = focusedElement.css('box-shadow').split(' ');
+            var hex = getHexRGBColor(style[0] + " " + style[1] + " " + style[2]);
+            $('#shadow_color_changer').val(hex);
+            $('#shadow_x').slider( "value", style[3].split('p')[0]);
+            $('#shadow_y').slider( "value", style[4].split('p')[0]);
+            $('#shadow_size').slider( "value", style[5].split('p')[0]);
+        }
+
+    } else if (id == "color_win") {
+        var color = focusedElement.css('backgroundColor');
+        $('#color_changer').val(getHexRGBColor(color));
+    } else if (id == "border_win") {
+        if (focusedElement.css('border') == "none") {
+            $('#border_color_changer').val('#ffffff');
+            $('#border_width').slider('value', 0);
+            $('.border_types').css('backgroundColor', 'transparent');
+        } else {
+            var border = focusedElement.css('border').split(' ');
+
+            $('#border_color_changer').val(getHexRGBColor(border[2] + " " + border[3] + " " + border[4]));
+            $('#border_width').slider('value', border[0].split('p')[0]);
+
+            $('.border_types').each(function () {
+                if ($.trim($(this).html()) == border[1]) {
+                    $(this).css('backgroundColor', 'green');
+                }
+            });
+        }
+        if (focusedElement.css('border-radius') == "none") {
+            $('#border_radius_input').slider('value', 0);
+        } else {
+            $('#border_radius_input').slider('value', focusedElement.css('border-radius').split('p')[0]);
+        }
+    } else if (id == "font_win") {
+        $('#font_color_changer').val(getHexRGBColor(focusedElement.css('color')));
+        $('#font_family_changer').val(focusedElement.css('font-family'));
+        $('#font_size_changer').val(focusedElement.css('font-size').split('p')[0]);
+        console.log(getHexRGBColor(focusedElement.css('color')));
+        console.log(focusedElement.css('font-family'));
+        console.log(focusedElement.css('font-size').split('p')[0]);
+    }
+
+
     var vs = $("#" + id).css('visibility');
     $(".near_block").css({
         visibility: 'hidden'

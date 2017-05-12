@@ -29,11 +29,13 @@ var borderColor = "#ffffff";
 var borderType = "solid";
 
 $(document).ready(function() {
-    $(window).unload(function() {
+    /* $(window).unload(function() {
         if(currentFile != null) {
             createTemplateString();
         }
-    });
+    }); */
+
+
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',
@@ -572,6 +574,7 @@ function generateElement(element, point, tt) {
         });
 
         $(".near_block").css({
+            visibility: 'hidden',
             zIndex: $("#" + identifier).css('z-index')
         });
 

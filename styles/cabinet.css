@@ -37,7 +37,7 @@ body {
 
 #top {
     width: inherit;
-    height: 72px;
+    height: 62px;
     background-color: #294752;
 }
 
@@ -48,21 +48,21 @@ body {
 }
 
 #top_photo {
-    width: 52px;
-    height: 52px;
+    width: 42px;
+    height: 42px;
     margin: 10px;
-    border-radius: 25px;
+    border-radius: 21px;
     background-color: #fff;
 }
 
 #top_menu_box {
     margin: 0 40px 0 40px;
-    padding: 22px 0 22px 0;
+    padding: 17px 0 17px 0;
 }
 
 #top_name {
     height: 36px;
-    margin: 22px 20px;
+    margin: 17px 20px;
     font-size: 29px;
     color: #ffffff;
     font-family: "GothaProLig";
@@ -161,7 +161,7 @@ body {
     width: 450px;
     min-height: 100px;
     position: fixed;
-    top: 72px;
+    top: 62px;
     background-color: #294752;
     border-top: 2px solid #456b76;
     color: white;
