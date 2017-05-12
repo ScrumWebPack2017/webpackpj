@@ -26,6 +26,12 @@
 </head>
 
 <body>
+<div id="header">
+    <div id="header_logo">
+        <img src="images/cabinet/logo.jpg" height="62">
+    </div>
+</div>
+
 <header>
     <div class="header_elements" id="logo">
 
