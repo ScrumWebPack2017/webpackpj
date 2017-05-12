@@ -28,12 +28,13 @@ var borderWidth = 0;
 var borderColor = "#ffffff";
 var borderType = "solid";
 
+window.onunload = function() {
+    if(currentFile != null) {
+        createTemplateString();
+    }
+}
+
 $(document).ready(function() {
-    $(window).unload(function() {
-        if(currentFile != null) {
-            createTemplateString();
-        }
-    });
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',

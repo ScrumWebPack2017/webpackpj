@@ -149,7 +149,28 @@ function feelUserInfo(email, login, phone, gender, country) {
         $('#top_name').html(login);
         $('#input_login').val(login);
     } else {
-        $('#top_name').html(email);
+        var names = [
+            ".titanic {float: none;}",
+            "Code Monkey",
+            "accepted Chief Hacking Office",
+            "Princess of Software",
+            "Coding Zombie",
+            "BugMaker",
+            "Chief Bug Creator",
+            "Software Ninjaneer",
+            "Jesus404",
+            "2B||!2B",
+            "Byte me",
+            "Codebuster",
+            "Web Nerd",
+            "ITGeekyFreaky",
+            "Tutty Frutty",
+            "Caveman",
+            "Rebooter",
+            "Server jockey",
+            "Overgeek"
+        ];
+        $('#top_name').html(names[Math.floor(Math.random() * names.length)]);
     }
     if (phone != 0) {
         $('#drop_phone').html(phone);
