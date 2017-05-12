@@ -469,7 +469,7 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
     </div>
 </div>
 
-<div id="cover">
+<div id="cover"  style="z-index: 999999999999">
     <div class="cssload-fond">
         <div class="cssload-container-general">
             <div class="cssload-internal"><div class="cssload-ballcolor cssload-ball_1"> </div></div>
