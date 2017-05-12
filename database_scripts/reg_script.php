@@ -38,6 +38,21 @@
             echo "not sent: " . mysql_error();
             exit();
         }
+        $sel_query = "SELECT MAX(`id`) as 'max' FROM `User`";
+        $result_sel = mysql_query($sel_query);
+        if(!$result_sel) { //вдруг не удалось сделать запрос
+            echo "not sent: " . mysql_error();
+            exit();
+        }
+        $row = mysql_fetch_array($result_sel);
+        $date = date('Y/m/d');
+        $ins_query = "INSERT INTO `WorkTime` (`userid`, `date`) 
+            VALUES ('" . $row['max'] . "', '" . $date . "')";
+        $result_ins = mysql_query($ins_query);
+        if(!$result_ins) { //вдруг не удалось сделать запрос
+            echo "not sent: " . mysql_error();
+            exit();
+        }
         $string_url = "http://webpackpj.com/database_scripts/confirm_mail.php?email=" . $email;
         if(mail($email, "Password reset", "Hi, it`s WebPack.\nConfirm your account by following this link: \n" . $string_url)) {
             mkdir("../userprojects/" . $email, 0700);

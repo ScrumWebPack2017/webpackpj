@@ -37,7 +37,7 @@ function createTemplateString() {
 
         }
 
-        var query = "name=" + currentFile + "&data=" + result;
+        var query = "name=" + currentFile + "&data=" + result + "&secs=" + sec_counter;
 
         $.ajax({
             url: 'database_scripts/saver.php',

@@ -27,16 +27,21 @@ var currentFile = null;
 var borderWidth = 0;
 var borderColor = "#ffffff";
 var borderType = "solid";
+var sec_counter = 0;
+var timer;
 
-window.onunload = function() {
+window.onclose = function() {
     if(currentFile != null) {
         createTemplateString();
+        sendStatistics();
     }
 }
 
 $(document).ready(function() {
 
-
+    timer = setInterval(function () {
+        ++sec_counter;
+    }, 1000);
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',

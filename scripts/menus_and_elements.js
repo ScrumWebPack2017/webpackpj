@@ -423,13 +423,16 @@ function showChangesWindow() {
         });
     }
     if ($("#changes_menu").parent().css('opacity') == 0) {
+        $("#changes_menu").parent().css({visibility:'visible'});
         $("#changes_menu").parent().animate({
             'opacity': '1'
         }, 400);
     } else {
         $("#changes_menu").parent().animate({
             'opacity': '0'
-        }, 400);
+        }, 400, function(){
+            $("#changes_menu").parent().css({visibility:'hidden'});
+        });
     }
 }
 
@@ -565,6 +568,19 @@ function showWin(id) {
             visibility: 'hidden'
         });
     }
+}
+
+function sendStatistics() {
+    var data = "worktime=" + sec_counter;
+    $.ajax({
+        url: 'database_scripts/send_about_time.php',
+        type: 'POST',
+        data: 'data',
+        dataType: "text",
+        success: function(data) {
+
+        }
+    });
 }
 
 jQuery.fn.appendAt = function(content, index) {

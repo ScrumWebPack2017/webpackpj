@@ -1,0 +1,2 @@
+{ "element":{"locked":false, "type":"div", "id":"div_1", "parent":"#workplace" }, "style":"position: absolute; float: right; width: 574px; height: 277px; background: rgb(211, 18, 181); z-index: 1; left: 231px; top: 53px; cursor: auto;" }
+{ "element":{"locked":false, "type":"div", "id":"div_2", "parent":"#div_1" }, "style":"position: absolute; float: right; width: 200px; height: 200px; background: rgb(15, 28, 2); z-index: 2; left: 0px; top: 0px; cursor: auto;" }

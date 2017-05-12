@@ -77,7 +77,134 @@ body {
 #control_wrapper {
     width: inherit;
     height: 66px;
+}
 
+#chart_container {
+    position: relative;
+    width: 100%;
+    height: 0px;
+    border-bottom: 2px solid silver;
+}
+
+.chart_bar {
+    position: absolute;
+    width: 1000px;
+    height: 360px;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#data_shower {
+    width: 80px;
+    height: 60px;
+    background: #294752;
+    border-radius: 5px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 100000000000000;
+}
+
+#date {
+    width: 80px;
+    height: 25px;
+    float: left;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #ffffff;
+    font-family: "GothaProLig";
+    text-align: center;
+}
+
+#time {
+    width: 80px;
+    height: 20px;
+    float: left;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    font-family: "GothaProLig";
+    text-align: center;
+}
+
+#upper_line {
+    position: absolute;
+    width: 100%;
+    height: 220px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+#query_chart {
+    width: 1000px;
+    height: 210px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    border: 2px solid silver;
+    border-radius: 10px;
+}
+
+#text_area_block {
+    width: 700px;
+    height: 190px;
+    float: left;
+    margin-left: 45px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: rgb(250, 250, 250);
+}
+
+.image_block {
+    width: 600px;
+    height: 170px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgb(250, 250, 250) url("../images/Web-Development-With-Angular-Javascript.png") no-repeat;
+    background-size: 100% 100%;
+}
+
+#chart_column {
+    height: 200px;
+    width: 180px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.query_btn {
+    background: #294752;
+    background-image: -webkit-linear-gradient(top, #294752, #294752);
+    background-image: -moz-linear-gradient(top, #294752, #294752);
+    background-image: -ms-linear-gradient(top, #294752, #294752);
+    background-image: -o-linear-gradient(top, #294752, #294752);
+    background-image: linear-gradient(to bottom, #294752, #294752);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    font-family: "GothaProLig";
+    color: #ffffff;
+    font-size: 20px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    width: 120px;
+    height: 20px;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.query_btn:hover {
+    background: #467180;
+    text-decoration: none;
 }
 
 .control_element {
@@ -203,6 +330,7 @@ body {
     opacity: 0.8;
 }
 
+
 #change_menu_panel {
     width: 560px;
     height: 420px;
@@ -219,6 +347,7 @@ body {
     padding: 0;
     border-radius: 4px;
 }
+
 
 #change_menu_control {
     position: relative;

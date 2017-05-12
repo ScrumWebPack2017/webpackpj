@@ -3,6 +3,32 @@
     require ("database_framework.php");
 	session_start();
 
+    $date_format = date('Y/m/d');
+    $sel_query = "SELECT DISTINCT `date` FROM `WorkTime` WHERE `date` = '" . $date_format . "'";
+    $result_sel = mysql_query($sel_query);
+    if(!$result_sel) {
+        echo "not sent: " . mysql_error();
+        exit();
+    }
+
+    if(mysql_num_rows($result_sel) == 0) {
+        $sel_query_id = "SELECT `id` as 'ide' FROM `User` GROUP BY 'ide'";
+        $result_sel_id = mysql_query($sel_query_id);
+        if(!$result_sel_id) {
+            echo "not sent: " . mysql_error();
+            exit();
+        }
+
+        while($row = mysql_fetch_array($result_sel_id)) {
+            $in_query_id = "INSERT INTO `WorkTime` (`userid`, `date`) VALUES ('" . $row['ide'] . "', '" . $date_format . "')";
+            $in_sel_id = mysql_query($in_query_id);
+            if(!$in_sel_id) {
+                echo "not sent: " . mysql_error();
+                exit();
+            }
+        }
+    }
+
 	if(isset($_SESSION["user"])){
         if(contains($_SESSION["user"])){
             echo "error with ' symbol";

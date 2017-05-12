@@ -125,6 +125,28 @@ $(document).ready(function() {
     });
 });
 
+function showChartMenu() {
+    if($(".chart_bar").css('opacity') == '0') {
+        $("#chart_container").animate({'height':'600px'}, 300, function () {
+            $(".chart_bar").css({visibility:'visible'});
+            $("#upper_line").css({visibility:'visible'});
+            $("#upper_line").animate({'opacity':'1'}, 400);
+            $(".chart_bar").animate({'opacity':'1'}, 400, function () {
+                $("#control_wrapper").css({marginTop: '5px'});
+            });
+        });
+    } else {
+        $("#upper_line").animate({'opacity':'0'}, 400);
+        $(".chart_bar").animate({'opacity':'0'}, 400, function () {
+            $("#control_wrapper").css({marginTop: '0px'});
+            $("#chart_container").animate({'height':'0px'}, 300, function () {
+                $(".chart_bar").css({visibility:'hidden'});
+                $("#upper_line").css({visibility:'hidden'});
+            });
+        });
+    }
+}
+
 function centerize() {
     var height = document.documentElement.clientHeight;
     $('#change_menu_panel').css('top', (height - $('#change_menu_panel').css('height').split('p')[0] - 30)/2);
@@ -191,6 +213,97 @@ function feelUserInfo(email, login, phone, gender, country) {
     } else {
         $('#drop_phone').html('-');
     }
+}
+
+function loadTime() {
+    $.ajax({
+        url: 'database_scripts/get_hours.php',
+        type: 'POST',
+        data: "",
+        dataType: "text",
+        success: function (data) {
+            if(data.indexOf("|") != -1) {
+                newChart(data);
+            }
+        }
+    });
+}
+
+function newChart(data) {
+    var spl = data.split("$");
+    spl.pop();
+    var dates = [];
+    var times = [];
+    for(var i = 0; i < spl.length; ++i) {
+        var temp = spl[i].split("|");
+        dates.push(temp[0]);
+        times.push(parseInt(temp[1]));
+    }
+
+    var chart = new Chartist.Line('.chart_bar', {
+        labels: dates,
+        series: [
+            times
+        ]
+    }, {
+        low: 0,
+        showArea: true,
+        axisY: {
+            offset: 80,
+            labelInterpolationFnc: function(value) {
+                var sec_num = parseInt(value, 10); // don't forget the second param
+                var hours   = Math.floor(sec_num / 3600);
+                var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+                var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+                if (hours   < 10) {hours   = "0"+hours;}
+                if (minutes < 10) {minutes = "0"+minutes;}
+                if (seconds < 10) {seconds = "0"+seconds;}
+                return hours+':'+minutes+':'+seconds;
+            }
+        }
+    });
+
+    chart.on("created", function () {
+        $('.ct-chart-line .ct-point').mouseover(function (event) {
+            var val = $(this).attr("ct:value");
+            $("#date").html(dates[times.indexOf(parseInt(val))]);
+            var sec_num = parseInt(val, 10);
+            var hours   = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            var to = hours+':'+minutes+':'+seconds;
+            $("#time").html(to);
+
+            $("#data_shower").css({ visibility:'visible', left: event.pageX, top: event.pageY - 60 });
+            $("#data_shower").animate({'opacity': '1'}, 400);
+            $("#data_shower").parent().css({cursor:'pointer'});
+        });
+
+        $('.ct-chart-line .ct-point').mouseout(function () {
+            $("#data_shower").animate({'opacity': '0'}, 400, function () {
+                $("#data_shower").css({ visibility:'hidden', left: "0", top: "0" });
+                $("#data_shower").parent().css({cursor:'auto'});
+            });
+
+        });
+    });
+}
+
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+':'+minutes+':'+seconds;
 }
 
 
@@ -285,6 +398,7 @@ function showChangeMenu() {
 
     }
 }
+
 
 function serializeUserForm() {
     var result = "email=";

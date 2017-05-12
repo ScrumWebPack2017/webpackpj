@@ -5,12 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="scripts/chartist.css">
     <link rel="stylesheet" type="text/css" href="styles/cabinet.css">
 
 
     <script type="text/javascript" src="scripts/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="scripts/jquery-ui.js"></script>
     <script type="text/javascript" src="scripts/cabinet.js"></script>
+    <script type="text/javascript" src="scripts/chartist.js"></script>
 
     <!--
     <script type="text/javascript" src="scripts/menus_and_elements.js"></script>
@@ -26,6 +28,10 @@
     -->
 </head>
 <body>
+    <div id="data_shower">
+        <div id="date"></div>
+        <div id="time"></div>
+    </div>
     <div id="wrapper">
         <div id="top">
             <div id="top_logo">
@@ -47,6 +53,22 @@
                 </div>
             </div>
 
+        </div>
+        <div id="chart_container">
+            <div id="upper_line">
+                <div id="query_chart">
+                    <div id="chart_column">
+                        <div class="query_btn" onclick="loadTime()">Work Time</div>
+                        <div class="query_btn">Projects</div>
+                        <div class="query_btn">Change 3</div>
+                        <div class="query_btn">Change 4</div>
+                    </div>
+                    <div id="text_area_block">
+                        <div class="image_block"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart_bar"></div>
         </div>
         <div id="control_wrapper">
             <div id="control">
@@ -118,7 +140,7 @@
                 Male
             </div>
             <div class="drop drop_right">
-                <img src="images/cabinet/stats.jpg" height="34" style="cursor: pointer;">
+                <img src="images/cabinet/stats.jpg" onclick="showChartMenu()" height="34" style="cursor: pointer;">
             </div>
         </div>
         <div class="drop_menu_line">
