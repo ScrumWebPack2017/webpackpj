@@ -55,6 +55,42 @@ $(document).ready(function() {
     });
 });
 
+function showAuth() {
+    var x = $('#header_authorization_img').offset().left;
+    console.log(x);
+    $('#user_block').css({
+        left: x + 'px'
+    });
+    if ($('#user_block').css('display') == 'none') {
+        $('#user_block').css('display', 'block');
+    } else {
+        $('#user_block').css('display', 'none');
+    }
+}
+
+function showProperties() {
+    console.log('showProperties()');
+    $('#vertical_context_menu').css('visibility', 'hidden');
+    var w = document.documentElement.clientWidth;
+    var pos = $('#header_menu_wrap').css('left').split('p')[0];
+    if (pos == w) {
+        $('#header_menu_wrap').animate({
+           left: 0
+        }, 700);
+        $('#workplace').animate({
+            top: '265px'
+        }, 700);
+    } else {
+        $('#header_menu_wrap').animate({
+            left: w
+        }, 700);
+        $('#workplace').animate({
+            top: '93px'
+        }, 700);
+    }
+
+}
+
 function closeWithChanges() {
     submitChangesCSS();
     createNewStatus("CSS was changed with Editor", cursor, changes, generatedElements);
@@ -143,16 +179,29 @@ function tabControl() {
 }
 
 function shiftLeftBar() {
+    console.log('shiftLeftBar()');
+    $('#vertical_context_menu').css('visibility', 'hidden');
     var x = $('#left_bar').css('left').split('p')[0];
+    var w = $('#status_line').css('width').split('p')[0];
     if (x == 0) {
         $('#left_bar').animate({
             left: "-230px"
         }, 400);
+        $('#status_line').animate({
+            'margin-left': "10px"
+        }).css({
+
+        });
         $('#left_btn').css('backgroundImage', 'url(images/arrRight.png)');
     } else {
         $('#left_bar').animate({
             left: "0px"
         }, 400);
+        $('#status_line').animate({
+            'margin-left': "230px"
+        }).css({
+
+        });
         $('#left_btn').css('backgroundImage', 'url(images/arrLeft.png)');
     }
 }
@@ -160,19 +209,28 @@ function shiftLeftBar() {
 function normalizePage() {
     var w = document.documentElement.clientWidth;
     var h = document.documentElement.clientHeight;
+    //
+
+
+    $('#header_menu_wrap').css('left', w);
+    $(".header_item_box").css({
+        width: (w - 260) / 4 - 30 + "px"
+    });
+
+    //
     if (w > 1800)
-        $('#top_menu').css('width', w - 444);
+        $('#top_menu').css('width', w);
     else
-        $('#top_menu').css('width', w - 440);
-    $('#left_bar').css('height', h - 200);
+        $('#top_menu').css('width', w);
+    $('#left_bar').css('height', h - 62);
     $('#left_btn_col').css('padding-top', (h - 240) / 2);
 
     if (w > 1800)
-        $('.menu_tab').css('width', Math.floor((w - 460) / 4) - 13);
+        $('.menu_tab').css('width', Math.floor((w - 20) / 4) - 13);
     else if (w > 2400)
-        $('.menu_tab').css('width', (w - 460) / 4 - 16);
+        $('.menu_tab').css('width', (w - 20) / 4 - 16);
     else
-        $('.menu_tab').css('width', (w - 460) / 4 - 11);
+        $('.menu_tab').css('width', (w - 20) / 4 - 11);
 
 
     $('.property').css('width', $('#properties').width() / 2 - 40);

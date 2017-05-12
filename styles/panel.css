@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     display: none;
-    z-index: 999998;
+    z-index: 10000000010;
     width: 100%;
     background: silver;
     opacity: 0.8;
@@ -15,7 +15,7 @@
     height: 532px;
     margin: 50px auto;
     display: none;
-    z-index: 999999;
+    z-index: 10000000011;
     background: #eaeef1;
     position: fixed;
     left: 0;

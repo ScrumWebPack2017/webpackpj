@@ -26,206 +26,245 @@
 </head>
 
 <body>
-<div id="header">
+<div id="header_block">
     <div id="header_logo">
         <img src="images/cabinet/logo.jpg" height="62">
     </div>
+
+    <div class="header_item_box">
+        <div id="header_properties_img" class="header_item_img">
+            <img src="images/cabinet/properties_img.jpg" onclick="showProperties()">
+        </div>
+        <div id="header_properties" class="header_item" onclick="showProperties()">
+            Properties
+        </div>
+    </div>
+    <div class="header_item_box">
+        <div id="header_source_code_img" class="header_item_img">
+            <img src="images/cabinet/source_code_img.jpg" onclick="showSourceCode()">
+        </div>
+        <div id="header_source_code" class="header_item" onclick="showSourceCode()">
+            Source Code
+        </div>
+    </div>
+<?php
+if(!$_SESSION['user'] && !$_SESSION['uname'])
+    echo
+        '<div class="header_item_box">
+            <div id="header_authorization_img" class="header_item_img">
+                <img src="images/cabinet/cabinet_img.jpg" onclick="showAuth()">
+            </div>
+            <div id="header_authorization" class="header_item" onclick="showAuth()">
+                Authorization
+            </div>
+             </div>
+        <div class="header_item_box">
+            <div id="header_registration_img" class="header_item_img">
+                <img src="images/cabinet/exit_img.jpg" onclick="showSourceCode()">
+            </div>
+            <div id="header_registration" class="header_item" onclick="showSourceCode()">
+                Registration
+            </div>
+        </div>';
+    else echo
+        '<div class="header_item_box">
+            <div id="header_authorization_img" class="header_item_img">
+                <a href="personal_cabinet.php"> <img src="images/cabinet/cabinet_img.jpg"> </a>
+            </div>
+            <a href="personal_cabinet.php">
+            <div id="header_authorization" class="header_item">
+                Personal Cabinet
+            </div>
+            </a>
+        </div>
+        <div class="header_item_box">
+            <div id="header_registration_img" class="header_item_img">
+                <img src="images/cabinet/exit_img.jpg" onclick="logOut()">
+            </div>
+            <div id="header_registration" class="header_item" onclick="logOut()">
+                Log Out
+            </div>
+        </div>';
+?>
+</div>
+<div id="status_line_wrapper">
+    <div id="status_line">
+        <div id="left_btn" class="status_element" onclick="shiftLeftBar()"></div>
+        <!--<div class="status_element" onclick="deleteFocused()" style="cursor: pointer">
+                    Delete
+                </div>-->
+        <div class="status_element">
+            Width:
+            <input class="status_input" id="current_width" type="text" disabled>
+
+        </div>
+        <div class="status_element">
+            Height:
+            <input class="status_input" id="current_height" type="text" disabled>
+        </div>
+        <div class="status_element">
+            Id:
+            <input class="status_input" id="current_id" type="text" style="width: 100px" disabled>
+        </div>
+        <!-- <div class="status_element" id="status_parent" onclick="parentFocus()" style="cursor: pointer">
+                    Parent
+                </div>-->
+        <div id="locker_ico" class="status_element" title="Lock\unlock focused element to enable\disable element interaction.">
+        </div>
+        <div id="camera_ico" class="status_element" title="Save workplace as image.">
+        </div>
+        <div class="status_element" id="last_time">
+        </div>
+    </div>
 </div>
 
-<header>
-    <div class="header_elements" id="logo">
 
+<div id="header_menu_wrap">
+    <div id="header_menu_tabs">
+        <div class="menu_tab selected_tab" id="props1tab">
+            Properties1
+        </div>
+        <div class="menu_tab" id="props2tab">
+            Properties2
+        </div>
+        <div class="menu_tab" id="props3tab">
+            Properties3
+        </div>
+        <div class="menu_tab" id="source_code_btn">
+            Source code
+        </div>
     </div>
-    <div class="header_elements" id="top_menu">
-        <div class="header_elements" id="header_menu_wrap">
-            <div id="header_menu_tabs">
-                <div class="menu_tab selected_tab" id="props1tab">
-                    Properties1
-                </div>
-                <div class="menu_tab" id="props2tab">
-                    Properties2
-                </div>
-                <div class="menu_tab" id="props3tab">
-                    Properties3
-                </div>
-                <div class="menu_tab" id="source_code_btn">
-                    Source code
-                </div>
+    <div id="properties">
+        <div id="props1" class="property_list" style="z-index: 5; visibility: visible">
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
             </div>
-            <div id="properties">
-                <div id="props1" class="property_list" style="z-index: 5; visibility: visible">
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Float </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Width </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Height </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Margin </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Padding </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                </div>
-                <div id="props2" class="property_list" style="z-index: 6">
-                    <div class="property">
-                        <div class="property_label"> Background </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Border </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Border-radius </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Height </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Margin </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Padding </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                </div>
-                <div id="props3" class="property_list" style="z-index: 7">
-                    <div class="property">
-                        <div class="property_label"> Font-size </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Color </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Text-decoration </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Height </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Margin </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Padding </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                    <div class="property">
-                        <div class="property_label"> Position </div>
-                        <input class="property_input" type="text">
-                    </div>
-                </div>
+            <div class="property">
+                <div class="property_label"> Float </div>
+                <input class="property_input" type="text">
             </div>
-            <div id="status_line">
-                <div id="left_btn" class="status_element" onclick="shiftLeftBar()"></div>
-                <!--<div class="status_element" onclick="deleteFocused()" style="cursor: pointer">
-                            Delete
-                        </div>-->
-
-                <div class="status_element">
-                    Width:
-                    <input class="status_input" id="current_width" type="text" disabled>
-
-                </div>
-                <div class="status_element">
-                    Height:
-                    <input class="status_input" id="current_height" type="text" disabled>
-                </div>
-                <div class="status_element">
-                    Id:
-                    <input class="status_input" id="current_id" type="text" style="width: 100px" disabled>
-                </div>
-                <!-- <div class="status_element" id="status_parent" onclick="parentFocus()" style="cursor: pointer">
-                            Parent
-                        </div>-->
-                <div id="locker_ico" class="status_element" title="Lock\unlock focused element to enable\disable element interaction.">
-                </div>
-                <div id="camera_ico" class="status_element" title="Save workplace as image.">
-                </div>
-                <div class="status_element" id="last_time">
-                </div>
+            <div class="property">
+                <div class="property_label"> Width </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Height </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Margin </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Padding </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
+            </div>
+        </div>
+        <div id="props2" class="property_list" style="z-index: 6">
+            <div class="property">
+                <div class="property_label"> Background </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Border </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Border-radius </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Height </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Margin </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Padding </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
+            </div>
+        </div>
+        <div id="props3" class="property_list" style="z-index: 7">
+            <div class="property">
+                <div class="property_label"> Font-size </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Color </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Text-decoration </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Height </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Margin </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Padding </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
+            </div>
+            <div class="property">
+                <div class="property_label"> Position </div>
+                <input class="property_input" type="text">
             </div>
         </div>
     </div>
-    <div class="header_elements" id="user_block">
-        <?php
-        if(!$_SESSION['user'] && !$_SESSION['uname'])
-            echo
-            '<form id="authorization_form">
-                    <div class="auth_box">
-                        <input type="text" id="email_input" name="email" class="auth_input" placeholder="E-mail">
-                    </div>
-                    <div class="auth_box">
-                        <input type="password" id="pass_input" name="password" class="auth_input" placeholder="Password">
-                    </div>
-                    <div id="error_lbl"></div>
-                    <div class="auth_box" id="res_pass" style="font-size: 14px; margin-top: 0px">
-                            <a href="database_scripts/additional/reset/reset_pass.html" style="color: #c2c7cb">  Reset password </a>
-                    </div>
-                    <div class="auth_box" style="padding-bottom: 0">
-                            <input type="submit" class="auth_btn"  value="Sign In">
-                    </div>
-                </form>
-               
-                <div class="auth_box" id="reg_btn_box" style="">
-                    <a href="registration.html"> <button class="auth_btn" id="reg_btn"> Registration </button> </a>
-                </div>';
-        else echo '
-                    <div class="auth_box">
-                        Hello,'.$_SESSION['uname'].'!
-                    </div>
-                    <div class="auth_box">
-                        <a href="personal_cabinet.php"> Personal cabinet </a>
-                    </div>
-                    <div class="auth_box" onclick="logOut()" id="logOut">
-                        Log Out
-                    </div>
-                ';
-        ?>
+</div>
+
+
+
+<div id="user_block">
+    <form id="authorization_form">
+        <div class="auth_box">
+            <input type="text" id="email_input" name="email" class="auth_input" placeholder="E-mail">
+        </div>
+        <div class="auth_box">
+            <input type="password" id="pass_input" name="password" class="auth_input" placeholder="Password">
+        </div>
+        <div id="error_lbl"></div>
+        <div class="auth_box" id="res_pass" style="font-size: 14px; margin-top: 0px">
+            <a href="database_scripts/additional/reset/reset_pass.html" style="color: #c2c7cb">  Reset password </a>
+        </div>
+        <div class="auth_box" style="padding-bottom: 0">
+            <input type="submit" class="auth_btn"  value="Sign In">
+        </div>
+    </form>
+    <div class="auth_box" id="reg_btn_box" style="">
+        <a href="registration.html"> <button class="auth_btn" id="reg_btn"> Registration </button> </a>
     </div>
+</div>
 
 
-</header>
+
 <div id="workplace">
     <ul id="menu_tools">
         <li>

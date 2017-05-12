@@ -36,7 +36,6 @@ window.onunload = function() {
 
 $(document).ready(function() {
 
-
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',
@@ -358,6 +357,7 @@ function run() {
 }
 
 function normalizeWorkplace() {
+
     var w = document.body.scrollWidth;
     $('#workplace').css('width', w - 8);
     $("#res_pass").css({
