@@ -38,7 +38,7 @@ window.onclose = function() {
 }
 
 $(document).ready(function() {
-
+    
     timer = setInterval(function () {
         ++sec_counter;
     }, 1000);
@@ -363,6 +363,7 @@ function run() {
 }
 
 function normalizeWorkplace() {
+
     var w = document.body.scrollWidth;
     $('#workplace').css('width', w - 8);
     $("#res_pass").css({
