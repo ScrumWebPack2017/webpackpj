@@ -29,7 +29,7 @@
     <div id="wrapper">
         <div id="top">
             <div id="top_logo">
-                <img src="images/cabinet/logo.jpg" height="72">
+                <img src="images/cabinet/logo.jpg" height="62">
             </div>
 
             <!-- float changed -->

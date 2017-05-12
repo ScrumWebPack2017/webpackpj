@@ -35,6 +35,8 @@ window.onunload = function() {
 }
 
 $(document).ready(function() {
+
+
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',
@@ -573,6 +575,7 @@ function generateElement(element, point, tt) {
         });
 
         $(".near_block").css({
+            visibility: 'hidden',
             zIndex: $("#" + identifier).css('z-index')
         });
 
