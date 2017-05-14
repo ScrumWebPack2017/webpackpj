@@ -174,7 +174,8 @@ $(document).ready(function() {
 
 
                     canvas.toBlob(function(blob) {
-                        saveAs(blob, "MySite.png");
+                        var file = currentFile != null ? currentFile + ".png" : "unknown_project.png";
+                        saveAs(blob, file);
                     });
                 }
             });

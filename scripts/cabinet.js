@@ -1,5 +1,7 @@
 var focused = null;
 var t, l = (new Date()).getTime();
+var active = null;
+var allow = true;
 
 /*
  confirmUserInfo() - send changed data
@@ -9,11 +11,23 @@ var t, l = (new Date()).getTime();
 
 
 $(document).ready(function() {
+    //alert("You did a great job out there! You worked for <span class=\"red_dot\">10</span> hours for last 3 days! This is <span style=\"text-decoration: underline; text-decoration-color:  lawngreen;\">very good</span> result. We glad that you like using our system. We hope, that we fully help you with developing your own web pages. <span style=\"color:  darkorange;\">\"Everything you can imagine is real.\" ― Pablo Picasso</span>");
     centerize();
     normalizeCabinet();
     //feelUserInfo("someEmail.@gmail.com", "Sonya Marmeladova", "3807766999", "Male", "USA");
     $(window).resize(function () {
         normalizeCabinet();
+    });
+
+    $(".query_btn").click(function (event) {
+        if(active == $(this).index()) {
+            allow = false;
+        } else {
+            active = $(this).index();
+            $(".query_btn").css({background: '#294752'});
+            $(this).css({background: '#467180'});
+            allow = true;
+        }
     });
 
     $('#change_user_box input').focus(function() {
@@ -60,6 +74,48 @@ $(document).ready(function() {
                 $("#top_photo img").attr('src', "../images/png/" + input[5]);
             }
         }
+    });
+
+    $("#btn_1").click(function () {
+        $(".image_block").html('');
+        $(".image_block").animate({'opacity' : '0'}, 400, function() {
+            $(".image_block").css({
+                background: "rgb(250, 250, 250) url('../images/Cheering-Office-Workers.png') no-repeat",
+                backgroundSize: "100% 100%"
+            });
+            $(".image_block").animate({'opacity' : '1'}, 400, function () {
+                setTimeout(function () {
+                    $(".image_block").animate({'opacity' : '0'}, 400, function () {
+                        $(".image_block").css({
+                            background: "rgb(250, 250, 250)",
+                        });
+                        showTextAboutTime(".image_block");
+                        $(".image_block").animate({'opacity' : '1'}, 400);
+                    });
+                }, 1000);
+            });
+        });
+    });
+
+    $("#btn_2").click(function () {
+        $(".image_block").html('');
+        $(".image_block").animate({'opacity' : '0'}, 400, function() {
+            $(".image_block").css({
+                background: "rgb(250, 250, 250) url('../images/Web-Development-With-Angular-Javascript.png') no-repeat",
+                backgroundSize: "100% 100%"
+            });
+            $(".image_block").animate({'opacity' : '1'}, 400, function () {
+                setTimeout(function () {
+                    $(".image_block").animate({'opacity' : '0'}, 400, function () {
+                        $(".image_block").css({
+                            background: "rgb(250, 250, 250)",
+                        });
+                        showTextAboutPj(".image_block");
+                        $(".image_block").animate({'opacity' : '1'}, 400);
+                    });
+                }, 1000);
+            });
+        });
     });
 
     $('#templates').on("mouseover", ".template_box",  function(e) {
@@ -125,25 +181,93 @@ $(document).ready(function() {
     });
 });
 
-function showChartMenu() {
-    if($(".chart_bar").css('opacity') == '0') {
-        $("#chart_container").animate({'height':'600px'}, 300, function () {
-            $(".chart_bar").css({visibility:'visible'});
-            $("#upper_line").css({visibility:'visible'});
-            $("#upper_line").animate({'opacity':'1'}, 400);
-            $(".chart_bar").animate({'opacity':'1'}, 400, function () {
-                $("#control_wrapper").css({marginTop: '5px'});
+function showTextAboutPj(elem_id) {
+    var dret;
+    var text;
+    $.ajax({
+        url: 'database_scripts/proj_summary.php',
+        type: 'POST',
+        data: '',
+        dataType: "text",
+        success: function(data) {
+            dret = data;
+            var seconds = parseInt(dret);
+            if(seconds >= 200) {
+                text = "That’s how we do this! Did you know that you created <span class=\"red_dot\">" + seconds + "</span> elements for last 3 projects? Oh, yeah, we forgot that you also see this chart down there. Anyway, congratulations! <span style=\"color:  darkorange;\">“Others have seen what is and asked why. I have seen what could be and asked why not. ” ― Pablo Picasso</span>";
+            } else {
+                if(seconds < 200 && seconds >= 50) {
+                    text = "Straight and simple! Good design choice, but not the best one. Otherwise, you have created <span style='font-size: 25px; color: darkorange; font-family: \"GothaProLig\";'>" + seconds + "</span> elements for last 3 projects. Next time, try to use <span style='text-decoration: underline; text-decoration-color: darkorange;'>more elements</span> to impress your potential users. <span style=\"color: cornflowerblue\">“Shoot for the moon. Even if you miss, you'll land among the stars.” ― Norman Vincent Peale</span>";
+                } else {
+                    text = "Well, don’t explain anything. We know why you have created <span style='font-size: 25px; color: orangered; font-family: \"GothaProLig\";'>" + seconds + "</span> elements for last 3 projects: we have found out that you are an artist, who works with minimalistic art. We hope that wasn’t a secret. <span style=\"color: blueviolet\">“It is hard to fail, but it is worse never to have tried to succeed.” ― Theodore Roosevelt</span>";
+                }
+            }
+            $(elem_id).html(text);
+        }
+    });
+}
+
+function showTextAboutTime(elem_id) {
+    var dret;
+    var text;
+    $.ajax({
+        url: 'database_scripts/time_summary.php',
+        type: 'POST',
+        data: '',
+        dataType: "text",
+        success: function(data) {
+            dret = data;
+            var seconds = parseInt(dret);
+            if(seconds >= 72000) {
+                text = "You did a great job! You worked for <span class=\"red_dot\">" + tm(seconds) + "</span> hours for last 3 days! This is <span style=\"text-decoration: underline; text-decoration-color:  lawngreen;\">very good</span> result. We glad that you like using our system. We hope, that we fully help you with web page developing. <span style=\"color:  darkorange;\">\"Everything you can imagine is real.\" ― Pablo Picasso</span>";
+            } else {
+                if(seconds < 72000 && seconds >= 18000) {
+                    text = "You did good. You worked for <span style='font-size: 25px; color: darkorange; font-family: \"GothaProLig\";'>" + tm(seconds) + "</span> hours for last 3 days. We advice you to <span style=\"text-decoration: underline; text-decoration-color: darkorange;\">practice more</span> with web developing. <span style=\"color: cornflowerblue\">“And, when you want something, all the universe conspires in helping you to achieve it.”― Paulo Coelho, The Alchemist</span>";
+                } else {
+                    text = "We <span style=\"text-decoration: line-through\">must</span> couldn’t say your results are awful, but there is really nothing to be proud of :( You worked for <span style=\"font-size: 25px; color: orangered; font-family: \"GothaProLig\";\">" + tm(seconds) + "</span> hours for last 3 days. <span style=\"color: blueviolet\">“I have not failed. I've just found 10,000 ways that won't work.” ― Thomas A. Edison</span>";
+                }
+            }
+            $(elem_id).html(text);
+        }
+    });
+}
+
+function showBArMenu(bar) {
+        if (bar == "show") {
+            $(".chart_bar").css({visibility: 'visible'});
+            $(".chart_bar").animate({'opacity': '1'}, 400, function () {
+
             });
+        } else {
+            $(".chart_bar").animate({'opacity': '0'}, 400, function () {
+                $(".chart_bar").css({visibility: 'hidden'});
+            });
+        }
+}
+
+function showChartMenu() {
+    if($("#chart_container").css('height') == '0px') {
+        $("#chart_container").animate({'height':'600px'}, 300, function () {
+            //$(".chart_bar").css({visibility:'visible'});
+            $("#upper_line").css({visibility:'visible'});
+            $("#upper_line").animate({'opacity':'1'}, 400, function() {
+                $("#control_wrapper").css({marginTop: '5px'});
+                $("#btn_1").trigger("click");
+            });
+            /*$(".chart_bar").animate({'opacity':'1'}, 400, function () {
+
+            });*/
         });
     } else {
-        $("#upper_line").animate({'opacity':'0'}, 400);
-        $(".chart_bar").animate({'opacity':'0'}, 400, function () {
+        $("#upper_line").animate({'opacity':'0'}, 400, function () {
             $("#control_wrapper").css({marginTop: '0px'});
             $("#chart_container").animate({'height':'0px'}, 300, function () {
-                $(".chart_bar").css({visibility:'hidden'});
+                //$(".chart_bar").css({visibility:'hidden'});
                 $("#upper_line").css({visibility:'hidden'});
             });
         });
+        /*$(".chart_bar").animate({'opacity':'0'}, 400, function () {
+
+        });*/
     }
 }
 
@@ -215,7 +339,24 @@ function feelUserInfo(email, login, phone, gender, country) {
     }
 }
 
+function loadPjs() {
+    showBArMenu("hid");
+    $.ajax({
+        url: 'database_scripts/proj_stats.php',
+        type: 'POST',
+        data: "",
+        dataType: "text",
+        success: function (data) {
+            if(data.indexOf("|") != -1) {
+                newChartBars(data);
+                showBArMenu("show");
+            }
+        }
+    });
+}
+
 function loadTime() {
+    showBArMenu("hid");
     $.ajax({
         url: 'database_scripts/get_hours.php',
         type: 'POST',
@@ -224,8 +365,32 @@ function loadTime() {
         success: function (data) {
             if(data.indexOf("|") != -1) {
                 newChart(data);
+                showBArMenu("show");
             }
         }
+    });
+}
+
+function newChartBars(data) {
+    var spl = data.split("$");
+    spl.pop();
+    var projects = [];
+    var elems = [];
+    for(var i = 0; i < spl.length; ++i) {
+        var temp = spl[i].split("|");
+        projects.push(temp[0]);
+        elems.push(parseInt(temp[1]));
+    }
+
+    var point = false;
+
+    $(".chart_bar").html('');
+
+    var chart = new Chartist.Bar('.chart_bar', {
+        labels: projects,
+        series: elems
+    }, {
+        distributeSeries: true
     });
 }
 
@@ -239,6 +404,8 @@ function newChart(data) {
         dates.push(temp[0]);
         times.push(parseInt(temp[1]));
     }
+
+    $(".chart_bar").html('');
 
     var chart = new Chartist.Line('.chart_bar', {
         labels: dates,
@@ -304,6 +471,17 @@ String.prototype.toHHMMSS = function () {
     if (minutes < 10) {minutes = "0"+minutes;}
     if (seconds < 10) {seconds = "0"+seconds;}
     return hours+':'+minutes+':'+seconds;
+}
+
+function tm(sec_num) {
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return hours+' hours '+minutes+' minutes '+seconds + " seconds";
 }
 
 

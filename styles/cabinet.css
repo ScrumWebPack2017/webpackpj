@@ -100,13 +100,14 @@ body {
 
 #data_shower {
     width: 80px;
-    height: 60px;
+    height: 50px;
     background: #294752;
     border-radius: 5px;
     position: absolute;
     visibility: hidden;
     opacity: 0;
     z-index: 100000000000000;
+    border: 3px inset #e2e2e2;
 }
 
 #date {
@@ -124,7 +125,6 @@ body {
     width: 80px;
     height: 20px;
     float: left;
-    margin-top: 5px;
     font-size: 12px;
     color: #ffffff;
     font-family: "GothaProLig";
@@ -168,8 +168,19 @@ body {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    background: rgb(250, 250, 250) url("../images/Web-Development-With-Angular-Javascript.png") no-repeat;
-    background-size: 100% 100%;
+    background: rgb(250, 250, 250);
+    font-size: 20px;
+    color: #294752;
+    font-family: "GothaProLig";
+    text-align: justify;
+    line-height: 1.5;
+    text-indent: 1.5em;
+}
+
+.red_dot {
+    font-size: 25px;
+    color: lawngreen;
+    font-family: "GothaProLig";
 }
 
 #chart_column {
@@ -199,6 +210,7 @@ body {
     height: 20px;
     float: left;
     margin: 5px;
+    margin-top: 35px;
     cursor: pointer;
 }
 

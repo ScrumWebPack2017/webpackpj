@@ -1,0 +1,2 @@
+{ "element":{"locked":false, "type":"form", "id":"form_1", "parent":"#workplace" }, "style":"position: absolute; float: right; width: 693px; height: 271px; background: rgb(154, 137, 27); z-index: 1; left: 207px; top: 89px; cursor: auto;" }
+{ "element":{"locked":false, "type":"span", "id":"span_1", "parent":"#form_1" }, "style":"position: absolute; float: right; width: 250px; height: 100px; background: rgb(219, 127, 57); z-index: 2; left: 0px; top: 0px; cursor: auto;" }

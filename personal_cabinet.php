@@ -58,13 +58,13 @@
             <div id="upper_line">
                 <div id="query_chart">
                     <div id="chart_column">
-                        <div class="query_btn" onclick="loadTime()">Work Time</div>
-                        <div class="query_btn">Projects</div>
-                        <div class="query_btn">Change 3</div>
-                        <div class="query_btn">Change 4</div>
+                        <div class="query_btn" onclick="loadTime()" id="btn_1">Work Time</div>
+                        <div class="query_btn" onclick="loadPjs()" id="btn_2">Projects</div>
                     </div>
                     <div id="text_area_block">
-                        <div class="image_block"></div>
+                        <div class="image_block">
+
+                        </div>
                     </div>
                 </div>
             </div>

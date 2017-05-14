@@ -77,4 +77,16 @@ function checkEmailFW($email) {
        if(strpos($str, "'") !== false) return true;
        return false;
     }
+
+    function countFile($file) {
+        if ($file) {
+            $cnt = 0;
+            while (($line = fgets($file)) !== false) {
+                ++$cnt;
+            }
+            rewind($file);
+            return $cnt;
+        }
+        return -1;
+    }
 ?>
