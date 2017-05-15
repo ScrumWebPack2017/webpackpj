@@ -174,11 +174,9 @@ function parseHTML(str) {
                 var currTag = str.substring(i + 1, j);
                 if (checkTag(currTag)) {
                     tagQ++;
-
                 } else {
                     tagSingle = true;
                 }
-
             } else {
                 flag = true;
             }
@@ -369,16 +367,22 @@ function source_vSplit() {
         vSplit = true
         var css = editorCSS.getValue();
         var html = editorHTML.getValue();
+
         editorHTML = ace.edit("source_code_html");
         editorCSS = ace.edit("source_code_css");
-        editorHTML.setTheme("ace/theme/chrome");
         editorHTML.getSession().setMode("ace/mode/html");
-        editorCSS.setTheme("ace/theme/chrome");
         editorCSS.getSession().setMode("ace/mode/css");
         editorCSS.setValue(css);
         editorHTML.setValue(html);
         editorCSS.clearSelection();
         editorHTML.clearSelection();
+        if (dark) {
+            editorHTML.setTheme("ace/theme/monokai");
+            editorCSS.setTheme("ace/theme/monokai");
+        } else {
+            editorHTML.setTheme("ace/theme/chrome");
+            editorCSS.setTheme("ace/theme/chrome");
+        }
     }
 }
 
@@ -402,6 +406,13 @@ function source_hSplit() {
         editorHTML.setValue(html);
         editorCSS.clearSelection();
         editorHTML.clearSelection();
+        if (dark) {
+            editorHTML.setTheme("ace/theme/monokai");
+            editorCSS.setTheme("ace/theme/monokai");
+        } else {
+            editorHTML.setTheme("ace/theme/chrome");
+            editorCSS.setTheme("ace/theme/chrome");
+        }
     }
 }
 

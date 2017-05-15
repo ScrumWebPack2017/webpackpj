@@ -179,7 +179,12 @@ function tabControl() {
 }
 
 function shiftLeftBar() {
-    console.log('shiftLeftBar()');
+    $("#vertical_context_menu").css({
+        visibility: "hidden"
+    });
+    $(".near_block").css({
+        visibility: 'hidden'
+    });
     $('#vertical_context_menu').css('visibility', 'hidden');
     var x = $('#left_bar').css('left').split('p')[0];
     var w = $('#status_line').css('width').split('p')[0];

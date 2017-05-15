@@ -57,17 +57,17 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
             <div id="header_authorization" class="header_item" onclick="showAuth()">
                 Authorization
             </div>
-             </div>
+        </div>
         <div class="header_item_box">
             <div id="header_registration_img" class="header_item_img">
-                <img src="images/cabinet/exit_img.jpg" onclick="showSourceCode()">
+                <a href="registration.html"><img src="images/cabinet/exit_img.jpg"></a>
             </div>
-            <div id="header_registration" class="header_item" onclick="showSourceCode()">
+             <a href="registration.html"><div id="header_registration" class="header_item">
                 Registration
-            </div>
+            </div></a>
         </div>';
     else echo
-        '<div class="header_item_box">
+        '<div class="header_item_box"style="margin-left: 40px">
             <div id="header_authorization_img" class="header_item_img">
                 <a href="personal_cabinet.php"> <img src="images/cabinet/cabinet_img.jpg"> </a>
             </div>
@@ -77,7 +77,7 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
             </div>
             </a>
         </div>
-        <div class="header_item_box">
+        <div class="header_item_box" style="margin-left: 70px">
             <div id="header_registration_img" class="header_item_img">
                 <img src="images/cabinet/exit_img.jpg" onclick="logOut()">
             </div>
@@ -667,6 +667,10 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
     <div id="source_code_css" class="source_code_block">
 
     </div>
+
+</div>
+
+<div id="templates_panel">
 
 </div>
 

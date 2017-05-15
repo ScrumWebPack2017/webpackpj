@@ -82,7 +82,7 @@
                     <img src="images/cabinet/icons_DB/iconDB3.png" width="46" style="cursor: pointer" onclick="showProjectFeild()">
                 </div>
                 <div class="control_element" id="createForm" style="margin-left: 40px">
-                    <input type="text" id="projectName" class="control_element">
+                    <input type="text" id="projectName" class="control_element" style="margin-right: -34px;">
                         <div class="control_element" id="createBtn">
                             <img src="images/cabinet/icons_DB/iconsDB_04.gif" width="50" style="cursor: pointer">
                         </div>
