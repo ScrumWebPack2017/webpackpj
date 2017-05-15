@@ -240,6 +240,32 @@ $(document).ready(function() {
         }
     });
 
+    $("#download_but").click(function(event) {
+        event.preventDefault();
+        var temp = generateHTML().split("&");
+        var html_text = "<!DOCTYPE html>\n<html>\n<head>\n\t<meta charset=\"UTF-8\">\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n</head>\n<body style=\" margin: 0px; padding: 0px;\">\n\t" + temp[0] + "</body>\n</html>"
+        var css_text = temp[1];
+        var query = "html=" + html_text + "&css=" + css_text;
+        $.ajax({
+            url: 'database_scripts/delete_last.php',
+            type: 'POST',
+            success: function(dataa) {
+                $.ajax({
+                    url: 'database_scripts/project_giver.php',
+                    type: 'POST',
+                    data: query,
+                    dataType: "text",
+                    success: function(data) {
+                        $("#download_me").attr('href', data);
+                        $("#download_me").click(function (event) {
+                            this.click();
+                        }).click();
+                    }
+                });
+            }
+        });
+    });
+
     $('#border_width').slider({
         animate: 'slow',
         min: 0,
