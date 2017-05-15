@@ -268,6 +268,9 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
 <div id="workplace">
     <ul id="menu_tools">
         <li>
+            <div id="download_but"><span class="ui-icon ui-icon-arrowthick-1-s"></span>Download</div>
+        </li>
+        <li>
             <div onclick="saveFromMenu()"><span class="ui-icon ui-icon-disk"></span>Save</div>
         </li>
         <li class="ui-state-disabled">
@@ -669,6 +672,8 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
     </div>
 
 </div>
+
+<a id="download_me" href=""></a>
 
 </body>
 

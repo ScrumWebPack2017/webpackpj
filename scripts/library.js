@@ -148,6 +148,7 @@ function generateHTML() {
     resultWithoutStyles = parseHTML(resultWithoutStyles);
     editorHTML.setValue(resultWithoutStyles);
     editorCSS.setValue(css.join(''));
+    return resultWithoutStyles + "&" + css.join('');
 }
 
 function checkTag(tag) {

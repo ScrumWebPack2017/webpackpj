@@ -1,0 +1,72 @@
+#div_1 {
+    position: absolute;
+    float: right;
+    width: 574px;
+    height: 277px;
+    background: rgb(211, 18, 181);
+    z-index: 1;
+    left: 231px;
+    top: 53px;
+    cursor: auto;
+}
+
+#div_2 {
+    position: absolute;
+    float: right;
+    width: 200px;
+    height: 200px;
+    background: rgb(15, 28, 2);
+    z-index: 1;
+    left: 0px;
+    top: 0px;
+    cursor: auto;
+}
+
+#nav_1 {
+    position: absolute;
+    float: right;
+    width: 200px;
+    height: 200px;
+    background: rgb(47, 160, 177);
+    z-index: 2;
+    left: 374px;
+    top: 0px;
+    cursor: auto;
+}
+
+#time_1 {
+    position: absolute;
+    float: right;
+    width: 174px;
+    height: 77px;
+    background: none 0% 0% / auto repeat scroll padding-box border-box rgb(249, 189, 130);
+    z-index: 1;
+    left: 200px;
+    top: 200px;
+    cursor: auto;
+}
+
+#article_1 {
+    position: absolute;
+    float: right;
+    width: 400px;
+    height: 50px;
+    background: rgb(60, 165, 194);
+    z-index: 2;
+    left: 838px;
+    top: 79px;
+    cursor: auto;
+}
+
+#div_3 {
+    position: absolute;
+    float: right;
+    width: 200px;
+    height: 200px;
+    background: rgb(73, 24, 104);
+    z-index: 3;
+    left: 847px;
+    top: 199px;
+    cursor: auto;
+}
+

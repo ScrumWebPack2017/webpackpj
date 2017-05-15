@@ -136,6 +136,10 @@ $(document).ready(function() {
         $(this).css({ background: "#c0c5c8" });
     });
 
+    $('#templates').dblclick(function(event) {
+        $("#load_btn").trigger('click');
+    });
+
     $('#saveTemplate').click(function() {
         createTemplateString();
     });
