@@ -4,18 +4,19 @@
 }
 
 body {
-    background: url('../images/reg_background3.jpg');
+    background: url('../images/bg.jpg');
     background-size: cover;
 }
 
 #registration {
     position: relative;
-    width: 540px;
+    width: 550px;
     margin: auto;
     padding: 20px 0;
     border-radius: 20px;
-    background-color: #f6eddb;
+    background-color: #F9F9F9;
     opacity: 0.99;
+    border: 3px solid #2A4951;
 }
 
 .reg_error {
@@ -72,6 +73,6 @@ body {
     width: 200px;
     margin-left: 140px;
     height: 40px;
-    background: radial-gradient(#adf6b9, lightgreen);
+    background: #98CBCC;
     font-family: "CaviarDreams";
 }
