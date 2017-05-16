@@ -320,11 +320,13 @@ body {
 
 .drop_left {
     width: 110px;
+    margin-top: 5px;
     font-family: "GothaProReg";
 }
 
 .drop_center {
     width: 308px;
+    margin-top: 5px;
 }
 
 .drop_right {
@@ -430,3 +432,32 @@ body {
     outline: none;
     border: none;
 }
+
+.drop_input {
+    width: 280px;
+    height: 24px;
+    margin-bottom: 4px;
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid silver;
+    font-size: 18px;
+}
+
+#change_line {
+    margin-top: 20px;
+    width: inherit;
+    text-align: center;
+}
+
+#user_info_confirm {
+    position: relative;
+    margin: auto;
+    height: 24px;
+    width: 80px;
+    border-radius: 4px;
+    padding: 6px;
+    background-color: #5d89ae;
+
+}
+
+

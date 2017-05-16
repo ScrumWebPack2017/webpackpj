@@ -639,7 +639,7 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
 </div>
 
 
-<div id="source_code_wrapper"></div>
+<div id="source_code_wrapper" class="dark_wrapper"></div>
 <div id="source_code_panel">
     <div id="source_code_control">
         <div class="source_icon" id="source_switch" onclick="source_switchTheme()">
@@ -673,9 +673,117 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
 
 </div>
 
+<div id="templates_wrap" onclick="showTemplates()"></div>
 <div id="templates_panel">
+    <div id="tab_line">
+        <div id="table_tab" class="tab" onclick="showTable()" style="color: white">
+            Table
+        </div>
+        <div id="list_tab" class="tab" onclick="showList()" style="border-right: none;">
+            List
+        </div>
+    </div>
 
+    <div id="template_wrapper">
+        <div id="table_box" class="templ_box" style="visibility: visible;">
+            <div class="teml_line">
+                <div class="half_line">
+                    <div class="templ_field templ_desc">
+                        Rows:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_rows">
+                    </div>
+                </div>
+                <div class="half_line" style="padding-right: 0">
+                    <div class="templ_field templ_desc">
+                        Cols:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_cols">
+                    </div>
+                </div>
+            </div>
+
+            <div class="teml_line">
+                <div class="half_line">
+                    <div class="templ_field templ_desc">
+                        Cells width:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_width">
+                    </div>
+                </div>
+                <div class="half_line" style="padding-right: 0">
+                    <div class="templ_field templ_desc">
+                        Cells height:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_height">
+                    </div>
+                </div>
+            </div>
+
+            <div class="teml_line">
+                <div class="half_line">
+                    <div class="templ_field templ_desc">
+                        Cellspacing:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_spacing">
+                    </div>
+                </div>
+                <div class="half_line" style="padding-right: 0">
+                    <div class="templ_field templ_desc">
+                        Cellspadding:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_padding">
+                    </div>
+                </div>
+            </div>
+
+            <div class="teml_line">
+                <div class="half_line">
+                    <div class="templ_field templ_desc">
+                        Table border:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_table_border">
+                    </div>
+                </div>
+                <div class="half_line" style="padding-right: 0">
+                    <div class="templ_field templ_desc">
+                        Cell border:
+                    </div>
+                    <div class="templ_field templ_in">
+                        <input class="templ_input" type="text" id="templ_td_border">
+                    </div>
+                </div>
+            </div>
+
+            <div class="teml_line" id="add_btn" style="text-align: center" onclick="addTable()">
+                Add table
+            </div>
+
+        </div>
+        <div id="list_box" class="templ_box">
+            <div class="teml_line">
+
+            </div>
+            <div class="teml_line">
+
+            </div>
+            <div class="teml_line">
+
+            </div>
+            <div class="teml_line">
+
+            </div>
+        </div>
+    </div>
 </div>
+
 <a id="download_me" href=""></a>
 
 </body>

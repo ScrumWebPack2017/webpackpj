@@ -519,6 +519,10 @@ header {
     border: none;
 }
 
+.near_block {
+    z-index: 10000000010;
+}
+
 .font_linear .border_types {
     margin-top: -2px;
     !important;
@@ -759,7 +763,7 @@ header {
     display: inline-block;
     width: 100%;
     background: transparent;
-    padding: 10px 0 10px 15px;
+    padding: 10px 0 10px 22px;
     color: #9fb2b2;
     font-family: 'GothaProMed';
     font-size: 16px;
@@ -969,6 +973,109 @@ header {
     100%{-moz-transform:rotate(720deg) scale(1);}
 }
 
-#templates_panel {
+#templates_wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 10000000010;
+    width: 100%;
+    background: silver;
+    opacity: 0.8;
+}
 
+#templates_btn {
+    width: 100%;
+    background: transparent;
+    padding: 10px 0 10px 0;
+    color: #9fb2b2;
+    font-family: 'GothaProMed';
+    font-size: 16px;
+    border: 1px solid #768888;
+    text-align: center;
+    cursor: pointer;
+}
+
+#templates_panel {
+    width: 800px;
+    height: 500px;
+    margin: 50px auto;
+    display: none;
+    z-index: 10000000012;
+    background: #eaeef1;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+}
+
+#tab_line {
+    height: 26px;
+    background: #2a4852;
+    padding: 2px 10px 4px 10px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
+.tab {
+    position: relative;
+    float: left;
+    height: 20px;
+    width: 45%;
+    margin: 0 4px;
+    text-align: center;
+    font-size: 20px;
+    padding: 3px 0 4px 0;
+    border-right: 1px solid #304e58;
+    cursor: pointer;
+    color: #a0a295;
+    font-family: 'GothaProReg';
+}
+
+.templ_box {
+    position: absolute;
+    width: 740px;
+    height: 420px;
+    visibility: hidden;
+}
+
+#template_wrapper {
+    width: 740px;
+    padding: 30px 30px 30px 30px;
+    height: inherit;
+}
+
+.teml_line {
+    width: 740px;
+    height: 32px;
+}
+
+.half_line {
+    position: relative;
+    float: left;
+    width: 360px;
+    padding: 2px 20px 2px 0;
+    height: 26px;
+}
+
+.templ_field {
+    position: relative;
+    float: left;
+}
+
+.templ_desc {
+    width: 170px;
+    font-size: 18px;
+    padding: 4px 10px 4px 0;
+}
+
+.templ_in {
+    width: 160px;
+    padding: 0 10px 3px 0;
+}
+
+.templ_input {
+    height: 20px;
 }

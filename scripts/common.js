@@ -1,9 +1,22 @@
 var editorHTML;
 var editorCSS;
+var tableDiv = 0;
 var tab = "    ";
 
 $(document).ready(function() {
 
+    $('.templ_input').blur(function() {
+    });
+
+
+    $('#templates_wrapper').click(function() {
+        alert("fsdfs");
+        showTemplates();
+    });
+
+    $('#source_code_wrapper').click(function() {
+        showSourceCode();
+    });
 
     $('.border_types').click(function() {
         focusedElement.css('borderStyle', $(this).text());
@@ -50,9 +63,7 @@ $(document).ready(function() {
         marginTop: "19px"
     });
 
-    $('#source_code_wrapper').click(function() {
-        showSourceCode();
-    });
+
 });
 
 function showAuth() {
@@ -221,7 +232,7 @@ function normalizePage() {
     $(".header_item_box").css({
         width: (w - 260) / 4 - 30 + "px"
     });
-
+    $('#templates_wrap').css('height', h);
     //
     if (w > 1800)
         $('#top_menu').css('width', w);
@@ -361,4 +372,114 @@ function borderRed(id) {
 
 function borderDefault(id) {
     $('#' + id).css('border', '1px solid #e7e7e7');
+}
+
+function showTemplates() {
+    if ($('#templates_wrap').css('display') == 'block') {
+        $('#templates_wrap').css('display', 'none');
+        $('#templates_panel').css('display', 'none');
+        allowkeys = true;
+    } else {
+        $('#templates_wrap').css('display', 'block');
+        $('#templates_panel').css('display', 'block');
+        allowkeys = false;
+        $("#vertical_context_menu").css({
+            visibility: "hidden"
+        });
+    }
+}
+
+function showTable() {
+    $('#table_box').css({
+        visibility: 'visible'
+    });
+    $('#list_box').css({
+        visibility: 'hidden'
+    });
+    $('#table_tab').css({
+        color: '#ffffff'
+    });
+    $('#list_tab').css({
+        color: '#a0a295'
+    });
+}
+
+function showList() {
+    $('#table_box').css({
+        visibility: 'hidden'
+    });
+    $('#list_box').css({
+        visibility: 'visible'
+    });
+    $('#table_tab').css({
+        color: '#a0a295'
+    });
+    $('#list_tab').css({
+        color: '#ffffff'
+    });
+}
+
+function addTable() {
+
+    var rows = $('#templ_rows').val();
+    var cols = $('#templ_cols').val();
+    var cellH = $('#templ_height').val() == '' ? '10px' : $('#templ_height').val();
+    var cellW = $('#templ_width').val() == '' ? '10px' : $('#templ_width').val();
+    var tdSpacing = $('#templ_spacing').val() == '' ? '0' :  $('#templ_spacing').val();
+    var tdPadding = $('#templ_padding').val() == '' ? '0' : $('#templ_padding').val();
+    var tableBorder = $('#templ_table_border').val() == '' ? '' : $('#templ_table_border').val();
+    var tdBorder = $('#templ_td_border').val() == '' ? '' : $('#templ_td_border').val();
+
+    var table = "<table>";
+    if (rows != "" && cols != "") {
+        for (var i = 0; i < rows; ++i) {
+            table += "<tr>"
+            for (var j = 0; j < cols; ++j) {
+                table += "<td></td>"
+            }
+            table += "</tr>";
+        }
+        table += "</table>";
+
+        var divId = 'tDiv_' + tableDiv++;
+        var div = {
+            id: divId,
+            type: "div",
+            parent: "#workplace",
+            focused: false,
+            zIndex_: zindex,
+            locked: false
+        };
+
+
+        // setting div styles
+        var divW = (+cellW + +tdPadding + +tdSpacing + tdBorder.split('p')[0] * 2) * cols + +tableBorder.split('p')[0] * 2;
+        var divH = (+cellH + +tdPadding + +tdSpacing  + tdBorder.split('p')[0] * 2) * rows + +tableBorder.split('p')[0] * 2;
+        generateAgain(div, '', false);
+        $('#' + divId).css({
+            width: divW + 'px',
+            height: +divH +20 + 'px',
+            background: getLightColor()
+        })
+            //.resizable("disable")
+            .append(table);
+
+
+        $('#' + divId + ' table').css({
+            'border-spacing': tdSpacing,
+            border: tableBorder
+        });
+        $('#' + divId + ' td').each(function(e) {
+            $(this).css({
+                width: cellW,
+                height: cellH,
+                border: tdBorder,
+                padding: tdPadding
+            });
+        });
+
+        showTemplates();
+        shiftLeftBar();
+    }
+
 }

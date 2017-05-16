@@ -2,6 +2,8 @@ var focused = null;
 var t, l = (new Date()).getTime();
 var active = null;
 var allow = true;
+var changeFlag = false;
+var curLogin, curEmail, curPhone, curCountry;
 
 /*
  confirmUserInfo() - send changed data
@@ -17,6 +19,10 @@ $(document).ready(function() {
     //feelUserInfo("someEmail.@gmail.com", "Sonya Marmeladova", "3807766999", "Male", "USA");
     $(window).resize(function () {
         normalizeCabinet();
+    });
+
+    $('.drop_input').focus(function() {
+        borderDefault(this.id);
     });
 
     $(".query_btn").click(function (event) {
@@ -295,9 +301,12 @@ function logOut() {
 function feelUserInfo(email, login, phone, gender, country) {
     $('#drop_email').html(email);
     $('#input_email').val(email);
+    curEmail = email;
     if (login != 0) {
+        curLogin = login;
         $('#top_name').html(login);
         $('#input_login').val(login);
+        $('#drop_login').html(login);
     } else {
         var names = [
             ".titanic {float: none;}",
@@ -323,23 +332,25 @@ function feelUserInfo(email, login, phone, gender, country) {
         $('#top_name').html(names[Math.floor(Math.random() * names.length)]);
     }
     if (phone != 0) {
+        curPhone = phone;
         $('#drop_phone').html(phone);
         $('#input_phone').val(phone);
     } else {
         $('#drop_phone').html('-');
     }
-    if (gender != 0) {
+    /* if (gender != 0) {
         $('#drop_gender').html(gender);
         $('#input_gender').val(gender);
     } else {
         $('#drop_phone').html('-');
-    }
+    } */
     if (country != 0) {
-        $('#drop_cpuntry').html(country);
+        curCountry = country;
+        $('#drop_country').html(country);
         $('#input_country').val(country);
 
     } else {
-        $('#drop_phone').html('-');
+        $('#drop_country').html('-');
     }
 }
 
@@ -571,14 +582,34 @@ function dropMenu() {
 }
 
 function showChangeMenu() {
-    if ($('#change_menu_wrapper').css('display') == 'block') {
+    if (!changeFlag) {
+        changeFlag = true;
+        $('#drop_menu').css({
+            height: +$('#drop_menu').css('height').split('p')[0] + 50 + 'px'
+        });
+        $('#change_line').css('display', 'block');
+        $('.drop_center').css('margin-top', '0');
+        $('#drop_email, #drop_login, #drop_phone, #drop_country').css('display', 'none');
+        $('#drop_email_input, #drop_login_input, #drop_phone_input, #drop_country_input').css('display', 'block');
+    } else {
+        changeFlag = false;
+        $('#drop_menu').css({
+            height: +$('#drop_menu').css('height').split('p')[0] - 50 + 'px'
+        });
+        $('#change_line').css('display', 'none');
+        $('.drop_center').css('margin-top', '5px');
+        $('#drop_email, #drop_login, #drop_phone, #drop_country').css('display', 'block');
+        $('#drop_email_input, #drop_login_input, #drop_phone_input, #drop_country_input').css('display', 'none');
+
+    }
+    /* if ($('#change_menu_wrapper').css('display') == 'block') {
         $('#change_menu_wrapper').css('display', 'none');
         $('#change_menu_panel').css('display', 'none');
     } else {
         $('#change_menu_wrapper').css('display', 'block');
         $('#change_menu_panel').css('display', 'block');
 
-    }
+    } */
 }
 
 
@@ -591,7 +622,7 @@ function serializeUserForm() {
     result += $('#input_phone').val();
     result += "&country=";
     result += $('#input_country').val();
-    alert(result);
+    return result;
 }
 
 function confirmNewPassword() {
@@ -678,19 +709,23 @@ function checkEmail() {
             return false;
         }
     }
-    var data = "email=" + $('#input_email').val();
-    $.ajax({
-        url: 'database_scripts/emailChecker.php',
-        type: 'POST',
-        data: data,
-        dataType: 'text',
-        success: function (data) {
-            if (data.indexOf('yes') == -1) {
-                borderRed('input_email');
-                $('#email_error').html('Email exists');
+    if ($('#input_email').val() != curEmail) {
+        var data = "email=" + $('#input_email').val();
+        $.ajax({
+            url: 'database_scripts/emailChecker.php',
+            type: 'POST',
+            data: data,
+            dataType: 'text',
+            success: function (data) {
+                if (data.indexOf('yes') == -1) {
+                    borderRed('input_email');
+                    console.log('email exists');
+                    $('#email_error').html('Email exists');
+                }
             }
-        }
-    });
+        });
+    }
+
     return $('#email_error').html().length == 0;
 }
 

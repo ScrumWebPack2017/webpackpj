@@ -557,11 +557,13 @@ function showWin(id) {
         visibility: 'hidden'
     });
     $("#" + id).css({
-        visibility: vs
+        visibility: vs,
+        'z-index': 1000000000
     });
     if ($("#" + id).css("visibility") == "hidden") {
         $("#" + id).css({
-            visibility: 'visible'
+            visibility: 'visible',
+            'z-index': 1000000000
         });
     } else {
         $("#" + id).css({

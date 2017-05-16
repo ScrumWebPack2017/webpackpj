@@ -115,10 +115,27 @@
                 E-mail:
             </div>
             <div class="drop drop_center"  id="drop_email">
-                testlongemail@mail.ru
+                testemail...
+            </div>
+            <div class="drop drop_center"  id="drop_email_input" style="display: none">
+                <input class="drop_input" type="text" id="input_email">
             </div>
             <div class="drop drop_right">
                 <img src="images/cabinet/top_arrow.jpg" height="34" style="cursor: pointer;" onclick="dropMenu()">
+            </div>
+        </div>
+        <div class="drop_menu_line">
+            <div class="drop drop_left">
+                Login
+            </div>
+            <div class="drop drop_center" id="drop_login">
+                -
+            </div>
+            <div class="drop drop_center" id="drop_login_input" style="display: none">
+                <input class="drop_input" type="text" id="input_login">
+            </div>
+            <div class="drop drop_right">
+                <img src="images/cabinet/pencil.jpg" height="34" style="cursor: pointer;" onclick="showChangeMenu()">
             </div>
         </div>
         <div class="drop_menu_line">
@@ -128,16 +145,8 @@
             <div class="drop drop_center"  id="drop_phone">
                 380669341903
             </div>
-            <div class="drop drop_right">
-                <img src="images/cabinet/pencil.jpg" height="34" style="cursor: pointer;" onclick="showChangeMenu()">
-            </div>
-        </div>
-        <div class="drop_menu_line">
-            <div class="drop drop_left">
-                Gender:
-            </div>
-            <div class="drop drop_center" id="drop_gender">
-                Male
+            <div class="drop drop_center"  id="drop_phone_input" style="display: none">
+                <input class="drop_input" type="text" id="input_phone">
             </div>
             <div class="drop drop_right">
                 <img src="images/cabinet/stats.jpg" onclick="showChartMenu()" height="34" style="cursor: pointer;">
@@ -150,8 +159,16 @@
             <div class="drop drop_center" id="drop_country">
                 Ukraine
             </div>
+            <div class="drop drop_center" id="drop_country_input" style="display: none">
+                <input  class="drop_input" type="text" id="input_country">
+            </div>
             <div class="drop drop_right">
                 <img src="images/cabinet/exit.jpg" height="34" style="cursor: pointer;" onclick="logOut()">
+            </div>
+        </div>
+        <div id="change_line" style="display: none">
+            <div id="user_info_confirm" onclick="confirmUserInfo()" class="confirmBtn">
+                Confirm
             </div>
         </div>
 
@@ -177,7 +194,7 @@
                         E-mail:
                     </div>
                     <div class="inputs">
-                        <input type="text" id="input_email">
+                        <!--  <input type="text" id="input_email"> -->
                     </div>
                     <div id="email_error" class="error_changer"></div>
                 </div>
@@ -187,7 +204,7 @@
                         Login:
                     </div>
                     <div class="inputs">
-                        <input type="text" id="input_login">
+
                     </div>
                     <div id="login_error" class="error_changer"></div>
                 </div>
@@ -197,7 +214,6 @@
                         Phone:
                     </div>
                     <div class="inputs">
-                        <input type="text" id="input_phone">
                     </div>
                     <div id="phone_error" class="error_changer"></div>
                 </div>
@@ -207,15 +223,11 @@
                         Country:
                     </div>
                     <div class="inputs">
-                        <input type="text" id="input_country">
+
                     </div>
                     <div id="country_error" class="error_changer"></div>
                 </div>
-                <div class="change_line">
-                    <div id="user_info_confirm" onclick="confirmUserInfo()" class="confirmBtn">
-                        Confirm
-                    </div>
-                </div>
+
             </div>
 
             <div id="change_pass_box" class="change_box">
@@ -247,6 +259,8 @@
         </div>
 
     </div>
+
+
     <div id="ajax"></div>
 </body>
 </html>
