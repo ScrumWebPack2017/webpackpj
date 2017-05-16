@@ -1,0 +1,24 @@
+#div_2 {
+    position: absolute;
+    float: right;
+    width: 200px;
+    height: 200px;
+    background: rgb(85, 67, 160);
+    z-index: 1;
+    left: 394px;
+    top: 92px;
+    cursor: auto;
+}
+
+#div_1 {
+    position: absolute;
+    float: right;
+    width: 94px;
+    height: 79px;
+    background: rgb(250, 163, 185);
+    z-index: 2;
+    left: 106px;
+    top: 121px;
+    cursor: auto;
+}
+

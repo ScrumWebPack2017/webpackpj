@@ -444,6 +444,13 @@ function deleteFocused() {
         $("#cut_list").parent().addClass('ui-state-disabled');
         $("#detach_list").parent().addClass('ui-state-disabled');
         $("#parentFoc_list").parent().addClass('ui-state-disabled');
+        $("#vertical_context_menu").css({
+            visibility: 'hidden'
+        });
+        $(".near_block").css({
+            visibility: 'hidden'
+        });
+        generateHTML();
         createNewStatus(focusedId + " was deleted", cursor, changes, generatedElements);
         ++cursor;
         my_cur = cursor
@@ -952,6 +959,12 @@ function manipulate(eve) {
                 createNewStatus(focusedId + " was pasted", cursor, changes, generatedElements);
                 ++cursor;
                 my_cur = cursor
+                $("#vertical_context_menu").css({
+                    visibility: 'hidden'
+                });
+                $(".near_block").css({
+                    visibility: 'hidden'
+                });
             } else {
                 if (eve.which == 88 && eve.ctrlKey) {
                     cut();
@@ -964,6 +977,7 @@ function manipulate(eve) {
                     $(".near_block").css({
                         visibility: 'hidden'
                     });
+
                 } else {
                     if (eve.which == 68 && eve.ctrlKey) {
                         detach_child();
