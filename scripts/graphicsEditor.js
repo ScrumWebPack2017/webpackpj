@@ -681,7 +681,7 @@ function generateElement(element, point, tt) {
 
         $(".near_block").css({
             visibility: 'hidden',
-            zIndex: $("#" + identifier).css('z-index')
+            zIndex: zindex + 1
         });
 
         if (element.type == "table") {

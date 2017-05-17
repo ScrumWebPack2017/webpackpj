@@ -221,18 +221,40 @@ function generateAgain(element, css, isLoading) {
             });
 
             $("#vertical_context_menu").css({
-                zIndex: $("#" + element.id).css('z-index')
+                zIndex: zindex + 1
             });
 
-            $(".near_block").position({
-                my: 'left+49 top',
-                at: 'right top',
-                of: "#" + element.id,
-                collision: 'flip flip'
-            });
+            if($("#" + element.id).width() >= 1300) {
+                $(".near_block").position({
+                    my: 'left+44 top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+            } else {
+                $(".near_block").position({
+                    my: 'left+49 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left+5 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+            }
 
             $(".near_block").css({
-                zIndex: $("#" + element.id).css('z-index')
+                visibility: 'hidden',
+                zIndex: zindex + 1
             });
 
             if (!busy) {
@@ -278,6 +300,34 @@ function generateAgain(element, css, isLoading) {
                             generatedElements[elem].height = $("#" + element.id).height();
                         }
                     }
+                }
+
+                if($("#" + element.id).width() >= 1300) {
+                    $(".near_block").position({
+                        my: 'left+44 top+5',
+                        at: 'left bottom',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                    $("#vertical_context_menu").position({
+                        my: 'left top+5',
+                        at: 'left bottom',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                } else {
+                    $(".near_block").position({
+                        my: 'left+49 top',
+                        at: 'right top',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                    $("#vertical_context_menu").position({
+                        my: 'left+5 top',
+                        at: 'right top',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
                 }
             },
             stop: function(event, ui) {
@@ -347,6 +397,35 @@ function generateAgain(element, css, isLoading) {
                     //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
                     //$("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
                 }
+
+                if($("#" + element.id).width() >= 1300) {
+                    $(".near_block").position({
+                        my: 'left+44 top+5',
+                        at: 'left bottom',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                    $("#vertical_context_menu").position({
+                        my: 'left top+5',
+                        at: 'left bottom',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                } else {
+                    $(".near_block").position({
+                        my: 'left+49 top',
+                        at: 'right top',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                    $("#vertical_context_menu").position({
+                        my: 'left+5 top',
+                        at: 'right top',
+                        of: '#' + identifier,
+                        collision: 'flip flip'
+                    });
+                }
+
             },
             stop: function(event, ui) {
                 busy = false;
