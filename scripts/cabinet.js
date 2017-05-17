@@ -371,7 +371,7 @@ function loadTime() {
         dataType: "text",
         success: function (data) {
             if(data.indexOf("|") != -1) {
-                showBArMenu("show", data, "CB");
+                showBArMenu("show", data, "nC");
             }
         }
     });

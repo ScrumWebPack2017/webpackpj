@@ -228,26 +228,26 @@ function generateAgain(element, css, isLoading) {
                 $(".near_block").position({
                     my: 'left+44 top+5',
                     at: 'left bottom',
-                    of: '#' + identifier,
+                    of: '#' + element.id,
                     collision: 'flip flip'
                 });
                 $("#vertical_context_menu").position({
                     my: 'left top+5',
                     at: 'left bottom',
-                    of: '#' + identifier,
+                    of: '#' + element.id,
                     collision: 'flip flip'
                 });
             } else {
                 $(".near_block").position({
                     my: 'left+49 top',
                     at: 'right top',
-                    of: '#' + identifier,
+                    of: '#' + element.id,
                     collision: 'flip flip'
                 });
                 $("#vertical_context_menu").position({
                     my: 'left+5 top',
                     at: 'right top',
-                    of: '#' + identifier,
+                    of: '#' + element.id,
                     collision: 'flip flip'
                 });
             }
@@ -302,33 +302,42 @@ function generateAgain(element, css, isLoading) {
                     }
                 }
 
+                $("#vertical_context_menu").css({
+                    zIndex: zindex + 1
+                });
+
                 if($("#" + element.id).width() >= 1300) {
                     $(".near_block").position({
                         my: 'left+44 top+5',
                         at: 'left bottom',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                     $("#vertical_context_menu").position({
                         my: 'left top+5',
                         at: 'left bottom',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                 } else {
                     $(".near_block").position({
                         my: 'left+49 top',
                         at: 'right top',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                     $("#vertical_context_menu").position({
                         my: 'left+5 top',
                         at: 'right top',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                 }
+
+                $(".near_block").css({
+                    visibility: 'hidden',
+                    zIndex: zindex + 1
+                });
             },
             stop: function(event, ui) {
                 busy = false;
@@ -398,33 +407,42 @@ function generateAgain(element, css, isLoading) {
                     //$("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
                 }
 
+                $("#vertical_context_menu").css({
+                    zIndex: zindex + 1
+                });
+
                 if($("#" + element.id).width() >= 1300) {
                     $(".near_block").position({
                         my: 'left+44 top+5',
                         at: 'left bottom',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                     $("#vertical_context_menu").position({
                         my: 'left top+5',
                         at: 'left bottom',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                 } else {
                     $(".near_block").position({
                         my: 'left+49 top',
                         at: 'right top',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                     $("#vertical_context_menu").position({
                         my: 'left+5 top',
                         at: 'right top',
-                        of: '#' + identifier,
+                        of: '#' + element.id,
                         collision: 'flip flip'
                     });
                 }
+
+                $(".near_block").css({
+                    visibility: 'hidden',
+                    zIndex: zindex + 1
+                });
 
             },
             stop: function(event, ui) {

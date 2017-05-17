@@ -37,6 +37,10 @@ function createTemplateString() {
 
         }
 
+        while(result.indexOf('&quot;') != -1) {
+            result = result.replace('&quot;', '');
+        }
+
         var query = "name=" + currentFile + "&data=" + result + "&secs=" + sec_counter;
 
         $.ajax({
@@ -85,6 +89,71 @@ function appendSaved(data) {
         var b = jQuery.extend(true, {}, e.element);
         generatedElements.push(b);
         generateAgain(b, e.style, true);
+        var text = $("#" + b.id).css('background-image');
+        if(text.indexOf('url') != -1) {
+            var iret = text.indexOf('(') + 2;
+            var jert = text.indexOf(')') - 6;
+            var straight = text.substr(iret, jert);
+            var el = document.createElement("li");
+            var el2 = document.createElement("img");
+            el2.setAttribute('class', 'imgs');
+            el2.setAttribute('src', straight);
+            el.appendChild(el2);
+            $("#kuk").append(el);
+
+            $(".imgs").click(function () {
+                shiftLeftBar();
+                var hello = $(".imgs").toArray();
+                var eleme = hello[hello.length - 1];
+                var eve = {
+                    id: "",
+                    type: "div",
+                    parent: "#workplace",
+                    top: 0,
+                    position: "absolute",
+                    float: 'right',
+                    margin: '',
+                    width: "200px",
+                    height: "200px",
+                    background: '',
+                    font_size: '14px',
+                    border: 'none',
+                    zIndex_: zindex,
+                    focused: false,
+                    locked: false
+                };
+                generatedElements.push(eve);
+                generateElement(eve, true, "div");
+                var w = $(eleme).naturalWidth();
+                var h = $(eleme).naturalHeight();
+                if(w >= 1300 || h >= 800) {
+                    w /= 2;
+                    h /= 2;
+                    if(w >= 1300 || h >= 800) {
+                        w /= 2;
+                        h /= 2;
+                    }
+                }
+                $("#" + generatedElements[generatedElements.length - 1].id).css({
+                    width: w + 'px',
+                    height: h + 'px',
+                    background: "url(" + $(eleme).attr('src') + ") no-repeat",
+                    backgroundSize: '100% 100%'
+                });
+                var elems = $("#workplace .work_elements").each(function(event) {
+                    $(this).children().removeClass('ui-icon');
+                });
+                $($(".status_radio").toArray()[$(".status_radio").toArray().length - 1]).trigger('click');
+                createNewStatus(generatedElements[generatedElements.length - 1].id + " image was created", cursor, changes, generatedElements);
+                ++cursor;
+                my_cur = cursor
+            });
+        } else {
+            $('#custom_i_i').css({outline:'2px solid red'});
+            setTimeout(function () {
+                $('#custom_i_i').css({outline: 'none'});
+            }, 700);
+        }
     }
 }
 
@@ -730,6 +799,7 @@ function makeLoaded(data) {
         data: '',
         dataType: "text",
         success: function(data) {
+            //alert(data);
             appendSaved(data);
             createNewStatus("Load", cursor, changes, generatedElements);
             ++cursor;

@@ -419,7 +419,7 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
                 </ul>
             </li>
             <li>
-                <span class="outer_element" style="border-bottom: 1px solid #768888;">
+                <span class="outer_element">
                     <div class="el_arrow"></div>
                     Text formatting
                 </span>
@@ -466,6 +466,29 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
                     <li>
                         <span class="inner_element" id="sup"> &lt;sup&gt; </span>
                     </li>
+                </ul>
+            </li>
+            <li>
+                <span class="outer_element">
+                    <div class="el_arrow"></div>
+                    Custom images
+                </span>
+                <ul class="elements" id="kuk">
+                    <li>
+                         <input type="text" class="auth_input" id="custom_i_i">
+                    </li>
+                    <!--<li>
+                        <img src="images/logo.jpg" class="imgs">
+                    </li>
+                    <li>
+                        <img src="images/learn-javascript.png" class="imgs">
+                    </li>
+                    <li>
+                        <img src="images/Unofficial_JavaScript_logo_2.svg.png" class="imgs">
+                    </li>
+                    <li>
+                        <img src="images/reg_background3.jpg" class="imgs">
+                    </li> -->
                 </ul>
             </li>
         </ul>

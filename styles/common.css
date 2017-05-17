@@ -546,6 +546,10 @@ header {
     visibility: hidden; !important;
 }
 
+.custom_i_i {
+
+}
+
 
 #changes_menu {
     max-height: 300px;
@@ -790,6 +794,31 @@ header {
     border-top-right-radius: 2px;
     background: url('../images/search_ico.jpg');
     background-size: cover;
+}
+
+#custom_i_i {
+    float: left;
+    width: 152px;
+    border-radius: 2px;
+    margin-left: 30px;
+    overflow-x: visible;
+}
+
+.lastExpandable {
+    border-bottom: 1px solid #768888; !important;
+    width: 220px;
+}
+.imgs {
+    width: 150px;
+    height: 100px;
+    float: left;
+    border-radius: 2px;
+    margin-left: 30px;
+    margin-top: 5px;
+    border: 1px solid #768888;
+    max-height: 200px;
+    max-width: 200px;
+    object-fit: cover;
 }
 
 #search_input {
