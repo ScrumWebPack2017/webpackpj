@@ -47,6 +47,11 @@ $(document).ready(function() {
 
     timer = setInterval(function () {
         ++sec_counter;
+        var today = new Date();
+        if(today.getHours() == 0 && today.getMinutes() == 0) {
+            saveFromMenu();
+            sec_counter = 0;
+        }
     }, 1000);
     /*$.ajax({
         url: 'database_scripts/check_session.php',
@@ -62,6 +67,102 @@ $(document).ready(function() {
 
             }
         }
+    });*/
+
+    $("#custom_i_i").keypress(function(e){
+        if (e.which == 13) {
+            var txt = $('#custom_i_i').val();
+            if(ValidURL(txt)) {
+                var el = document.createElement("li");
+                var el2 = document.createElement("img");
+                el2.setAttribute('class', 'imgs');
+                el2.setAttribute('src', txt);
+                el.appendChild(el2);
+                $("#kuk").append(el);
+
+                $(".imgs").click(function () {
+                    shiftLeftBar();
+                    var hello = $(".imgs").toArray();
+                    var eleme = hello[hello.length - 1];
+                    var eve = {
+                        id: "",
+                        type: "div",
+                        parent: "#workplace",
+                        top: 0,
+                        position: "absolute",
+                        float: 'right',
+                        margin: '',
+                        width: "200px",
+                        height: "200px",
+                        background: '',
+                        font_size: '14px',
+                        border: 'none',
+                        zIndex_: zindex,
+                        focused: false,
+                        locked: false
+                    };
+                    generatedElements.push(eve);
+                    generateElement(eve, true, "div");
+                    var w = $(eleme).naturalWidth();
+                    var h = $(eleme).naturalHeight();
+                    if(w >= 1300 || h >= 800) {
+                        w /= 2;
+                        h /= 2;
+                        if(w >= 1300 || h >= 800) {
+                            w /= 2;
+                            h /= 2;
+                        }
+                    }
+                    $("#" + generatedElements[generatedElements.length - 1].id).css({
+                        width: w + 'px',
+                        height: h + 'px',
+                        background: "url(" + $(eleme).attr('src') + ") no-repeat",
+                        backgroundSize: '100% 100%'
+                    });
+                    var elems = $("#workplace .work_elements").each(function(event) {
+                        $(this).children().removeClass('ui-icon');
+                    });
+                    $($(".status_radio").toArray()[$(".status_radio").toArray().length - 1]).trigger('click');
+                    createNewStatus(generatedElements[generatedElements.length - 1].id + " image was created", cursor, changes, generatedElements);
+                    ++cursor;
+                    my_cur = cursor
+                });
+            } else {
+                $('#custom_i_i').css({outline:'2px solid red'});
+                    setTimeout(function () {
+                        $('#custom_i_i').css({outline: 'none'});
+                    }, 700);
+            }
+            return false;
+        }
+    });
+
+    /*$(".imgs").click(function () {
+        var eve = {
+            id: "",
+            type: "div",
+            parent: "#workplace",
+            top: 0,
+            position: "absolute",
+            float: 'right',
+            margin: '',
+            width: "200px",
+            height: "200px",
+            background: '',
+            font_size: '14px',
+            border: 'none',
+            zIndex_: zindex,
+            focused: false,
+            locked: false
+        };
+        generatedElements.push(eve);
+        generateElement(eve, true, "div");
+        $("#" + generatedElements[generatedElements.length - 1].id).css({
+            width: (document.getElementById(eve.id).naturalWidth / 2) + 'px',
+            height: (document.getElementById(eve.id).naturalWidth / 2) + 'px',
+            background: "url(" + txt + ") no-repeat",
+            backgroundSize: '100% 100%'
+        });
     });*/
 
     $.when(run()).done(function () {
@@ -380,6 +481,35 @@ $(document).ready(function() {
     });*/
 
 });
+
+jQuery.extend(jQuery.expr[':'], {
+    focus: "a == document.activeElement"
+});
+
+(function($) {
+    function img(url) {
+        var i = new Image;
+        i.src = url;
+        return i;
+    }
+
+    if ('naturalWidth' in (new Image)) {
+        $.fn.naturalWidth  = function() { return this[0].naturalWidth; };
+        $.fn.naturalHeight = function() { return this[0].naturalHeight; };
+        return;
+    }
+    $.fn.naturalWidth  = function() { return img(this.src).width; };
+    $.fn.naturalHeight = function() { return img(this.src).height; };
+})(jQuery);
+
+function ValidURL(str) {
+    var pattern = new RegExp('(https?:\/\/.*\.(?:png|jpg|jpeg|gif|png|svg))'); // fragment locater
+    if(!pattern.test(str)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function calculatePos(e) {
     if(($("#menu_tools").width() > $("#workplace").width() -  e.pageX) && ($("#menu_tools").height() > e.pageY - 200)) {
@@ -1041,16 +1171,18 @@ function manipulate(eve) {
             copy();
         } else {
             if (eve.which == 86 && eve.ctrlKey) {
-                paste();
-                createNewStatus(focusedId + " was pasted", cursor, changes, generatedElements);
-                ++cursor;
-                my_cur = cursor
-                $("#vertical_context_menu").css({
-                    visibility: 'hidden'
-                });
-                $(".near_block").css({
-                    visibility: 'hidden'
-                });
+                if($("#custom_i_i").is(":focus") == false) {
+                    paste();
+                    createNewStatus(focusedId + " was pasted", cursor, changes, generatedElements);
+                    ++cursor;
+                    my_cur = cursor
+                    $("#vertical_context_menu").css({
+                        visibility: 'hidden'
+                    });
+                    $(".near_block").css({
+                        visibility: 'hidden'
+                    });
+                }
             } else {
                 if (eve.which == 88 && eve.ctrlKey) {
                     cut();
