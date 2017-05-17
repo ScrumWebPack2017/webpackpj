@@ -542,6 +542,10 @@ header {
     background: red;
 }
 
+.ui-dialog {
+    visibility: hidden; !important;
+}
+
 
 #changes_menu {
     max-height: 300px;

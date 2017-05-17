@@ -241,43 +241,38 @@ function showTextAboutTime(elem_id) {
     });
 }
 
-function showBArMenu(bar) {
-        if (bar == "show") {
-            $(".chart_bar").css({visibility: 'visible'});
-            $(".chart_bar").animate({'opacity': '1'}, 400, function () {
-
-            });
-        } else {
-            $(".chart_bar").animate({'opacity': '0'}, 400, function () {
-                $(".chart_bar").css({visibility: 'hidden'});
-            });
-        }
+function showBArMenu(bar, data, me) {
+    if (bar == "show") {
+        $(".chart_bar").animate({'opacity': '0'}, 400, function () {
+            if(me == "nC") {
+                newChart(data);
+            } else {
+                newChartBars(data);
+            }
+            setTimeout(function() {$(".chart_bar").animate({'opacity': '1'}, 400, function () {
+            });}, 500);
+        });
+    }
 }
 
 function showChartMenu() {
     if($("#chart_container").css('height') == '0px') {
         $("#chart_container").animate({'height':'600px'}, 300, function () {
-            //$(".chart_bar").css({visibility:'visible'});
+            $(".chart_bar").css({visibility:'visible'});
             $("#upper_line").css({visibility:'visible'});
             $("#upper_line").animate({'opacity':'1'}, 400, function() {
                 $("#control_wrapper").css({marginTop: '5px'});
                 $("#btn_1").trigger("click");
             });
-            /*$(".chart_bar").animate({'opacity':'1'}, 400, function () {
-
-            });*/
         });
     } else {
         $("#upper_line").animate({'opacity':'0'}, 400, function () {
             $("#control_wrapper").css({marginTop: '0px'});
             $("#chart_container").animate({'height':'0px'}, 300, function () {
-                //$(".chart_bar").css({visibility:'hidden'});
+                $(".chart_bar").css({visibility:'hidden'});
                 $("#upper_line").css({visibility:'hidden'});
             });
         });
-        /*$(".chart_bar").animate({'opacity':'0'}, 400, function () {
-
-        });*/
     }
 }
 
@@ -355,7 +350,6 @@ function feelUserInfo(email, login, phone, gender, country) {
 }
 
 function loadPjs() {
-    showBArMenu("hid");
     $.ajax({
         url: 'database_scripts/proj_stats.php',
         type: 'POST',
@@ -363,15 +357,13 @@ function loadPjs() {
         dataType: "text",
         success: function (data) {
             if(data.indexOf("|") != -1) {
-                newChartBars(data);
-                showBArMenu("show");
+                showBArMenu("show", data, "nCB");
             }
         }
     });
 }
 
 function loadTime() {
-    showBArMenu("hid");
     $.ajax({
         url: 'database_scripts/get_hours.php',
         type: 'POST',
@@ -379,8 +371,7 @@ function loadTime() {
         dataType: "text",
         success: function (data) {
             if(data.indexOf("|") != -1) {
-                newChart(data);
-                showBArMenu("show");
+                showBArMenu("show", data, "CB");
             }
         }
     });

@@ -40,6 +40,7 @@ window.onclose = function() {
 }
 
 $(document).ready(function() {
+
     var timer1 = setInterval(function () {
         window.scrollTo(0, 0);
     }, 1);
@@ -125,6 +126,12 @@ $(document).ready(function() {
 
     $("#workplace").on("contextmenu", function(e) {
         e.preventDefault();
+        $("#vertical_context_menu").css({
+            visibility: 'hidden'
+        });
+        $(".near_block").css({
+            visibility: 'hidden'
+        });
         $('#menu_tools').css('visibility', 'visible');
         calculatePos(e);
         return false;
@@ -644,12 +651,33 @@ function generateElement(element, point, tt) {
             zIndex: $("#" + identifier).css('z-index')
         });
 
-        $(".near_block").position({
-            my: 'left+49 top',
-            at: 'right top',
-            of: '#' + identifier,
-            collision: 'flip flip'
-        });
+        if($("#" + element.id).width() >= 1300) {
+            $(".near_block").position({
+                my: 'left+44 top+5',
+                at: 'left bottom',
+                of: '#' + identifier,
+                collision: 'flip flip'
+            });
+            $("#vertical_context_menu").position({
+                my: 'left top+5',
+                at: 'left bottom',
+                of: '#' + identifier,
+                collision: 'flip flip'
+            });
+        } else {
+            $(".near_block").position({
+                my: 'left+49 top',
+                at: 'right top',
+                of: '#' + identifier,
+                collision: 'flip flip'
+            });
+            $("#vertical_context_menu").position({
+                my: 'left+5 top',
+                at: 'right top',
+                of: '#' + identifier,
+                collision: 'flip flip'
+            });
+        }
 
         $(".near_block").css({
             visibility: 'hidden',
@@ -710,6 +738,33 @@ function generateElement(element, point, tt) {
                         generatedElements[elem].height = $("#" + identifier).height();
                     }
                 }
+            }
+            if($("#" + element.id).width() >= 1300) {
+                $(".near_block").position({
+                    my: 'left+44 top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+            } else {
+                $(".near_block").position({
+                    my: 'left+49 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left+5 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
             }
         },
         stop: function(event, ui) {
@@ -778,6 +833,33 @@ function generateElement(element, point, tt) {
                 //$("#" + parent_id).resizable("option", "minHeight", ($("#" + this.id).height() + 1 + $("#" + this.id).position().top));
                 // $("#" + parent_id).resizable("option", "minWidth", ($("#" + this.id).width() + 1 + $("#" + this.id).position().left));
             }
+            if($("#" + element.id).width() >= 1300) {
+                $(".near_block").position({
+                    my: 'left+44 top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left top+5',
+                    at: 'left bottom',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+            } else {
+                $(".near_block").position({
+                    my: 'left+49 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+                $("#vertical_context_menu").position({
+                    my: 'left+5 top',
+                    at: 'right top',
+                    of: '#' + identifier,
+                    collision: 'flip flip'
+                });
+            }
             //checkBlock(this);
         },
         stop: function(event, ui) {
@@ -833,6 +915,10 @@ function generateElement(element, point, tt) {
                 });
             }
         }
+    }
+    
+    if(element.type == "header") {
+        $("#" + element.id).css({top: '0', left: '0'});
     }
 
     if (point == true) {

@@ -67,6 +67,12 @@ $(document).ready(function() {
 });
 
 function showAuth() {
+    $("#vertical_context_menu").css({
+        visibility: 'hidden'
+    });
+    $(".near_block").css({
+        visibility: 'hidden'
+    });
     var x = $('#header_authorization_img').offset().left;
     console.log(x);
     $('#user_block').css({
@@ -80,6 +86,12 @@ function showAuth() {
 }
 
 function showProperties() {
+    $("#vertical_context_menu").css({
+        visibility: 'hidden'
+    });
+    $(".near_block").css({
+        visibility: 'hidden'
+    });
     console.log('showProperties()');
     $('#vertical_context_menu').css('visibility', 'hidden');
     var w = document.documentElement.clientWidth;
@@ -115,6 +127,12 @@ function closeWithChanges() {
 }
 
 function showSourceCode() {
+    $("#vertical_context_menu").css({
+        visibility: 'hidden'
+    });
+    $(".near_block").css({
+        visibility: 'hidden'
+    });
     if ($('#source_code_wrapper').css('display') == 'block') {
         $('#source_code_wrapper').css('display', 'none');
         $('#source_code_panel').css('display', 'none');
