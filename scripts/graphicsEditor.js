@@ -648,7 +648,7 @@ function generateElement(element, point, tt) {
         });
 
         $("#vertical_context_menu").css({
-            zIndex: $("#" + identifier).css('z-index')
+            zIndex: zindex + 1
         });
 
         if($("#" + element.id).width() >= 1300) {
