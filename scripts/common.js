@@ -246,10 +246,33 @@ function normalizePage() {
     //
 
 
+    if (w < 1300) {
+        $(".header_item_box").css({
+            width: (w - 260) / 4 - 40 + "px",
+            fontSize: '16px'
+
+        });
+        $('#props_box').css('width', (w - 260) / 4 - 10 + 'px');
+
+    } else {
+        $(".header_item_box").css({
+            width: (w - 260) / 4 - 30 + "px"
+        });
+    }
+    //$('#props_box').css('width', (w - 260) / 4 - 10 + 'px');
+    if (w < 1000) {
+        $('#header_block').css('margin-right', '10px');
+        $(".header_item_box").css({
+            width: (w - 260) / 4 - 45 + "px",
+            fontSize: '16px'
+
+        });
+        $('#props_box').css('width', (w - 260) / 4 + 5 + 'px');
+        $('#signup_box').css('width', (w - 260) / 4 - 20 + 'px');
+        $('#cab_box').css('width', (w - 260) / 4 - 30 + 'px');
+    }
     $('#header_menu_wrap').css('left', w);
-    $(".header_item_box").css({
-        width: (w - 260) / 4 - 30 + "px"
-    });
+
     $('#templates_wrap').css('height', h);
     //
     if (w > 1800)
@@ -266,8 +289,10 @@ function normalizePage() {
     else
         $('.menu_tab').css('width', (w - 20) / 4 - 11);
 
-
-    $('.property').css('width', $('#properties').width() / 2 - 40);
+    if (w < 1300)
+        $('.property').css('width', $('#properties').width() / 2 - 44);
+    else
+        $('.property').css('width', $('#properties').width() / 2 - 42);
     $('.property_label').css('width', $('.property').width() * 0.35);
 
     $('.property_input').css('width', $('.property').width() * 0.65 - 10);

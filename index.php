@@ -31,7 +31,7 @@
         <img src="images/cabinet/logo.jpg" height="62">
     </div>
 
-    <div class="header_item_box">
+    <div class="header_item_box" id="props_box">
         <div id="header_properties_img" class="header_item_img">
             <img src="images/cabinet/properties_img.jpg" onclick="showProperties()">
         </div>
@@ -44,7 +44,7 @@
             <img src="images/cabinet/source_code_img.jpg" onclick="showSourceCode()">
         </div>
         <div id="header_source_code" class="header_item" onclick="showSourceCode()">
-            Source Code
+            Code
         </div>
     </div>
 <?php
@@ -55,29 +55,29 @@ if(!$_SESSION['user'] && !$_SESSION['uname'])
                 <img src="images/cabinet/cabinet_img.jpg" onclick="showAuth()">
             </div>
             <div id="header_authorization" class="header_item" onclick="showAuth()">
-                Authorization
+                Sign In
             </div>
         </div>
-        <div class="header_item_box">
+        <div class="header_item_box" id="signup_box">
             <div id="header_registration_img" class="header_item_img">
                 <a href="registration.html"><img src="images/cabinet/exit_img.jpg"></a>
             </div>
              <a href="registration.html"><div id="header_registration" class="header_item">
-                Registration
+                Sign Up
             </div></a>
         </div>';
     else echo
-        '<div class="header_item_box"style="margin-left: 40px">
+        '<div class="header_item_box"style="margin-left: 40px" id="cab_box">
             <div id="header_authorization_img" class="header_item_img">
                 <a href="personal_cabinet.php"> <img src="images/cabinet/cabinet_img.jpg"> </a>
             </div>
             <a href="personal_cabinet.php">
-            <div id="header_authorization" class="header_item">
-                Personal Cabinet
+            <div id="header_authorization" class="header_item" >
+                Cabinet
             </div>
             </a>
         </div>
-        <div class="header_item_box" style="margin-left: 70px">
+        <div class="header_item_box" style="margin-left: 70px" id="signup_box">
             <div id="header_registration_img" class="header_item_img">
                 <img src="images/cabinet/exit_img.jpg" onclick="logOut()">
             </div>
