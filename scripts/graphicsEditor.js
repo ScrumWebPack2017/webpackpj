@@ -32,6 +32,8 @@ var borderType = "solid";
 var sec_counter = 0;
 var timer;
 
+var propResize = true;
+
 window.onclose = function() {
     if(currentFile != null) {
         createTemplateString();
@@ -836,6 +838,7 @@ function generateElement(element, point, tt) {
         minHeight: 25,
         handles: 'all',
         resize: function(event, ui) {
+            propResize = false;
             busy = true;
             $("#vertical_context_menu").css({
                 visibility: 'hidden'
@@ -896,8 +899,10 @@ function generateElement(element, point, tt) {
                     collision: 'flip flip'
                 });
             }
+            propResize = true;
         },
         stop: function(event, ui) {
+            propResize = false;
             createNewStatus(this.id + " was resized to W:" + $(this).width() + " H:" + $(this).height(), cursor, changes, generatedElements);
             ++cursor;
             my_cur = cursor
@@ -905,6 +910,7 @@ function generateElement(element, point, tt) {
                 visibility: 'visible'
             });
             busy = false;
+            propResize = true;
         }
     }).droppable({
         over: function(event, ui) {

@@ -29,8 +29,12 @@ $(document).ready(function() {
     });
 
     normalizePage();
-    $(window).resize(function() {
-        normalizePage();
+    normalizeProperties();
+    $(document).resize(function() {
+       if (propResize) {
+           normalizeProperties();
+       }
+       normalizePage();
     });
 
     $(document).keyup(function(event) {
@@ -240,10 +244,19 @@ function shiftLeftBar() {
     }
 }
 
+function normalizeProperties() {
+    if ($('body').css('cursor').split('-')[1] != 'resize') {
+        var w = document.documentElement.clientWidth;
+        $('#header_menu_wrap').css('left', w);
+    }
+
+}
+
 function normalizePage() {
     var w = document.documentElement.clientWidth;
     var h = document.documentElement.clientHeight;
     //
+
 
 
     if (w < 1300) {
@@ -271,7 +284,7 @@ function normalizePage() {
         $('#signup_box').css('width', (w - 260) / 4 - 20 + 'px');
         $('#cab_box').css('width', (w - 260) / 4 - 30 + 'px');
     }
-    $('#header_menu_wrap').css('left', w);
+
 
     $('#templates_wrap').css('height', h);
     //
