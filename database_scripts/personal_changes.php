@@ -20,7 +20,7 @@
 
     $mail = $_SESSION["user"];
 
-    $update_query = "UPDATE `User` SET `email` = '" . $email . "' `name` = '". $name ."', `country` = '". $country ."', `phone` = '". $phone ."'  WHERE `email` = '" . $mail . "'";
+    $update_query = "UPDATE `User` SET `email` = '" . $email . "', `name` = '". $name ."', `country` = '". $country ."', `phone` = '". $phone ."'  WHERE `email` = '" . $mail . "'";
     $result_update = mysql_query($update_query);
     if(!$result_update) {
         echo "update error: " . mysql_error();

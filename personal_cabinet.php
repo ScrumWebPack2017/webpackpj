@@ -167,7 +167,7 @@
             </div>
         </div>
         <div id="change_line" style="display: none">
-            <div id="user_info_confirm" onclick="confirmUserInfo()" class="confirmBtn">
+            <div id="user_info_confirm" onclick="confirmUserInfo()" class="confirmBtn" style="cursor: pointer;">
                 Confirm
             </div>
         </div>

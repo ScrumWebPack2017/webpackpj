@@ -24,6 +24,8 @@ var changes = new Array(0);
 var cursor = 0;
 var my_cur = cursor;
 
+var allowMe = true;
+
 var currentFile = null;
 
 var borderWidth = 0;
@@ -55,6 +57,14 @@ $(document).ready(function() {
             sec_counter = 0;
         }
     }, 1000);
+
+    $("#custom_i_i").focus(function() {
+        allowMe = false;
+    });
+
+    $("#custom_i_i").blur(function() {
+        allowMe = true;
+    });
     /*$.ajax({
         url: 'database_scripts/check_session.php',
         type: 'POST',
@@ -1164,6 +1174,7 @@ function countType(type) {
 }
 
 function manipulate(eve) {
+    if(!allowMe) return;
     if (eve.which == 46) {
         deleteFocused();
         $("#vertical_context_menu").css({

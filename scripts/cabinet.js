@@ -737,8 +737,21 @@ function confirmUserInfo() {
             data: get,
             dataType: 'text',
             success: function (data) {
-                if (data != "OK") {
-                    console.log("NOT OK");
+                if (data == "OK") {
+                    $.ajax({
+                        url: 'database_scripts/get_data.php',
+                        type: 'POST',
+                        data: '',
+                        dataType: "text",
+                        success: function(data) {
+                            if(data != "Error") {
+                                var input = data.split("*");
+                                feelUserInfo(input[0], input[1], input[2], input[3], input[4]);
+                                $("#top_photo img").attr('src', "../images/png/" + input[5]);
+                                showChangeMenu();
+                            }
+                        }
+                    });
                 }
             }
         });
