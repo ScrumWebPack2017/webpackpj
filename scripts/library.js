@@ -217,7 +217,19 @@ function generateHTML() {
     resultWithoutStyles = parseHTML(resultWithoutStyles);
     editorHTML.setValue(resultWithoutStyles);
     editorCSS.setValue(css.join(''));
-    return resultWithoutStyles + "&" + css.join('');
+	var cssto = css.join('');
+	var firstQuot = true;
+	cssto = cssto.replace(/(\r\n|\n|\r|\t)/gm,"").trim();
+	while(cssto.indexOf('&quot;') != -1) {
+		if(firstQuot) {
+			cssto = cssto.replace("&quot;", "h").replace(/(\s){4}/gm, "");
+			firstQuot = false;
+		} else {
+			cssto = cssto.replace("&quot;", ")").replace(/(\s){4}/gm, "");
+			firstQuot = true;
+		}
+	}
+    return resultWithoutStyles + "&" + cssto;
 }
 
 function checkTag(tag) {
